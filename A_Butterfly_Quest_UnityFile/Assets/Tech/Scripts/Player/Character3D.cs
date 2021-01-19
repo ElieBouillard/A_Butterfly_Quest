@@ -55,6 +55,10 @@ public class Character3D : MonoBehaviour
 
     public bool debug = false;
 
+    public Vector3 directionForward;
+    public Vector3 directionRight;
+
+
     void Awake()
     {
         if (TryGetComponent<Rigidbody>(out Rigidbody attached_rigidbody))
@@ -74,8 +78,8 @@ public class Character3D : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
-        Vector3 directionForward = new Vector3(m_camera.transform.forward.x, 0f, m_camera.transform.forward.z).normalized;
-        Vector3 directionRight = new Vector3(m_camera.transform.right.x, 0f, m_camera.transform.right.z).normalized;
+        directionForward = new Vector3(m_camera.transform.forward.x, 0f, m_camera.transform.forward.z).normalized;
+        directionRight = new Vector3(m_camera.transform.right.x, 0f, m_camera.transform.right.z).normalized;
 
 
         if (debug)
@@ -139,7 +143,7 @@ public class Character3D : MonoBehaviour
         }
 
         //main velocity operation
-        target_Velocity = new Vector3(horizontalInput * currentSpeed, 0, verticalInput * currentSpeed) + new Vector3(0, (m_rb.velocity.y + (-9.81f * GravityBoost)) * ((jumpTime != -1) ? 0 : 1), 0);
+        target_Velocity = directionForward * currentSpeed * verticalInput + directionRight * currentSpeed * horizontalInput+ new Vector3(0, (m_rb.velocity.y + (-9.81f * GravityBoost)) * ((jumpTime != -1) ? 0 : 1), 0);
 
         if (jumpTime != -1)
         {

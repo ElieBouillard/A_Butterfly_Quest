@@ -7,12 +7,12 @@ using UnityEngine;
 using Debug = UnityEngine.Debug;
 using UnityEngine.SceneManagement;
 
-public class Character2D : MonoBehaviour
+public class Character3D : MonoBehaviour
 {
-    public static Character2D m_instance;
+    public static Character3D m_instance;
 
     [Header("Physics")]
-    private Rigidbody2D m_rb;
+    private Rigidbody m_rb;
     Vector3 target_Velocity;
     Vector3 current_Velocity;
     Vector3 jumpDirection = Vector3.up;
@@ -45,21 +45,19 @@ public class Character2D : MonoBehaviour
     public float GravityBoost;
     public float DetectionDistance = 1;
     public float DetectionDistanceGround = 1;
-    bool isJumping;
 
     [Header("Inputs")]
     public float horizontalInput;
     public float verticalInput;
 
     public Animator animator;
-    public GameObject cam;
+    public GameObject m_camera;
 
-    Vector2 rayDir;
-    public bool grounded;
+    public bool debug = false;
 
     void Awake()
     {
-        if (TryGetComponent<Rigidbody2D>(out Rigidbody2D attached_rigidbody))
+        if (TryGetComponent<Rigidbody>(out Rigidbody attached_rigidbody))
         {
             m_rb = attached_rigidbody;
         }
@@ -74,20 +72,32 @@ public class Character2D : MonoBehaviour
 
     void Update()
     {
-    
+        horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
+        Vector3 directionForward = new Vector3(m_camera.transform.forward.x, 0f, m_camera.transform.forward.z).normalized;
+        Vector3 directionRight = new Vector3(m_camera.transform.right.x, 0f, m_camera.transform.right.z).normalized;
 
-        //run
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Player_Action_anim") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Player_Death_anim"))
+
+        if (debug)
         {
-            animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
+            Debug.DrawRay(transform.position, directionForward * 10, Color.blue);
+            Debug.DrawRay(transform.position, directionRight * 10, Color.red);
         }
 
-        // Jump
+        //run
+        if (animator != null)
+        {
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Player_Action_anim") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Player_Death_anim"))
+            {
+                animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
+            }
+        }
+        
 
+        // Jump
         if ((Input.GetKeyDown(KeyCode.Space) /*|| Input manette*/  && IsGrounded()))
         {
-            jumpTime = 0;
-            isJumping = true;   
+            jumpTime = 0;   
         }
 
         if (jumpTime != -1 && jumpTime >= 0 && jumpTime < jumpCurve.keys[jumpCurve.length - 1].time)
@@ -97,39 +107,39 @@ public class Character2D : MonoBehaviour
         else
         {
             jumpTime = -1;
-            isJumping = false;
         }
-
 
         // acceleration 
+        //currentSpeed = Mathf.Lerp(0, maxSpeed, (accelerationCoefficient * accelerationCurve.Evaluate(accelerationTime)) + ((IsGrounded() == true) ? 0 : 1) * ((airControlBoost == true) ? 1 : 0));
 
-        currentSpeed = Mathf.Lerp(0, maxSpeed, (accelerationCoefficient * accelerationCurve.Evaluate(accelerationTime)) + ((IsGrounded() == true) ? 0 : 1) * ((airControlBoost == true) ? 1 : 0));
+        //if (horizontalInput != 0 && accelerationTime == -1)
+        //{
+        //    accelerationTime = 0;
+        //}
+        //if (accelerationTime != -1 && accelerationTime >= 0 && accelerationTime < accelerationCurve.keys[accelerationCurve.length - 1].time)
+        //{
+        //    accelerationTime += Time.deltaTime;
+        //}
+        //else
+        //{
+        //    if (horizontalInput == 0)
+        //    {
+        //        accelerationTime = -1;
+        //    }
+        //}
 
-        if (horizontalInput != 0 && accelerationTime == -1)
-        {
-            accelerationTime = 0;
-        }
-        if (accelerationTime != -1 && accelerationTime >= 0 && accelerationTime < accelerationCurve.keys[accelerationCurve.length - 1].time)
-        {
-            accelerationTime += Time.deltaTime;
-        }
-        else
-        {
-            if (horizontalInput == 0)
-            {
-                accelerationTime = -1;
-            }
-        }
+        currentSpeed = maxSpeed;
     }
+
     void FixedUpdate()
     {
-        if (gameObject.GetComponent<Rigidbody2D>().velocity.magnitude > 25)
+        if (gameObject.GetComponent<Rigidbody>().velocity.magnitude > 25)
         {
-            gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+            gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
 
         //main velocity operation
-        target_Velocity = new Vector3(horizontalInput * currentSpeed, 0, 0) + new Vector3(0, (m_rb.velocity.y + (-9.81f * GravityBoost)) * ((jumpTime != -1) ? 0 : 1), 0);
+        target_Velocity = new Vector3(horizontalInput * currentSpeed, 0, verticalInput * currentSpeed) + new Vector3(0, (m_rb.velocity.y + (-9.81f * GravityBoost)) * ((jumpTime != -1) ? 0 : 1), 0);
 
         if (jumpTime != -1)
         {
@@ -147,7 +157,8 @@ public class Character2D : MonoBehaviour
 
     public bool IsGrounded()
     {
-        RaycastHit2D hit0 = Physics2D.Raycast(transform.position, Vector2.down, DetectionDistanceGround, ground_Layer);
-        return ((hit0.collider != null));
+        bool groundRayCast = Physics.Raycast(transform.position, Vector3.down, DetectionDistanceGround, ground_Layer);
+        Debug.Log(groundRayCast);
+        return groundRayCast;
     }
 }

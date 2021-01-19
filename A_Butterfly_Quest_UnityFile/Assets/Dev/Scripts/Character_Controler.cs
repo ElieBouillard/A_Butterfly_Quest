@@ -7,6 +7,9 @@ public class Character_Controler : MonoBehaviour
     private Rigidbody Rb;
     public float Speed = 5;
 
+    private float AxisX;
+    private float AxisZ;
+
     private void Start()
     {
         Rb = GetComponent<Rigidbody>();
@@ -14,12 +17,18 @@ public class Character_Controler : MonoBehaviour
 
     private void Update()
     {
-        Move();       
+        AxisX = Input.GetAxis("Horizontal");
+        AxisZ = Input.GetAxis("Vertical");      
+    }
+
+    private void FixedUpdate()
+    {
+        Move();
     }
 
     private void Move()
     {
-        Vector3 dir = new Vector3(Input.GetAxis("Horizontal")* Speed, Rb.velocity.y, Input.GetAxis("Vertical") * Speed);
+        Vector3 dir = new Vector3(AxisX* Speed, Rb.velocity.y, AxisZ * Speed);
         Rb.velocity = dir;
     }
 }

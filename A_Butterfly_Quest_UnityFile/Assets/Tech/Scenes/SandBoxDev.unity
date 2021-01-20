@@ -1546,7 +1546,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6c79da9525eddd04e91df750f2bf320c, type: 2}
+  - {fileID: 2100000, guid: aa8426cabc882bc4f8f9327826584187, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1606,8 +1606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81da7bc0c3d83bc45a29ad26ce58c548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerControllerScpt: {fileID: 9289138}
-  m_cam: {fileID: 1215292937}
+  PlayerOb: {fileID: 9289136}
 --- !u!23 &1517676954
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1626,7 +1625,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b10f054809c244e48ab1805e82fae07b, type: 2}
+  - {fileID: 2100000, guid: 662b3dc897eb1234ba2b62b3dce30bb7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1892,7 +1891,7 @@ MonoBehaviour:
   m_YAxis:
     Value: 0.5
     m_SpeedMode: 0
-    m_MaxSpeed: 3
+    m_MaxSpeed: 2
     m_AccelTime: 0.2
     m_DecelTime: 0.1
     m_InputAxisName: Mouse Y
@@ -1916,7 +1915,7 @@ MonoBehaviour:
   m_XAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 600
+    m_MaxSpeed: 250
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Mouse X

@@ -163,7 +163,6 @@ public class Character3D : MonoBehaviour
     public bool IsGrounded()
     {
         bool groundRayCast = Physics.Raycast(transform.position, Vector3.down, DetectionDistanceGround, ground_Layer);
-        Debug.Log(groundRayCast);
         return groundRayCast;
     }
 }

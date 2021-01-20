@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class CharacterMeshRotate : MonoBehaviour
 {
-    public Character3D PlayerControllerScpt;
-    public Camera m_cam;
+    public GameObject PlayerOb;
+    private Character3D PlayerControllerScpt;
+
+    private void Start()
+    {
+        PlayerControllerScpt = PlayerOb.GetComponent<Character3D>();
+    }
 
     private void Update()
     {
-        ////float RotationAngle = Mathf.Atan2(PlayerControllerScpt.horizontalInput, PlayerControllerScpt.verticalInput) * Mathf.Rad2Deg;
-        //transform.rotation = Quaternion.Euler(0f, RotationAngle + 90, 0f);
+        Vector3 dir = (PlayerControllerScpt.directionForward * -PlayerControllerScpt.horizontalInput + PlayerControllerScpt.directionRight * PlayerControllerScpt.verticalInput);
 
-        Quaternion rotationTarget = new Quaternion(0f, m_cam.transform.rotation.y ,0f, 0f);
-        transform.rotation = rotationTarget;
+        if(dir != Vector3.zero)
+        {
+            transform.rotation = Quaternion.LookRotation(dir);
+        }
     }
 }

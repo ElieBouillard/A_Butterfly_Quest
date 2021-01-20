@@ -52,11 +52,14 @@ public class Character3D : MonoBehaviour
 
     public Animator animator;
     public GameObject m_camera;
+    public GameObject m_freeLookCamera;
 
     public bool debug = false;
 
     public Vector3 directionForward;
     public Vector3 directionRight;
+
+    public Vector3 directionForwardFreeLook;
 
 
     void Awake()
@@ -80,7 +83,7 @@ public class Character3D : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical");
 
         directionForward = new Vector3(m_camera.transform.forward.x, 0f, m_camera.transform.forward.z).normalized;
-        directionRight = new Vector3(m_camera.transform.right.x, 0f, m_camera.transform.right.z).normalized;
+        directionRight = new Vector3(m_camera.transform.right.x, 0f, m_camera.transform.right.z).normalized;      
 
 
         if (debug)
@@ -100,11 +103,10 @@ public class Character3D : MonoBehaviour
         
 
         // Jump
-        if ((Input.GetKeyDown(KeyCode.Space) /*|| Input manette*/  && IsGrounded()))
+        if ((Input.GetAxis("Jump") > 0 && IsGrounded()))
         {
             jumpTime = 0;   
         }
-
         if (jumpTime != -1 && jumpTime >= 0 && jumpTime < jumpCurve.keys[jumpCurve.length - 1].time)
         {
             jumpTime += Time.deltaTime;

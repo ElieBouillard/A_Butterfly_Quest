@@ -5,12 +5,17 @@ using Cinemachine;
 
 public class Shoot : MonoBehaviour
 {
-    public Animator CameraAnimator;
-    public bool Aiming = false;
-    public CinemachineFreeLook freeLookCam;
-    public GameObject CamTarget;
     public GameObject PlayerMesh;
     private CharacterMeshRotate CharacterMeshScpt;
+
+    public Animator CamAnimator;
+
+    public GameObject CrossAirObj;
+
+    public CinemachineFreeLook freeLookCam;
+    public CameraAiming CameraAimingScpt;    
+
+    public bool Aiming = false;
 
     private void Start()
     {
@@ -21,21 +26,42 @@ public class Shoot : MonoBehaviour
     {        
         if (Input.GetAxis("Aim") > 0)
         {
-            CharacterMeshScpt.ResetMeshForward();
+
             Aiming = true;
-            CameraAnimator.SetBool("AimCamera", true);
+            CamAnimator.SetBool("AimCamera", true);
+            ShowOnCrossair();            
         }
         else if (Input.GetAxis("Aim") <= 0)
         {
-            StartCoroutine(resetMesh());
-
+            ResetFreeLookCamPos();
+            ResetAimCamPos();
+            Aiming = false;
+            CamAnimator.SetBool("AimCamera", false);
+            ShowOffCrossair();
         }
     }
 
-    IEnumerator resetMesh()
+    public void ResetAimCamPos()
     {
-        CameraAnimator.SetBool("AimCamera", false);
-        yield return new WaitForSeconds(0.8f);
-        Aiming = false;
+        if (CameraAimingScpt.yAxis.Value != 0)
+        {
+            CameraAimingScpt.yAxis.Value = 0;
+        }
+        //CameraAimingScpt.xAxis.Value = 0;
+    }
+
+    public void ResetFreeLookCamPos()
+    {
+        freeLookCam.m_XAxis.Value = CameraAimingScpt.xAxis.Value;
+    }
+
+    public void ShowOnCrossair()
+    {
+        CrossAirObj.SetActive(true);
+    }
+
+    public void ShowOffCrossair()
+    {
+        CrossAirObj.SetActive(false);
     }
 }

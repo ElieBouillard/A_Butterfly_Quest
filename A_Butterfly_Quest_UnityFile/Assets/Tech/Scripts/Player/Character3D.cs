@@ -71,19 +71,13 @@ public class Character3D : MonoBehaviour
         m_instance = this;
     }
 
-
-    void Start()
-    {
-      
-    }
-
     void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
         directionForward = new Vector3(m_camera.transform.forward.x, 0f, m_camera.transform.forward.z).normalized;
-        directionRight = new Vector3(m_camera.transform.right.x, 0f, m_camera.transform.right.z).normalized;      
+        directionRight = new Vector3(m_camera.transform.right.x, 0f, m_camera.transform.right.z).normalized;       
 
 
         if (debug)

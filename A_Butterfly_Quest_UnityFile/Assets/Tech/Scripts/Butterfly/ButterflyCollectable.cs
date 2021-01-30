@@ -16,7 +16,8 @@ public class ButterflyCollectable : MonoBehaviour
         ButterflyInventory PlayerInventory = other.GetComponent<ButterflyInventory>();
         if(PlayerInventory != null)
         {
-            PlayerInventory.CatchButterfly(ButterflyNumber, ButterflySpeed, Damage, TicFirePerSec, Illusion);
+            ButterflyEntity currButterfly = new ButterflyEntity(ButterflySpeed, Damage, TicFirePerSec, Illusion);
+            PlayerInventory.CatchButterfly(ButterflyNumber, currButterfly);
         }
     }
 }

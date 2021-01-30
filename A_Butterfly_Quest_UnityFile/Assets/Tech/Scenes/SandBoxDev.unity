@@ -331,6 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ButterflyInInventoryValue: 0
+  ButterflyInTravelValue: 0
   ButterflyToReloadValue: 0
   numbreButterfly: {fileID: 702491275}
 --- !u!1 &26378652
@@ -3183,7 +3184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ButterflyNumber: 2
-  ButterflySpeed: 5
+  ButterflySpeed: 50
   Damage: 7
   TicFirePerSec: 0
   Illusion: 0

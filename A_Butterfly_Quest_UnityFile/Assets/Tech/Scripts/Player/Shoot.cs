@@ -62,37 +62,40 @@ public class Shoot : MonoBehaviour
         }
 
         //Reload
-        if (Input.GetKeyDown("r"))
+        if (Input.GetButtonDown("Reload"))
         {
-            ButterflyInventory.Instance.Reload();
+            ButterflyInventory.Instance.StartReload();
         }
     }
 
     private void ShootButterfly()
     {
+        //Recuperation du premier papillon normal dans l'inventaire
         currButterflyEntity = ButterflyInventory.Instance.ButterflyInInventory[0];
-        ButterflyInventory.Instance.ShootedButterfly();
+        ButterflyInventory.Instance.ShootedButterfly(currButterflyEntity);
 
-        GameObject currButterfly = ButterflyPooler.SharedInstance.GetPooledObject();
-        if(currButterfly != null)
+        //Recuperation de l'objet pool disponible
+        GameObject butterflyBullet = ButterflyPooler.SharedInstance.GetPooledObject();
+        if(butterflyBullet != null)
         {
-            currButterfly.transform.position = ButterflyLauncher.transform.position;
-            currButterfly.SetActive(true);
-            ButterflyBullet currButterFlyScpt = currButterfly.GetComponent<ButterflyBullet>();
+            //Reset position de l'objet pool et activation
+            butterflyBullet.transform.position = ButterflyLauncher.transform.position;
+            butterflyBullet.SetActive(true);
+            ButterflyBullet butterflyBulletScpt = butterflyBullet.GetComponent<ButterflyBullet>();
 
-            currButterFlyScpt.GetButterflyInfo(currButterflyEntity);
+            butterflyBulletScpt.GetButterflyInfo(currButterflyEntity);
 
             //Si touche un mesh alors prend les coordonees en direction
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out ShootInfo, Range))
             {
-                currButterFlyScpt.onHit = true;
-                currButterFlyScpt.target = ShootInfo.point;
+                butterflyBulletScpt.onHit = true;
+                butterflyBulletScpt.target = ShootInfo.point;
             }
             //Sinon le papillon part du perso pour aller tout droit
             else
             {
-                currButterFlyScpt.onHit = false;
-                currButterFlyScpt.rb.velocity = Camera.main.transform.forward * currButterFlyScpt.ButterflySpeed;
+                butterflyBulletScpt.onHit = false;
+                butterflyBulletScpt.rb.velocity = Camera.main.transform.forward * butterflyBulletScpt.ButterflySpeed;
             }
         }        
     }

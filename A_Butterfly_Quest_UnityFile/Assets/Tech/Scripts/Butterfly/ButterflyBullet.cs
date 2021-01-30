@@ -20,6 +20,7 @@ public class ButterflyBullet : MonoBehaviour
     private Vector3 direction;
     public float distPlayerToButterfly;
     public float distanceMax;
+    private ButterflyEntity m_butterfly;
 
 
     public bool onHit;
@@ -40,17 +41,9 @@ public class ButterflyBullet : MonoBehaviour
             if(distPlayerToButterfly > distanceMax)
             {
                 gameObject.SetActive(false);
-                ButterflyInventory.Instance.AddToReloadList(ButterflySpeed, Damage, TicFirePerSec, Illusion);
+                ButterflyInventory.Instance.AddToReloadList(m_butterfly);
             }
         }
-    }
-
-    public void GetButterflyInfo(ButterflyEntity currButterfly)
-    {
-        ButterflySpeed = currButterfly.ButterflySpeed;
-        Damage = currButterfly.Damage;
-        TicFirePerSec = currButterfly.TicFirePerSec;
-        Illusion = currButterfly.Illusion;
     }
 
     private void FixedUpdate()
@@ -73,9 +66,17 @@ public class ButterflyBullet : MonoBehaviour
             
     }
 
+    public void GetButterflyInfo(ButterflyEntity currButterfly)
+    {
+        m_butterfly = currButterfly;
+        ButterflySpeed = currButterfly.ButterflySpeed;
+        Damage = currButterfly.Damage;
+        TicFirePerSec = currButterfly.TicFirePerSec;
+        Illusion = currButterfly.Illusion;
+    }
     private void OnTriggerEnter(Collider other)
     {
         gameObject.SetActive(false);
-        ButterflyInventory.Instance.AddToReloadList(ButterflySpeed, Damage, TicFirePerSec, Illusion);
+        ButterflyInventory.Instance.AddToReloadList(m_butterfly);
     }
 }

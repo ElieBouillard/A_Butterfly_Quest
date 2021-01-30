@@ -9,37 +9,49 @@ public class ButterflyInventory : MonoBehaviour
 
     [Header("Debug Info")]
     public int ButterflyInInventoryValue;
+    public int ButterflyInTravelValue;
     public int ButterflyToReloadValue;
 
     public List<ButterflyEntity> ButterflyInInventory = new List<ButterflyEntity>();
+    public List<ButterflyEntity> ButterflyInTravel = new List<ButterflyEntity>();
     public List<ButterflyEntity> ButterflyToReload = new List<ButterflyEntity>();
 
     //Test number of bullets
     public Text numbreButterfly;
+
+    private float clock;
+    private bool reloading = false;
 
     public void Awake()
     {
         Instance = this;
     }
 
-    public void CatchButterfly(int butterflyNumbre,float butterflySpeed, float damage, float ticFirePerSec, bool illusion)
+    public void CatchButterfly(int butterflyNumbre,ButterflyEntity currButterfly)
     {
         for (int i = 0; i < butterflyNumbre; i++)
         {
-            ButterflyEntity catchedButterfly = new ButterflyEntity(butterflySpeed, damage, ticFirePerSec, illusion);
-            ButterflyInInventory.Add(catchedButterfly);
+            ButterflyInInventory.Add(currButterfly);
         }        
     }
 
-    public void ShootedButterfly()
+    public void ShootedButterfly(ButterflyEntity currButterfly)
     {
-        ButterflyInInventory.RemoveAt(0);
+        ButterflyInTravel.Add(currButterfly);
+        ButterflyInInventory.Remove(currButterfly);
     }
 
-    public void AddToReloadList(float butterflySpeed, float damage, float ticFirePerSec, bool illusion)
+    public void AddToReloadList(ButterflyEntity currButterfly)
     {
-        ButterflyEntity butterflyToAdd = new ButterflyEntity(butterflySpeed, damage, ticFirePerSec, illusion);
-        ButterflyToReload.Add(butterflyToAdd);
+        ButterflyToReload.Add(currButterfly);
+        ButterflyInTravel.Remove(currButterfly);
+    }
+
+    public void StartReload()
+    {
+        reloading = true;
+        Debug.Log("Reloading...");
+        clock = 2f;
     }
 
     public void Reload()
@@ -51,20 +63,34 @@ public class ButterflyInventory : MonoBehaviour
                 ButterflyInInventory.Add(ButterflyToReload[i]);
             }
             ButterflyToReload.Clear();
+            Debug.Log("Reloading success !");
         }
         else
         {
             Debug.Log("No butterfly to reload !");
         }
+        reloading = false;
     }
 
     private void Update()
     {
         //Debug tailles des listes
         ButterflyInInventoryValue = ButterflyInInventory.Count;
+        ButterflyInTravelValue = ButterflyInTravel.Count;
         ButterflyToReloadValue = ButterflyToReload.Count;
 
-        //Nombre de papillon à tirer
+        //Nombre de papillon à tirer HUD
         numbreButterfly.text = ButterflyInInventory.Count.ToString();
+
+        //Clock reload
+        if (reloading)
+        {
+            clock -= Time.deltaTime;
+            if(clock < 0)
+            {
+                Reload();
+            }
+        }
+
     }
 }

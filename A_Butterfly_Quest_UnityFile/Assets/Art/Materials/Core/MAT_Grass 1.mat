@@ -153,7 +153,7 @@ Material:
     - _AlphaCutoffShadow: 0.5
     - _AlphaDstBlend: 0
     - _AlphaSrcBlend: 1
-    - _AmbientForce: 0.1
+    - _AmbientForce: 0
     - _Anisotropy: 0
     - _BlendMode: 0
     - _CameraTiltingAmount: 2.5
@@ -292,7 +292,7 @@ Material:
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
     - _Vector0: {r: 0, g: 1, b: 0, a: 0}
-    - _WindDirection: {r: 0.40824828, g: 0, b: 0.40824828, a: 0.81649655}
+    - _WindDirection: {r: 1, g: -0.2, b: 0.40824828, a: 1}
     - _WindLocalJitterMask: {r: 1, g: 0.35, b: 1, a: 0.1}
-    - _WindMask: {r: 0, g: 1, b: 0, a: 0}
+    - _WindMask: {r: 0.2, g: 1, b: 0, a: 0}
     - _trestestes: {r: 0, g: -1, b: 0, a: 0}

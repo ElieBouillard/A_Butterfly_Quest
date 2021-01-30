@@ -88,7 +88,6 @@ public class Character3D : MonoBehaviour
         //Vitesse de déplacement
         currentSpeed = maxSpeed;
 
-
         //Animation Run
         //if (animator != null)
         //{

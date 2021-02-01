@@ -5,45 +5,49 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class AnimationManager : MonoBehaviour
 {
+    public bool DEBUG = false;
 
+    //Components
     private Animator m_anim;
+    private Transform m_parentMesh;
 
+    //Inputs
     private Vector3 cameraForward;
     private Vector3 cameraRight;
-
     private float playerSpeed;
     private Vector2 playerTargetDir;
-    private Vector2 playerCurDir;
-    [SerializeField]
     private float playerDirOffset;
-
     private bool playerFocused;
     private bool jumpTrigger;
 
-    private float cur_playerSpeed;
 
-
-    [SerializeField]
-    private float inputLerpSpeed = 1.0f;
-
-    public float debugValue;
-
-    private Transform m_parentMesh;
 
     //Torso Bending
-    [SerializeField]
     private float curTorsoBend = 0.0f;
-    [SerializeField]
     private float targetTorsoBend = 0.0f;
     [SerializeField]
     private float TorsoBendMultiplier = 1f;
     [SerializeField]
-    private float torsoMaxRange = 0.4f;
+    private float torsoMaxRange = 0.45f;
     [SerializeField]
     private float minSpeedForBending = .3f;
+
+    //Torso Impulse
     private bool canTorsoImpulse = false;
     private bool TorsoImpulseTrigger = false;
+
+    //Reorientation
     private bool reorientateTrigger = false;
+    private float reorientateTimer;
+    [SerializeField]
+    private float reorientateDuration = .3f;
+    [SerializeField]
+    private float reorientateSpeed = 300.0f;
+    private Vector3 reorientateDirection;
+    private float reorientateCooldown = 0.0f;
+    private float rotationDirection = 1f;
+    private float negativeReorientationTreshold = -0.5f;
+
 
     private void Awake()
     {
@@ -55,59 +59,60 @@ public class AnimationManager : MonoBehaviour
     {
         cameraForward = Vector3.forward;
         cameraRight = Vector3.right;
+        reorientateTimer = -1.0f;
     }
 
 
     void Update()
     {
-        ////Debug area
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-        playerSpeed = Mathf.Max(Mathf.Abs(horizontal), Mathf.Abs(vertical));
-        playerTargetDir = new Vector2(horizontal, vertical);
-        if (Input.GetKeyDown(KeyCode.Joystick1Button1)) 
-        {
-            playerFocused = !playerFocused;
-        }
-        if (Input.GetKeyDown(KeyCode.Joystick1Button0))
-        {
-            jumpTrigger = true;
-        }
-        ////
 
-        //cur_playerSpeed = Mathf.Lerp(cur_playerSpeed, playerSpeed, Time.deltaTime * inputLerpSpeed);
-
-        
-
-      
         Vector3 inputPos = cameraForward * playerTargetDir.y + cameraRight * playerTargetDir.x;
         Vector3 meshPos = m_parentMesh.transform.forward;
         Vector3 offset = inputPos.normalized - meshPos.normalized;
-        //DEBUG
-        Debug.DrawRay(transform.position + Vector3.up * 2, offset, Color.magenta);
-        Debug.DrawRay(transform.position + Vector3.up * 2, m_parentMesh.transform.right, Color.green);
-        Debug.DrawRay(transform.position, cameraForward * playerTargetDir.y + cameraRight * playerTargetDir.x, Color.cyan);
-        Debug.DrawRay(transform.position, m_parentMesh.transform.forward, Color.red);
+        playerDirOffset = Vector3.Dot(offset, m_parentMesh.transform.right);
 
 
-
-        if (playerSpeed > minSpeedForBending && playerFocused == false)
+        if (playerFocused == false && playerSpeed > 0.01f)
         {
-            //calculate playerDirOFFSET
-            playerDirOffset = Vector3.Dot(offset, m_parentMesh.transform.right);
 
-            if (Mathf.Abs(playerDirOffset) <= torsoMaxRange)
+            float OrientationDir = Vector3.Dot(inputPos.normalized, meshPos.normalized);
+            if (OrientationDir >= torsoMaxRange) //cone range
             {
-                HandleTorsoBend();
-                if (canTorsoImpulse)
+                if(playerSpeed > minSpeedForBending)
                 {
-                    TorsoImpulseTrigger = true;
-                    canTorsoImpulse = false;
+                    HandleTorsoBend();
+                    if (canTorsoImpulse)
+                    {
+                        TorsoImpulseTrigger = true;
+                        canTorsoImpulse = false;
+                    }
                 }
+               
+                
             }
             else
             {
-                HandleReorientation();
+                //If offset is too big, start reorientating 
+                if (reorientateTimer <= -0.8f && reorientateCooldown <= -.8f)
+                {
+                    reorientateDirection = inputPos;
+                    reorientateTrigger = true;
+                    //speed à 0
+
+                    if (Vector3.Dot(reorientateDirection.normalized, m_parentMesh.transform.forward.normalized) >= negativeReorientationTreshold && Mathf.Sign(playerDirOffset) < 0)
+                    {
+                        rotationDirection = -1f;
+                    }
+                    else
+                    {
+                        rotationDirection = 1f;
+                    }
+
+                    reorientateTimer = 0;
+
+                    
+                }
+
             }
         }
         else
@@ -122,18 +127,74 @@ public class AnimationManager : MonoBehaviour
             
         }
 
-        if(playerSpeed >= 0.01f)
+        //Reorientate pause timer
+        if(reorientateTimer >= -.1f)
         {
+            HandleReorientation();
+            reorientateTimer += Time.deltaTime;
+            if(reorientateTimer >= reorientateDuration)
+            {
+                reorientateCooldown = 0f;
+                reorientateTimer = -1f;          
+            }
+            targetTorsoBend = 0;
+        }
+
+        //wait before being able to reorientate
+        if(reorientateCooldown >= -.1f)
+        {
+            reorientateCooldown += Time.deltaTime;
+            if(reorientateCooldown >= .5f)
+            {
+                reorientateCooldown = -1f;
+            }
+        }
+
+        //Basic Input facing with a lerp
+        if (playerSpeed >= 0.01f && reorientateTimer <= -0.8f)
+        {          
             FacePlayerInput();
         }
 
+        //Update torso bend
         curTorsoBend = Mathf.Lerp(curTorsoBend, targetTorsoBend, Time.deltaTime * 20);
-        //if(Mathf.Abs(curTorsoBend) <= 0.1f)
-        //{
-        //    curTorsoBend = 0.0f;
-        //}
 
-        HandleAnimatorBindings(); 
+        //Interface with Animator component
+        HandleAnimatorBindings();
+
+
+
+
+
+
+        // ******** DEBUG *********
+
+        if (DEBUG)
+        {
+            ////Debug area**********
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
+            playerSpeed = Mathf.Max(Mathf.Abs(horizontal), Mathf.Abs(vertical));
+            playerTargetDir = new Vector2(horizontal, vertical);
+            if (Input.GetKeyDown(KeyCode.Joystick1Button1))
+            {
+                playerFocused = !playerFocused;
+            }
+            if (Input.GetKeyDown(KeyCode.Joystick1Button0))
+            {
+                jumpTrigger = true;
+            }
+            ////************
+        }
+
+        //Debug.DrawRay(transform.position + Vector3.up * 2, offset, Color.magenta);
+        //Debug.DrawRay(transform.position + Vector3.up * 2, m_parentMesh.transform.right, Color.green);
+        Debug.DrawRay(transform.position, inputPos, Color.cyan);
+        Debug.DrawRay(transform.position, cameraForward * playerTargetDir.y + cameraRight * playerTargetDir.x, Color.cyan);
+        Debug.DrawRay(transform.position, m_parentMesh.transform.forward, Color.red);
+        //Debug.DrawRay(transform.position, m_parentMesh.transform.right - m_parentMesh.transform.forward, Color.red);
+        Debug.DrawRay(transform.position, m_parentMesh.transform.forward * (1- torsoMaxRange*2) + m_parentMesh.transform.right * torsoMaxRange*2, Color.red);
+        Debug.DrawRay(transform.position, m_parentMesh.transform.forward * (1- torsoMaxRange*2) + -m_parentMesh.transform.right * torsoMaxRange*2, Color.red);
     }
 
     void FacePlayerInput()
@@ -141,7 +202,7 @@ public class AnimationManager : MonoBehaviour
         if(playerFocused == false)
         {
             //mesh forward lerp towards new dir
-            Quaternion targetRotation = Quaternion.LookRotation(new Vector3(playerTargetDir.x,0,playerTargetDir.y));
+            Quaternion targetRotation = Quaternion.LookRotation(new Vector3(playerTargetDir.x, 0, playerTargetDir.y));
             m_parentMesh.rotation = Quaternion.Slerp(m_parentMesh.rotation, targetRotation, Time.deltaTime * 10);
         }
         else
@@ -157,9 +218,17 @@ public class AnimationManager : MonoBehaviour
 
     void HandleReorientation()
     {
-        reorientateTrigger = true;
-        Debug.DrawRay(transform.position, Vector3.up * 5, Color.black);
-        //speed à 0
+        float offsetFromTarget = Vector3.Dot(reorientateDirection.normalized, m_parentMesh.transform.forward.normalized);
+        if (offsetFromTarget <= 0.95f)
+        {
+            m_parentMesh.localEulerAngles = new Vector3(m_parentMesh.localEulerAngles.x, m_parentMesh.localEulerAngles.y + (reorientateSpeed * rotationDirection * Time.deltaTime) / reorientateDuration, m_parentMesh.localEulerAngles.z);            
+        }
+        else
+        {       
+            reorientateTimer = -1f;
+            reorientateCooldown = 0f;
+        }
+
     }
 
     void HandleAnimatorBindings()

@@ -1,0 +1,96 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class ButterflyInventory : MonoBehaviour
+{
+    public static ButterflyInventory Instance;
+
+    [Header("Debug Info")]
+    public int ButterflyInInventoryValue;
+    public int ButterflyInTravelValue;
+    public int ButterflyToReloadValue;
+
+    public List<ButterflyEntity> ButterflyInInventory = new List<ButterflyEntity>();
+    public List<ButterflyEntity> ButterflyInTravel = new List<ButterflyEntity>();
+    public List<ButterflyEntity> ButterflyToReload = new List<ButterflyEntity>();
+
+    //Test number of bullets
+    public Text numbreButterfly;
+
+    private float clock;
+    private bool reloading = false;
+
+    public void Awake()
+    {
+        Instance = this;
+    }
+
+    public void CatchButterfly(int butterflyNumbre,ButterflyEntity currButterfly)
+    {
+        for (int i = 0; i < butterflyNumbre; i++)
+        {
+            ButterflyInInventory.Add(currButterfly);
+        }        
+    }
+
+    public void ShootedButterfly(ButterflyEntity currButterfly)
+    {
+        ButterflyInTravel.Add(currButterfly);
+        ButterflyInInventory.Remove(currButterfly);
+    }
+
+    public void AddToReloadList(ButterflyEntity currButterfly)
+    {
+        ButterflyToReload.Add(currButterfly);
+        ButterflyInTravel.Remove(currButterfly);
+    }
+
+    public void StartReload()
+    {
+        reloading = true;
+        Debug.Log("Reloading...");
+        clock = 2f;
+    }
+
+    public void Reload()
+    {
+        if ( ButterflyToReload.Count > 0)
+        {
+            for (int i = 0; i < ButterflyToReload.Count; i++)
+            {
+                ButterflyInInventory.Add(ButterflyToReload[i]);
+            }
+            ButterflyToReload.Clear();
+            Debug.Log("Reloading success !");
+        }
+        else
+        {
+            Debug.Log("No butterfly to reload !");
+        }
+        reloading = false;
+    }
+
+    private void Update()
+    {
+        //Debug tailles des listes
+        ButterflyInInventoryValue = ButterflyInInventory.Count;
+        ButterflyInTravelValue = ButterflyInTravel.Count;
+        ButterflyToReloadValue = ButterflyToReload.Count;
+
+        //Nombre de papillon à tirer HUD
+        numbreButterfly.text = ButterflyInInventory.Count.ToString();
+
+        //Clock reload
+        if (reloading)
+        {
+            clock -= Time.deltaTime;
+            if(clock < 0)
+            {
+                Reload();
+            }
+        }
+
+    }
+}

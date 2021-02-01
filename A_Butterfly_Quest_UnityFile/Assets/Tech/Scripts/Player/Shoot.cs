@@ -14,6 +14,7 @@ public class Shoot : MonoBehaviour
     private RaycastHit ShootInfo;
     public GameObject PrefabButterly;
     private GameObject ButterflyLauncher;
+    public ButterflyEntity currButterflyEntity;
 
     [Header("References")]
     public Animator CamAnimator;
@@ -51,28 +52,52 @@ public class Shoot : MonoBehaviour
             CamAnimator.SetBool("AimCamera", false);
         }
 
-        //Shoot
-        if (Input.GetButtonDown("Fire1") && Aiming)
+        //Shoot Papillons normaux
+        if (ButterflyInventory.Instance.ButterflyInInventory.Count > 0)
         {
-            ShootButterfly();
+            if (Input.GetButtonDown("Fire1") && Aiming)
+            {
+                ShootButterfly();
+            }
+        }
+
+        //Reload
+        if (Input.GetButtonDown("Reload"))
+        {
+            ButterflyInventory.Instance.StartReload();
         }
     }
 
     private void ShootButterfly()
     {
-        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out ShootInfo, Range))
-        {
-            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * Range, Color.yellow, 10f);
-            GameObject currButterfly = ButterflyPooler.SharedInstance.GetPooledObject();
-            if(currButterfly != null)
-            {
-                currButterfly.transform.position = ButterflyLauncher.transform.position;
-                currButterfly.SetActive(true);
-                ButterFlyBullet currButterFlyScpt = currButterfly.GetComponent<ButterFlyBullet>();
-                currButterFlyScpt.target = ShootInfo.point;
-            }
+        //Recuperation du premier papillon normal dans l'inventaire
+        currButterflyEntity = ButterflyInventory.Instance.ButterflyInInventory[0];
+        ButterflyInventory.Instance.ShootedButterfly(currButterflyEntity);
 
-        }
+        //Recuperation de l'objet pool disponible
+        GameObject butterflyBullet = ButterflyPooler.SharedInstance.GetPooledObject();
+        if(butterflyBullet != null)
+        {
+            //Reset position de l'objet pool et activation
+            butterflyBullet.transform.position = ButterflyLauncher.transform.position;
+            butterflyBullet.SetActive(true);
+            ButterflyBullet butterflyBulletScpt = butterflyBullet.GetComponent<ButterflyBullet>();
+
+            butterflyBulletScpt.GetButterflyInfo(currButterflyEntity);
+
+            //Si touche un mesh alors prend les coordonees en direction
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out ShootInfo, Range))
+            {
+                butterflyBulletScpt.onHit = true;
+                butterflyBulletScpt.target = ShootInfo.point;
+            }
+            //Sinon le papillon part du perso pour aller tout droit
+            else
+            {
+                butterflyBulletScpt.onHit = false;
+                butterflyBulletScpt.rb.velocity = Camera.main.transform.forward * butterflyBulletScpt.ButterflySpeed;
+            }
+        }        
     }
 
     //Reset la camera "Aim" derriere le joueur dès que Aim = false

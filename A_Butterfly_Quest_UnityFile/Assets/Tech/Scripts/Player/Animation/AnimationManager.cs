@@ -20,6 +20,8 @@ public class AnimationManager : MonoBehaviour
     private bool playerFocused;
     private bool jumpTrigger;
 
+    //Freeze rotations
+    private bool freezeRotations;
 
 
     //Torso Bending
@@ -48,6 +50,15 @@ public class AnimationManager : MonoBehaviour
     private float rotationDirection = 1f;
     private float negativeReorientationTreshold = -0.5f;
 
+    //Shooting
+    private float shootAnim_RandomIndex = 0.0f;
+    private bool shootTrigger;
+
+    //Shouting
+    private bool shoutTrigger;
+
+    //Dashing
+    private bool dashTrigger;
 
     private void Awake()
     {
@@ -71,8 +82,25 @@ public class AnimationManager : MonoBehaviour
         Vector3 offset = inputPos.normalized - meshPos.normalized;
         playerDirOffset = Vector3.Dot(offset, m_parentMesh.transform.right);
 
+        //Check for freezes
+        if (!m_anim.GetCurrentAnimatorStateInfo(1).IsName("None") /* || other conditions for freeze*/)
+        {
+            if (!freezeRotations)
+            {
+                freezeRotations = true;
+            }
+           
+        }
+        else
+        {
+            if (freezeRotations)
+            {
+                freezeRotations = false;
+            }
+        }
 
-        if (playerFocused == false && playerSpeed > 0.01f)
+
+        if (playerFocused == false && playerSpeed > 0.01f && !freezeRotations)
         {
 
             float OrientationDir = Vector3.Dot(inputPos.normalized, meshPos.normalized);
@@ -114,6 +142,12 @@ public class AnimationManager : MonoBehaviour
                 }
 
             }
+
+            ////bypass walk anim with big changes
+            //if ()
+            //{
+
+            //}
         }
         else
         {
@@ -152,8 +186,12 @@ public class AnimationManager : MonoBehaviour
 
         //Basic Input facing with a lerp
         if (playerSpeed >= 0.01f && reorientateTimer <= -0.8f)
-        {          
-            FacePlayerInput();
+        {
+            if (!freezeRotations) //Check if we're doing an overriding action
+            {
+                FacePlayerInput();
+            }
+            
         }
 
         //Update torso bend
@@ -161,9 +199,6 @@ public class AnimationManager : MonoBehaviour
 
         //Interface with Animator component
         HandleAnimatorBindings();
-
-
-
 
 
 
@@ -176,13 +211,25 @@ public class AnimationManager : MonoBehaviour
             float vertical = Input.GetAxis("Vertical");
             playerSpeed = Mathf.Max(Mathf.Abs(horizontal), Mathf.Abs(vertical));
             playerTargetDir = new Vector2(horizontal, vertical);
-            if (Input.GetKeyDown(KeyCode.Joystick1Button1))
+            if (Input.GetKeyDown(KeyCode.Joystick1Button4))
             {
                 playerFocused = !playerFocused;
             }
             if (Input.GetKeyDown(KeyCode.Joystick1Button0))
             {
                 jumpTrigger = true;
+            }
+            if (Input.GetKeyDown(KeyCode.Joystick1Button5))
+            {
+                shootTrigger = true;
+            }
+            if (Input.GetKeyDown(KeyCode.Joystick1Button3))
+            {
+                shoutTrigger = true;
+            }
+            if (Input.GetKeyDown(KeyCode.Joystick1Button1))
+            {
+                dashTrigger = true;
             }
             ////************
         }
@@ -256,6 +303,24 @@ public class AnimationManager : MonoBehaviour
             reorientateTrigger = false;
         }
 
+        if (shootTrigger)
+        {
+            m_anim.SetFloat("RandomShoot", Random.Range(0, 2));
+            m_anim.SetTrigger("Shoot");
+            shootTrigger = false;
+        }
+
+        if (shoutTrigger)
+        {
+            m_anim.SetTrigger("Shout");
+            shoutTrigger = false;
+        }
+
+        if (dashTrigger)
+        {
+            m_anim.SetTrigger("Dash");
+            dashTrigger = false;
+        }
     
     }
 }

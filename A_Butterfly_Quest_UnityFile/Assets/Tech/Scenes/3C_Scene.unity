@@ -218,6 +218,7 @@ MonoBehaviour:
   m_camera: {fileID: 1215292935}
   directionForward: {x: 0, y: 0, z: 0}
   directionRight: {x: 0, y: 0, z: 0}
+  m_animManager: {fileID: 0}
   debug: 1
 --- !u!54 &9289139
 Rigidbody:
@@ -261,12 +262,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f671b3e2f4c489646b9aa2dc86ebf583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Instance: {fileID: 0}
   Range: 50
   PrefabButterly: {fileID: 9118633422063191064, guid: 2ec3869f9051116409f9f27ffe2581fd,
     type: 3}
   CamAnimator: {fileID: 245339200}
-  CrosshairObj: {fileID: 0}
   freeLookCam: {fileID: 2043809381}
   Aiming: 0
 --- !u!114 &9289142
@@ -333,7 +332,6 @@ MonoBehaviour:
   ButterflyInInventoryValue: 0
   ButterflyInTravelValue: 0
   ButterflyToReloadValue: 0
-  numbreButterfly: {fileID: 0}
 --- !u!1 &52292380
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,7 +343,7 @@ GameObject:
   - component: {fileID: 52292381}
   - component: {fileID: 52292382}
   m_Layer: 0
-  m_Name: ButterflyManager
+  m_Name: ButterflyPooler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

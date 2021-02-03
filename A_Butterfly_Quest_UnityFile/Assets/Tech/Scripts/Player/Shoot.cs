@@ -53,7 +53,7 @@ public class Shoot : MonoBehaviour
         }
 
         //Shoot Papillons normaux
-        if (ButterflyInventory.Instance.ButterflyInInventory.Count > 0)
+        if (ButterflyInventory.Instance.ButterflyBasicInInventory.Count > 0)
         {
             if (Input.GetButtonDown("Fire1") && Aiming)
             {
@@ -71,7 +71,7 @@ public class Shoot : MonoBehaviour
     private void ShootButterfly()
     {
         //Recuperation du premier papillon normal dans l'inventaire
-        currButterflyEntity = ButterflyInventory.Instance.ButterflyInInventory[0];
+        currButterflyEntity = ButterflyInventory.Instance.ButterflyBasicInInventory[0];
         ButterflyInventory.Instance.ShootedButterfly(currButterflyEntity);
 
         //Recuperation de l'objet pool disponible

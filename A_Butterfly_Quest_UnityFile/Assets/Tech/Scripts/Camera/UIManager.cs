@@ -6,10 +6,12 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     private GameObject Crosshair;
+    private Text ButterflyInvetoryCount;
 
     public void Awake()
     {
         Crosshair = gameObject.transform.GetChild(0).gameObject;
+        ButterflyInvetoryCount = gameObject.transform.GetChild(2).GetComponent<Text>();    
     }
 
     private void Update()
@@ -22,6 +24,8 @@ public class UIManager : MonoBehaviour
         {
             ShowCrosshair(false);
         }
+
+        ButterflyInvetoryCount.text = ButterflyInventory.Instance.ButterflyInInventory.Count.ToString();
     }
 
     public void ShowCrosshair(bool value)

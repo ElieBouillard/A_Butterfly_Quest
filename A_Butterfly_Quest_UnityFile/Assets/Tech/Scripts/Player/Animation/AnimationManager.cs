@@ -250,12 +250,14 @@ public class AnimationManager : MonoBehaviour
 
         //Debug.DrawRay(transform.position + Vector3.up * 2, offset, Color.magenta);
         //Debug.DrawRay(transform.position + Vector3.up * 2, m_parentMesh.transform.right, Color.green);
-        Debug.DrawRay(transform.position, inputPos, Color.cyan);
+        //Debug.DrawRay(transform.position, inputPos, Color.cyan);
         Debug.DrawRay(transform.position, cameraForward * playerTargetDir.y + cameraRight * playerTargetDir.x, Color.cyan);
-        Debug.DrawRay(transform.position, m_parentMesh.transform.forward, Color.red);
+        Debug.DrawRay(transform.position, cameraForward, Color.red);
         //Debug.DrawRay(transform.position, m_parentMesh.transform.right - m_parentMesh.transform.forward, Color.red);
-        Debug.DrawRay(transform.position, m_parentMesh.transform.forward * (1- torsoMaxRange*2) + m_parentMesh.transform.right * torsoMaxRange*2, Color.red);
-        Debug.DrawRay(transform.position, m_parentMesh.transform.forward * (1- torsoMaxRange*2) + -m_parentMesh.transform.right * torsoMaxRange*2, Color.red);
+        //Debug.DrawRay(transform.position, cameraForward * (1- torsoMaxRange*2) + cameraRight * torsoMaxRange*2, Color.red);
+        Debug.DrawRay(transform.position, m_parentMesh.transform.forward * (1 - torsoMaxRange * 2) + m_parentMesh.transform.right * torsoMaxRange * 2, Color.red);
+        //Debug.DrawRay(transform.position, cameraForward * (1- torsoMaxRange*2) + -cameraRight * torsoMaxRange*2, Color.red);
+        Debug.DrawRay(transform.position, m_parentMesh.transform.forward * (1 - torsoMaxRange * 2) + -m_parentMesh.transform.right * torsoMaxRange * 2, Color.red);
     }
 
     void FacePlayerInput()
@@ -263,7 +265,8 @@ public class AnimationManager : MonoBehaviour
         if(playerFocused == false)
         {
             //mesh forward lerp towards new dir
-            Quaternion targetRotation = Quaternion.LookRotation(new Vector3(playerTargetDir.x, 0, playerTargetDir.y));
+            //Quaternion targetRotation = Quaternion.LookRotation(new Vector3(playerTargetDir.x, 0, playerTargetDir.y));
+            Quaternion targetRotation = Quaternion.LookRotation(cameraForward * playerTargetDir.y + cameraRight * playerTargetDir.x);
             m_parentMesh.rotation = Quaternion.Slerp(m_parentMesh.rotation, targetRotation, Time.deltaTime * 10);
         }
         else

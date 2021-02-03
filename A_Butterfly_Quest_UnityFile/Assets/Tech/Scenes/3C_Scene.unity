@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 52292381}
   - component: {fileID: 52292382}
   m_Layer: 0
-  m_Name: ButterflyManager
+  m_Name: ButterflyPooler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

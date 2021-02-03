@@ -25,7 +25,7 @@ public class UIManager : MonoBehaviour
             ShowCrosshair(false);
         }
 
-        ButterflyInvetoryCount.text = ButterflyInventory.Instance.ButterflyInInventory.Count.ToString();
+        ButterflyInvetoryCount.text = ButterflyInventory.Instance.ButterflyBasicInInventory.Count.ToString();
     }
 
     public void ShowCrosshair(bool value)

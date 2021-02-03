@@ -41,7 +41,9 @@ public class Shoot : MonoBehaviour
         if (Input.GetAxis("Aim") > 0)
         {
             Aiming = true;
-            CamAnimator.SetBool("AimCamera", true);           
+            CamAnimator.SetBool("AimCamera", true);
+
+            AnimationManager.m_instance.playerFocused = true; //Anim
         }
         //No Aim
         else if (Input.GetAxis("Aim") <= 0)
@@ -50,6 +52,8 @@ public class Shoot : MonoBehaviour
             ResetAimCamPos();
             Aiming = false;
             CamAnimator.SetBool("AimCamera", false);
+
+            AnimationManager.m_instance.playerFocused = false; //Anim
         }
 
         //Shoot Papillons normaux
@@ -58,6 +62,8 @@ public class Shoot : MonoBehaviour
             if (Input.GetButtonDown("Fire1") && Aiming)
             {
                 ShootButterfly();
+
+                AnimationManager.m_instance.shootTrigger = true; //Anim
             }
         }
 

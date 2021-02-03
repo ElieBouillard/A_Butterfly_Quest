@@ -66,7 +66,11 @@ public class AnimationManager : MonoBehaviour
 
     private void Awake()
     {
-        m_instance = this;
+        if (DEBUG == false)
+        {
+            m_instance = this;
+        }
+ 
         m_anim = GetComponent<Animator>();
         m_parentMesh = this.transform;
     }

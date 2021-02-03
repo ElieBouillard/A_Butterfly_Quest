@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9118633422063191065}
   - component: {fileID: 661230897017128254}
   - component: {fileID: 3601542160855845065}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Butterfly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,8 +126,11 @@ MonoBehaviour:
   Player: {fileID: 0}
   rb: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
-  ButterFlySpeed: 20
+  ButterflySpeed: 0
   Damage: 2
+  TicFirePerSec: 0
+  Illusion: 0
   distPlayerToButterfly: 0
   distanceMax: 40
   onHit: 0
+  TypeSelection: 1

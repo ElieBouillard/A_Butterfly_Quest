@@ -4,27 +4,22 @@ using UnityEngine;
 
 public class ButterflyBullet : MonoBehaviour
 {
-    public GameObject Player;
     [HideInInspector]
     public Rigidbody rb;
+    private GameObject Player;
     [HideInInspector]
     public Vector3 target = Vector3.zero;
     
     [Header("BulletStats")]
     public float ButterflySpeed = 0;
     public float Damage = 0;
-    public float TicFirePerSec = 0;
-    public bool Illusion = false;
-
 
     private Vector3 direction;
     public float distPlayerToButterfly;
     public float distanceMax;
     private ButterflyEntity m_butterfly;
 
-
     public bool onHit;
-
 
     private void Awake()
     {
@@ -62,8 +57,7 @@ public class ButterflyBullet : MonoBehaviour
             {
                 rb.velocity = rb.velocity;
             }
-        }
-            
+        }            
     }
 
     public void GetButterflyInfo(ButterflyEntity currButterfly)
@@ -71,8 +65,6 @@ public class ButterflyBullet : MonoBehaviour
         m_butterfly = currButterfly;
         ButterflySpeed = currButterfly.ButterflySpeed;
         Damage = currButterfly.Damage;
-        TicFirePerSec = currButterfly.TicFirePerSec;
-        Illusion = currButterfly.Illusion;
     }
     private void OnTriggerEnter(Collider other)
     {

@@ -16,9 +16,6 @@ public class ButterflyInventory : MonoBehaviour
     public List<ButterflyEntity> ButterflyInTravel = new List<ButterflyEntity>();
     public List<ButterflyEntity> ButterflyToReload = new List<ButterflyEntity>();
 
-    //Test number of bullets
-    public Text numbreButterfly;
-
     private float clock;
     private bool reloading = false;
 
@@ -79,9 +76,6 @@ public class ButterflyInventory : MonoBehaviour
         ButterflyInTravelValue = ButterflyInTravel.Count;
         ButterflyToReloadValue = ButterflyToReload.Count;
 
-        //Nombre de papillon à tirer HUD
-        numbreButterfly.text = ButterflyInInventory.Count.ToString();
-
         //Clock reload
         if (reloading)
         {
@@ -91,6 +85,5 @@ public class ButterflyInventory : MonoBehaviour
                 Reload();
             }
         }
-
     }
 }

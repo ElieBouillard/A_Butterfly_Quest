@@ -6,19 +6,19 @@ using System;
 
 public class Shoot : MonoBehaviour
 {
+    public static Shoot Instance;
+
     [Header("Shooting variables")]
-    [Range(1, 10)]
-    public int Damage = 1;
     [Range(1, 100)]
     public float Range = 50;
     private RaycastHit ShootInfo;
     public GameObject PrefabButterly;
     private GameObject ButterflyLauncher;
-    public ButterflyEntity currButterflyEntity;
+    private ButterflyEntity currButterflyEntity;
+    private LayerMask ButterflyMask;
 
     [Header("References")]
     public Animator CamAnimator;
-    public GameObject CrosshairObj;
     public CinemachineFreeLook freeLookCam;
     private CameraAiming CameraAimingScpt;
     private GameObject PlayerMesh;
@@ -31,6 +31,8 @@ public class Shoot : MonoBehaviour
         CameraAimingScpt = GetComponent<CameraAiming>();
         PlayerMesh = gameObject.transform.GetChild(0).gameObject;
         ButterflyLauncher = PlayerMesh.transform.GetChild(0).gameObject;
+        ButterflyMask =~ LayerMask.GetMask("Butterfly");
+        Instance = this;
     }
 
     private void Update()
@@ -39,13 +41,11 @@ public class Shoot : MonoBehaviour
         if (Input.GetAxis("Aim") > 0)
         {
             Aiming = true;
-            CamAnimator.SetBool("AimCamera", true);
-            ShowCrosshair(true);            
+            CamAnimator.SetBool("AimCamera", true);           
         }
         //No Aim
         else if (Input.GetAxis("Aim") <= 0)
         {
-            ShowCrosshair(false);
             ResetFreeLookCamPos();
             ResetAimCamPos();
             Aiming = false;
@@ -86,7 +86,7 @@ public class Shoot : MonoBehaviour
             butterflyBulletScpt.GetButterflyInfo(currButterflyEntity);
 
             //Si touche un mesh alors prend les coordonees en direction
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out ShootInfo, Range))
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out ShootInfo, Range, ButterflyMask))
             {
                 butterflyBulletScpt.onHit = true;
                 butterflyBulletScpt.target = ShootInfo.point;
@@ -113,10 +113,5 @@ public class Shoot : MonoBehaviour
     public void ResetFreeLookCamPos()
     {
         freeLookCam.m_XAxis.Value = CameraAimingScpt.xAxis.Value;
-    }
-
-    public void ShowCrosshair(bool value)
-    {
-        CrosshairObj.SetActive(value);
     }
 }

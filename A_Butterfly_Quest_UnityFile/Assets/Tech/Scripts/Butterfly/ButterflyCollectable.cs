@@ -8,15 +8,14 @@ public class ButterflyCollectable : MonoBehaviour
     public int ButterflyNumber;
     public float ButterflySpeed;
     public float Damage;
-    public float TicFirePerSec;
-    public bool Illusion;
 
     private void OnTriggerEnter(Collider other)
     {
+        //Lors du ramassage de papillons
         ButterflyInventory PlayerInventory = other.GetComponent<ButterflyInventory>();
         if(PlayerInventory != null)
         {
-            ButterflyEntity currButterfly = new ButterflyEntity(ButterflySpeed, Damage, TicFirePerSec, Illusion);
+            ButterflyEntity currButterfly = new ButterflyEntity(ButterflySpeed, Damage);
             PlayerInventory.CatchButterfly(ButterflyNumber, currButterfly);
         }
     }

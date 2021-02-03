@@ -7,18 +7,22 @@ public class AnimationManager : MonoBehaviour
 {
     public bool DEBUG = false;
 
+    //Singleton
+    public static AnimationManager m_instance;
+
     //Components
     private Animator m_anim;
     private Transform m_parentMesh;
 
     //Inputs
-    private Vector3 cameraForward;
-    private Vector3 cameraRight;
-    private float playerSpeed;
-    private Vector2 playerTargetDir;
+    public Vector3 cameraForward;
+    public Vector3 cameraRight;
+    public float playerSpeed;
+    public Vector2 playerTargetDir;
     private float playerDirOffset;
-    private bool playerFocused;
-    private bool jumpTrigger;
+    public bool playerFocused;
+    public bool jumpTrigger;
+    public bool isGrounded;
 
     //Freeze rotations
     private bool freezeRotations;
@@ -52,7 +56,7 @@ public class AnimationManager : MonoBehaviour
 
     //Shooting
     private float shootAnim_RandomIndex = 0.0f;
-    private bool shootTrigger;
+    public bool shootTrigger;
 
     //Shouting
     private bool shoutTrigger;
@@ -62,15 +66,20 @@ public class AnimationManager : MonoBehaviour
 
     private void Awake()
     {
+        m_instance = this;
         m_anim = GetComponent<Animator>();
         m_parentMesh = this.transform;
     }
 
     void Start()
     {
-        cameraForward = Vector3.forward;
-        cameraRight = Vector3.right;
-        reorientateTimer = -1.0f;
+        if (DEBUG)
+        {
+            cameraForward = Vector3.forward;
+            cameraRight = Vector3.right;
+            reorientateTimer = -1.0f;
+        }
+        
     }
 
 
@@ -223,15 +232,16 @@ public class AnimationManager : MonoBehaviour
             {
                 shootTrigger = true;
             }
-            if (Input.GetKeyDown(KeyCode.Joystick1Button3))
-            {
-                shoutTrigger = true;
-            }
-            if (Input.GetKeyDown(KeyCode.Joystick1Button1))
-            {
-                dashTrigger = true;
-            }
             ////************
+        }
+
+        if (Input.GetKeyDown(KeyCode.Joystick1Button3))
+        {
+            shoutTrigger = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Joystick1Button1))
+        {
+            dashTrigger = true;
         }
 
         //Debug.DrawRay(transform.position + Vector3.up * 2, offset, Color.magenta);
@@ -284,6 +294,7 @@ public class AnimationManager : MonoBehaviour
         m_anim.SetFloat("DirX", playerTargetDir.x);
         m_anim.SetFloat("DirY", playerTargetDir.y);
         m_anim.SetBool("Focused", playerFocused);
+        m_anim.SetBool("Grounded",isGrounded);
         if (jumpTrigger)
         {
             m_anim.SetTrigger("Jump");

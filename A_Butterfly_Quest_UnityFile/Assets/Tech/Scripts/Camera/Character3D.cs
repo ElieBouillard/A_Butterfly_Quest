@@ -44,6 +44,9 @@ public class Character3D : MonoBehaviour
     public Vector3 directionForward;
     public Vector3 directionRight;
 
+    [Header("Animation Binding")]
+    public AnimationManager m_animManager;
+
     public bool debug = false;
 
     void Awake()
@@ -53,6 +56,10 @@ public class Character3D : MonoBehaviour
             m_rb = attached_rigidbody;
         }
         m_instance = this;
+    }
+    private void Start()
+    {
+        m_animManager = AnimationManager.m_instance;
     }
 
     void Update()
@@ -74,7 +81,9 @@ public class Character3D : MonoBehaviour
         // Jump
         if ((Input.GetAxis("Jump") > 0 && IsGrounded()))
         {
-            jumpTime = 0;   
+            jumpTime = 0;
+
+            m_animManager.jumpTrigger = true; //anim
         }
         if (jumpTime != -1 && jumpTime >= 0 && jumpTime < jumpCurve.keys[jumpCurve.length - 1].time)
         {
@@ -83,7 +92,15 @@ public class Character3D : MonoBehaviour
         else
         {
             jumpTime = -1;
+
+            m_animManager.jumpTrigger = false; //anim
         }
+
+        if((Input.GetAxis("Jump") <= 0) || IsGrounded() == false)
+        {
+            m_animManager.jumpTrigger = false; //anim
+        }
+
 
         //Vitesse de déplacement
         currentSpeed = maxSpeed;
@@ -96,6 +113,15 @@ public class Character3D : MonoBehaviour
         //        animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
         //    }
         //}
+
+
+        //Animation Binding
+        m_animManager.cameraForward = directionForward;
+        m_animManager.cameraRight = directionRight;
+        m_animManager.playerSpeed = Mathf.Max(Mathf.Abs(horizontalInput), Mathf.Abs(verticalInput));
+        m_animManager.playerTargetDir = new Vector2(horizontalInput, verticalInput);
+        m_animManager.isGrounded = IsGrounded();
+
     }
 
     void FixedUpdate()

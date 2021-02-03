@@ -14,6 +14,8 @@ public class ButterflyInventory : MonoBehaviour
 
     public List<ButterflyEntity> ButterflyBasicInInventory = new List<ButterflyEntity>();
     public List<ButterflyEntity> ButterflyIllusionInInventory = new List<ButterflyEntity>();
+    public List<ButterflyEntity> ButterflyLightInInventory = new List<ButterflyEntity>();
+
     public List<ButterflyEntity> ButterflyInTravel = new List<ButterflyEntity>();
     public List<ButterflyEntity> ButterflyToReload = new List<ButterflyEntity>();
 

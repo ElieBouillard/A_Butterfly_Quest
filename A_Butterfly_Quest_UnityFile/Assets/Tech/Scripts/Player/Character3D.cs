@@ -32,6 +32,7 @@ public class Character3D : MonoBehaviour
     [Header("Movements")]
     public float maxSpeed = 20;
     private float currentSpeed = 0;
+    public bool FreezePlayerMovement = false;
 
     [Header("Inputs")]
     public float horizontalInput;
@@ -101,7 +102,6 @@ public class Character3D : MonoBehaviour
             m_animManager.jumpTrigger = false; //anim
         }
 
-
         //Vitesse de déplacement
         currentSpeed = maxSpeed;
 
@@ -121,6 +121,18 @@ public class Character3D : MonoBehaviour
         m_animManager.playerSpeed = Mathf.Max(Mathf.Abs(horizontalInput), Mathf.Abs(verticalInput));
         m_animManager.playerTargetDir = new Vector2(horizontalInput, verticalInput);
         m_animManager.isGrounded = IsGrounded();
+
+
+        //test freePosPlayer
+        if (Input.GetKeyDown("b"))
+        {
+            FreezePosPlayer(true);
+        }
+        if (Input.GetKeyDown("n"))
+        {
+            FreezePosPlayer(false);
+        }
+
 
     }
 
@@ -153,5 +165,17 @@ public class Character3D : MonoBehaviour
     {
         bool groundRayCast = Physics.Raycast(transform.position, Vector3.down, DetectionDistanceGround, ground_Layer);
         return groundRayCast;
+    }
+
+    public void FreezePosPlayer(bool value)
+    {
+        if (value == true)
+        {
+            m_rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+        }
+        else
+        {
+            m_rb.constraints = RigidbodyConstraints.FreezeRotation;
+        }
     }
 }

@@ -32,7 +32,9 @@ public class Character3D : MonoBehaviour
     [Header("Movements")]
     public float maxSpeed = 20;
     private float currentSpeed = 0;
-    public bool FreezePlayerMovement = false;
+    public float freezeClock;
+    public bool canClock = false;
+
 
     [Header("Inputs")]
     public float horizontalInput;
@@ -126,14 +128,22 @@ public class Character3D : MonoBehaviour
         //test freePosPlayer
         if (Input.GetKeyDown("b"))
         {
-            FreezePosPlayer(true);
-        }
-        if (Input.GetKeyDown("n"))
+            FreezePosPlayer(2f);
+        } 
+
+        //FreezePlayer
+        if(freezeClock > -0.5f)
         {
-            FreezePosPlayer(false);
+            freezeClock -= Time.deltaTime;
         }
-
-
+        if (freezeClock > 0)
+        {
+            m_rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+        }
+        else if (freezeClock <= 0)
+        {
+            m_rb.constraints = RigidbodyConstraints.FreezeRotation;
+        }
     }
 
     void FixedUpdate()
@@ -156,7 +166,6 @@ public class Character3D : MonoBehaviour
 
             target_Velocity += jumpDirection * (jumpForce * frameVelocityCoefficient);
         }
-
         //Assign final velocity
         m_rb.velocity = target_Velocity;
     }
@@ -167,15 +176,8 @@ public class Character3D : MonoBehaviour
         return groundRayCast;
     }
 
-    public void FreezePosPlayer(bool value)
+    public void FreezePosPlayer(float value)
     {
-        if (value == true)
-        {
-            m_rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
-        }
-        else
-        {
-            m_rb.constraints = RigidbodyConstraints.FreezeRotation;
-        }
+        freezeClock = value;
     }
 }

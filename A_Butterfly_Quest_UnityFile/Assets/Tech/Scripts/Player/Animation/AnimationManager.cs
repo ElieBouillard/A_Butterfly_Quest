@@ -24,6 +24,7 @@ public class AnimationManager : MonoBehaviour
     public bool jumpTrigger;
     public bool airboneTrigger;
     public bool wasGrounded;
+    public bool isGrounded;
 
     //Freeze rotations
     private bool freezeRotations;
@@ -146,7 +147,7 @@ public class AnimationManager : MonoBehaviour
                     reorientateTrigger = true;
                     
 
-                    Character3D.m_instance.FreezePosPlayer(.25f,true); //speed à 0
+                    Character3D.m_instance.FreezePosPlayer(.3f,true); //speed à 0
                    
                     if (Vector3.Dot(reorientateDirection.normalized, m_parentMesh.transform.forward.normalized) >= negativeReorientationTreshold && Mathf.Sign(playerDirOffset) < 0)
                     {
@@ -207,13 +208,17 @@ public class AnimationManager : MonoBehaviour
         }
 
         //Basic Input facing with a lerp
-        if (playerSpeed >= 0.01f && reorientateTimer <= -0.8f)
+        if (playerSpeed >= 0.01f && reorientateTimer <= -0.8f && !playerFocused)
         {
             if (!freezeRotations) //Check if we're doing an overriding action
             {
                 FacePlayerInput();
             }
             
+        }
+        if (playerFocused)
+        {
+            FaceAim();
         }
 
         //Update torso bend
@@ -287,10 +292,15 @@ public class AnimationManager : MonoBehaviour
             //}
             
         }
-        else
-        {
-            //follow camera forward
-        }
+    }
+
+    void FaceAim()
+    {
+        //follow camera forward
+        Vector3 newForward = cameraForward;
+        Quaternion targetRotation = Quaternion.LookRotation(newForward);
+        m_parentMesh.rotation = Quaternion.Slerp(m_parentMesh.rotation, targetRotation, Time.deltaTime * BodyRefacingSpeed);
+
     }
 
     void HandleTorsoBend()
@@ -319,11 +329,14 @@ public class AnimationManager : MonoBehaviour
         m_anim.SetFloat("DirX", playerTargetDir.x);
         m_anim.SetFloat("DirY", playerTargetDir.y);
         m_anim.SetBool("Focused", playerFocused);
+        m_anim.SetBool("Grounded", wasGrounded);
         //m_anim.SetBool("Grounded",airboneTrigger);
         if (jumpTrigger)
         {
             m_anim.SetTrigger("Jump");
             jumpTrigger = false;
+            //remove focused
+            playerFocused = false;
         }
 
         m_anim.SetFloat("TorsoBend", curTorsoBend);

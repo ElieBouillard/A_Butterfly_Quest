@@ -16,6 +16,7 @@ public class ButterflyBullet : MonoBehaviour
     public int Type = 0;
 
     private Vector3 direction;
+    private Vector3 direction2;
     public float distPlayerToButterfly;
     public float distanceMax;
     private ButterflyEntity m_butterfly;
@@ -45,6 +46,7 @@ public class ButterflyBullet : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         if (enabled)
         {
             //Si il y une cible
@@ -57,7 +59,7 @@ public class ButterflyBullet : MonoBehaviour
             //Si le tir est dans le vide
             else
             {
-                rb.velocity = Camera.main.transform.forward * ButterflySpeed * Time.fixedDeltaTime;
+                rb.velocity = direction2 * ButterflySpeed * Time.fixedDeltaTime;
             }
         }            
     }

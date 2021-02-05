@@ -102,7 +102,7 @@ public class Character3D : MonoBehaviour
         }
 
         // Jump
-        if ((Input.GetAxis("Jump") > 0 && IsGrounded()))
+        if ((Input.GetAxis("Jump") > 0 && IsGrounded() && forceNoJump == false))
         {
             jumpTime = 0;
 

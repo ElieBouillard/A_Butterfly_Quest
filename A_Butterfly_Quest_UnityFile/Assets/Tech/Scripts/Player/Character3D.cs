@@ -15,6 +15,7 @@ public class Character3D : MonoBehaviour
     private Rigidbody m_rb;
     Vector3 target_Velocity;
     Vector3 jumpDirection = Vector3.up;
+    private GameObject PlayerMesh;
 
     [Header("Jump")]
     public float jumpTime;
@@ -33,7 +34,11 @@ public class Character3D : MonoBehaviour
     public float maxSpeed = 20;
     private float currentSpeed = 0;
     private bool FreezeInput = false;
-    private float freezeClock; 
+    private float freezeClock;
+    [Header("DashValues")]
+    public float DashSpeed = 1f;
+    public float DashDuration = 1f;
+    private float m_DashSpeed = 0f;
 
 
     [Header("Inputs")]
@@ -59,6 +64,9 @@ public class Character3D : MonoBehaviour
             m_rb = attached_rigidbody;
         }
         m_instance = this;
+
+        PlayerMesh = gameObject.transform.GetChild(0).gameObject;
+
     }
     private void Start()
     {
@@ -148,6 +156,8 @@ public class Character3D : MonoBehaviour
         {
             FreezeInput = false;
         }
+
+        DashUpdate();
     }
 
     void FixedUpdate()
@@ -158,7 +168,7 @@ public class Character3D : MonoBehaviour
         }
 
         //Main velocity operation
-        target_Velocity = directionForward * currentSpeed * verticalInput + directionRight * currentSpeed * horizontalInput+ new Vector3(0, (m_rb.velocity.y + (-9.81f * GravityBoost)) * ((jumpTime != -1) ? 0 : 1), 0);
+        target_Velocity = directionForward * currentSpeed * verticalInput + directionRight * currentSpeed * horizontalInput+ new Vector3(0, (m_rb.velocity.y + (-9.81f * GravityBoost)) * ((jumpTime != -1) ? 0 : 1), 0) + PlayerMesh.transform.forward * m_DashSpeed;
 
         //Jump velocity operation
         if (jumpTime != -1)
@@ -184,5 +194,35 @@ public class Character3D : MonoBehaviour
     {
         freezeClock = value;
         FreezeInput = true;
+    }
+
+
+    float clockDash = 0f;
+    bool canDash = true;
+    public void InitDash(float dashSpeed, float dashDuration)
+    {
+        clockDash = dashDuration;
+        m_DashSpeed = dashSpeed;
+        FreezePosPlayer(dashDuration);
+        canDash = false;
+    }
+
+
+    public void DashUpdate()
+    {
+        if (Input.GetKeyDown(KeyCode.Joystick1Button1) && canDash)
+        {
+            InitDash(DashSpeed, DashDuration);
+        }
+
+        if(clockDash > -0.5)
+        {
+            clockDash -= Time.deltaTime;
+        }
+        else if(clockDash <= 0)
+        {
+            m_DashSpeed = 0;
+            canDash = true;
+        }
     }
 }

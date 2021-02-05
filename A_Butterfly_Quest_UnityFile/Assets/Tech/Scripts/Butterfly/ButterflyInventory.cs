@@ -25,9 +25,10 @@ public class ButterflyInventory : MonoBehaviour
     public void Awake()
     {
         Instance = this;
-        ButterflyInInventory.Add(new List<ButterflyEntity>());
-        ButterflyInInventory.Add(new List<ButterflyEntity>());
-        ButterflyInInventory.Add(new List<ButterflyEntity>());
+        for (int i = 0; i <= ButterflyTypeSelection.Instance.SelectionTypeValue; i++)
+        {
+            ButterflyInInventory.Add(new List<ButterflyEntity>());
+        }
     }
 
     public void CatchButterfly(int butterflyNumbre,ButterflyEntity currButterfly)

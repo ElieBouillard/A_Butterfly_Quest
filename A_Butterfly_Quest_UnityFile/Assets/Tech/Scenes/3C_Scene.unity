@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 9289141}
   - component: {fileID: 9289142}
   - component: {fileID: 9289143}
+  - component: {fileID: 9289144}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -214,8 +215,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   maxSpeed: 5
-  freezeClock: 0
-  canClock: 0
+  DashSpeed: 10
+  DashDuration: 0.1
   horizontalInput: 0
   verticalInput: 0
   m_camera: {fileID: 1215292935}
@@ -339,6 +340,20 @@ MonoBehaviour:
   ButterflyOtherInInventoryValue: 0
   ButterflyInTravelValue: 0
   ButterflyToReloadValue: 0
+--- !u!114 &9289144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9289136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 750c60ac07dbce04288d8666abba3ab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectionTypeValue: 0
+  MaxButterflyType: 2
 --- !u!1 &52292380
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,7 +400,7 @@ MonoBehaviour:
   pooledButterfly: []
   ButterflyToPool: {fileID: 9118633422063191064, guid: 2ec3869f9051116409f9f27ffe2581fd,
     type: 3}
-  amountToPool: 10
+  amountToPool: 20
 --- !u!1 &245339198
 GameObject:
   m_ObjectHideFlags: 0
@@ -985,6 +1000,25 @@ Transform:
   m_Father: {fileID: 2043809382}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &883925978 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8069222301492021661, guid: 12583edab3bcabf4ea7d3e7c9a483275,
+    type: 3}
+  m_PrefabInstance: {fileID: 740668829}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &883925981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883925978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81da7bc0c3d83bc45a29ad26ce58c548, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerOb: {fileID: 9289136}
 --- !u!1 &1015959383
 GameObject:
   m_ObjectHideFlags: 3
@@ -1258,7 +1292,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195822808}
-  m_LocalRotation: {x: 0.0992033, y: 0.0000000039627728, z: -3.9506903e-10, w: 0.9950672}
+  m_LocalRotation: {x: 0.0992033, y: 0.000000004280376, z: -4.2673248e-10, w: 0.9950672}
   m_LocalPosition: {x: -4.2314844, y: -2.6870003, z: 3.0550785}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

@@ -21,7 +21,6 @@ public class ButterflyCollectable : MonoBehaviour
         {
             ButterflyEntity currButterfly = new ButterflyEntity(ButterflySpeed, Damage, ButterflyType);
             PlayerInventory.CatchButterfly(ButterflyNumber, currButterfly);
-            Debug.Log((int)currButterfly.ButterflyType);
         }
     }
 }

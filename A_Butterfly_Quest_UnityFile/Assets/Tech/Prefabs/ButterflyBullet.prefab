@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 661230897017128254}
   - component: {fileID: 3601542160855845065}
   m_Layer: 9
-  m_Name: Butterfly
+  m_Name: ButterflyBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,14 +123,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5a25a4c544c4184a8404224229f6986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
   rb: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
   ButterflySpeed: 0
   Damage: 2
-  TicFirePerSec: 0
-  Illusion: 0
+  Type: 0
   distPlayerToButterfly: 0
   distanceMax: 40
   onHit: 0
-  TypeSelection: 1
+  TypesMat:
+  - {fileID: 2100000, guid: 43a9c6e396bd6e04c8d161f066391328, type: 2}
+  - {fileID: 2100000, guid: 95307569dac39564296e925404b472c9, type: 2}
+  - {fileID: 2100000, guid: d1b3a446c55b1634b90fc65fbe5fbe0d, type: 2}

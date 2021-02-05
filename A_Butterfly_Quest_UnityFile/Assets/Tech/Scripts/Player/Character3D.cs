@@ -32,8 +32,8 @@ public class Character3D : MonoBehaviour
     [Header("Movements")]
     public float maxSpeed = 20;
     private float currentSpeed = 0;
-    public float freezeClock;
-    public bool canClock = false;
+    private bool FreezeInput = false;
+    private float freezeClock; 
 
 
     [Header("Inputs")]
@@ -68,8 +68,16 @@ public class Character3D : MonoBehaviour
     void Update()
     {
         //Inputs
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
+        if (FreezeInput == false)
+        {
+            horizontalInput = Input.GetAxis("Horizontal");
+            verticalInput = Input.GetAxis("Vertical");
+        }
+        else
+        {
+            horizontalInput = 0;
+            verticalInput = 0;
+        }
         
         //Camera X & Z axis
         directionForward = new Vector3(m_camera.transform.forward.x, 0f, m_camera.transform.forward.z).normalized;
@@ -126,9 +134,9 @@ public class Character3D : MonoBehaviour
 
 
         //test freePosPlayer
-        if (Input.GetKeyDown("b"))
+        if (Input.GetKeyDown(KeyCode.Joystick1Button3))
         {
-            FreezePosPlayer(2f);
+            FreezePosPlayer(1f);
         } 
 
         //FreezePlayer
@@ -136,13 +144,9 @@ public class Character3D : MonoBehaviour
         {
             freezeClock -= Time.deltaTime;
         }
-        if (freezeClock > 0)
-        {
-            m_rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
-        }
         else if (freezeClock <= 0)
         {
-            m_rb.constraints = RigidbodyConstraints.FreezeRotation;
+            FreezeInput = false;
         }
     }
 
@@ -179,5 +183,6 @@ public class Character3D : MonoBehaviour
     public void FreezePosPlayer(float value)
     {
         freezeClock = value;
+        FreezeInput = true;
     }
 }

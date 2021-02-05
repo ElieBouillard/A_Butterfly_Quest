@@ -13,7 +13,7 @@ public class Shoot : MonoBehaviour
     public float Range = 50;
     private RaycastHit ShootInfo;
     public GameObject PrefabButterly;
-    private GameObject ButterflyLauncher;
+    public GameObject ButterflyLauncher;
     private ButterflyEntity currButterflyEntity;
     private LayerMask ButterflyMask;
 
@@ -26,11 +26,12 @@ public class Shoot : MonoBehaviour
     [HideInInspector]
     public bool Aiming = false;
 
+    public bool canShoot = true;
+
     private void Awake()
     {
         CameraAimingScpt = GetComponent<CameraAiming>();
         PlayerMesh = gameObject.transform.GetChild(0).gameObject;
-        ButterflyLauncher = PlayerMesh.transform.GetChild(0).gameObject;
         ButterflyMask =~ LayerMask.GetMask("Butterfly");
         Instance = this;
     }
@@ -57,27 +58,20 @@ public class Shoot : MonoBehaviour
         }
 
         //Shoot Papillons normaux
-        if (ButterflyInventory.Instance.ButterflyBasicInInventory.Count > 0)
-        {
-            if (Input.GetButtonDown("Fire1") && Aiming)
-            {
-                ShootButterfly();
-
-                AnimationManager.m_instance.shootTrigger = true; //Anim
-            }
-        }
+        if(Aiming)
+            ShootInputSystem();
 
         //Reload
         if (Input.GetButtonDown("Reload"))
         {
             ButterflyInventory.Instance.StartReload();
-        }
+        }      
     }
 
     private void ShootButterfly()
     {
         //Recuperation du premier papillon normal dans l'inventaire
-        currButterflyEntity = ButterflyInventory.Instance.ButterflyBasicInInventory[0];
+        currButterflyEntity = ButterflyInventory.Instance.ButterflyInInventory[ButterflyTypeSelection.Instance.SelectionTypeValue][0];
         ButterflyInventory.Instance.ShootedButterfly(currButterflyEntity);
 
         //Recuperation de l'objet pool disponible
@@ -101,9 +95,30 @@ public class Shoot : MonoBehaviour
             else
             {
                 butterflyBulletScpt.onHit = false;
-                butterflyBulletScpt.rb.velocity = Camera.main.transform.forward * butterflyBulletScpt.ButterflySpeed;
             }
         }        
+    }
+
+    private void ShootInputSystem()
+    {
+        if (ButterflyInventory.Instance.ButterflyInInventory[ButterflyTypeSelection.Instance.SelectionTypeValue].Count > 0)
+        {
+            if (Input.GetAxisRaw("Fire1") == 1)
+            {
+                if (canShoot == true)
+                {
+                    ShootButterfly();
+
+                    AnimationManager.m_instance.shootTrigger = true; //Anim   
+
+                    canShoot = false;
+                }
+            }
+        }
+        if (Input.GetAxisRaw("Fire1") == 0)
+        {
+            canShoot = true;
+        }
     }
 
     //Reset la camera "Aim" derriere le joueur dès que Aim = false

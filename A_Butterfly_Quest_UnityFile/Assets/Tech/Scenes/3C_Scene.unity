@@ -214,6 +214,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   maxSpeed: 5
+  freezeClock: 0
+  canClock: 0
   horizontalInput: 0
   verticalInput: 0
   m_camera: {fileID: 1215292935}
@@ -266,9 +268,11 @@ MonoBehaviour:
   Range: 50
   PrefabButterly: {fileID: 9118633422063191064, guid: 2ec3869f9051116409f9f27ffe2581fd,
     type: 3}
+  ButterflyLauncher: {fileID: 534868966}
   CamAnimator: {fileID: 245339200}
   freeLookCam: {fileID: 2043809381}
   Aiming: 0
+  canShoot: 1
 --- !u!114 &9289142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,6 +335,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ButterflyInInventoryValue: 0
+  ButterflyIllusionInInventoryValue: 0
+  ButterflyOtherInInventoryValue: 0
   ButterflyInTravelValue: 0
   ButterflyToReloadValue: 0
 --- !u!1 &52292380
@@ -676,9 +682,7 @@ MonoBehaviour:
   m_AnimatedTarget: {fileID: 245339200}
   m_LayerIndex: 0
   m_ShowDebugText: 0
-  m_ChildCameras:
-  - {fileID: 1078631265}
-  - {fileID: 2043809381}
+  m_ChildCameras: []
   m_Instructions:
   - m_FullHash: 1839989770
     m_VirtualCamera: {fileID: 2043809381}
@@ -740,6 +744,12 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &534868966 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1221632716, guid: 12583edab3bcabf4ea7d3e7c9a483275,
+    type: 3}
+  m_PrefabInstance: {fileID: 740668829}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &558497866
 GameObject:
   m_ObjectHideFlags: 3
@@ -1248,7 +1258,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195822808}
-  m_LocalRotation: {x: 0.0992033, y: 1.6202906e-36, z: -3.049644e-37, w: 0.9950672}
+  m_LocalRotation: {x: 0.0992033, y: 0.0000000039627728, z: -3.9506903e-10, w: 0.9950672}
   m_LocalPosition: {x: -4.2314844, y: -2.6870003, z: 3.0550785}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1523,8 +1533,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6043bde05a7fc4cba197d06915c1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damping: {x: 0.1, y: 0.5, z: 0.3}
-  ShoulderOffset: {x: 0.3, y: -0.2, z: -2}
+  Damping: {x: 0.01, y: 0.01, z: 0.01}
+  ShoulderOffset: {x: 0.5, y: 0.35, z: -2}
   VerticalArmLength: 0.4
   CameraSide: 1
   CameraDistance: 2

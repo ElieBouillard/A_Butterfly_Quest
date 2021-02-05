@@ -9,12 +9,12 @@ public class ButterflyInventory : MonoBehaviour
 
     [Header("Debug Info")]
     public int ButterflyInInventoryValue;
+    public int ButterflyIllusionInInventoryValue;
+    public int ButterflyOtherInInventoryValue;
     public int ButterflyInTravelValue;
     public int ButterflyToReloadValue;
 
-    public List<ButterflyEntity> ButterflyBasicInInventory = new List<ButterflyEntity>();
-    public List<ButterflyEntity> ButterflyIllusionInInventory = new List<ButterflyEntity>();
-    public List<ButterflyEntity> ButterflyLightInInventory = new List<ButterflyEntity>();
+    public List<List<ButterflyEntity>> ButterflyInInventory = new List<List<ButterflyEntity>>(3);
 
     public List<ButterflyEntity> ButterflyInTravel = new List<ButterflyEntity>();
     public List<ButterflyEntity> ButterflyToReload = new List<ButterflyEntity>();
@@ -25,20 +25,23 @@ public class ButterflyInventory : MonoBehaviour
     public void Awake()
     {
         Instance = this;
+        ButterflyInInventory.Add(new List<ButterflyEntity>());
+        ButterflyInInventory.Add(new List<ButterflyEntity>());
+        ButterflyInInventory.Add(new List<ButterflyEntity>());
     }
 
     public void CatchButterfly(int butterflyNumbre,ButterflyEntity currButterfly)
     {
         for (int i = 0; i < butterflyNumbre; i++)
         {
-            ButterflyBasicInInventory.Add(currButterfly);
+            ButterflyInInventory[(int)currButterfly.ButterflyType].Add(currButterfly);
         }        
     }
 
     public void ShootedButterfly(ButterflyEntity currButterfly)
     {
         ButterflyInTravel.Add(currButterfly);
-        ButterflyBasicInInventory.Remove(currButterfly);
+        ButterflyInInventory[(int)currButterfly.ButterflyType].Remove(currButterfly);
     }
 
     public void AddToReloadList(ButterflyEntity currButterfly)
@@ -59,8 +62,8 @@ public class ButterflyInventory : MonoBehaviour
         if ( ButterflyToReload.Count > 0)
         {
             for (int i = 0; i < ButterflyToReload.Count; i++)
-            {
-                ButterflyBasicInInventory.Add(ButterflyToReload[i]);
+            { 
+                ButterflyInInventory[(int)ButterflyToReload[i].ButterflyType].Add(ButterflyToReload[i]);
             }
             ButterflyToReload.Clear();
             Debug.Log("Reloading success !");
@@ -75,7 +78,9 @@ public class ButterflyInventory : MonoBehaviour
     private void Update()
     {
         //Debug tailles des listes
-        ButterflyInInventoryValue = ButterflyBasicInInventory.Count;
+        ButterflyInInventoryValue = ButterflyInInventory[0].Count;
+        ButterflyIllusionInInventoryValue = ButterflyInInventory[1].Count;
+        ButterflyOtherInInventoryValue = ButterflyInInventory[2].Count;
         ButterflyInTravelValue = ButterflyInTravel.Count;
         ButterflyToReloadValue = ButterflyToReload.Count;
 

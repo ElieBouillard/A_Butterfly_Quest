@@ -128,6 +128,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2011232528, guid: 12583edab3bcabf4ea7d3e7c9a483275, type: 3}
+      propertyPath: DEBUG
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2011232528, guid: 12583edab3bcabf4ea7d3e7c9a483275, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7255424630249739047, guid: 12583edab3bcabf4ea7d3e7c9a483275,
         type: 3}
       propertyPath: m_RootOrder
@@ -6540,43 +6548,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4429232263310418297}
-  - component: {fileID: 4250679224503351593}
-  - component: {fileID: 3908029269978217412}
   m_Layer: 0
-  m_Name: Mesh (1)
+  m_Name: Mesh Ref TPOSE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &3908029269978217412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3908029269978217411}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d414c8a20d5d7742a02da84496f26b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DEBUG: 0
-  cameraForward: {x: 0, y: 0, z: 0}
-  cameraRight: {x: 0, y: 0, z: 0}
-  playerSpeed: 0
-  playerTargetDir: {x: 0, y: 0}
-  playerFocused: 0
-  jumpTrigger: 0
-  isGrounded: 0
-  TorsoBendMultiplier: 1
-  torsoMaxRange: 0.9
-  minSpeedForBending: 0.3
-  BodyRefacingSpeed: 10
-  TorsoRefacingSpeed: 20
-  reorientateDuration: 0.5
-  reorientateSpeed: 180
-  shootTrigger: 0
 --- !u!4 &3937398985884393996
 Transform:
   m_ObjectHideFlags: 0
@@ -6637,25 +6615,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!95 &4250679224503351593
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3908029269978217411}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6e9cd4fde60f8a04a822994e23600f18, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &4329600556813196504
 Transform:
   m_ObjectHideFlags: 0

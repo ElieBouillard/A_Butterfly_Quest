@@ -22,7 +22,8 @@ public class AnimationManager : MonoBehaviour
     private float playerDirOffset;
     public bool playerFocused;
     public bool jumpTrigger;
-    public bool isGrounded;
+    public bool airboneTrigger;
+    public bool wasGrounded;
 
     //Freeze rotations
     private bool freezeRotations;
@@ -250,6 +251,7 @@ public class AnimationManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Joystick1Button3))
         {
             shoutTrigger = true;
+            Character3D.m_instance.FreezePosPlayer(0.5f, true, true);
         }
         if (Input.GetKeyDown(KeyCode.Joystick1Button1))
         {
@@ -274,8 +276,16 @@ public class AnimationManager : MonoBehaviour
         {
             //mesh forward lerp towards new dir
             //Quaternion targetRotation = Quaternion.LookRotation(new Vector3(playerTargetDir.x, 0, playerTargetDir.y));
-            Quaternion targetRotation = Quaternion.LookRotation(cameraForward * playerTargetDir.y + cameraRight * playerTargetDir.x);
+            Vector3 newForward = cameraForward * playerTargetDir.y + cameraRight * playerTargetDir.x;
+            Quaternion targetRotation = Quaternion.LookRotation(newForward);
             m_parentMesh.rotation = Quaternion.Slerp(m_parentMesh.rotation, targetRotation, Time.deltaTime * BodyRefacingSpeed);
+
+            //if (newForward != Vector3.zero)
+            //{
+            //    Quaternion targetRotation = Quaternion.LookRotation(newForward);
+            //    m_parentMesh.rotation = Quaternion.Slerp(m_parentMesh.rotation, targetRotation, Time.deltaTime * BodyRefacingSpeed);
+            //}
+            
         }
         else
         {
@@ -309,7 +319,7 @@ public class AnimationManager : MonoBehaviour
         m_anim.SetFloat("DirX", playerTargetDir.x);
         m_anim.SetFloat("DirY", playerTargetDir.y);
         m_anim.SetBool("Focused", playerFocused);
-        m_anim.SetBool("Grounded",isGrounded);
+        //m_anim.SetBool("Grounded",airboneTrigger);
         if (jumpTrigger)
         {
             m_anim.SetTrigger("Jump");
@@ -346,6 +356,12 @@ public class AnimationManager : MonoBehaviour
         {
             m_anim.SetTrigger("Dash");
             dashTrigger = false;
+        }
+
+        if (airboneTrigger)
+        {
+            m_anim.SetTrigger("Airborne");
+            airboneTrigger = false;
         }
     
     }

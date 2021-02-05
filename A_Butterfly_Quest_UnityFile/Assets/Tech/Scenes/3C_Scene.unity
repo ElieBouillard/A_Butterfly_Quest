@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 9289141}
   - component: {fileID: 9289142}
   - component: {fileID: 9289143}
+  - component: {fileID: 9289144}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -214,6 +215,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   maxSpeed: 5
+  DashSpeed: 1
+  DashDuration: 1
   horizontalInput: 0
   verticalInput: 0
   m_camera: {fileID: 1215292935}
@@ -337,6 +340,20 @@ MonoBehaviour:
   ButterflyOtherInInventoryValue: 0
   ButterflyInTravelValue: 0
   ButterflyToReloadValue: 0
+--- !u!114 &9289144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9289136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 750c60ac07dbce04288d8666abba3ab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectionTypeValue: 0
+  MaxButterflyType: 2
 --- !u!1 &52292380
 GameObject:
   m_ObjectHideFlags: 0
@@ -1252,7 +1269,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195822808}
-  m_LocalRotation: {x: 0.0992033, y: 0.000000015339852, z: -0.0000000015293079, w: 0.9950672}
+  m_LocalRotation: {x: 0.0992033, y: 0.000000015335953, z: -0.000000001528919, w: 0.9950672}
   m_LocalPosition: {x: -4.2314844, y: -2.6870003, z: 3.0550785}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

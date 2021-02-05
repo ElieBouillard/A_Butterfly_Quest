@@ -15,6 +15,7 @@ public class Character3D : MonoBehaviour
     private Rigidbody m_rb;
     Vector3 target_Velocity;
     Vector3 jumpDirection = Vector3.up;
+    private GameObject PlayerMesh;
 
     [Header("Jump")]
     public float jumpTime;
@@ -34,7 +35,10 @@ public class Character3D : MonoBehaviour
     private float currentSpeed = 0;
     private bool FreezeInput = false;
     private float freezeClock;
-    private bool forceNoJump;
+    [Header("DashValues")]
+    public float DashSpeed = 1f;
+    public float DashDuration = 1f;
+    private float m_DashSpeed = 0f;
 
 
     [Header("Inputs")]
@@ -60,6 +64,9 @@ public class Character3D : MonoBehaviour
             m_rb = attached_rigidbody;
         }
         m_instance = this;
+
+        PlayerMesh = gameObject.transform.GetChild(0).gameObject;
+
     }
     private void Start()
     {
@@ -91,12 +98,11 @@ public class Character3D : MonoBehaviour
         }
 
         // Jump
-        if (Input.GetAxis("Jump") > 0 && IsGrounded() && forceNoJump == false)
+        if ((Input.GetAxis("Jump") > 0 && IsGrounded()))
         {
             jumpTime = 0;
 
             m_animManager.jumpTrigger = true; //anim
-            Debug.Log("test");
         }
         if (jumpTime != -1 && jumpTime >= 0 && jumpTime < jumpCurve.keys[jumpCurve.length - 1].time)
         {
@@ -130,10 +136,8 @@ public class Character3D : MonoBehaviour
         //Animation Binding
         m_animManager.cameraForward = directionForward;
         m_animManager.cameraRight = directionRight;
-        m_animManager.playerSpeed = Mathf.Max(Mathf.Abs(Input.GetAxis("Horizontal")), Mathf.Abs(Input.GetAxis("Vertical")));
-        m_animManager.playerTargetDir = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-
-       
+        m_animManager.playerSpeed = Mathf.Max(Mathf.Abs(horizontalInput), Mathf.Abs(verticalInput));
+        m_animManager.playerTargetDir = new Vector2(horizontalInput, verticalInput);
         m_animManager.isGrounded = IsGrounded();
 
 
@@ -144,15 +148,16 @@ public class Character3D : MonoBehaviour
         } 
 
         //FreezePlayer
-        if(freezeClock > 0)
+        if(freezeClock > -0.5f)
         {
             freezeClock -= Time.deltaTime;
         }
-        else
+        else if (freezeClock <= 0)
         {
             FreezeInput = false;
-            forceNoJump = false;
         }
+
+        DashUpdate();
     }
 
     void FixedUpdate()
@@ -163,7 +168,7 @@ public class Character3D : MonoBehaviour
         }
 
         //Main velocity operation
-        target_Velocity = directionForward * currentSpeed * verticalInput + directionRight * currentSpeed * horizontalInput+ new Vector3(0, (m_rb.velocity.y + (-9.81f * GravityBoost)) * ((jumpTime != -1) ? 0 : 1), 0);
+        target_Velocity = directionForward * currentSpeed * verticalInput + directionRight * currentSpeed * horizontalInput+ new Vector3(0, (m_rb.velocity.y + (-9.81f * GravityBoost)) * ((jumpTime != -1) ? 0 : 1), 0) + PlayerMesh.transform.forward * m_DashSpeed;
 
         //Jump velocity operation
         if (jumpTime != -1)
@@ -185,11 +190,39 @@ public class Character3D : MonoBehaviour
         return groundRayCast;
     }
 
-    public void FreezePosPlayer(float value, bool cantJump = false)
+    public void FreezePosPlayer(float value)
     {
         freezeClock = value;
         FreezeInput = true;
-        forceNoJump = cantJump;
-        Debug.Log("Freezing");
+    }
+
+
+    float clockDash = 0f;
+    bool canDash = true;
+    public void InitDash(float dashSpeed, float dashDuration)
+    {
+        clockDash = dashDuration;
+        m_DashSpeed = dashSpeed;
+        FreezePosPlayer(dashDuration);
+        canDash = false;
+    }
+
+
+    public void DashUpdate()
+    {
+        if (Input.GetKeyDown(KeyCode.Joystick1Button1) && canDash)
+        {
+            InitDash(DashSpeed, DashDuration);
+        }
+
+        if(clockDash > -0.5)
+        {
+            clockDash -= Time.deltaTime;
+        }
+        else if(clockDash <= 0)
+        {
+            m_DashSpeed = 0;
+            canDash = true;
+        }
     }
 }

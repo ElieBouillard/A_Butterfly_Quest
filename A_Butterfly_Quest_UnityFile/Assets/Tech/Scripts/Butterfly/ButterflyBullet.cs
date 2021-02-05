@@ -89,4 +89,9 @@ public class ButterflyBullet : MonoBehaviour
         gameObject.SetActive(false);
         ButterflyInventory.Instance.AddToReloadList(m_butterfly);
     }
+
+    public void GetDistance2()
+    {
+        direction2 = Camera.main.transform.forward;
+    }
 }

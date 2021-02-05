@@ -94,6 +94,7 @@ public class Shoot : MonoBehaviour
             //Sinon le papillon part du perso pour aller tout droit
             else
             {
+                butterflyBulletScpt.GetDistance2();
                 butterflyBulletScpt.onHit = false;
             }
         }        

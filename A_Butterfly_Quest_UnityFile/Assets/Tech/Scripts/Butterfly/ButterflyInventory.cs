@@ -25,7 +25,11 @@ public class ButterflyInventory : MonoBehaviour
     public void Awake()
     {
         Instance = this;
-        for (int i = 0; i <= ButterflyTypeSelection.Instance.SelectionTypeValue; i++)
+    }
+
+    public void Start()
+    {
+        for (int i = 0; i <= ButterflyTypeSelection.Instance.MaxButterflyType; i++)
         {
             ButterflyInInventory.Add(new List<ButterflyEntity>());
         }

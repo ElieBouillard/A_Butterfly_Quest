@@ -214,8 +214,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   maxSpeed: 5
-  freezeClock: 0
-  canClock: 0
   horizontalInput: 0
   verticalInput: 0
   m_camera: {fileID: 1215292935}
@@ -519,7 +517,7 @@ MonoBehaviour:
   m_VerticalDamping: 0
   m_ScreenX: 0.5
   m_ScreenY: 0.75
-  m_DeadZoneWidth: 0.1
+  m_DeadZoneWidth: 0.06
   m_DeadZoneHeight: 0.06
   m_SoftZoneWidth: 0.8
   m_SoftZoneHeight: 0.8
@@ -838,10 +836,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9289137}
     m_Modifications:
-    - target: {fileID: 2011232528, guid: 12583edab3bcabf4ea7d3e7c9a483275, type: 3}
-      propertyPath: DEBUG
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7255424630249739047, guid: 12583edab3bcabf4ea7d3e7c9a483275,
         type: 3}
       propertyPath: m_RootOrder
@@ -1038,7 +1032,7 @@ MonoBehaviour:
   m_VerticalDamping: 0
   m_ScreenX: 0.5
   m_ScreenY: 0.614
-  m_DeadZoneWidth: 0.1
+  m_DeadZoneWidth: 0.06
   m_DeadZoneHeight: 0.06
   m_SoftZoneWidth: 0.8
   m_SoftZoneHeight: 0.8
@@ -1258,7 +1252,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195822808}
-  m_LocalRotation: {x: 0.0992033, y: 0.0000000039627728, z: -3.9506903e-10, w: 0.9950672}
+  m_LocalRotation: {x: 0.0992033, y: 0.000000015339852, z: -0.0000000015293079, w: 0.9950672}
   m_LocalPosition: {x: -4.2314844, y: -2.6870003, z: 3.0550785}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1782,7 +1776,7 @@ MonoBehaviour:
   m_VerticalDamping: 0
   m_ScreenX: 0.5
   m_ScreenY: 0.55
-  m_DeadZoneWidth: 0.1
+  m_DeadZoneWidth: 0.06
   m_DeadZoneHeight: 0.06
   m_SoftZoneWidth: 2
   m_SoftZoneHeight: 0.8

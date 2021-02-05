@@ -33,7 +33,8 @@ public class Character3D : MonoBehaviour
     public float maxSpeed = 20;
     private float currentSpeed = 0;
     private bool FreezeInput = false;
-    private float freezeClock; 
+    private float freezeClock;
+    private bool forceNoJump;
 
 
     [Header("Inputs")]
@@ -90,11 +91,12 @@ public class Character3D : MonoBehaviour
         }
 
         // Jump
-        if ((Input.GetAxis("Jump") > 0 && IsGrounded()))
+        if (Input.GetAxis("Jump") > 0 && IsGrounded() && forceNoJump == false)
         {
             jumpTime = 0;
 
             m_animManager.jumpTrigger = true; //anim
+            Debug.Log("test");
         }
         if (jumpTime != -1 && jumpTime >= 0 && jumpTime < jumpCurve.keys[jumpCurve.length - 1].time)
         {
@@ -128,8 +130,10 @@ public class Character3D : MonoBehaviour
         //Animation Binding
         m_animManager.cameraForward = directionForward;
         m_animManager.cameraRight = directionRight;
-        m_animManager.playerSpeed = Mathf.Max(Mathf.Abs(horizontalInput), Mathf.Abs(verticalInput));
-        m_animManager.playerTargetDir = new Vector2(horizontalInput, verticalInput);
+        m_animManager.playerSpeed = Mathf.Max(Mathf.Abs(Input.GetAxis("Horizontal")), Mathf.Abs(Input.GetAxis("Vertical")));
+        m_animManager.playerTargetDir = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+       
         m_animManager.isGrounded = IsGrounded();
 
 
@@ -140,13 +144,14 @@ public class Character3D : MonoBehaviour
         } 
 
         //FreezePlayer
-        if(freezeClock > -0.5f)
+        if(freezeClock > 0)
         {
             freezeClock -= Time.deltaTime;
         }
-        else if (freezeClock <= 0)
+        else
         {
             FreezeInput = false;
+            forceNoJump = false;
         }
     }
 
@@ -180,9 +185,11 @@ public class Character3D : MonoBehaviour
         return groundRayCast;
     }
 
-    public void FreezePosPlayer(float value)
+    public void FreezePosPlayer(float value, bool cantJump = false)
     {
         freezeClock = value;
         FreezeInput = true;
+        forceNoJump = cantJump;
+        Debug.Log("Freezing");
     }
 }

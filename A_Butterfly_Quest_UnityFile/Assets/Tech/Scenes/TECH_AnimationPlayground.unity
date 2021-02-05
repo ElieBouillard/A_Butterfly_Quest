@@ -188,6 +188,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mesh
       objectReference: {fileID: 0}
+    - target: {fileID: 8069222301492021661, guid: 12583edab3bcabf4ea7d3e7c9a483275,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12583edab3bcabf4ea7d3e7c9a483275, type: 3}
 --- !u!1 &8035254
@@ -6567,6 +6572,8 @@ MonoBehaviour:
   TorsoBendMultiplier: 1
   torsoMaxRange: 0.9
   minSpeedForBending: 0.3
+  BodyRefacingSpeed: 10
+  TorsoRefacingSpeed: 20
   reorientateDuration: 0.5
   reorientateSpeed: 180
   shootTrigger: 0

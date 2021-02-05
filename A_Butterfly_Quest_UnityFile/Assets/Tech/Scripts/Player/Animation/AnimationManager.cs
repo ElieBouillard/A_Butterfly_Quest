@@ -37,6 +37,10 @@ public class AnimationManager : MonoBehaviour
     private float torsoMaxRange = 0.45f;
     [SerializeField]
     private float minSpeedForBending = .3f;
+    [SerializeField]
+    private float BodyRefacingSpeed = 10f;
+    [SerializeField]
+    private float TorsoRefacingSpeed = 20f;
 
     //Torso Impulse
     private bool canTorsoImpulse = false;
@@ -136,10 +140,13 @@ public class AnimationManager : MonoBehaviour
                 //If offset is too big, start reorientating 
                 if (reorientateTimer <= -0.8f && reorientateCooldown <= -.8f)
                 {
+                    reorientateTimer = 0;
                     reorientateDirection = inputPos;
                     reorientateTrigger = true;
-                    //speed à 0
+                    
 
+                    Character3D.m_instance.FreezePosPlayer(.25f,true); //speed à 0
+                   
                     if (Vector3.Dot(reorientateDirection.normalized, m_parentMesh.transform.forward.normalized) >= negativeReorientationTreshold && Mathf.Sign(playerDirOffset) < 0)
                     {
                         rotationDirection = -1f;
@@ -149,7 +156,7 @@ public class AnimationManager : MonoBehaviour
                         rotationDirection = 1f;
                     }
 
-                    reorientateTimer = 0;
+                    
 
                     
                 }
@@ -173,6 +180,7 @@ public class AnimationManager : MonoBehaviour
             }
             
         }
+
 
         //Reorientate pause timer
         if(reorientateTimer >= -.1f)
@@ -208,7 +216,7 @@ public class AnimationManager : MonoBehaviour
         }
 
         //Update torso bend
-        curTorsoBend = Mathf.Lerp(curTorsoBend, targetTorsoBend, Time.deltaTime * 20);
+        curTorsoBend = Mathf.Lerp(curTorsoBend, targetTorsoBend, Time.deltaTime * TorsoRefacingSpeed);
 
         //Interface with Animator component
         HandleAnimatorBindings();
@@ -267,7 +275,7 @@ public class AnimationManager : MonoBehaviour
             //mesh forward lerp towards new dir
             //Quaternion targetRotation = Quaternion.LookRotation(new Vector3(playerTargetDir.x, 0, playerTargetDir.y));
             Quaternion targetRotation = Quaternion.LookRotation(cameraForward * playerTargetDir.y + cameraRight * playerTargetDir.x);
-            m_parentMesh.rotation = Quaternion.Slerp(m_parentMesh.rotation, targetRotation, Time.deltaTime * 10);
+            m_parentMesh.rotation = Quaternion.Slerp(m_parentMesh.rotation, targetRotation, Time.deltaTime * BodyRefacingSpeed);
         }
         else
         {

@@ -12,7 +12,7 @@ public class ButterflyTypeSelection : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        SelectionTypeValue = 2;
+        SelectionTypeValue = 0;
     }
 
     private void Update()

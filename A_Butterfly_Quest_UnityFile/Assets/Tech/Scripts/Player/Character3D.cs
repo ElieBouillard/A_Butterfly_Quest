@@ -32,6 +32,9 @@ public class Character3D : MonoBehaviour
     [Header("Movements")]
     public float maxSpeed = 20;
     private float currentSpeed = 0;
+    public float freezeClock;
+    public bool canClock = false;
+
 
     [Header("Inputs")]
     public float horizontalInput;
@@ -101,7 +104,6 @@ public class Character3D : MonoBehaviour
             m_animManager.jumpTrigger = false; //anim
         }
 
-
         //Vitesse de déplacement
         currentSpeed = maxSpeed;
 
@@ -122,6 +124,26 @@ public class Character3D : MonoBehaviour
         m_animManager.playerTargetDir = new Vector2(horizontalInput, verticalInput);
         m_animManager.isGrounded = IsGrounded();
 
+
+        //test freePosPlayer
+        if (Input.GetKeyDown("b"))
+        {
+            FreezePosPlayer(2f);
+        } 
+
+        //FreezePlayer
+        if(freezeClock > -0.5f)
+        {
+            freezeClock -= Time.deltaTime;
+        }
+        if (freezeClock > 0)
+        {
+            m_rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+        }
+        else if (freezeClock <= 0)
+        {
+            m_rb.constraints = RigidbodyConstraints.FreezeRotation;
+        }
     }
 
     void FixedUpdate()
@@ -144,7 +166,6 @@ public class Character3D : MonoBehaviour
 
             target_Velocity += jumpDirection * (jumpForce * frameVelocityCoefficient);
         }
-
         //Assign final velocity
         m_rb.velocity = target_Velocity;
     }
@@ -153,5 +174,10 @@ public class Character3D : MonoBehaviour
     {
         bool groundRayCast = Physics.Raycast(transform.position, Vector3.down, DetectionDistanceGround, ground_Layer);
         return groundRayCast;
+    }
+
+    public void FreezePosPlayer(float value)
+    {
+        freezeClock = value;
     }
 }

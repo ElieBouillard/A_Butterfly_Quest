@@ -2102,12 +2102,13 @@ MonoBehaviour:
   playerTargetDir: {x: 0, y: 0}
   playerFocused: 0
   jumpTrigger: 0
-  isGrounded: 1
-  TorsoBendMultiplier: 1.3
+  airboneTrigger: 0
+  wasGrounded: 0
+  TorsoBendMultiplier: 2
   torsoMaxRange: 0.45
   minSpeedForBending: 0.3
   BodyRefacingSpeed: 15
-  TorsoRefacingSpeed: 20
+  TorsoRefacingSpeed: 5
   reorientateDuration: 0.3
   reorientateSpeed: 300
   shootTrigger: 0

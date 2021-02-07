@@ -36,6 +36,8 @@ public class Character3D : MonoBehaviour
     private bool FreezeInput = false;
     private float freezeClock;
     private bool forceNoJump;
+    private bool freezeDirection;
+    private bool grounded = true;
 
     [Header("DashValues")]
     public float DashSpeed = 1f;
@@ -48,6 +50,7 @@ public class Character3D : MonoBehaviour
     [Header("Inputs")]
     public float horizontalInput;
     public float verticalInput;
+    private Vector2 inputDirection;
     //public Animator animator;
     public GameObject m_camera;
 
@@ -79,18 +82,24 @@ public class Character3D : MonoBehaviour
 
     void Update()
     {
+        grounded = IsGrounded();
+
         //Inputs
         if (FreezeInput == false)
         {
             horizontalInput = Input.GetAxis("Horizontal");
-            verticalInput = Input.GetAxis("Vertical");
+            verticalInput = Input.GetAxis("Vertical");         
         }
         else
         {
             horizontalInput = 0;
             verticalInput = 0;
         }
-        
+        if (!freezeDirection)
+        {
+            inputDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        }
+
         //Camera X & Z axis
         directionForward = new Vector3(m_camera.transform.forward.x, 0f, m_camera.transform.forward.z).normalized;
         directionRight = new Vector3(m_camera.transform.right.x, 0f, m_camera.transform.right.z).normalized;       
@@ -102,7 +111,7 @@ public class Character3D : MonoBehaviour
         }
 
         // Jump
-        if ((Input.GetAxis("Jump") > 0 && IsGrounded() && forceNoJump == false))
+        if ((Input.GetButtonDown("Jump") && grounded && forceNoJump == false))
         {
             jumpTime = 0;
 
@@ -116,16 +125,25 @@ public class Character3D : MonoBehaviour
         {
             jumpTime = -1;
 
-            m_animManager.jumpTrigger = false; //anim
+            //m_animManager.jumpTrigger = false; //anim
         }
 
-        if((Input.GetAxis("Jump") <= 0) || IsGrounded() == false)
+        if(grounded == false)
         {
-            m_animManager.jumpTrigger = false; //anim
+            //Debug.Log("test");
+            //m_animManager.jumpTrigger = false; //anim
         }
 
         //Vitesse de déplacement
-        currentSpeed = maxSpeed;
+        if (Shoot.Instance.Aiming == false)
+        {
+            currentSpeed = maxSpeed;
+        }
+        else
+        {
+            currentSpeed = maxSpeed/2;
+        }
+        
 
         //Animation Run
         //if (animator != null)
@@ -141,15 +159,20 @@ public class Character3D : MonoBehaviour
         m_animManager.cameraForward = directionForward;
         m_animManager.cameraRight = directionRight;
         m_animManager.playerSpeed = Mathf.Max(Mathf.Abs(Input.GetAxis("Horizontal")), Mathf.Abs(Input.GetAxis("Vertical")));
-        m_animManager.playerTargetDir = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        m_animManager.isGrounded = IsGrounded();
-
-
-        //test freePosPlayer
-        if (Input.GetKeyDown(KeyCode.Joystick1Button3))
+        m_animManager.playerTargetDir = inputDirection;
+        //m_animManager.airboneTrigger = grounded;
+        if (grounded == false && m_animManager.wasGrounded == true && jumpTime <= -0.8f)
         {
-            FreezePosPlayer(1f);
+            m_animManager.airboneTrigger = true;
+            m_animManager.wasGrounded = false;
         }
+        if(grounded && !m_animManager.wasGrounded)
+        {
+            m_animManager.wasGrounded = true;
+        }
+
+
+      
 
         //FreezePlayer
         if (freezeClock > 0)
@@ -160,6 +183,7 @@ public class Character3D : MonoBehaviour
         {
             FreezeInput = false;
             forceNoJump = false;
+            freezeDirection = false;
         }
 
         DashUpdate();
@@ -195,11 +219,12 @@ public class Character3D : MonoBehaviour
         return groundRayCast;
     }
 
-    public void FreezePosPlayer(float value, bool cantJump = false)
+    public void FreezePosPlayer(float duration, bool CantJump = false, bool FreezeDirection = false)
     {
-        freezeClock = value;
+        freezeClock = duration;
         FreezeInput = true;
-        forceNoJump = cantJump;
+        forceNoJump = CantJump;
+        freezeDirection = FreezeDirection;
     }
 
 
@@ -207,7 +232,7 @@ public class Character3D : MonoBehaviour
     {
         clockDash = dashDuration;
         m_DashSpeed = dashSpeed;
-        FreezePosPlayer(dashDuration,true);
+        FreezePosPlayer(dashDuration,true,true);
         canDash = false;
     }
 
@@ -219,11 +244,11 @@ public class Character3D : MonoBehaviour
             InitDash(DashSpeed, DashDuration);
         }
 
-        if(clockDash > -0.5)
+        if(clockDash > 0)
         {
             clockDash -= Time.deltaTime;
         }
-        else if(clockDash <= 0)
+        else
         {
             m_DashSpeed = 0;
             canDash = true;

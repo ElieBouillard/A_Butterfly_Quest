@@ -20,7 +20,7 @@ public class ButterflyInventory : MonoBehaviour
     public List<ButterflyEntity> ButterflyToReload = new List<ButterflyEntity>();
 
     private float clock;
-    private bool reloading = false;
+    private bool Reloading = false;
 
     public void Awake()
     {
@@ -57,7 +57,7 @@ public class ButterflyInventory : MonoBehaviour
 
     public void StartReload()
     {
-        reloading = true;
+        Reloading = true;
         Debug.Log("Reloading...");
         clock = 2f;
     }
@@ -77,7 +77,7 @@ public class ButterflyInventory : MonoBehaviour
         {
             Debug.Log("No butterfly to reload !");
         }
-        reloading = false;
+        Reloading = false;
     }
 
     private void Update()
@@ -90,7 +90,7 @@ public class ButterflyInventory : MonoBehaviour
         ButterflyToReloadValue = ButterflyToReload.Count;
 
         //Clock reload
-        if (reloading)
+        if (Reloading)
         {
             clock -= Time.deltaTime;
             if(clock < 0)

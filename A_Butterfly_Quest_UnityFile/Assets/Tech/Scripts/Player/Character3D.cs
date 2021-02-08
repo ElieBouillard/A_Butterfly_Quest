@@ -169,10 +169,7 @@ public class Character3D : MonoBehaviour
         if(grounded && !m_animManager.wasGrounded)
         {
             m_animManager.wasGrounded = true;
-        }
-
-
-      
+        }      
 
         //FreezePlayer
         if (freezeClock > 0)

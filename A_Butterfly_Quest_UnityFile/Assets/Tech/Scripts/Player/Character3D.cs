@@ -135,7 +135,15 @@ public class Character3D : MonoBehaviour
         }
 
         //Vitesse de déplacement
-        currentSpeed = maxSpeed;
+        if (Shoot.Instance.Aiming == false)
+        {
+            currentSpeed = maxSpeed;
+        }
+        else
+        {
+            currentSpeed = maxSpeed/2;
+        }
+        
 
         //Animation Run
         //if (animator != null)

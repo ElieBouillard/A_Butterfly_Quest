@@ -11,8 +11,6 @@ public class ButterflyCollectable : MonoBehaviour
 
     public ButterflyEntity.m_ButterflyType ButterflyType;
 
-    public float type = -1;
-
     private void OnTriggerEnter(Collider other)
     {
         //Lors du ramassage de papillons

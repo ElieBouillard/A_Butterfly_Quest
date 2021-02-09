@@ -40,7 +40,7 @@ public class ButterflyBullet : MonoBehaviour
             if(distPlayerToButterfly > distanceMax)
             {
                 DisableButteryfly();
-            }
+            }            
         }
     }
 
@@ -52,8 +52,6 @@ public class ButterflyBullet : MonoBehaviour
             //Si il y une cible
             if (onHit)
             {
-                direction = target - transform.position;
-                direction.Normalize();
                 rb.velocity = direction * ButterflySpeed * Time.deltaTime;
             }
             //Si le tir est dans le vide
@@ -96,7 +94,13 @@ public class ButterflyBullet : MonoBehaviour
         ButterflyInventory.Instance.AddToReloadList(m_butterfly);
     }
 
-    public void GetDistance2()
+    public void GetDirection1()
+    {
+        direction = target - transform.position;
+        direction.Normalize();
+    }
+
+    public void GetDirection2()
     {
         direction2 = Camera.main.transform.forward;
     }

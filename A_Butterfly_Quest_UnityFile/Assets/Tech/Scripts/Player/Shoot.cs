@@ -32,7 +32,7 @@ public class Shoot : MonoBehaviour
     {
         CameraAimingScpt = GetComponent<CameraAiming>();
         PlayerMesh = gameObject.transform.GetChild(0).gameObject;
-        ButterflyMask =~ LayerMask.GetMask("Butterfly");
+        ButterflyMask =~ LayerMask.GetMask("Butterfly") + LayerMask.GetMask("Player");
         Instance = this;
     }
 
@@ -90,11 +90,12 @@ public class Shoot : MonoBehaviour
             {
                 butterflyBulletScpt.onHit = true;
                 butterflyBulletScpt.target = ShootInfo.point;
+                butterflyBulletScpt.GetDirection1();
             }
             //Sinon le papillon part du perso pour aller tout droit
             else
             {
-                butterflyBulletScpt.GetDistance2();
+                butterflyBulletScpt.GetDirection2();
                 butterflyBulletScpt.onHit = false;
             }
         }        

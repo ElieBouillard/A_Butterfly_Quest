@@ -82,6 +82,12 @@ public class ButterflyBullet : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         DisableButteryfly();
+
+        if (other.GetComponent<EnemyAiTest2>())
+        {
+            HealthSystem TargetHealth = other.GetComponent<HealthSystem>();
+            TargetHealth.TakeDamage(Damage);
+        }
     }
 
     public void DisableButteryfly()

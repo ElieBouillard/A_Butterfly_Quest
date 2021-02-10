@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4677853975394533978}
   - component: {fileID: 7426405144844744336}
   m_Layer: 0
-  m_Name: GrassPatch_Low_A (10)
+  m_Name: GrassPatch_Low_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 97e77ddb20e6bb04082e3646752835f2, type: 2}
+  - {fileID: 2100000, guid: dfc34b46e07310345b743bc83685a576, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

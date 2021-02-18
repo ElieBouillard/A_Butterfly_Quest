@@ -8,9 +8,9 @@ public class BuildScript : MonoBehaviour
 {
     private void Awake()
     {
-        SceneManager.LoadScene("GreyBoxLD", LoadSceneMode.Additive);
-        SceneManager.LoadScene("VOLUMES", LoadSceneMode.Additive);
-        SceneManager.LoadScene("HUD_Scene", LoadSceneMode.Additive);
-        SceneManager.LoadScene("Blocking_LD_1", LoadSceneMode.Additive);
+        //SceneManager.LoadScene("GreyBoxLD", LoadSceneMode.Additive);
+        //SceneManager.LoadScene("VOLUMES", LoadSceneMode.Additive);
+        //SceneManager.LoadScene("HUD_Scene", LoadSceneMode.Additive);
+        //SceneManager.LoadScene("Blocking_LD_1", LoadSceneMode.Additive);
     }
 }

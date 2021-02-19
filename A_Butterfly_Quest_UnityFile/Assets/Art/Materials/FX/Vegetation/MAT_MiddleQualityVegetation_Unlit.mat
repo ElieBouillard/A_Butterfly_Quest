@@ -318,7 +318,7 @@ Material:
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
     - _Vector0: {r: 0, g: 1, b: 0, a: 0}
-    - _WindDirection: {r: 0, g: -0.35, b: 1, a: 0.6}
+    - _WindDirection: {r: 0.3, g: -0.35, b: 0, a: 0.5}
     - _WindLocalJitterMask: {r: 1, g: 0.35, b: 1, a: 0.1}
     - _WindMask: {r: 0, g: 1, b: 0, a: 0}
     - _masktest: {r: 1, g: 1, b: 1, a: 0}

@@ -166,9 +166,7 @@ public class EnemyAiTest2 : MonoBehaviour
                 InCanalisationAttack = false;
                 posAfterAttack = null;
             }
-
-        }
-        
+        }        
     }
 
     private void InitChargeAttack()

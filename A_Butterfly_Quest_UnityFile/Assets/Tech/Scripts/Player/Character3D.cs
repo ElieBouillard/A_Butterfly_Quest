@@ -25,10 +25,16 @@ public class Character3D : MonoBehaviour
     public float frameAccuracy = 0.1f;
     public float jumpForce;
     public float GravityBoost;
-    public float DetectionDistanceGround = 1;
+    public float jumpDelay = 0.25f;
+    public float jumpTimer = 0f;
 
-    [Header("Layers")]
+    [Header("RaysGrounded")]
+    public bool IsGroundedDebug;
+    public float DetectionDistanceGround = 1;
+    public float OffSetX = 0.5f;
+    public float OffSetY = 0.5f;
     public LayerMask ground_Layer;
+    public bool grounded = true;
 
     [Header("Movements")]
     public float maxSpeed = 20;
@@ -37,7 +43,6 @@ public class Character3D : MonoBehaviour
     private float freezeClock;
     private bool forceNoJump;
     private bool freezeDirection;
-    private bool grounded = true;
 
     [Header("DashValues")]
     public float DashSpeed = 1f;
@@ -46,23 +51,20 @@ public class Character3D : MonoBehaviour
     float clockDash = 0f;
     bool canDash = true;
 
-
     [Header("Inputs")]
+    public GameObject m_camera;
     public float horizontalInput;
     public float verticalInput;
     private Vector2 inputDirection;
-    //public Animator animator;
-    public GameObject m_camera;
-
 
     [Header("MainCamera axis")]
+    public bool debugCameraAxis = false;
     public Vector3 directionForward;
     public Vector3 directionRight;
 
     [Header("Animation Binding")]
     public AnimationManager m_animManager;
 
-    public bool debug = false;
 
     void Awake()
     {
@@ -104,19 +106,27 @@ public class Character3D : MonoBehaviour
         directionForward = new Vector3(m_camera.transform.forward.x, 0f, m_camera.transform.forward.z).normalized;
         directionRight = new Vector3(m_camera.transform.right.x, 0f, m_camera.transform.right.z).normalized;       
 
-        if (debug)
+        if (debugCameraAxis)
         {
             Debug.DrawRay(transform.position, directionForward * 10, Color.blue);
             Debug.DrawRay(transform.position, directionRight * 10, Color.red);
         }
 
         // Jump
-        if ((Input.GetButtonDown("Jump") && grounded && forceNoJump == false))
+        if (Input.GetButtonDown("Jump"))
+        {
+            jumpTimer = Time.time + jumpDelay;
+        }
+
+        if(jumpTimer > Time.time && grounded && forceNoJump == false)
         {
             jumpTime = 0;
 
             m_animManager.jumpTrigger = true; //anim
+
+            jumpTimer = 0;
         }
+
         if (jumpTime != -1 && jumpTime >= 0 && jumpTime < jumpCurve.keys[jumpCurve.length - 1].time)
         {
             jumpTime += Time.deltaTime;
@@ -212,7 +222,25 @@ public class Character3D : MonoBehaviour
 
     public bool IsGrounded()
     {
-        bool groundRayCast = Physics.Raycast(transform.position, Vector3.down, DetectionDistanceGround, ground_Layer);
+        bool groundRayCast = false;
+        if (Physics.Raycast(transform.position + new Vector3(OffSetX, 0, 0), Vector3.down, DetectionDistanceGround, ground_Layer))
+        {
+            groundRayCast = true;
+        }
+        if (Physics.Raycast(transform.position + new Vector3(-OffSetX, 0, 0), Vector3.down, DetectionDistanceGround, ground_Layer))
+        {
+            groundRayCast = true;
+        }
+        if (Physics.Raycast(transform.position + new Vector3(0, 0, OffSetY), Vector3.down, DetectionDistanceGround, ground_Layer))
+        {
+            groundRayCast = true;
+        }
+        if (Physics.Raycast(transform.position + new Vector3(0, 0, -OffSetY), Vector3.down, DetectionDistanceGround, ground_Layer))
+        {
+            groundRayCast = true;
+        }
+
+
         return groundRayCast;
     }
 
@@ -224,7 +252,6 @@ public class Character3D : MonoBehaviour
         freezeDirection = FreezeDirection;
     }
 
-
     public void InitDash(float dashSpeed, float dashDuration)
     {
         clockDash = dashDuration;
@@ -232,7 +259,6 @@ public class Character3D : MonoBehaviour
         FreezePosPlayer(dashDuration,true,true);
         canDash = false;
     }
-
 
     public void DashUpdate()
     {
@@ -250,5 +276,18 @@ public class Character3D : MonoBehaviour
             m_DashSpeed = 0;
             canDash = true;
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (IsGroundedDebug)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawRay(transform.position + new Vector3(OffSetX, 0, 0), transform.TransformDirection(Vector3.down * DetectionDistanceGround));
+            Gizmos.DrawRay(transform.position + new Vector3(-OffSetX, 0, 0), transform.TransformDirection(Vector3.down * DetectionDistanceGround));
+            Gizmos.DrawRay(transform.position + new Vector3(0, 0, OffSetY), transform.TransformDirection(Vector3.down * DetectionDistanceGround));
+            Gizmos.DrawRay(transform.position + new Vector3(0, 0, -OffSetY), transform.TransformDirection(Vector3.down * DetectionDistanceGround));
+        }
+        
     }
 }

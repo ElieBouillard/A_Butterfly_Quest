@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class MeshBaker : MonoBehaviour
 {
-    public SkinnedMeshRenderer skinnedMeshRenderer;
+    public  SkinnedMeshRenderer skinnedMeshRenderer;
+    GameObject ObjectToBake;
 
-    public Mesh bakedMesh;
+    private Mesh bakedMesh;
 
-    public Vector3 colliderRotation = new Vector3(-90, 0, 0); //To combat blender.
+    public Vector3 rotationOffset = new Vector3(-90, 0, 0); //To combat blender.
 
 
 
@@ -16,7 +17,11 @@ public class MeshBaker : MonoBehaviour
 
     private GameObject colliderContainer;
 
-
+    private void Reset()
+    {
+        skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
+        ObjectToBake = this.gameObject;
+    }
 
     private void Start()
     {
@@ -27,7 +32,7 @@ public class MeshBaker : MonoBehaviour
 
         colliderContainer.transform.SetParent(transform);
 
-        colliderContainer.transform.localRotation = Quaternion.Euler(colliderRotation);
+        colliderContainer.transform.localRotation = Quaternion.Euler(rotationOffset);
 
         meshCollider = colliderContainer.AddComponent<MeshCollider>();
 
@@ -44,9 +49,9 @@ public class MeshBaker : MonoBehaviour
 
         colliderContainer = new GameObject("Collider Container");
 
-        colliderContainer.transform.SetParent(transform);
+        colliderContainer.transform.SetParent(ObjectToBake.transform);
 
-        colliderContainer.transform.localRotation = Quaternion.Euler(colliderRotation);
+        colliderContainer.transform.localRotation = Quaternion.Euler(rotationOffset);
 
         meshCollider = colliderContainer.AddComponent<MeshCollider>();
 
@@ -59,18 +64,16 @@ public class MeshBaker : MonoBehaviour
     {
         skinnedMeshRenderer.BakeMesh(bakedMesh);
         GameObject newObject = new GameObject();
+        newObject.transform.position = transform.position;
         newObject.name = skinnedMeshRenderer.gameObject.name;
         MeshFilter newFilter = newObject.AddComponent(typeof(MeshFilter)) as MeshFilter;
         newFilter.mesh = bakedMesh;
-        newObject.AddComponent<MeshRenderer>();
-        ObjExporter.MeshToFile(newFilter,"testtttt");
+        newFilter.mesh.name = ObjectToBake.name + "_export";
+        MeshRenderer newRenderer = newObject.AddComponent<MeshRenderer>();
+        newRenderer.material = skinnedMeshRenderer.sharedMaterial;
+        ObjExporter.MeshToFile(newFilter,newObject.name + "_exported");
     }
 
 
-    private void FixedUpdate()
-    {
 
-       
-
-    }
 }

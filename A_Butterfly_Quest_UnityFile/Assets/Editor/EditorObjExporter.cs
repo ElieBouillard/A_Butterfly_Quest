@@ -35,7 +35,7 @@ public class EditorObjExporter : ScriptableObject
 
 	//User should probably be able to change this. It is currently left as an excercise for
 	//the reader.
-	private static string targetFolder = "ExportedObj";
+	private static string targetFolder = "Assets/Art/Meshes/ExportedObjs/";
 
 
 	private static string MeshToString(MeshFilter mf, Dictionary<string, ObjMaterial> materialList)
@@ -127,7 +127,7 @@ public class EditorObjExporter : ScriptableObject
 
 	private static void MaterialsToFile(Dictionary<string, ObjMaterial> materialList, string folder, string filename)
 	{
-		using (StreamWriter sw = new StreamWriter(folder + Path.PathSeparator + filename + ".mtl"))
+		using (StreamWriter sw = new StreamWriter(folder + Path.PathSeparator + filename + ".mat"))
 		{
 			foreach (KeyValuePair<string, ObjMaterial> kvp in materialList)
 			{
@@ -180,9 +180,9 @@ public class EditorObjExporter : ScriptableObject
 	{
 		Dictionary<string, ObjMaterial> materialList = PrepareFileWrite();
 
-		using (StreamWriter sw = new StreamWriter(folder + Path.PathSeparator + filename + ".obj"))
+		using (StreamWriter sw = new StreamWriter(folder + "/" + filename + ".obj"))
 		{
-			sw.Write("mtllib ./" + filename + ".mtl\n");
+			sw.Write("mtllib ./" + filename + ".mat\n");
 
 			sw.Write(MeshToString(mf, materialList));
 		}
@@ -194,9 +194,9 @@ public class EditorObjExporter : ScriptableObject
 	{
 		Dictionary<string, ObjMaterial> materialList = PrepareFileWrite();
 
-		using (StreamWriter sw = new StreamWriter(folder + Path.PathSeparator + filename + ".obj"))
+		using (StreamWriter sw = new StreamWriter(folder + "/" + filename + ".obj"))
 		{
-			sw.Write("mtllib ./" + filename + ".mtl\n");
+			sw.Write("mtllib ./" + filename + ".mat\n");
 
 			for (int i = 0; i < mf.Length; i++)
 			{
@@ -222,7 +222,7 @@ public class EditorObjExporter : ScriptableObject
 		return true;
 	}
 
-	[MenuItem("Custom/Export/Export all MeshFilters in selection to separate OBJs")]
+	[MenuItem("Mesh Baker/Export/Export all MeshFilters in selection to separate OBJs")]
 	static void ExportSelectionToSeparate()
 	{
 		if (!CreateTargetFolder())
@@ -255,7 +255,7 @@ public class EditorObjExporter : ScriptableObject
 			EditorUtility.DisplayDialog("Objects not exported", "Make sure at least some of your selected objects have mesh filters!", "");
 	}
 
-	[MenuItem("Custom/Export/Export whole selection to single OBJ")]
+	[MenuItem("Mesh Baker/Export/Export whole selection to single OBJ")]
 	static void ExportWholeSelectionToSingle()
 	{
 		if (!CreateTargetFolder())
@@ -312,7 +312,7 @@ public class EditorObjExporter : ScriptableObject
 
 
 
-	[MenuItem("Custom/Export/Export each selected to single OBJ")]
+	[MenuItem("Mesh Baker/Export/Export each selected to single OBJ")]
 	static void ExportEachSelectionToSingle()
 	{
 		if (!CreateTargetFolder())

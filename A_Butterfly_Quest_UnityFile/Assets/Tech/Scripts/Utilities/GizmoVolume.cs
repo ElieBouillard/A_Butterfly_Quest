@@ -8,7 +8,7 @@
 //using UnityEngine.PlayerLoop;
 //using System.CodeDom;
 
-////[ExecuteInEditMode]
+//[ExecuteInEditMode]
 
 //public class GizmoVolume : MonoBehaviour
 //{
@@ -46,20 +46,20 @@
 //    public int fetchedVarIndex = 0;
 //    public bool _wrongFetch;
 
-//    // >> Find Default Icon Names https://unitylist.com/p/5c3/Unity-editor-icons <<
+//     >> Find Default Icon Names https://unitylist.com/p/5c3/Unity-editor-icons <<
 //    public string[] defaultIcons = new string[17] { "d_tree_icon_frond", "d_tree_icon_leaf", "GameManager Icon", "LightProbeGroup Gizmo", "CharacterController Icon", "CompositeCollider2D Icon", "PackageBadgeNew", "Assembly Icon", "CollabEdit Icon", "d_CollabConflict Icon", "Favorite Icon", "EdgeCollider2D Icon", "NetworkStartPosition Icon", "VideoEffect Icon", "VisualEffectAsset Icon", "VisualEffect Gizmo", "CloudRecoBehaviour Icon" };
 
 
 
 //    private void Reset()
 //    {
-//        //set default size to the object's size
+//        set default size to the object's size
 //        size = transform.localScale;
 
-//        //defaultIcons = new string[17] { "d_tree_icon_frond", "d_tree_icon_leaf", "GameManager Icon", "LightProbeGroup Gizmo", "CharacterController Icon", "CompositeCollider2D Icon", "PackageBadgeNew", "Assembly Icon", "CollabEdit Icon", "d_CollabConflict Icon", "Favorite Icon", "EdgeCollider2D Icon", "NetworkStartPosition Icon", "VideoEffect Icon", "VisualEffectAsset Icon", "VisualEffect Gizmo", "CloudRecoBehaviour Icon" };
+//        defaultIcons = new string[17] { "d_tree_icon_frond", "d_tree_icon_leaf", "GameManager Icon", "LightProbeGroup Gizmo", "CharacterController Icon", "CompositeCollider2D Icon", "PackageBadgeNew", "Assembly Icon", "CollabEdit Icon", "d_CollabConflict Icon", "Favorite Icon", "EdgeCollider2D Icon", "NetworkStartPosition Icon", "VideoEffect Icon", "VisualEffectAsset Icon", "VisualEffect Gizmo", "CloudRecoBehaviour Icon" };
 
 
-//        //Rename automatically newly created object
+//        Rename automatically newly created object
 //        if (name.Length >= 10)
 //        {
 //            if (name.Substring(0, 10) == "GameObject")
@@ -81,7 +81,7 @@
 
 //    public void UpdateComponents()
 //    {
-//        //accessibleVariables = new Dictionary<string, object>();
+//        accessibleVariables = new Dictionary<string, object>();
 //        fetchedVariables_names = new List<string>();
 //        fetchedVariables_values = new List<object>();
 //        fetchedVariables_names.Clear();
@@ -142,8 +142,8 @@
 
 //    public void UpdateVar()
 //    {
-//        //Component[] myComponents = GetComponents(typeof(Component)); //get all components on that gameObject       
-//        //accessibleVariables_refs[sizeVarIndex] = myComponents[sizeVarCompIndex].GetType().GetField(accessibleVariables_names[sizeVarIndex]);
+//        Component[] myComponents = GetComponents(typeof(Component)); //get all components on that gameObject       
+//        accessibleVariables_refs[sizeVarIndex] = myComponents[sizeVarCompIndex].GetType().GetField(accessibleVariables_names[sizeVarIndex]);
 //        if (fetchedComponent.GetType().IsSubclassOf(typeof(MonoBehaviour)))
 //        {
 
@@ -161,7 +161,7 @@
 //        {
 //            if (fetchedVariables_values.Count > fetchedVarIndex)
 //            {
-//                //accessibleVariables_refs[sizeVarIndex] = sizeVarRef.GetType().GetProperties()[sizeVarIndex].GetValue(sizeVarRef, null);
+//                accessibleVariables_refs[sizeVarIndex] = sizeVarRef.GetType().GetProperties()[sizeVarIndex].GetValue(sizeVarRef, null);
 //                if (!fetchedComponent.GetType().GetProperties()[fetchedVarIndex - 1].IsDefined(typeof(ObsoleteAttribute), true))  //filter out deprecated properties
 //                {
 //                    fetchedVariables_values[fetchedVarIndex] = fetchedComponent.GetType().GetProperties()[fetchedVarIndex - 1].GetValue(fetchedComponent, null);
@@ -190,16 +190,16 @@
 
 //        if (fetchedVarIndex != 0 && _fetchVariable)
 //        {
-//            //if updaterealtime
+//            if updaterealtime
 //            if (!_UpdateFetchedVarOnlyOnFocus && fetchedVarRealtimeUpdate)
-//            {
-//                UpdateVar();
-//            }
+//                {
+//                    UpdateVar();
+//                }
 
 
 //            if (fetchedVariables_values.Count > 0)
 //            {
-//                //size.x = (float)accessibleVariables.TryGetValue(accessibleVariables.Keys.ToArray()[sizeVarIndex], out getSize);
+//                size.x = (float)accessibleVariables.TryGetValue(accessibleVariables.Keys.ToArray()[sizeVarIndex], out getSize);
 //                fetchedValue = fetchedVariables_values[fetchedVarIndex];
 //                if (fetchedValue != lastFetchedValue) //if we just changed the value
 //                {
@@ -359,32 +359,32 @@
 
 //        }
 
-//        // if (activated)
-//        //{
-//        DrawVolume(volumeType, color, transform.position + OffsetPosition, size + sizeOffset, defaultIcons[iconNameIndex]);
-
-
-//        //ADD TEXT
-//        if (addText && !hideTextUnselected)
+//        if (activated)
 //        {
-//            Handles.BeginGUI();
+//            DrawVolume(volumeType, color, transform.position + OffsetPosition, size + sizeOffset, defaultIcons[iconNameIndex]);
 
 
-//            GUIStyle style = new GUIStyle();
-//            style.fontSize = textSize;
-//            style.alignment = TextAnchor.MiddleCenter;
-//            style.normal.textColor = textColor;
+//            ADD TEXT
+//        if (addText && !hideTextUnselected)
+//            {
+//                Handles.BeginGUI();
 
-//            var view = SceneView.currentDrawingSceneView;
-//            Vector3 screenPos = Camera.current.WorldToScreenPoint(transform.position + OffsetPosition + textOffset);
 
-//            Vector2 sizeG = GUI.skin.label.CalcSize(new GUIContent(areaText));
-//            GUI.Label(new Rect(screenPos.x - (sizeG.x / 2), -screenPos.y + Screen.height - 30/*view.position.height*/, sizeG.x, sizeG.y), areaText, style);
-//            //GUI.Label(new Rect(screenPos.x - (sizeG.x / 2), -screenPos.y + Camera.current.pixelHeight/*view.position.height*/, sizeG.x, sizeG.y), areaText, style);
-//            Handles.EndGUI();
+//                GUIStyle style = new GUIStyle();
+//                style.fontSize = textSize;
+//                style.alignment = TextAnchor.MiddleCenter;
+//                style.normal.textColor = textColor;
+
+//                var view = SceneView.currentDrawingSceneView;
+//                Vector3 screenPos = Camera.current.WorldToScreenPoint(transform.position + OffsetPosition + textOffset);
+
+//                Vector2 sizeG = GUI.skin.label.CalcSize(new GUIContent(areaText));
+//                GUI.Label(new Rect(screenPos.x - (sizeG.x / 2), -screenPos.y + Screen.height - 30/*view.position.height*/, sizeG.x, sizeG.y), areaText, style);
+//                GUI.Label(new Rect(screenPos.x - (sizeG.x / 2), -screenPos.y + Camera.current.pixelHeight/*view.position.height*/, sizeG.x, sizeG.y), areaText, style);
+//                Handles.EndGUI();
+//            }
+
 //        }
-
-//        // }
 
 
 
@@ -433,7 +433,7 @@
 
 
 
-//    //[MenuItem("GameObject/Create Other/Gizmo Volume")]
+//    [MenuItem("GameObject/Create Other/Gizmo Volume")]
 //    public static void NewGizmoVolume()
 //    {
 //        GameObject newObject = new GameObject();

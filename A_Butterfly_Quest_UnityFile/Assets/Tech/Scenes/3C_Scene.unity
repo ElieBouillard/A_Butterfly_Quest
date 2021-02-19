@@ -239,6 +239,7 @@ MonoBehaviour:
     m_Bits: 256
   grounded: 0
   maxSpeed: 5
+  ClampVelocityY: 3
   DashSpeed: 15
   DashDuration: 0.5
   m_camera: {fileID: 1215292935}

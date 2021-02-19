@@ -43,6 +43,7 @@ public class Character3D : MonoBehaviour
     private float freezeClock;
     private bool forceNoJump;
     private bool freezeDirection;
+    public float ClampVelocityY;
 
     [Header("DashValues")]
     public float DashSpeed = 1f;
@@ -218,6 +219,12 @@ public class Character3D : MonoBehaviour
         }
         //Assign final velocity
         m_rb.velocity = target_Velocity;
+
+        //ClampY Velocity
+        if (m_rb.velocity.y > ClampVelocityY && jumpTime == -1)
+        {
+            m_rb.velocity = new Vector3(m_rb.velocity.x, ClampVelocityY, m_rb.velocity.z);
+        }
     }
 
     public bool IsGrounded()

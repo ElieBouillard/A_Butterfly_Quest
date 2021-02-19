@@ -177,7 +177,7 @@ Material:
     - _Cutoff: 0.254
     - _DarkFloor: 0.558
     - _DarkenBottom: 1
-    - _DebugLUT: -1
+    - _DebugLUT: 0.52
     - _DepthOffsetEnable: 0
     - _DetailAlbedoScale: 1
     - _DetailNormalScale: 1
@@ -223,7 +223,7 @@ Material:
     - _HeightTessAmplitude: 2
     - _HeightTessCenter: 0.5
     - _Interactivity: 1
-    - _InteractivityForce: 1
+    - _InteractivityForce: 0.5
     - _InvTilingScale: 1
     - _Ior: 1.5
     - _IridescenceMask: 1

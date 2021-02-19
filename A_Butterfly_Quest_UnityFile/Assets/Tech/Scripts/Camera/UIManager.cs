@@ -13,6 +13,11 @@ public class UIManager : MonoBehaviour
     [Header("ButterlyTypeSelectionSprites")]
     public Sprite[] ButterflyType;
 
+    private void Start()
+    {
+        ShowCrosshair(true);
+    }
+
     private void Update()
     {
         //CrossHairHUD

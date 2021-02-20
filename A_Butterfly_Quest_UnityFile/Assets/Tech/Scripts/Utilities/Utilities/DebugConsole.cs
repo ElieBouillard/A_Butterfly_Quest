@@ -449,8 +449,11 @@ public class DebugConsole : MonoBehaviour
         Debug.Log(toggle);
     }
 
-    public static void blob()
+    public static void ShowTip(int tipIndex, int duration)
     {
-
+        if(TipsManager.instance != null)
+        {
+            TipsManager.instance.ShowTip(tipIndex, TipsManager.TipType.BottomTip, duration);
+        }
     }
 }

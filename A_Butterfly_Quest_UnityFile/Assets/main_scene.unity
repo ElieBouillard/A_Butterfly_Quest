@@ -167,7 +167,7 @@ MonoBehaviour:
   scenesToLoad:
   - GreyBoxLD
   - VOLUMES
-  - HUD_Scene
+  - UI_HUD_Scene
   - Blocking_LD_1
   - CONSOLE
   - 3C_Scene

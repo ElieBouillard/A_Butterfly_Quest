@@ -60,6 +60,7 @@ public class DebugConsole : MonoBehaviour
     {
         //Canvas
         GameObject consoleCanvas = new GameObject();
+        consoleCanvas.transform.SetParent(this.transform);
         consoleCanvas.name = "DEBUG_Canvas";
         RectTransform rt_consolecanvas = consoleCanvas.AddComponent<RectTransform>();
         Canvas cv_consolecanvas = consoleCanvas.AddComponent<Canvas>();

@@ -294,7 +294,6 @@ public class Character3D : MonoBehaviour
             Gizmos.DrawRay(transform.position + new Vector3(-OffSetX, 0, 0), transform.TransformDirection(Vector3.down * DetectionDistanceGround));
             Gizmos.DrawRay(transform.position + new Vector3(0, 0, OffSetY), transform.TransformDirection(Vector3.down * DetectionDistanceGround));
             Gizmos.DrawRay(transform.position + new Vector3(0, 0, -OffSetY), transform.TransformDirection(Vector3.down * DetectionDistanceGround));
-        }
-        
+        }        
     }
 }

@@ -81,7 +81,7 @@ public class ButterflyBullet : MonoBehaviour
     {
         DisableButteryfly();
 
-        if (other.GetComponent<EnemyAiTest2>())
+        if (other.GetComponent<EnemyAI>())
         {
             HealthSystem TargetHealth = other.GetComponent<HealthSystem>();
             TargetHealth.TakeDamage(Damage);

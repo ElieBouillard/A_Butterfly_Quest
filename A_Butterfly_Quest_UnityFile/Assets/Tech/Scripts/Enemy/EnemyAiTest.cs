@@ -1,77 +1,44 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class EnemyAiTest : MonoBehaviour
+public class EnemyAITest : MonoBehaviour
 {
-    public enum PlayerState { waiting, movement }
-    public PlayerState currState;
+    [Header("References")]
+    public GameObject Target;
+    private NavMeshAgent Agent;
+    public LayerMask GroundMask, PlayerMask, EnemyMask;
+    private MeshRenderer m_MeshRenderer;
 
-    public float waitingTime;
-    private float m_clock;
-
+    [Header("EnemyStats")]    
     public float Speed;
-    public float MoveRangeMax;
-    public float MoveRangeMin;
 
-    public Vector3 m_InitialPosition;
-    public Vector3 randomPosTarget;
+    [Header("Ranges")]
+    [Range(0,20)]
+    public float DetectionRange;
+    [Range(0, 20)]
+    public float AttackRange;
+    [Range(0,5)]
+    public float CancelAttackRange;
+    [Range(0,20)]
+    public float RandomPosRange;
+
+    [Header("ChargeAttack")]
+
+
+    [Header("WaitingState")]
+    public float WaitingTime;
+
 
     private void Awake()
     {
-        currState = PlayerState.waiting;
-        m_clock = waitingTime;
-    }
-
-    private void Start()
-    {
-        m_InitialPosition = transform.position;
+        Agent = GetComponent<NavMeshAgent>();
+        m_MeshRenderer = GetComponent<MeshRenderer>();
     }
 
     private void Update()
     {
-        if (currState == PlayerState.waiting)
-        {
-            if (m_clock > 0)
-            {
-                m_clock -= Time.deltaTime;
-            }
-            else if (m_clock <= 0)
-            {
-                randomPosTarget = GetRandomPosition();
-                Debug.Log(randomPosTarget);
-                currState = PlayerState.movement;
-            }
-        }
-
-        else if (currState == PlayerState.movement)
-        {
-            Vector3 direction = randomPosTarget - transform.position;
-
-            float distTargetToPlayer = direction.magnitude;
-            float distPlayerToInitPos = Time.deltaTime * Speed;
-
-            if (distPlayerToInitPos > distTargetToPlayer)
-            {
-                transform.position = randomPosTarget;
-                m_clock = waitingTime;
-                currState = PlayerState.waiting;
-            }
-            else
-            {
-                direction.Normalize();
-                transform.position += Time.deltaTime * direction * Speed;
-            }
-        }
-    }
-
-    Vector3 GetRandomPosition()
-    {
-        Vector3 positionRandom = Random.insideUnitSphere;
-        Vector3 position = new Vector3(positionRandom.x, 0, positionRandom.z);
-
-        return position + m_InitialPosition  * MoveRangeMax;
+        
     }
 }
-
-

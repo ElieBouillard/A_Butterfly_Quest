@@ -58,7 +58,7 @@ public class Shoot : MonoBehaviour
         }
 
         //Shoot Papillons normaux
-        if(Aiming)
+        if (Aiming)
             ShootInputSystem();
 
         //Reload

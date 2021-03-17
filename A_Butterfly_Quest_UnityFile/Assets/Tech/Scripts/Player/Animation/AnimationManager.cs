@@ -68,7 +68,7 @@ public class AnimationManager : MonoBehaviour
     private bool shoutTrigger;
 
     //Dashing
-    private bool dashTrigger;
+    public bool dashTrigger;
 
     private void Awake()
     {
@@ -258,10 +258,10 @@ public class AnimationManager : MonoBehaviour
             shoutTrigger = true;
             Character3D.m_instance.FreezePosPlayer(0.5f, true, true);
         }
-        if (Input.GetKeyDown(KeyCode.Joystick1Button1))
-        {
-            dashTrigger = true;
-        }
+        //if ((Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKeyDown("left shift")))
+        //{
+        //    dashTrigger = true;
+        //}
 
         //Debug.DrawRay(transform.position + Vector3.up * 2, offset, Color.magenta);
         //Debug.DrawRay(transform.position + Vector3.up * 2, m_parentMesh.transform.right, Color.green);
@@ -377,5 +377,11 @@ public class AnimationManager : MonoBehaviour
             airboneTrigger = false;
         }
     
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawCube(transform.position + new Vector3(2f, 1, 0), new Vector3(4, 2, 1));
     }
 }

@@ -51,6 +51,7 @@ public class Character3D : MonoBehaviour
     private float m_DashSpeed = 0f;
     float clockDash = 0f;
     bool canDash = true;
+    public bool dashDebug;
 
     [Header("Inputs")]
     public GameObject m_camera;
@@ -261,6 +262,7 @@ public class Character3D : MonoBehaviour
 
     public void InitDash(float dashSpeed, float dashDuration)
     {
+        AnimationManager.m_instance.dashTrigger = true;
         clockDash = dashDuration;
         m_DashSpeed = dashSpeed;
         FreezePosPlayer(dashDuration,true,true);
@@ -269,7 +271,7 @@ public class Character3D : MonoBehaviour
 
     public void DashUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button1) && canDash)
+        if ((Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKeyDown("left shift")) && canDash)
         {
             InitDash(DashSpeed, DashDuration);
         }
@@ -294,6 +296,12 @@ public class Character3D : MonoBehaviour
             Gizmos.DrawRay(transform.position + new Vector3(-OffSetX, 0, 0), transform.TransformDirection(Vector3.down * DetectionDistanceGround));
             Gizmos.DrawRay(transform.position + new Vector3(0, 0, OffSetY), transform.TransformDirection(Vector3.down * DetectionDistanceGround));
             Gizmos.DrawRay(transform.position + new Vector3(0, 0, -OffSetY), transform.TransformDirection(Vector3.down * DetectionDistanceGround));
-        }        
+        }
+
+        if (dashDebug)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawCube(transform.position + new Vector3(2f, 0, 0), new Vector3(4,2,1));
+        }
     }
 }

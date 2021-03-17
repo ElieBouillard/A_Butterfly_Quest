@@ -56,6 +56,7 @@ public class EnemyAI : MonoBehaviour
     private bool Started = false;
     public bool DisableAI = false;
     private float attackRange;
+    public bool horsState;
 
 
 
@@ -64,6 +65,7 @@ public class EnemyAI : MonoBehaviour
         Agent = GetComponent<NavMeshAgent>();
         m_MeshRenderer = GetComponent<MeshRenderer>();
         rb = GetComponent<Rigidbody>();
+        horsState = false;
     }
 
     private void Start()
@@ -81,16 +83,16 @@ public class EnemyAI : MonoBehaviour
 
         PlayerInAttackRange = Physics.CheckSphere(transform.position, attackRange, PlayerMask);
 
-        if (!PlayerInDetectionRange && !PlayerInAttackRange)
+        if (!PlayerInDetectionRange && !PlayerInAttackRange && !horsState)
         {
             WaitingState();
         }
-        if (PlayerInDetectionRange && !PlayerInAttackRange)
+        if (PlayerInDetectionRange && !PlayerInAttackRange && !horsState)
         { 
             ChaseState();        
         }
 
-        if (PlayerInDetectionRange && PlayerInAttackRange)
+        if (PlayerInDetectionRange && PlayerInAttackRange && !horsState)
         {
             AttackState();
         }
@@ -102,6 +104,11 @@ public class EnemyAI : MonoBehaviour
         else
         {
             attackRange = AttackRange;
+        }
+
+        if (horsState)
+        {
+            Agent.ResetPath();
         }
     }
 
@@ -247,7 +254,6 @@ public class EnemyAI : MonoBehaviour
         ChannelingClock = ChannelingTimeValue;
         InitCanalisationAttack = false;
     }
-
 
     //Debug
     private void OnDrawGizmosSelected()

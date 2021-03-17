@@ -60,6 +60,7 @@ public class DebugConsole : MonoBehaviour
     {
         //Canvas
         GameObject consoleCanvas = new GameObject();
+        consoleCanvas.transform.SetParent(this.transform);
         consoleCanvas.name = "DEBUG_Canvas";
         RectTransform rt_consolecanvas = consoleCanvas.AddComponent<RectTransform>();
         Canvas cv_consolecanvas = consoleCanvas.AddComponent<Canvas>();
@@ -449,8 +450,11 @@ public class DebugConsole : MonoBehaviour
         Debug.Log(toggle);
     }
 
-    public static void blob()
+    public static void ShowTip(int tipIndex, int duration)
     {
-
+        if(TipsManager.instance != null)
+        {
+            TipsManager.instance.ShowTip(tipIndex, TipsManager.TipType.BottomTip, duration);
+        }
     }
 }

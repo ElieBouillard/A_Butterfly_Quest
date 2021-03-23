@@ -39,6 +39,7 @@ public class EnemyAIv2 : MonoBehaviour
     [Header("AttackingValue")]
     public float TimeAfterAttacking;
     public Vector3? AttackingPos;
+    public bool inAttack;
 
     [Header("TurnBackValue")]
     public float TimeAfterTurnBack;
@@ -97,11 +98,11 @@ public class EnemyAIv2 : MonoBehaviour
 
         if (useRange)
         {
-            if (!playerInAttackRange && !playerInChasingRange)
+            if (!playerInAttackRange && !playerInChasingRange && !inAttack)
             {
                 m_State = States.Patroling;
             }
-            if (!playerInAttackRange && playerInChasingRange)
+            if (!playerInAttackRange && playerInChasingRange && !inAttack)
             {
                 m_State = States.Chasing;
             }
@@ -237,9 +238,8 @@ public class EnemyAIv2 : MonoBehaviour
                 AttackingPosTemp = transform.position + distAttackTemp  * 2 * dirAttack;
                 minDistStop = 0.5f;
             }
-
+            inAttack = true;
             AttackingPos = AttackingPosTemp;
-            useRange = false;
         }
         else
         {
@@ -251,10 +251,10 @@ public class EnemyAIv2 : MonoBehaviour
 
             if (distToAttackPos < minDistStop)
             {
+                inAttack = false;
                 Debug.Log("Distance atteinte");
                 TurnOff(TimeAfterAttacking, States.TurnBack);
                 AttackingPos = null;
-                useRange = true;
             }
             
         }

@@ -53,7 +53,6 @@ public class Shoot : MonoBehaviour
             ResetAimCamPos();
             Aiming = false;
             CamAnimator.SetBool("AimCamera", false);
-
             AnimationManager.m_instance.playerFocused = false; //Anim
         }
 

@@ -355,13 +355,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 411088745}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.3017051, y: 3.3512468, z: -2.6084733}
+  m_LocalRotation: {x: -0.48881584, y: -0.6151248, z: -0.014538145, w: 0.6184409}
+  m_LocalPosition: {x: -8.64, y: -1.84, z: -16.83}
   m_LocalScale: {x: 3.0715, y: 3.0715, z: 3.0715}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -38.498, y: -107.44601, z: 48.195004}
 --- !u!1 &623764217
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,7 +584,7 @@ GameObject:
   - component: {fileID: 982547578}
   m_Layer: 11
   m_Name: Enemy (1)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -782,7 +782,7 @@ GameObject:
   - component: {fileID: 1014475695}
   m_Layer: 11
   m_Name: Enemy (2)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1322,7 +1322,7 @@ GameObject:
   - component: {fileID: 1347630150}
   m_Layer: 11
   m_Name: Enemy (3)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1354,7 +1354,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 5
-  m_Acceleration: 100
+  m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 500
   m_StoppingDistance: 0
@@ -1404,42 +1404,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 1347630149}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0236711059779ce4c8d061a970d22815, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d4ee1791c6d2ad41842a6342aada9ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_State: 0
   Target: {fileID: 0}
-  GroundMask:
-    serializedVersion: 2
-    m_Bits: 256
   PlayerMask:
     serializedVersion: 2
     m_Bits: 1024
-  EnemyMask:
-    serializedVersion: 2
-    m_Bits: 2048
-  obstacleMask: 0
-  Speed: 5
-  DetectionRange: 15
-  AttackRange: 5.5
-  CancelAttackRange: 1.5
-  RandomPosRange: 10.5
+  PatrolingRange: 10.5
+  ChasingRange: 14
+  AttackingRange: 5.5
+  AttackingCancelRange: 2.5
+  PatrolingSpeed: 5
+  ChasingSpeed: 6
+  AttackingSpeed: 50
+  TurnBackSpeed: 2
+  Acceleration: 10
   WaitingTime: 2
-  ChargeAttacksSpeed: 5000
-  ChannelingTimeValue: 2
-  ChannelingClock: 2
-  InChargeAttack: 0
-  PlayerInAttackRange: 0
-  inChargeAttackRange: 0
-  dirChagre: {x: 0, y: 0, z: 0}
-  distChagre: 0
-  PlayerInDetectionRange: 0
-  StatesMat:
-  - {fileID: 2100000, guid: 43a9c6e396bd6e04c8d161f066391328, type: 2}
-  - {fileID: 2100000, guid: 5382724637345f744b8b90e4aa20504f, type: 2}
-  - {fileID: 2100000, guid: aa8426cabc882bc4f8f9327826584187, type: 2}
-  InitialPos: {x: 0, y: 0, z: 0}
-  DisableAI: 0
-  horsState: 0
+  TimeAfterAttacking: 0.2
+  TimeAfterTurnBack: 2
+  minDistStop: 0
+  useRange: 0
+  clockOff: 0
 --- !u!23 &1347630155
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1818,7 +1805,7 @@ GameObject:
   - component: {fileID: 1928082576}
   m_Layer: 11
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

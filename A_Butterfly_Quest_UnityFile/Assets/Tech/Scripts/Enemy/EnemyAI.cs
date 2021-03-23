@@ -109,7 +109,22 @@ public class EnemyAI : MonoBehaviour
         if (horsState)
         {
             Agent.ResetPath();
+            PlayerInAttackRange = false;
+            PlayerInDetectionRange = false;
         }
+    }
+    public void InitTurnBack()
+    {
+        Agent.isStopped = true;
+        horsState = true;
+        //Vector3 Dir = -(Target.transform.position - transform.position);
+        //Agent.SetDestination(transform.position + 1f * Dir);
+
+    }
+
+    public void TurnBack()
+    {
+        
     }
 
     private void WaitingState()
@@ -195,6 +210,7 @@ public class EnemyAI : MonoBehaviour
         if (InitCanalisationAttack)
         {
             InitChargeAttack();
+            InitCanalisationAttack = false;
         }
 
         if(ChannelingClock <= 0)
@@ -236,12 +252,15 @@ public class EnemyAI : MonoBehaviour
 
             float distanceToPosAfterAttack = Vector3.Distance(posAfterAttack.Value, transform.position);
 
-            if(distanceToPosAfterAttack < 2f)
+            if(distanceToPosAfterAttack < 0f)
             {
+                Debug.Log("ChargeAttackEnd");
                 InChargeAttack = false;
                 Agent.speed = Speed;
                 posAfterAttack = null;
-                InitCanalisationAttack = true;
+                Agent.isStopped = true;
+                InitTurnBack();
+                //InitCanalisationAttack = true;
             }
         }
 
@@ -252,7 +271,7 @@ public class EnemyAI : MonoBehaviour
     private void InitChargeAttack()
     {
         ChannelingClock = ChannelingTimeValue;
-        InitCanalisationAttack = false;
+        
     }
 
     //Debug

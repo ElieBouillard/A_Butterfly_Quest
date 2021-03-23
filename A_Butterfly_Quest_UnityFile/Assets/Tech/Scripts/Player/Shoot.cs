@@ -53,12 +53,11 @@ public class Shoot : MonoBehaviour
             ResetAimCamPos();
             Aiming = false;
             CamAnimator.SetBool("AimCamera", false);
-
             AnimationManager.m_instance.playerFocused = false; //Anim
         }
 
         //Shoot Papillons normaux
-        if(Aiming)
+        if (Aiming)
             ShootInputSystem();
 
         //Reload

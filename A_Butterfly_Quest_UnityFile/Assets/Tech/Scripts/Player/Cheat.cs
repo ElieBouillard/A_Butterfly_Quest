@@ -6,9 +6,14 @@ public class Cheat : MonoBehaviour
 {
     public GameObject Player;
 
+    private void Start()
+    {
+        Player = Character3D.m_instance.gameObject;
+    }
+
     private void Update()
     {
-        if (Input.GetKeyDown("e"))
+        if (Input.GetKeyDown("p"))
         {
             Player.transform.position = transform.position;
         }

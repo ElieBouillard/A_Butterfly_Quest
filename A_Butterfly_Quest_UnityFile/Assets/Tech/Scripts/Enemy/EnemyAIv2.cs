@@ -198,7 +198,6 @@ public class EnemyAIv2 : MonoBehaviour
         WaitingPatrolingClock = WaitingTime;
     }
 
-
     bool canStop;
     private void Chasing()
     {
@@ -252,11 +251,9 @@ public class EnemyAIv2 : MonoBehaviour
             if (distToAttackPos < minDistStop)
             {
                 inAttack = false;
-                Debug.Log("Distance atteinte");
                 TurnOff(TimeAfterAttacking, States.TurnBack);
                 AttackingPos = null;
-            }
-            
+            }            
         }
         canStop = true;
     }

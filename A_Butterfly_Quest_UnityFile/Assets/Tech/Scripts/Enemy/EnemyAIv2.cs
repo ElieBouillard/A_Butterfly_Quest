@@ -198,7 +198,6 @@ public class EnemyAIv2 : MonoBehaviour
         WaitingPatrolingClock = WaitingTime;
     }
 
-    bool canStop;
     private void Chasing()
     {
         Agent.speed = ChasingSpeed;
@@ -220,7 +219,8 @@ public class EnemyAIv2 : MonoBehaviour
         float distAttack;
         if(AttackingPos == null)
         {
-            dirAttack = Target.transform.position - transform.position;
+            Vector3 Targetpos = new Vector3(Target.transform.position.x, transform.position.y, Target.transform.position.z);
+            dirAttack = Targetpos - transform.position;
             distAttack = dirAttack.magnitude;
             dirAttack.Normalize();
 
@@ -255,7 +255,6 @@ public class EnemyAIv2 : MonoBehaviour
                 AttackingPos = null;
             }            
         }
-        canStop = true;
     }
 
     bool reachPos1;

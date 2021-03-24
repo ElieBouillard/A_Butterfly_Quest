@@ -10,7 +10,8 @@ Shader "Butterfly_main"
 		_FlapForce("FlapForce", Float) = 1
 		_TimeSpeed("TimeSpeed", Float) = 0
 		_MainColor("Main Color", Color) = (1,0.4764151,0.4764151,1)
-		[ASEEnd]_SecondaryColor("Secondary Color", Color) = (1,0.4764151,0.4764151,1)
+		[HDR]_SecondaryColor("Secondary Color", Color) = (1,0.4764151,0.4764151,1)
+		[ASEEnd]_Float0("Float 0", Float) = 0
 		[HideInInspector] _texcoord( "", 2D ) = "white" {}
 
 		[HideInInspector]_RenderQueueType("Render Queue Type", Float) = 5
@@ -257,6 +258,7 @@ Shader "Butterfly_main"
 			float4 _MainTex_ST;
 			float _TimeSpeed;
 			float _FlapForce;
+			float _Float0;
 			float4 _EmissionColor;
 			float _RenderQueueType;
 			#ifdef _ADD_PRECOMPUTED_VELOCITY
@@ -370,9 +372,13 @@ Shader "Butterfly_main"
 				UNITY_TRANSFER_INSTANCE_ID(inputMesh, o);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO( o );
 
-				float mulTime19 = _TimeParameters.x * _TimeSpeed;
+				float4 localWorldVar29 = float4( 0,0,0,1 );
+				(localWorldVar29).xyz = GetCameraRelativePositionWS((localWorldVar29).xyz);
+				float4 transform29 = mul(GetWorldToObjectMatrix(),localWorldVar29);
+				float4 temp_output_30_0 = sin( transform29 );
+				float mulTime19 = _TimeParameters.x * ( _TimeSpeed + temp_output_30_0 ).x;
 				float smoothstepResult15 = smoothstep( 0.2 , 1.0 , inputMesh.ase_color.r);
-				float3 temp_output_24_0 = ( ( _TimeParameters.y * float3(0,1,0) ) + ( ( sin( mulTime19 ) * float3(0,1,0) * _FlapForce ) * smoothstepResult15 ) );
+				float4 temp_output_24_0 = ( float4( ( _TimeParameters.y * float3(0.07,0.05,0.1) ) , 0.0 ) + ( ( sin( ( temp_output_30_0 + mulTime19 ) ) * float4( float3(0,1,0) , 0.0 ) * _FlapForce ) * smoothstepResult15 ) );
 				
 				o.ase_texcoord1.xy = inputMesh.ase_texcoord.xy;
 				
@@ -383,14 +389,14 @@ Shader "Butterfly_main"
 				#else
 				float3 defaultVertexValue = float3( 0, 0, 0 );
 				#endif
-				float3 vertexValue = temp_output_24_0;
+				float3 vertexValue = temp_output_24_0.xyz;
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 				inputMesh.positionOS.xyz = vertexValue;
 				#else
 				inputMesh.positionOS.xyz += vertexValue;
 				#endif
 
-				inputMesh.normalOS = temp_output_24_0;
+				inputMesh.normalOS = temp_output_24_0.xyz;
 
 				float3 positionRWS = TransformObjectToWorld(inputMesh.positionOS);
 				o.positionCS = TransformWorldToHClip(positionRWS);
@@ -507,8 +513,10 @@ Shader "Butterfly_main"
 				float4 tex2DNode7 = tex2D( _MainTex, uv_MainTex );
 				float4 lerpResult22 = lerp( _MainColor , _SecondaryColor , tex2DNode7.r);
 				
+				float3 temp_cast_1 = (_Float0).xxx;
+				
 				surfaceDescription.Color = lerpResult22.rgb;
-				surfaceDescription.Emission = 0;
+				surfaceDescription.Emission = temp_cast_1;
 				surfaceDescription.Alpha = tex2DNode7.a;
 				surfaceDescription.AlphaClipThreshold = _AlphaCutoff;
 				surfaceDescription.ShadowTint = float4( 0, 0 ,0 ,1 );
@@ -623,6 +631,7 @@ Shader "Butterfly_main"
 			float4 _MainTex_ST;
 			float _TimeSpeed;
 			float _FlapForce;
+			float _Float0;
 			float4 _EmissionColor;
 			float _RenderQueueType;
 			#ifdef _ADD_PRECOMPUTED_VELOCITY
@@ -708,9 +717,13 @@ Shader "Butterfly_main"
 				UNITY_TRANSFER_INSTANCE_ID(inputMesh, o);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO( o );
 
-				float mulTime19 = _TimeParameters.x * _TimeSpeed;
+				float4 localWorldVar29 = float4( 0,0,0,1 );
+				(localWorldVar29).xyz = GetCameraRelativePositionWS((localWorldVar29).xyz);
+				float4 transform29 = mul(GetWorldToObjectMatrix(),localWorldVar29);
+				float4 temp_output_30_0 = sin( transform29 );
+				float mulTime19 = _TimeParameters.x * ( _TimeSpeed + temp_output_30_0 ).x;
 				float smoothstepResult15 = smoothstep( 0.2 , 1.0 , inputMesh.ase_color.r);
-				float3 temp_output_24_0 = ( ( _TimeParameters.y * float3(0,1,0) ) + ( ( sin( mulTime19 ) * float3(0,1,0) * _FlapForce ) * smoothstepResult15 ) );
+				float4 temp_output_24_0 = ( float4( ( _TimeParameters.y * float3(0.07,0.05,0.1) ) , 0.0 ) + ( ( sin( ( temp_output_30_0 + mulTime19 ) ) * float4( float3(0,1,0) , 0.0 ) * _FlapForce ) * smoothstepResult15 ) );
 				
 				o.ase_texcoord.xy = inputMesh.ase_texcoord.xy;
 				
@@ -721,14 +734,14 @@ Shader "Butterfly_main"
 				#else
 				float3 defaultVertexValue = float3( 0, 0, 0 );
 				#endif
-				float3 vertexValue = temp_output_24_0;
+				float3 vertexValue = temp_output_24_0.xyz;
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 				inputMesh.positionOS.xyz = vertexValue;
 				#else
 				inputMesh.positionOS.xyz += vertexValue;
 				#endif
 
-				inputMesh.normalOS = temp_output_24_0;
+				inputMesh.normalOS = temp_output_24_0.xyz;
 
 				float3 positionRWS = TransformObjectToWorld(inputMesh.positionOS);
 				o.positionCS = TransformWorldToHClip(positionRWS);
@@ -945,6 +958,7 @@ Shader "Butterfly_main"
 			float4 _MainTex_ST;
 			float _TimeSpeed;
 			float _FlapForce;
+			float _Float0;
 			float4 _EmissionColor;
 			float _RenderQueueType;
 			#ifdef _ADD_PRECOMPUTED_VELOCITY
@@ -1041,9 +1055,13 @@ Shader "Butterfly_main"
 				UNITY_SETUP_INSTANCE_ID( inputMesh );
 				UNITY_TRANSFER_INSTANCE_ID( inputMesh, o );
 
-				float mulTime19 = _TimeParameters.x * _TimeSpeed;
+				float4 localWorldVar29 = float4( 0,0,0,1 );
+				(localWorldVar29).xyz = GetCameraRelativePositionWS((localWorldVar29).xyz);
+				float4 transform29 = mul(GetWorldToObjectMatrix(),localWorldVar29);
+				float4 temp_output_30_0 = sin( transform29 );
+				float mulTime19 = _TimeParameters.x * ( _TimeSpeed + temp_output_30_0 ).x;
 				float smoothstepResult15 = smoothstep( 0.2 , 1.0 , inputMesh.ase_color.r);
-				float3 temp_output_24_0 = ( ( _TimeParameters.y * float3(0,1,0) ) + ( ( sin( mulTime19 ) * float3(0,1,0) * _FlapForce ) * smoothstepResult15 ) );
+				float4 temp_output_24_0 = ( float4( ( _TimeParameters.y * float3(0.07,0.05,0.1) ) , 0.0 ) + ( ( sin( ( temp_output_30_0 + mulTime19 ) ) * float4( float3(0,1,0) , 0.0 ) * _FlapForce ) * smoothstepResult15 ) );
 				
 				o.ase_texcoord.xy = inputMesh.ase_texcoord.xy;
 				
@@ -1054,14 +1072,14 @@ Shader "Butterfly_main"
 				#else
 				float3 defaultVertexValue = float3( 0, 0, 0 );
 				#endif
-				float3 vertexValue = temp_output_24_0;
+				float3 vertexValue = temp_output_24_0.xyz;
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 				inputMesh.positionOS.xyz = vertexValue;
 				#else
 				inputMesh.positionOS.xyz += vertexValue;
 				#endif
 
-				inputMesh.normalOS = temp_output_24_0;
+				inputMesh.normalOS = temp_output_24_0.xyz;
 
 				float2 uv = float2( 0.0, 0.0 );
 				if( unity_MetaVertexControl.x )
@@ -1188,8 +1206,10 @@ Shader "Butterfly_main"
 				float4 tex2DNode7 = tex2D( _MainTex, uv_MainTex );
 				float4 lerpResult22 = lerp( _MainColor , _SecondaryColor , tex2DNode7.r);
 				
+				float3 temp_cast_1 = (_Float0).xxx;
+				
 				surfaceDescription.Color = lerpResult22.rgb;
-				surfaceDescription.Emission = 0;
+				surfaceDescription.Emission = temp_cast_1;
 				surfaceDescription.Alpha = tex2DNode7.a;
 				surfaceDescription.AlphaClipThreshold =  _AlphaCutoff;
 
@@ -1285,6 +1305,7 @@ Shader "Butterfly_main"
 			float4 _MainTex_ST;
 			float _TimeSpeed;
 			float _FlapForce;
+			float _Float0;
 			float4 _EmissionColor;
 			float _RenderQueueType;
 			#ifdef _ADD_PRECOMPUTED_VELOCITY
@@ -1370,9 +1391,13 @@ Shader "Butterfly_main"
 				UNITY_TRANSFER_INSTANCE_ID(inputMesh, o);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO( o );
 
-				float mulTime19 = _TimeParameters.x * _TimeSpeed;
+				float4 localWorldVar29 = float4( 0,0,0,1 );
+				(localWorldVar29).xyz = GetCameraRelativePositionWS((localWorldVar29).xyz);
+				float4 transform29 = mul(GetWorldToObjectMatrix(),localWorldVar29);
+				float4 temp_output_30_0 = sin( transform29 );
+				float mulTime19 = _TimeParameters.x * ( _TimeSpeed + temp_output_30_0 ).x;
 				float smoothstepResult15 = smoothstep( 0.2 , 1.0 , inputMesh.ase_color.r);
-				float3 temp_output_24_0 = ( ( _TimeParameters.y * float3(0,1,0) ) + ( ( sin( mulTime19 ) * float3(0,1,0) * _FlapForce ) * smoothstepResult15 ) );
+				float4 temp_output_24_0 = ( float4( ( _TimeParameters.y * float3(0.07,0.05,0.1) ) , 0.0 ) + ( ( sin( ( temp_output_30_0 + mulTime19 ) ) * float4( float3(0,1,0) , 0.0 ) * _FlapForce ) * smoothstepResult15 ) );
 				
 				o.ase_texcoord.xy = inputMesh.ase_texcoord.xy;
 				
@@ -1383,14 +1408,14 @@ Shader "Butterfly_main"
 				#else
 				float3 defaultVertexValue = float3( 0, 0, 0 );
 				#endif
-				float3 vertexValue =  temp_output_24_0;
+				float3 vertexValue =  temp_output_24_0.xyz;
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 				inputMesh.positionOS.xyz = vertexValue;
 				#else
 				inputMesh.positionOS.xyz += vertexValue;
 				#endif
 
-				inputMesh.normalOS = temp_output_24_0;
+				inputMesh.normalOS = temp_output_24_0.xyz;
 
 				float3 positionRWS = TransformObjectToWorld(inputMesh.positionOS);
 				o.positionCS = TransformWorldToHClip(positionRWS);
@@ -1599,6 +1624,7 @@ Shader "Butterfly_main"
 			float4 _MainTex_ST;
 			float _TimeSpeed;
 			float _FlapForce;
+			float _Float0;
 			float4 _EmissionColor;
 			float _RenderQueueType;
 			#ifdef _ADD_PRECOMPUTED_VELOCITY
@@ -1684,9 +1710,13 @@ Shader "Butterfly_main"
 				UNITY_TRANSFER_INSTANCE_ID(inputMesh, o);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO( o );
 
-				float mulTime19 = _TimeParameters.x * _TimeSpeed;
+				float4 localWorldVar29 = float4( 0,0,0,1 );
+				(localWorldVar29).xyz = GetCameraRelativePositionWS((localWorldVar29).xyz);
+				float4 transform29 = mul(GetWorldToObjectMatrix(),localWorldVar29);
+				float4 temp_output_30_0 = sin( transform29 );
+				float mulTime19 = _TimeParameters.x * ( _TimeSpeed + temp_output_30_0 ).x;
 				float smoothstepResult15 = smoothstep( 0.2 , 1.0 , inputMesh.ase_color.r);
-				float3 temp_output_24_0 = ( ( _TimeParameters.y * float3(0,1,0) ) + ( ( sin( mulTime19 ) * float3(0,1,0) * _FlapForce ) * smoothstepResult15 ) );
+				float4 temp_output_24_0 = ( float4( ( _TimeParameters.y * float3(0.07,0.05,0.1) ) , 0.0 ) + ( ( sin( ( temp_output_30_0 + mulTime19 ) ) * float4( float3(0,1,0) , 0.0 ) * _FlapForce ) * smoothstepResult15 ) );
 				
 				o.ase_texcoord.xy = inputMesh.ase_texcoord.xy;
 				
@@ -1697,14 +1727,14 @@ Shader "Butterfly_main"
 				#else
 				float3 defaultVertexValue = float3( 0, 0, 0 );
 				#endif
-				float3 vertexValue =  temp_output_24_0;
+				float3 vertexValue =  temp_output_24_0.xyz;
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 				inputMesh.positionOS.xyz = vertexValue;
 				#else
 				inputMesh.positionOS.xyz += vertexValue;
 				#endif
 
-				inputMesh.normalOS = temp_output_24_0;
+				inputMesh.normalOS = temp_output_24_0.xyz;
 
 				float3 positionRWS = TransformObjectToWorld(inputMesh.positionOS);
 				o.positionCS = TransformWorldToHClip(positionRWS);
@@ -1941,6 +1971,7 @@ Shader "Butterfly_main"
 			float4 _MainTex_ST;
 			float _TimeSpeed;
 			float _FlapForce;
+			float _Float0;
 			float4 _EmissionColor;
 			float _RenderQueueType;
 			#ifdef _ADD_PRECOMPUTED_VELOCITY
@@ -2022,9 +2053,13 @@ Shader "Butterfly_main"
 			VertexInput ApplyMeshModification(VertexInput inputMesh, float3 timeParameters, inout VertexOutput o )
 			{
 				_TimeParameters.xyz = timeParameters;
-				float mulTime19 = _TimeParameters.x * _TimeSpeed;
+				float4 localWorldVar29 = float4( 0,0,0,1 );
+				(localWorldVar29).xyz = GetCameraRelativePositionWS((localWorldVar29).xyz);
+				float4 transform29 = mul(GetWorldToObjectMatrix(),localWorldVar29);
+				float4 temp_output_30_0 = sin( transform29 );
+				float mulTime19 = _TimeParameters.x * ( _TimeSpeed + temp_output_30_0 ).x;
 				float smoothstepResult15 = smoothstep( 0.2 , 1.0 , inputMesh.ase_color.r);
-				float3 temp_output_24_0 = ( ( _TimeParameters.y * float3(0,1,0) ) + ( ( sin( mulTime19 ) * float3(0,1,0) * _FlapForce ) * smoothstepResult15 ) );
+				float4 temp_output_24_0 = ( float4( ( _TimeParameters.y * float3(0.07,0.05,0.1) ) , 0.0 ) + ( ( sin( ( temp_output_30_0 + mulTime19 ) ) * float4( float3(0,1,0) , 0.0 ) * _FlapForce ) * smoothstepResult15 ) );
 				
 				o.ase_texcoord3.xy = inputMesh.ase_texcoord.xy;
 				
@@ -2036,14 +2071,14 @@ Shader "Butterfly_main"
 				#else
 				float3 defaultVertexValue = float3( 0, 0, 0 );
 				#endif
-				float3 vertexValue = temp_output_24_0;
+				float3 vertexValue = temp_output_24_0.xyz;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 				inputMesh.positionOS.xyz = vertexValue;
 				#else
 				inputMesh.positionOS.xyz += vertexValue;
 				#endif
-				inputMesh.normalOS = temp_output_24_0;
+				inputMesh.normalOS = temp_output_24_0.xyz;
 				return inputMesh;
 			}
 
@@ -2302,52 +2337,63 @@ Shader "Butterfly_main"
 }
 /*ASEBEGIN
 Version=18800
--1232;89;1127;908;641.3331;221.0477;1;True;False
-Node;AmplifyShaderEditor.RangedFloatNode;17;-692.4237,553.1951;Inherit;False;Property;_TimeSpeed;TimeSpeed;2;0;Create;True;0;0;0;False;0;False;0;5;0;0;0;1;FLOAT;0
+-1232;89;1127;908;1044.244;919.3625;1.722097;True;False
+Node;AmplifyShaderEditor.WorldToObjectTransfNode;29;-829.6033,162.347;Inherit;False;1;0;FLOAT4;0,0,0,1;False;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SinOpNode;30;-604.0092,222.6206;Inherit;False;1;0;FLOAT4;0,0,0,0;False;1;FLOAT4;0
+Node;AmplifyShaderEditor.RangedFloatNode;17;-778.5291,498.0877;Inherit;False;Property;_TimeSpeed;TimeSpeed;2;0;Create;True;0;0;0;False;0;False;0;5;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleAddOpNode;32;-550.6243,546.3748;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT4;0,0,0,0;False;1;FLOAT4;0
 Node;AmplifyShaderEditor.SimpleTimeNode;19;-572.5735,410.148;Inherit;False;1;0;FLOAT;1;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleAddOpNode;31;-381.8583,375.8872;Inherit;False;2;2;0;FLOAT4;0,0,0,0;False;1;FLOAT;0;False;1;FLOAT4;0
+Node;AmplifyShaderEditor.SinOpNode;18;-329.0066,469.4288;Inherit;False;1;0;FLOAT4;0,0,0,0;False;1;FLOAT4;0
 Node;AmplifyShaderEditor.VertexColorNode;9;-263.3754,734.6133;Inherit;False;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.RangedFloatNode;13;-525.4275,807.416;Inherit;False;Property;_FlapForce;FlapForce;1;0;Create;True;0;0;0;False;0;False;1;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.Vector3Node;11;-648.4368,674.4337;Inherit;False;Constant;_Direction;Direction;1;0;Create;True;0;0;0;False;0;False;0,1,0;0,0,0;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
-Node;AmplifyShaderEditor.SinOpNode;18;-329.0066,469.4288;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.SinTimeNode;25;-243.5449,169.2657;Inherit;False;0;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SmoothstepOpNode;15;-21.99718,855.7291;Inherit;True;3;0;FLOAT;0;False;1;FLOAT;0.2;False;2;FLOAT;1;False;1;FLOAT;0
-Node;AmplifyShaderEditor.SimpleMultiplyOpNode;12;-222.8929,568.0474;Inherit;False;3;3;0;FLOAT;0;False;1;FLOAT3;0,0,0;False;2;FLOAT;0;False;1;FLOAT3;0
-Node;AmplifyShaderEditor.Vector3Node;27;-240.3331,331.9523;Inherit;False;Constant;_Vector0;Vector 0;5;0;Create;True;0;0;0;False;0;False;0,1,0;0,0,0;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;12;-222.8929,568.0474;Inherit;False;3;3;0;FLOAT4;0,0,0,0;False;1;FLOAT3;0,0,0;False;2;FLOAT;0;False;1;FLOAT4;0
+Node;AmplifyShaderEditor.SinTimeNode;25;-243.5449,169.2657;Inherit;False;0;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.Vector3Node;27;-240.3331,331.9523;Inherit;False;Constant;_Vector0;Vector 0;5;0;Create;True;0;0;0;False;0;False;0.07,0.05,0.1;0,0,0;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;14;-43.36676,496.5695;Inherit;False;2;2;0;FLOAT4;0,0,0,0;False;1;FLOAT;0;False;1;FLOAT4;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;26;-52.33313,282.9523;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT3;0,0,0;False;1;FLOAT3;0
-Node;AmplifyShaderEditor.SimpleMultiplyOpNode;14;-43.36676,496.5695;Inherit;False;2;2;0;FLOAT3;0,0,0;False;1;FLOAT;0;False;1;FLOAT3;0
-Node;AmplifyShaderEditor.LerpOp;22;-97.87291,-378.4307;Inherit;False;3;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;2;FLOAT;0;False;1;COLOR;0
-Node;AmplifyShaderEditor.ColorNode;21;-438.0933,-557.562;Inherit;False;Property;_MainColor;Main Color;3;0;Create;True;0;0;0;False;0;False;1,0.4764151,0.4764151,1;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.SamplerNode;7;-499.087,-190.2057;Inherit;True;Property;_MainTex;MainTex;0;0;Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.SimpleAddOpNode;24;135.3352,322.4266;Inherit;False;2;2;0;FLOAT3;0,0,0;False;1;FLOAT3;0,0,0;False;1;FLOAT3;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;20;-142.9779,-254.7141;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
-Node;AmplifyShaderEditor.ColorNode;23;-460.0015,-390.0291;Inherit;False;Property;_SecondaryColor;Secondary Color;4;0;Create;True;0;0;0;False;0;False;1,0.4764151,0.4764151,1;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;3;0,0;Float;False;False;-1;2;UnityEditor.Rendering.HighDefinition.HDLitGUI;0;1;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;SceneSelectionPass;0;3;SceneSelectionPass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;0;False;False;False;False;False;False;False;False;False;True;0;True;-26;True;False;False;False;False;0;False;-1;False;False;False;False;True;1;False;-1;False;False;True;1;LightMode=SceneSelectionPass;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;1;0,0;Float;False;False;-1;2;UnityEditor.Rendering.HighDefinition.HDLitGUI;0;1;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;ShadowCaster;0;1;ShadowCaster;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;0;False;False;False;False;False;False;False;False;False;True;0;True;-26;True;False;False;False;False;0;False;-1;False;False;False;False;True;1;False;-1;False;False;True;1;LightMode=ShadowCaster;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;116.3595,-73.14027;Float;False;True;-1;2;UnityEditor.Rendering.HighDefinition.HDLitGUI;0;13;Butterfly_main;7f5cb9c3ea6481f469fdd856555439ef;True;Forward Unlit;0;0;Forward Unlit;9;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Transparent=Queue=0;True;5;0;True;1;0;True;-20;0;True;-21;1;0;True;-22;0;True;-23;False;False;False;False;False;False;False;False;True;0;True;-26;False;False;False;False;True;True;0;True;-5;255;False;-1;255;True;-6;7;False;-1;3;False;-1;1;False;-1;1;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;True;0;True;-24;True;0;True;-32;False;True;1;LightMode=ForwardOnly;False;0;Hidden/InternalErrorShader;0;0;Standard;29;Surface Type;1;  Rendering Pass ;0;  Rendering Pass;1;  Blending Mode;0;  Receive Fog;1;  Distortion;0;    Distortion Mode;0;    Distortion Only;1;  Depth Write;1;  Cull Mode;0;  Depth Test;4;Double-Sided;0;Alpha Clipping;0;Motion Vectors;1;  Add Precomputed Velocity;0;Shadow Matte;0;Cast Shadows;1;DOTS Instancing;0;GPU Instancing;1;Tessellation;0;  Phong;0;  Strength;0.5,False,-1;  Type;0;  Tess;16,False,-1;  Min;10,False,-1;  Max;25,False,-1;  Edge Length;16,False,-1;  Max Displacement;25,False,-1;Vertex Position,InvertActionOnDeselection;1;0;7;True;True;True;True;True;True;False;False;;False;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;6;0,0;Float;False;False;-1;2;UnityEditor.Rendering.HighDefinition.HDLitGUI;0;1;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;DistortionVectors;0;6;DistortionVectors;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;0;True;4;1;False;-1;1;False;-1;4;1;False;-1;1;False;-1;True;1;False;-1;1;False;-1;False;False;False;False;False;False;False;True;0;True;-26;False;False;False;False;True;True;0;True;-11;255;False;-1;255;True;-12;7;False;-1;3;False;-1;1;False;-1;1;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;True;2;False;-1;True;3;False;-1;False;True;1;LightMode=DistortionVectors;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;5;0,0;Float;False;False;-1;2;UnityEditor.Rendering.HighDefinition.HDLitGUI;0;1;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;Motion Vectors;0;5;Motion Vectors;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;0;False;False;False;False;False;False;False;False;False;True;0;True;-26;False;False;False;False;True;True;0;True;-9;255;False;-1;255;True;-10;7;False;-1;3;False;-1;1;False;-1;1;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;True;1;False;-1;False;False;True;1;LightMode=MotionVectors;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;4;0,0;Float;False;False;-1;2;UnityEditor.Rendering.HighDefinition.HDLitGUI;0;1;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;DepthForwardOnly;0;4;DepthForwardOnly;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;0;False;False;False;False;False;False;False;False;False;True;0;True;-26;True;False;False;False;False;0;False;-1;False;False;False;True;True;0;True;-7;255;False;-1;255;True;-8;7;False;-1;3;False;-1;1;False;-1;1;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;True;1;False;-1;False;False;True;1;LightMode=DepthForwardOnly;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;2;0,0;Float;False;False;-1;2;UnityEditor.Rendering.HighDefinition.HDLitGUI;0;1;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;META;0;2;META;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;0;False;False;False;False;False;False;False;False;False;True;2;False;-1;False;False;False;False;False;False;False;False;True;1;LightMode=Meta;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
-WireConnection;19;0;17;0
-WireConnection;18;0;19;0
+Node;AmplifyShaderEditor.SamplerNode;7;-499.087,-190.2057;Inherit;True;Property;_MainTex;MainTex;0;0;Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.LerpOp;22;-97.87291,-378.4307;Inherit;False;3;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;2;FLOAT;0;False;1;COLOR;0
+Node;AmplifyShaderEditor.SimpleAddOpNode;24;135.3352,322.4266;Inherit;False;2;2;0;FLOAT3;0,0,0;False;1;FLOAT4;0,0,0,0;False;1;FLOAT4;0
+Node;AmplifyShaderEditor.RangedFloatNode;33;215.7529,-282.607;Inherit;False;Property;_Float0;Float 0;5;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.ColorNode;23;-456.5573,-390.0291;Inherit;False;Property;_SecondaryColor;Secondary Color;4;1;[HDR];Create;True;0;0;0;False;0;False;1,0.4764151,0.4764151,1;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.ColorNode;21;-436.3712,-557.562;Inherit;False;Property;_MainColor;Main Color;3;0;Create;True;0;0;0;False;0;False;1,0.4764151,0.4764151,1;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;5;0,0;Float;False;False;-1;2;UnityEditor.Rendering.HighDefinition.HDLitGUI;0;13;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;Motion Vectors;0;5;Motion Vectors;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;0;False;False;False;False;False;False;False;False;False;True;0;True;-26;False;False;False;False;True;True;0;True;-9;255;False;-1;255;True;-10;7;False;-1;3;False;-1;1;False;-1;1;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;True;1;False;-1;False;False;True;1;LightMode=MotionVectors;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;4;0,0;Float;False;False;-1;2;UnityEditor.Rendering.HighDefinition.HDLitGUI;0;13;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;DepthForwardOnly;0;4;DepthForwardOnly;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;0;False;False;False;False;False;False;False;False;False;True;0;True;-26;True;False;False;False;False;0;False;-1;False;False;False;True;True;0;True;-7;255;False;-1;255;True;-8;7;False;-1;3;False;-1;1;False;-1;1;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;True;1;False;-1;False;False;True;1;LightMode=DepthForwardOnly;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;3;0,0;Float;False;False;-1;2;UnityEditor.Rendering.HighDefinition.HDLitGUI;0;13;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;SceneSelectionPass;0;3;SceneSelectionPass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;0;False;False;False;False;False;False;False;False;False;True;0;True;-26;True;False;False;False;False;0;False;-1;False;False;False;False;True;1;False;-1;False;False;True;1;LightMode=SceneSelectionPass;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;1;0,0;Float;False;False;-1;2;UnityEditor.Rendering.HighDefinition.HDLitGUI;0;13;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;ShadowCaster;0;1;ShadowCaster;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;0;False;False;False;False;False;False;False;False;False;True;0;True;-26;True;False;False;False;False;0;False;-1;False;False;False;False;True;1;False;-1;False;False;True;1;LightMode=ShadowCaster;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;6;0,0;Float;False;False;-1;2;UnityEditor.Rendering.HighDefinition.HDLitGUI;0;13;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;DistortionVectors;0;6;DistortionVectors;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;0;True;4;1;False;-1;1;False;-1;4;1;False;-1;1;False;-1;True;1;False;-1;1;False;-1;False;False;False;False;False;False;False;True;0;True;-26;False;False;False;False;True;True;0;True;-11;255;False;-1;255;True;-12;7;False;-1;3;False;-1;1;False;-1;1;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;True;2;False;-1;True;3;False;-1;False;True;1;LightMode=DistortionVectors;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;2;0,0;Float;False;False;-1;2;UnityEditor.Rendering.HighDefinition.HDLitGUI;0;13;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;META;0;2;META;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;0;False;False;False;False;False;False;False;False;False;True;2;False;-1;False;False;False;False;False;False;False;False;True;1;LightMode=Meta;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;257.5715,-80.02866;Float;False;True;-1;2;UnityEditor.Rendering.HighDefinition.HDLitGUI;0;13;Butterfly_main;7f5cb9c3ea6481f469fdd856555439ef;True;Forward Unlit;0;0;Forward Unlit;9;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Transparent=Queue=0;True;5;0;True;1;0;True;-20;0;True;-21;1;0;True;-22;0;True;-23;False;False;False;False;False;False;False;False;True;0;True;-26;False;False;False;False;True;True;0;True;-5;255;False;-1;255;True;-6;7;False;-1;3;False;-1;1;False;-1;1;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;True;0;True;-24;True;0;True;-32;False;True;1;LightMode=ForwardOnly;False;0;Hidden/InternalErrorShader;0;0;Standard;29;Surface Type;1;  Rendering Pass ;0;  Rendering Pass;1;  Blending Mode;0;  Receive Fog;1;  Distortion;0;    Distortion Mode;0;    Distortion Only;1;  Depth Write;1;  Cull Mode;0;  Depth Test;4;Double-Sided;0;Alpha Clipping;0;Motion Vectors;1;  Add Precomputed Velocity;0;Shadow Matte;0;Cast Shadows;1;DOTS Instancing;0;GPU Instancing;1;Tessellation;0;  Phong;0;  Strength;0.5,False,-1;  Type;0;  Tess;16,False,-1;  Min;10,False,-1;  Max;25,False,-1;  Edge Length;16,False,-1;  Max Displacement;25,False,-1;Vertex Position,InvertActionOnDeselection;1;0;7;True;True;True;True;True;True;False;False;;False;0
+WireConnection;30;0;29;0
+WireConnection;32;0;17;0
+WireConnection;32;1;30;0
+WireConnection;19;0;32;0
+WireConnection;31;0;30;0
+WireConnection;31;1;19;0
+WireConnection;18;0;31;0
 WireConnection;15;0;9;1
 WireConnection;12;0;18;0
 WireConnection;12;1;11;0
 WireConnection;12;2;13;0
-WireConnection;26;0;25;4
-WireConnection;26;1;27;0
 WireConnection;14;0;12;0
 WireConnection;14;1;15;0
+WireConnection;26;0;25;4
+WireConnection;26;1;27;0
+WireConnection;20;0;21;0
+WireConnection;20;1;7;0
 WireConnection;22;0;21;0
 WireConnection;22;1;23;0
 WireConnection;22;2;7;1
 WireConnection;24;0;26;0
 WireConnection;24;1;14;0
-WireConnection;20;0;21;0
-WireConnection;20;1;7;0
 WireConnection;0;0;22;0
+WireConnection;0;1;33;0
 WireConnection;0;2;7;4
 WireConnection;0;6;24;0
 WireConnection;0;7;24;0
 ASEEND*/
-//CHKSM=09469CE64C6DA9AAA614EAE413AA3612C492312B
+//CHKSM=791D4BF390BFD7E0030085072D979D5628C8E0F0

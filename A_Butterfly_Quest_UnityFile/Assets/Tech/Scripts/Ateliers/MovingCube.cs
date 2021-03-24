@@ -39,7 +39,7 @@ public class MovingCube : MonoBehaviour
 
             if (playerScpt.canDash == false && indexValue == 2 && canMoove && !raycast)
             {
-                target = new Vector3(transform.position.x, transform.position.y, transform.position.z) + dir *3;
+                target = new Vector3(transform.position.x, transform.position.y, transform.position.z) + dir * 2.5f;
                 mooveClock = 2f;
             }           
         }

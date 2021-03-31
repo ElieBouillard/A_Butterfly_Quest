@@ -86,6 +86,11 @@ public class ButterflyBullet : MonoBehaviour
             HealthSystem TargetHealth = other.GetComponent<HealthSystem>();
             TargetHealth.TakeDamage(Damage);
         }
+
+        if (other.GetComponent<DestroyingCube>())
+        {
+            other.gameObject.SetActive(false);
+        }
     }
 
     public void DisableButteryfly()

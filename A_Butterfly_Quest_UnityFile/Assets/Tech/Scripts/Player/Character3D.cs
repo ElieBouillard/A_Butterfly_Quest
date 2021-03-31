@@ -50,7 +50,7 @@ public class Character3D : MonoBehaviour
     public float DashDuration = 1f;
     private float m_DashSpeed = 0f;
     float clockDash = 0f;
-    bool canDash = true;
+    public bool canDash = true;
     public bool dashDebug;
 
     [Header("Inputs")]

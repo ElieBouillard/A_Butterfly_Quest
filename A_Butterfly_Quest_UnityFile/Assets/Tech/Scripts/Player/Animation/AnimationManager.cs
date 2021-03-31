@@ -378,10 +378,4 @@ public class AnimationManager : MonoBehaviour
         }
     
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawCube(transform.position + new Vector3(2f, 1, 0), new Vector3(4, 2, 1));
-    }
 }

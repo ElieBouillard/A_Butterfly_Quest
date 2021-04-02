@@ -152,11 +152,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9289136}
   m_LocalRotation: {x: -0, y: 0.7141304, z: -0, w: 0.70001274}
-<<<<<<< HEAD
   m_LocalPosition: {x: 65.7, y: 1.93, z: 140.74}
-=======
-  m_LocalPosition: {x: 9.85, y: 17.24, z: 6.53}
->>>>>>> b9d0ddedf10dec8e30dfa3eebc8fad61c8e722e5
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1804809347}
@@ -255,7 +251,6 @@ MonoBehaviour:
   ClampVelocityY: 2
   DashSpeed: 15
   DashDuration: 0.5
-  canDash: 1
   dashDebug: 1
   m_camera: {fileID: 1215292935}
   horizontalInput: 0
@@ -2415,13 +2410,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195822808}
-<<<<<<< HEAD
   m_LocalRotation: {x: 0.023666773, y: -0.8665623, z: 0.010757476, w: 0.4983913}
   m_LocalPosition: {x: -163.20016, y: 2.1619797, z: -56.37021}
-=======
-  m_LocalRotation: {x: 0.0657897, y: -0.78489566, z: 0.084612615, w: 0.6102878}
-  m_LocalPosition: {x: -17.137451, y: 12.838947, z: 0.81838036}
->>>>>>> b9d0ddedf10dec8e30dfa3eebc8fad61c8e722e5
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1780449882}

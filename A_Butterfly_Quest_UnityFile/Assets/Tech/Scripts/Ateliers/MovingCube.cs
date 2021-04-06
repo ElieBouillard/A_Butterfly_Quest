@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class MovingCube : MonoBehaviour
 {
-
     Vector3 target;
     bool canMoove = true;
-    float mooveClock;
+    public float mooveClock;
     private Vector3 rayPos;
 
 
     [Header("Parametres Raycast")]
-    [Range(-1.5f,1.5f)]
+    [Range(-1.5f, 1.5f)]
     public float OffsetY;
-    public enum Direction{Front, Left, Back, Right};
+    public enum Direction { Front, Left, Back, Right };
     public Direction RayDir;
 
     private void Start()
@@ -26,21 +25,35 @@ public class MovingCube : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, target, 10f * Time.deltaTime);
 
-        if(mooveClock > 0)
+        if (mooveClock > 0)
         {
             mooveClock -= Time.deltaTime;
             canMoove = false;
         }
         else
         {
+            if (!checkDown() && canMoove)
+            {
+                Debug.Log(checkDown());
+                target = new Vector3(transform.position.x, transform.position.y - 3f, transform.position.z);
+            }
             canMoove = true;
         }
 
         rayPos = new Vector3(transform.position.x, transform.position.y + OffsetY, transform.position.z);
     }
+
+
+    private bool checkDown()
+    {
+        bool rayTemp = Physics.Raycast(transform.position, -transform.up, 4.5f);
+        return rayTemp;
+    }
+
+
     private void OnCollisionEnter(Collision hit)
     {
-        if(hit.gameObject.tag == "Player")
+        if (hit.gameObject.tag == "Player")
         {
             Character3D playerScpt = hit.gameObject.GetComponent<Character3D>();
             int indexValue = ButterflyTypeSelection.Instance.SelectionTypeValue;
@@ -50,8 +63,8 @@ public class MovingCube : MonoBehaviour
             if (playerScpt.canDash == false && indexValue == 2 && canMoove && !raycast)
             {
                 target = new Vector3(transform.position.x, transform.position.y, transform.position.z) + dir * 3f;
-                mooveClock = 2f;
-            }           
+                mooveClock = 1f;
+            }
         }
     }
 

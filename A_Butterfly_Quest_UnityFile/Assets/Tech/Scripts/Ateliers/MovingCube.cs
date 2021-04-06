@@ -32,7 +32,7 @@ public class MovingCube : MonoBehaviour
         }
         else
         {
-            if (!checkDown() && canMoove)
+            if (!checkDown() && !canMoove)
             {
                 Debug.Log(checkDown());
                 target = new Vector3(transform.position.x, transform.position.y - 3f, transform.position.z);
@@ -46,7 +46,7 @@ public class MovingCube : MonoBehaviour
 
     private bool checkDown()
     {
-        bool rayTemp = Physics.Raycast(transform.position, -transform.up, 4.5f);
+        bool rayTemp = Physics.Raycast(transform.position, -transform.up, 4.49f);
         return rayTemp;
     }
 

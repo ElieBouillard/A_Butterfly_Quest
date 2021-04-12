@@ -266,7 +266,6 @@ public class EnemyAIv2 : MonoBehaviour
         Agent.speed = TurnBackSpeed;
         if(TurnBackPos1 == null)
         {
-            Debug.Log("d");
             Vector3 dir = Target.transform.position - transform.position;
             float dist = dir.magnitude;
             dir.Normalize();

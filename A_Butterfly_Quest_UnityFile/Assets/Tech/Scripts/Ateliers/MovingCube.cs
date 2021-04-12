@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MovingCube : MonoBehaviour
 {
@@ -53,18 +51,15 @@ public class MovingCube : MonoBehaviour
 
     private void OnCollisionEnter(Collision hit)
     {
-        if (hit.gameObject.tag == "Player")
-        {
-            Character3D playerScpt = hit.gameObject.GetComponent<Character3D>();
-            int indexValue = ButterflyTypeSelection.Instance.SelectionTypeValue;
-            Vector3 dir = hit.contacts[0].normal;
-            bool raycast = Physics.Raycast(rayPos, dir, 4.49f);
+        Character3D playerScpt = hit.gameObject.GetComponent<Character3D>();
+        int indexValue = ButterflyTypeSelection.Instance.SelectionTypeValue;
+        Vector3 dir = hit.contacts[0].normal;
+        bool raycast = Physics.Raycast(rayPos, dir, 4.49f);
 
-            if (playerScpt.canDash == false && indexValue == 2 && canMoove && !raycast)
-            {
-                target = new Vector3(transform.position.x, transform.position.y, transform.position.z) + dir * 3f;
-                mooveClock = 1f;
-            }
+        if (playerScpt.canDash == false && indexValue == 2 && canMoove && !raycast)
+        {
+            target = new Vector3(transform.position.x, transform.position.y, transform.position.z) + dir * 3f;
+            mooveClock = 1f;
         }
     }
 

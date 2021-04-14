@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/main_scene.unity
     guid: 0f1e6e8d18061214caa823996e93fab6
   - enabled: 1
-    path: Assets/Tech/Scenes/3C_Scene.unity
-    guid: b7e5f28ae92fc8e418b5095b9bf7cd40
-  - enabled: 1
     path: Assets/Tech/Scenes/GreyBoxLDV2.unity
     guid: a7d7845a773261f4c83adcb4fb3126f7
   - enabled: 1

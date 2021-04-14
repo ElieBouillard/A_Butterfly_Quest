@@ -46,6 +46,8 @@ public class EnemyAIv2 : MonoBehaviour
     public Vector3? TurnBackPos1;
     public Vector3? TurnBackPos2;
 
+    [Header("Animation")]
+    public Animator m_animator;
 
     public float minDistStop;
     public bool useRange;
@@ -67,6 +69,8 @@ public class EnemyAIv2 : MonoBehaviour
         Target = Character3D.m_instance.gameObject;
         AttackingRangeTemp = AttackingRange;
         Agent.acceleration = Acceleration;
+
+        m_animator = transform.GetChild(0).gameObject.GetComponent<Animator>();
     }
 
     private void Update()
@@ -83,6 +87,13 @@ public class EnemyAIv2 : MonoBehaviour
         else
         {
             Agent.acceleration = 200;
+        }
+
+        if (Input.GetKeyDown("e"))
+        {
+            TurnOffAllAnimationTrigger();
+            m_animator.SetBool("Running", false);
+            m_animator.SetBool("Walking", false);
         }
 
         RangeSystem();
@@ -329,6 +340,11 @@ public class EnemyAIv2 : MonoBehaviour
         {
             m_State = nextState;
         }
+    }
+
+    private void TurnOffAllAnimationTrigger()
+    {
+
     }
 
     private void OnDrawGizmosSelected()

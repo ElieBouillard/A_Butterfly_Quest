@@ -20,6 +20,7 @@ public class HealthSystem : MonoBehaviour
     public void TakeDamage(float DamageValue)
     {
         CurrHealth -= DamageValue;
+        Debug.Log(CurrHealth);
 
         if(CurrHealth <= 0)
         {
@@ -30,10 +31,5 @@ public class HealthSystem : MonoBehaviour
     public void Death()
     {
         gameObject.SetActive(false);
-    }
-
-    public void Delete()
-    {
-        Destroy(this);
     }
 }

@@ -253,11 +253,11 @@ public class AnimationManager : MonoBehaviour
             ////************
         }
 
-        if (Input.GetKeyDown(KeyCode.Joystick1Button3))
-        {
-            shoutTrigger = true;
-            Character3D.m_instance.FreezePosPlayer(0.5f, true, true);
-        }
+        //if (Input.GetKeyDown(KeyCode.Joystick1Button3))
+        //{
+        //    shoutTrigger = true;
+        //    Character3D.m_instance.FreezePosPlayer(0.5f, true, true);
+        //}
         //if ((Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKeyDown("left shift")))
         //{
         //    dashTrigger = true;

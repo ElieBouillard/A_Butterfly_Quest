@@ -55,6 +55,19 @@ public class ButterflyInventory : MonoBehaviour
         ButterflyInTravel.Remove(currButterfly);
     }
 
+    public bool ReceptacleGiveButterfly(int ButterflyType)
+    {
+        if(ButterflyInInventoryValue > 0)
+        {
+            ButterflyInInventory[ButterflyType].RemoveAt(ButterflyInInventoryValue - 1);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public void StartReload()
     {
         _reloading = true;

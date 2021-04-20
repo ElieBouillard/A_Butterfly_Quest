@@ -433,6 +433,7 @@ MonoBehaviour:
   - Press  <sprite=1> to Dash through the wall
   - Press  <sprite=3> to Jump over the fence
   - Press  <sprite=2> + <sprite=4> to Reload
+  - Press B to give Butterfly
   bottomTipText: {fileID: 1121569129}
 --- !u!1 &1501285012
 GameObject:

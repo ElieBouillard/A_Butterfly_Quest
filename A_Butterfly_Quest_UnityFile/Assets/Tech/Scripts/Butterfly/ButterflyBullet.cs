@@ -46,7 +46,6 @@ public class ButterflyBullet : MonoBehaviour
 
     private void FixedUpdate()
     {
-
         if (enabled)
         {
             //Si il y une cible
@@ -81,7 +80,7 @@ public class ButterflyBullet : MonoBehaviour
     {
         DisableButteryfly();
 
-        if (other.GetComponent<EnemyAI>())
+        if (other.GetComponent<EnemyAIv2>())
         {
             HealthSystem TargetHealth = other.GetComponent<HealthSystem>();
             TargetHealth.TakeDamage(Damage);

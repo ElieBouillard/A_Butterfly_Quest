@@ -78,7 +78,16 @@ public class ButterflyBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        DisableButteryfly();
+        if(other.gameObject.GetComponent<Receptacle>())
+        {
+            Receptacle m_receptacle = other.gameObject.GetComponent<Receptacle>();
+            HitReceptacle(m_receptacle);            
+        }
+        else
+        {
+            DisableButteryfly();
+        }
+
 
         if (other.GetComponent<EnemyAIv2>())
         {
@@ -96,6 +105,13 @@ public class ButterflyBullet : MonoBehaviour
     {
         gameObject.SetActive(false);
         ButterflyInventory.Instance.AddToReloadList(m_butterfly);
+    }
+
+    public void HitReceptacle(Receptacle currReceptacle)
+    {
+        gameObject.SetActive(false);
+        ButterflyInventory.Instance.RemoveTravelList(m_butterfly);
+        currReceptacle.ValueGived++;
     }
 
     public void GetDirection1()

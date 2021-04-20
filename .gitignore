@@ -12,6 +12,7 @@ A_Butterfly_Quest_UnityFile/Assets/HDRPDefaultResources/DefaultSceneRoot.prefab
 A_Butterfly_Quest_UnityFile/testtttt
 A_Butterfly_Quest_UnityFile/Assets/HDRPDefaultResources.meta
 A_Butterfly_Quest_UnityFile/Assets/Tree_Textures.meta
+<<<<<<< HEAD
 A_Butterfly_Quest_UnityFile/LocalPackages/com.unity.render-pipelines.high-definition-config/CHANGELOG.md
 A_Butterfly_Quest_UnityFile/LocalPackages/com.unity.render-pipelines.high-definition-config/CHANGELOG.md.meta
 A_Butterfly_Quest_UnityFile/LocalPackages/com.unity.render-pipelines.high-definition-config/LICENSE.md
@@ -33,3 +34,11 @@ A_Butterfly_Quest_UnityFile/LocalPackages/com.unity.render-pipelines.high-defini
 A_Butterfly_Quest_UnityFile/LocalPackages/com.unity.render-pipelines.high-definition-config/Tests/Editor/ConfigurationTest.cs.meta
 A_Butterfly_Quest_UnityFile/LocalPackages/com.unity.render-pipelines.high-definition-config/Tests/Editor/Unity.RenderPipelines.HighDefinitionConfig.Editor.Tests.asmdef
 A_Butterfly_Quest_UnityFile/LocalPackages/com.unity.render-pipelines.high-definition-config/Tests/Editor/Unity.RenderPipelines.HighDefinitionConfig.Editor.Tests.asmdef.meta
+=======
+A_Butterfly_Quest_UnityFile/Assets/Tech/Scenes/NewBrush 1.brush
+A_Butterfly_Quest_UnityFile/Assets/Tech/Scenes/NewBrush 1.brush.meta
+A_Butterfly_Quest_UnityFile/Assets/Tech/Scenes/NewBrush 2.brush
+A_Butterfly_Quest_UnityFile/Assets/Tech/Scenes/NewBrush 2.brush.meta
+A_Butterfly_Quest_UnityFile/Assets/Tech/Scenes/3C_Scene.unity
+A_Butterfly_Quest_UnityFile/Assets/Tech/Scenes/3C_Scene.unity.meta
+>>>>>>> bd6e1d707ba1a57861b06441f6cf764d857ced87

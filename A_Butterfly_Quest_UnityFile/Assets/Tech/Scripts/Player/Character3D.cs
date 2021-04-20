@@ -38,20 +38,24 @@ public class Character3D : MonoBehaviour
 
     [Header("Movements")]
     public float maxSpeed = 20;
+    public float ClampVelocityY;
     private float currentSpeed = 0;
     private bool FreezeInput = false;
     private float freezeClock;
     private bool forceNoJump;
     private bool freezeDirection;
-    public float ClampVelocityY;
 
     [Header("DashValues")]
     public float DashSpeed = 1f;
     public float DashDuration = 1f;
+    public float DashIllusionDuration = 4f;
     private float m_DashSpeed = 0f;
-    float clockDash = 0f;
+    private float clockDash = 0f;
+    private float clockCanDash = 0f;
     public bool canDash = true;
     public bool dashDebug;
+    private int m_butterflyTypeSelectionIndex;
+    public GameObject IllusionMeshItem;
 
     [Header("Inputs")]
     public GameObject m_camera;
@@ -200,13 +204,8 @@ public class Character3D : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (gameObject.GetComponent<Rigidbody>().velocity.magnitude > 25)
-        {
-            gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        }
-
         //Main velocity operation
-        target_Velocity = directionForward * currentSpeed * verticalInput + directionRight * currentSpeed * horizontalInput+ new Vector3(0, (m_rb.velocity.y + (-9.81f * GravityBoost)) * ((jumpTime != -1) ? 0 : 1), 0) + PlayerMesh.transform.forward * m_DashSpeed;
+        target_Velocity = directionForward * currentSpeed * verticalInput + directionRight * currentSpeed * horizontalInput + new Vector3(0, (m_rb.velocity.y + (-9.81f * GravityBoost)) * ((jumpTime != -1) ? 0 : 1), 0) + PlayerMesh.transform.forward * m_DashSpeed;
 
         //Jump velocity operation
         if (jumpTime != -1)
@@ -260,20 +259,46 @@ public class Character3D : MonoBehaviour
         freezeDirection = FreezeDirection;
     }
 
-    public void InitDash(float dashSpeed, float dashDuration)
+    public void InitDash(float dashSpeed, float dashDuration, float canDashDuration)
     {
+        FreezePosPlayer(dashDuration, true, true);
         AnimationManager.m_instance.dashTrigger = true;
         clockDash = dashDuration;
+        clockCanDash = canDashDuration;
         m_DashSpeed = dashSpeed;
-        FreezePosPlayer(dashDuration,true,true);
         canDash = false;
+    }
+
+    GameObject illusionMeshTemp;
+
+    public void InitIllusionDash(float dashSpeed, float dashDuration, float canDashDuration)
+    {
+        FreezePosPlayer(dashDuration, true, true);
+        AnimationManager.m_instance.dashTrigger = true;
+        clockDash = dashDuration;
+        clockCanDash = canDashDuration;
+        m_DashSpeed = dashSpeed;
+        canDash = false;
+
+        illusionMeshTemp = Instantiate(IllusionMeshItem, transform.position, Quaternion.identity);
     }
 
     public void DashUpdate()
     {
+        m_butterflyTypeSelectionIndex = ButterflyTypeSelection.Instance.SelectionTypeValue;
+
         if ((Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKeyDown("left shift")) && canDash)
         {
-            InitDash(DashSpeed, DashDuration);
+            if(m_butterflyTypeSelectionIndex != 1)
+            {
+                InitDash(DashSpeed, DashDuration, DashDuration);
+            }
+            else
+            {
+                InitIllusionDash(DashSpeed, DashDuration, DashIllusionDuration);
+            }
+            Debug.Log(m_butterflyTypeSelectionIndex);
+
         }
 
         if(clockDash > 0)
@@ -283,9 +308,24 @@ public class Character3D : MonoBehaviour
         else
         {
             m_DashSpeed = 0;
+        }
+        
+
+        if (clockCanDash > 0)
+        {
+            clockCanDash -= Time.deltaTime;
+        }
+        else
+        {
             canDash = true;
+            if(illusionMeshTemp != null)
+            {
+                Destroy(illusionMeshTemp);
+            }
         }
     }
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Enemy")

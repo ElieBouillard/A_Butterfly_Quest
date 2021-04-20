@@ -14,5 +14,6 @@ public class ButterflyEntity
         ButterflySpeed = butterflySpeed;
         Damage = damage; 
         ButterflyType = butterflyType;
+        
     }
 }

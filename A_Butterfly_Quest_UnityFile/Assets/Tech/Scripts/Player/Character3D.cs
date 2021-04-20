@@ -287,7 +287,7 @@ public class Character3D : MonoBehaviour
     {
         m_butterflyTypeSelectionIndex = ButterflyTypeSelection.Instance.SelectionTypeValue;
 
-        if ((Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKeyDown("left shift")) && canDash)
+        if ((Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKeyDown("left shift")) && canDash)
         {
             if(m_butterflyTypeSelectionIndex != 1)
             {
@@ -297,8 +297,6 @@ public class Character3D : MonoBehaviour
             {
                 InitIllusionDash(DashSpeed, DashDuration, DashIllusionDuration);
             }
-            Debug.Log(m_butterflyTypeSelectionIndex);
-
         }
 
         if(clockDash > 0)
@@ -332,7 +330,6 @@ public class Character3D : MonoBehaviour
         {
             Debug.Log("Ca touche");
         }
-
     }
     private void OnDrawGizmosSelected()
     {

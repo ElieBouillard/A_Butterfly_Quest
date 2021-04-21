@@ -1,0 +1,11 @@
+
+newmtl M_Liana
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+map_Kd Assets/Art/Core/Environment/Textures/Plants/Liana/Liana_texturing3_DefaultMaterial_BaseColor.png
+
+

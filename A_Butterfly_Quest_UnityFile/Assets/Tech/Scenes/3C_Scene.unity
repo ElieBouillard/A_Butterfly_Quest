@@ -152,7 +152,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9289136}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.07, z: 0}
+  m_LocalPosition: {x: 342.03, y: 17.02, z: 468.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1804809347}
@@ -254,7 +254,8 @@ MonoBehaviour:
   DashIllusionDuration: 4
   canDash: 1
   dashDebug: 1
-  IllusionMeshItem: {fileID: 0}
+  IllusionMeshItem: {fileID: 2331409774595580149, guid: 94f122f9843a46e4d96d8561f4be9d95,
+    type: 3}
   m_camera: {fileID: 1215292935}
   horizontalInput: 0
   verticalInput: 0
@@ -622,6 +623,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_freelook: {fileID: 2043809381}
+  m_cameraAiming: {fileID: 0}
   OnPauseMenu: 0
 --- !u!1 &508540544
 GameObject:
@@ -2346,8 +2348,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195822808}
-  m_LocalRotation: {x: 0.023666803, y: -0.8665623, z: 0.010757519, w: 0.49839133}
-  m_LocalPosition: {x: -9.916006, y: -19.869595, z: -44.038246}
+  m_LocalRotation: {x: 0.02366674, y: -0.8665623, z: 0.010757408, w: 0.49839136}
+  m_LocalPosition: {x: -580.2218, y: 64.73859, z: 23.354248}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1780449882}
@@ -3015,8 +3017,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 1808030408}
-  m_Follow: {fileID: 1808030408}
+  m_LookAt: {fileID: 9289137}
+  m_Follow: {fileID: 9289137}
   m_CommonLens: 1
   m_Lens:
     FieldOfView: 40

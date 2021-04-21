@@ -18,9 +18,11 @@ public class Receptacle : MonoBehaviour
     public int ValueGived;
 
     [Header("References")]
+    public GameObject DoorToOpen;
+
     private GameObject player;
     private TextMesh m_text;
-    public Collider m_collider;
+    private Collider m_collider;
 
     private bool Completed;
     private bool UnlockDoor;
@@ -59,7 +61,10 @@ public class Receptacle : MonoBehaviour
 
     private void ReceptacleValidated()
     {
-        Debug.Log("Réceptacle plein !");
+        if(DoorToOpen != null)
+        {
+            DoorToOpen.SetActive(false);
+        }
     }
 
     private void CheckValue()
@@ -74,19 +79,7 @@ public class Receptacle : MonoBehaviour
     {
         if (Physics.CheckSphere(transform.position, DetectionRange, PlayerMask))
         {
-            m_text.gameObject.SetActive(true);
-            if (Input.GetKeyDown(KeyCode.Joystick1Button1) && !Completed)
-            {
-                if(ButterflyInventory.Instance.ReceptacleGiveButterfly((int)m_ButterflyNeededType))
-                {
-                    ValueGived++;
-                }
-                else
-                {
-                    Debug.Log("Ta plus de papillon pélo");
-                }
-
-            }
+            m_text.gameObject.SetActive(true); 
         }
         else
         {

@@ -81,7 +81,10 @@ public class ButterflyBullet : MonoBehaviour
         if(other.gameObject.GetComponent<Receptacle>())
         {
             Receptacle m_receptacle = other.gameObject.GetComponent<Receptacle>();
-            HitReceptacle(m_receptacle);            
+            if((int)m_receptacle.m_ButterflyNeededType == Type)
+            {
+                HitReceptacle(m_receptacle);
+            }          
         }
         else
         {

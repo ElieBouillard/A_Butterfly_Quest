@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         ShowCrosshair(true);
-        slideXaxis.value =  InputSystem.instance.m_freelook.m_XAxis.m_MaxSpeed;
+        slideXaxis.value = InputSystem.instance.m_freelook.m_XAxis.m_MaxSpeed;
         slideYaxis.value = InputSystem.instance.m_freelook.m_YAxis.m_MaxSpeed;
     }
 

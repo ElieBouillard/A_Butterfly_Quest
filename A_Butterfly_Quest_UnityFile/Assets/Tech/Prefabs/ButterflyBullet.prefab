@@ -129,7 +129,7 @@ MonoBehaviour:
   Damage: 2
   Type: 0
   distPlayerToButterfly: 0
-  distanceMax: 40
+  distanceMax: 20
   onHit: 0
   TypesMat:
   - {fileID: 2100000, guid: 43a9c6e396bd6e04c8d161f066391328, type: 2}

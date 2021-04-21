@@ -10,6 +10,10 @@ public class InputSystem : MonoBehaviour
 
     public static InputSystem instance;
 
+
+    [HideInInspector]
+    public bool OnPauseMenu;
+
     private void Awake()
     {
         instance = this;
@@ -34,5 +38,20 @@ public class InputSystem : MonoBehaviour
         //Affect Aim Sensi
         m_cameraAiming.xAxis.m_MaxSpeed = UIManager.instance.GetAimSensi().x;
         m_cameraAiming.yAxis.m_MaxSpeed = UIManager.instance.GetAimSensi().y;
+
+        //InputPause
+        if (Input.GetKeyDown(KeyCode.Escape) || (Input.GetKeyDown(KeyCode.Joystick1Button7)))
+        {
+            if (!OnPauseMenu)
+            {
+                OnPauseMenu = true;
+                Time.timeScale = 0;
+            }
+            else
+            {
+                OnPauseMenu = false;
+                Time.timeScale = 1;
+            }
+        }
     }
 }

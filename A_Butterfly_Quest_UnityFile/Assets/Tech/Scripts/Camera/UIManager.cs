@@ -23,9 +23,6 @@ public class UIManager : MonoBehaviour
     public Slider slideAimXaxis;
     public Slider slideAimYaxis;
 
-    [HideInInspector]
-    public bool OnPauseMenu;
-
     private void Awake()
     {
         instance = this;
@@ -49,26 +46,13 @@ public class UIManager : MonoBehaviour
         }
 
         //PauseMenu
-        if (OnPauseMenu)
+        if (InputSystem.instance.OnPauseMenu)
         {
             ShowPauseMenu(true);
         }
         else
         {
             ShowPauseMenu(false);
-        }
-
-        //InputPause
-        if (Input.GetKeyDown(KeyCode.Escape) || (Input.GetKeyDown(KeyCode.Joystick1Button7)))
-        {
-            if (!OnPauseMenu)
-            {
-                OnPauseMenu = true;
-            }
-            else
-            {
-                OnPauseMenu = false;
-            }
         }
 
         //AffectGoodSpriteButterflyTypeSelection
@@ -80,7 +64,8 @@ public class UIManager : MonoBehaviour
 
     public void TurnOffPauseMenu()
     {
-        OnPauseMenu = false;
+        InputSystem.instance.OnPauseMenu = false;
+        Time.timeScale = 1;
     }
 
     public Vector2 GetFreeLookSensi()

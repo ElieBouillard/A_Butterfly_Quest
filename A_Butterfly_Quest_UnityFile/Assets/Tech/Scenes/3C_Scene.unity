@@ -254,7 +254,8 @@ MonoBehaviour:
   DashIllusionDuration: 4
   canDash: 1
   dashDebug: 1
-  IllusionMeshItem: {fileID: 0}
+  IllusionMeshItem: {fileID: 2331409774595580149, guid: 94f122f9843a46e4d96d8561f4be9d95,
+    type: 3}
   m_camera: {fileID: 1215292935}
   horizontalInput: 0
   verticalInput: 0

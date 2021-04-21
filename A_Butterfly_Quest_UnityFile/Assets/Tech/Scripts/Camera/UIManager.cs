@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager instance;
+
     [Header("Links")]
     public GameObject ConstentHUD;
     public GameObject PauseHUD;
@@ -16,14 +18,22 @@ public class UIManager : MonoBehaviour
     public Sprite[] ButterflyType;
 
     [Header("Sensisivity")]
-    public Slider slideXaxis;
-    public Slider slideYaxis;
+    public Slider slideFreeLookXaxis;
+    public Slider slideFreeLookYaxis;
+    public Slider slideAimXaxis;
+    public Slider slideAimYaxis;
+
+    [HideInInspector]
+    public bool OnPauseMenu;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
         ShowCrosshair(true);
-        slideXaxis.value = InputSystem.instance.m_freelook.m_XAxis.m_MaxSpeed;
-        slideYaxis.value = InputSystem.instance.m_freelook.m_YAxis.m_MaxSpeed;
     }
 
     private void Update()
@@ -39,7 +49,7 @@ public class UIManager : MonoBehaviour
         }
 
         //PauseMenu
-        if (InputSystem.instance.OnPauseMenu)
+        if (OnPauseMenu)
         {
             ShowPauseMenu(true);
         }
@@ -48,17 +58,38 @@ public class UIManager : MonoBehaviour
             ShowPauseMenu(false);
         }
 
+        //InputPause
+        if (Input.GetKeyDown(KeyCode.Escape) || (Input.GetKeyDown(KeyCode.Joystick1Button7)))
+        {
+            if (!OnPauseMenu)
+            {
+                OnPauseMenu = true;
+            }
+            else
+            {
+                OnPauseMenu = false;
+            }
+        }
 
-
-        ButterflyCountText.text = ButterflyInventory.Instance.ButterflyInInventory[ButterflyTypeSelection.Instance.SelectionTypeValue].Count.ToString();
-
-        //ButterflyTypeSelection
+        //AffectGoodSpriteButterflyTypeSelection
         int selectedType = ButterflyTypeSelection.Instance.SelectionTypeValue;
         Image ButterflyTypeSrite = ButterflyTypeSelected.GetComponent<Image>();
         ButterflyTypeSrite.sprite = ButterflyType[selectedType];
+        ButterflyCountText.text = ButterflyInventory.Instance.ButterflyInInventory[ButterflyTypeSelection.Instance.SelectionTypeValue].Count.ToString();
+    }
 
-        InputSystem.instance.m_freelook.m_XAxis.m_MaxSpeed = slideXaxis.value;
-        InputSystem.instance.m_freelook.m_YAxis.m_MaxSpeed = slideYaxis.value;
+    public void TurnOffPauseMenu()
+    {
+        OnPauseMenu = false;
+    }
+
+    public Vector2 GetFreeLookSensi()
+    {
+        return new Vector2(slideFreeLookXaxis.value, slideFreeLookYaxis.value);
+    }
+    public Vector2 GetAimSensi()
+    {
+        return new Vector2(slideAimXaxis.value, slideAimYaxis.value);
     }
 
     public void ShowCrosshair(bool value)

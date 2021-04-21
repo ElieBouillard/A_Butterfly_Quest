@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class CameraAiming : MonoBehaviour
 {
+    public static CameraAiming instance;
+
     public Transform cameraLookAT;
     public Cinemachine.AxisState xAxis;
     public Cinemachine.AxisState yAxis;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void FixedUpdate()
     {

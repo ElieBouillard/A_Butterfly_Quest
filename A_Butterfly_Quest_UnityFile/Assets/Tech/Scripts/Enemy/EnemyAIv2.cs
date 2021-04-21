@@ -62,7 +62,7 @@ public class EnemyAIv2 : MonoBehaviour
     {
         //ReferenceAuto
         Agent = gameObject.GetComponent<NavMeshAgent>();
-        _obstacleMask = LayerMask.GetMask("Grounded");
+        _obstacleMask = LayerMask.GetMask("Grounded") + LayerMask.GetMask("Obstacles");
 
         InitialPos = transform.position;
         _started = true;

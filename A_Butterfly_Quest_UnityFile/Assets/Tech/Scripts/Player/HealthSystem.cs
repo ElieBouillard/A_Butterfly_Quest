@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
+    public enum CharacterType { Player, Enemy}
+    [Header("Type")]
+    public CharacterType m_CharacterType;
+
     [Header("Stats")]
     public float InitialHealth;
 
+    [Header("Links")]
+    private RespawnSystem m_repsawnSystem; 
 
     [Header("Debug")]
     public float CurrHealth;
@@ -14,13 +20,13 @@ public class HealthSystem : MonoBehaviour
 
     private void Start()
     {
+        m_repsawnSystem = gameObject.GetComponent<RespawnSystem>();
         CurrHealth = InitialHealth;
     }
 
     public void TakeDamage(float DamageValue)
     {
         CurrHealth -= DamageValue;
-        Debug.Log(CurrHealth);
 
         if(CurrHealth <= 0)
         {
@@ -30,6 +36,13 @@ public class HealthSystem : MonoBehaviour
 
     public void Death()
     {
-        gameObject.SetActive(false);
+        if(m_CharacterType == CharacterType.Enemy)
+        {
+            gameObject.SetActive(false);
+        }
+        else if(m_CharacterType == CharacterType.Player)
+        {
+            gameObject.transform.position = m_repsawnSystem.currRespawnPoint;
+        }
     }
 }

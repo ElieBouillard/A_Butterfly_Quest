@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class RespawnSystem : MonoBehaviour
 {
-    private Transform currRespawnPoint;
+    public Vector3 currRespawnPoint;
 
-    private void Update()
+    private void Start()
     {
-       
+        currRespawnPoint = gameObject.transform.position;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -16,7 +16,7 @@ public class RespawnSystem : MonoBehaviour
         if (other.GetComponent<RespawnTrigger>())
         {
             RespawnTrigger currRespawnTrigger = other.GetComponent<RespawnTrigger>();
-            currRespawnPoint = currRespawnTrigger.m_RespawnPoint;
+            currRespawnPoint = currRespawnTrigger.GetRespawnPoint();
             Debug.Log(currRespawnPoint);
         }
     }

@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 9289144}
   - component: {fileID: 9289143}
   - component: {fileID: 9289145}
+  - component: {fileID: 9289146}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -406,12 +407,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05d21eab7886cfd4980fe53b46266b35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TriggerColliderSpawn:
-  - {fileID: 0}
-  - {fileID: 0}
-  RepsawnPointTransform:
-  - {fileID: 0}
-  - {fileID: 0}
+--- !u!114 &9289146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9289136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 046a640cbb31f904b9a3de0ab9dee8e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitialHealth: 20
+  CurrHealth: 0
+  TakingDamageFeedBack: {fileID: 0}
 --- !u!1 &246973519
 GameObject:
   m_ObjectHideFlags: 0

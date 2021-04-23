@@ -74,7 +74,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _GrassColorLUT:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 0, y: 0}
         m_Offset: {x: 0, y: 0}
     - _HeightMap:
         m_Texture: {fileID: 0}
@@ -82,8 +82,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _InteractivityMap:
         m_Texture: {fileID: 8400000, guid: 1007a007daff2c3438b0a11fc1375c8d, type: 2}
-        m_Scale: {x: 0.035, y: 0.035}
-        m_Offset: {x: 1.17, y: 0.29}
+        m_Scale: {x: 0, y: 0}
+        m_Offset: {x: 0, y: 0}
     - _IridescenceMaskMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -165,11 +165,11 @@ Material:
     - _AlphaCutoffShadow: 0.5
     - _AlphaDstBlend: 0
     - _AlphaSrcBlend: 1
-    - _AmbientForce: 0.1
+    - _AmbientForce: 0
     - _Anisotropy: 0
     - _BlendMode: 0
     - _BoostNormal: 0.39
-    - _CameraTiltingAmount: 2.5
+    - _CameraTiltingAmount: 0
     - _CoatMask: 0
     - _CullMode: 0
     - _CullModeForward: 0
@@ -177,7 +177,7 @@ Material:
     - _Cutoff: 0.254
     - _DarkFloor: 0.558
     - _DarkenBottom: 1
-    - _DebugLUT: 0.52
+    - _DebugLUT: 0
     - _DepthOffsetEnable: 0
     - _DetailAlbedoScale: 1
     - _DetailNormalScale: 1
@@ -223,7 +223,7 @@ Material:
     - _HeightTessAmplitude: 2
     - _HeightTessCenter: 0.5
     - _Interactivity: 1
-    - _InteractivityForce: 0.5
+    - _InteractivityForce: 0
     - _InvTilingScale: 1
     - _Ior: 1.5
     - _IridescenceMask: 1
@@ -291,7 +291,7 @@ Material:
     - _debugspeed: 1
     - _debugstep: 0.2
     - _debugworld: 0
-    - _gradientForce: -1
+    - _gradientForce: 0
     - _mettallic: 0
     - _occlusion: 0
     - _stepvertical: -0.5
@@ -318,8 +318,8 @@ Material:
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
     - _Vector0: {r: 0, g: 1, b: 0, a: 0}
-    - _WindDirection: {r: 1, g: -0.35, b: 0, a: 0.2}
-    - _WindLocalJitterMask: {r: 1, g: 0.35, b: 1, a: 0.1}
-    - _WindMask: {r: 0, g: 1, b: 0, a: 0}
+    - _WindDirection: {r: 0, g: 0, b: 0, a: 0}
+    - _WindLocalJitterMask: {r: 0, g: 0, b: 0, a: 0}
+    - _WindMask: {r: 0, g: 0, b: 0, a: 0}
     - _masktest: {r: 1, g: 1, b: 1, a: 0}
     - _trestestes: {r: 0, g: -1, b: 0, a: 0}

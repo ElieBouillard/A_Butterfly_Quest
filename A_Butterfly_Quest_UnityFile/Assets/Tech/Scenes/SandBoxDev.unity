@@ -799,6 +799,7 @@ GameObject:
   - component: {fileID: 352892227}
   - component: {fileID: 352892226}
   - component: {fileID: 352892225}
+  - component: {fileID: 352892228}
   m_Layer: 8
   m_Name: RespawnCollider (1)
   m_TagString: Untagged
@@ -814,7 +815,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 352892224}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -841,6 +842,19 @@ Transform:
   m_Father: {fileID: 1677893423}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &352892228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352892224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7b738e3876ad0a48941e88bf2ccdbce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RespawnPoint: {fileID: 1249208785}
 --- !u!1 &357534918
 GameObject:
   m_ObjectHideFlags: 0
@@ -1892,6 +1906,7 @@ GameObject:
   - component: {fileID: 1028368036}
   - component: {fileID: 1028368035}
   - component: {fileID: 1028368034}
+  - component: {fileID: 1028368037}
   m_Layer: 8
   m_Name: RespawnCollider
   m_TagString: Untagged
@@ -1907,7 +1922,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1028368033}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -1934,6 +1949,19 @@ Transform:
   m_Father: {fileID: 1677893423}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1028368037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028368033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7b738e3876ad0a48941e88bf2ccdbce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RespawnPoint: {fileID: 1983340429}
 --- !u!1 &1051970844
 GameObject:
   m_ObjectHideFlags: 0
@@ -3479,12 +3507,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05d21eab7886cfd4980fe53b46266b35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TriggerColliderSpawn:
-  - {fileID: 1028368034}
-  - {fileID: 352892225}
-  RepsawnPointTransform:
-  - {fileID: 1983340429}
-  - {fileID: 1249208785}
 --- !u!4 &1677893423
 Transform:
   m_ObjectHideFlags: 0

@@ -78,6 +78,7 @@ public class ButterflyBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //HitReceptacle
         if(other.gameObject.GetComponent<Receptacle>())
         {
             Receptacle m_receptacle = other.gameObject.GetComponent<Receptacle>();
@@ -97,6 +98,7 @@ public class ButterflyBullet : MonoBehaviour
             HealthSystem TargetHealth = other.GetComponent<HealthSystem>();
             TargetHealth.TakeDamage(Damage);
         }
+
 
         if (other.GetComponent<DestroyingCube>())
         {

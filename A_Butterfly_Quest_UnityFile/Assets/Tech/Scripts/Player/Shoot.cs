@@ -29,6 +29,7 @@ public class Shoot : MonoBehaviour
     public bool canShoot = true;
 
     private bool canResetFreeLookCam;
+    private bool canResetAimCam;
 
     private void Awake()
     {
@@ -136,11 +137,13 @@ public class Shoot : MonoBehaviour
         {
             CameraAimingScpt.yAxis.Value = 0;
         }
+        CameraAimingScpt.xAxis.Value = freeLookCam.m_XAxis.Value;
     }
 
     //Reset la camera "FreeLook" sur l'orientation de la camera "Aim" dès que Aim = false
     public void ResetFreeLookCamPos()
     {
+        Debug.Log("ResetFreeLookCam");
         freeLookCam.m_XAxis.Value = CameraAimingScpt.xAxis.Value;
     }
 }

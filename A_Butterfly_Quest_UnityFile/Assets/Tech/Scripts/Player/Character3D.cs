@@ -323,14 +323,6 @@ public class Character3D : MonoBehaviour
         }
     }
 
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Enemy")
-        {
-            Debug.Log("Ca touche");
-        }
-    }
     private void OnDrawGizmosSelected()
     {
         if (IsGroundedDebug)

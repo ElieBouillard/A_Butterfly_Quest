@@ -24,6 +24,7 @@ public class EnemyAIv2 : MonoBehaviour
     public float AttackingCancelRange;
 
     [Header("Statistiques")]
+    public float Damage;
     public float PatrolingSpeed;
     public float ChasingSpeed;
     public float AttackingSpeed;
@@ -344,6 +345,25 @@ public class EnemyAIv2 : MonoBehaviour
 
     private void TurnOffAllAnimationTrigger()
     {
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<Character3D>())
+        {
+            HealthSystem m_healthSystem = other.GetComponent<HealthSystem>();
+            m_healthSystem.TakeDamage(Damage);
+        }
+
+        if (other.GetComponent<ButterflyBullet>())
+        {
+            HealthSystem TargetHealth = gameObject.GetComponent<HealthSystem>();
+            if(TargetHealth != null)
+            {
+                TargetHealth.TakeDamage(other.GetComponent<ButterflyBullet>().Damage);
+            }
+        }
 
     }
 

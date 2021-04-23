@@ -91,19 +91,6 @@ public class ButterflyBullet : MonoBehaviour
         {
             DisableButteryfly();
         }
-
-
-        if (other.GetComponent<EnemyAIv2>())
-        {
-            HealthSystem TargetHealth = other.GetComponent<HealthSystem>();
-            TargetHealth.TakeDamage(Damage);
-        }
-
-
-        if (other.GetComponent<DestroyingCube>())
-        {
-            other.gameObject.SetActive(false);
-        }
     }
 
     public void DisableButteryfly()

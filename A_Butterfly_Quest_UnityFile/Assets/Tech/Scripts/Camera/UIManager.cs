@@ -7,9 +7,12 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
 
-    [Header("Links")]
-    public GameObject ConstentHUD;
-    public GameObject PauseHUD;
+    [Header("Menus")]
+    public GameObject InGameHUD;
+    public GameObject PauseMenuHUD;
+    public GameObject OptionsMenuHUD;
+    public GameObject BindingMenuHUD;
+    public GameObject ReadMeMenuHUD;
     public GameObject Crosshair;
     public Text ButterflyCountText;
     public GameObject ButterflyTypeSelected;
@@ -22,6 +25,9 @@ public class UIManager : MonoBehaviour
     public Slider slideFreeLookYaxis;
     public Slider slideAimXaxis;
     public Slider slideAimYaxis;
+
+
+    private bool canShowPauseMenu = true;
 
     private void Awake()
     {
@@ -62,9 +68,42 @@ public class UIManager : MonoBehaviour
         ButterflyCountText.text = ButterflyInventory.Instance.ButterflyInInventory[ButterflyTypeSelection.Instance.SelectionTypeValue].Count.ToString();
     }
 
+    public void TurnOnOptions()
+    {
+        canShowPauseMenu = false;
+        OptionsMenuHUD.SetActive(true);
+        PauseMenuHUD.SetActive(false);
+    }
+    public void TurnOnControls()
+    {
+        canShowPauseMenu = false;
+        BindingMenuHUD.SetActive(true);
+        PauseMenuHUD.SetActive(false);
+    }
+    public void TurnOnReadMe()
+    {
+        canShowPauseMenu = false;
+        ReadMeMenuHUD.SetActive(true);
+        PauseMenuHUD.SetActive(false);
+    }
+    
+    public void BackToPauseMenu()
+    {
+        canShowPauseMenu = true;
+        PauseMenuHUD.SetActive(true);
+
+        ReadMeMenuHUD.SetActive(false);
+        BindingMenuHUD.SetActive(false);
+        OptionsMenuHUD.SetActive(false);
+    }
+
     public void TurnOffPauseMenu()
     {
+        canShowPauseMenu = true;
         InputSystem.instance.OnPauseMenu = false;
+        BindingMenuHUD.SetActive(false);
+        ReadMeMenuHUD.SetActive(false);
+        OptionsMenuHUD.SetActive(false);
         Time.timeScale = 1;
     }
 
@@ -84,6 +123,17 @@ public class UIManager : MonoBehaviour
 
     public void ShowPauseMenu(bool value)
     {
-        PauseHUD.SetActive(value);
+        if (canShowPauseMenu)
+        {
+            PauseMenuHUD.SetActive(value);
+        }
+
+        if (!value)
+        {
+            BindingMenuHUD.SetActive(false);
+            ReadMeMenuHUD.SetActive(false);
+            OptionsMenuHUD.SetActive(false);
+            canShowPauseMenu = true;
+        }
     }
 }

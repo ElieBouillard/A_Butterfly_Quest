@@ -143,7 +143,6 @@ public class Shoot : MonoBehaviour
     //Reset la camera "FreeLook" sur l'orientation de la camera "Aim" dès que Aim = false
     public void ResetFreeLookCamPos()
     {
-        Debug.Log("ResetFreeLookCam");
         freeLookCam.m_XAxis.Value = CameraAimingScpt.xAxis.Value;
     }
 }

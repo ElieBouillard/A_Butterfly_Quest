@@ -24,6 +24,17 @@ public class HealthSystem : MonoBehaviour
         CurrHealth = InitialHealth;
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown("k"))
+        {
+            if(m_CharacterType == CharacterType.Player)
+            {
+                Death();
+            }
+        }
+    }
+
     public void TakeDamage(float DamageValue)
     {
         CurrHealth -= DamageValue;

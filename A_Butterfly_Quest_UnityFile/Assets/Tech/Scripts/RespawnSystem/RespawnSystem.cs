@@ -17,7 +17,7 @@ public class RespawnSystem : MonoBehaviour
         {
             RespawnTrigger currRespawnTrigger = other.GetComponent<RespawnTrigger>();
             currRespawnPoint = currRespawnTrigger.GetRespawnPoint();
-            Debug.Log(currRespawnPoint);
+            Debug.Log("Save at " + currRespawnPoint);
         }
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class RespawnTrigger : MonoBehaviour
 {
     protected Vector3 m_RespawnPoint;
+    public bool ShowGizmo;
 
     private void Start()
     {
@@ -14,5 +15,14 @@ public class RespawnTrigger : MonoBehaviour
     public Vector3 GetRespawnPoint()
     {
         return m_RespawnPoint;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (ShowGizmo)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireCube(transform.position + GetComponent<BoxCollider>().center, GetComponent<BoxCollider>().size);
+        }
     }
 }

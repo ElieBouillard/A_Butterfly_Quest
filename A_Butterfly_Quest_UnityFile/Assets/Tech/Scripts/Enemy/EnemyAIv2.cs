@@ -50,6 +50,7 @@ public class EnemyAIv2 : MonoBehaviour
     [Header("Animation")]
     public Animator m_animator;
 
+    [Header("Debug")]
     public float minDistStop;
     public bool useRange;
     private NavMeshAgent Agent;
@@ -164,6 +165,9 @@ public class EnemyAIv2 : MonoBehaviour
             if (WaitingPatrolingClock <= 0)
             {
                 SearchPatrolingPos();
+
+                //Anim Start Walk
+                m_animator.SetBool("Walk", true);
             }
             else if (WaitingPatrolingClock > 0)
             {
@@ -180,6 +184,9 @@ public class EnemyAIv2 : MonoBehaviour
             if (DistanceToPatrolingPos.magnitude < 0.5f)
             {
                 WaitForNewPatrolingPos();
+
+                //Anim start Idle
+                m_animator.SetBool("Walk", false);
             }
         }
     }
@@ -202,6 +209,7 @@ public class EnemyAIv2 : MonoBehaviour
         {
             RandomPatrolingPos = null;
         }
+
     }
 
     private void WaitForNewPatrolingPos()

@@ -5345,9 +5345,9 @@ MonoBehaviour:
     dasher\r\npour atteindre la plateforme gr\xE2ce \xE0 la touche X. Le saut n\u2019est
     pas\r\npossible (normalement\u2026 si tu casses le jeu h\xE9sites pas \xE0 le
     faire\r\nsavoir)\n7) L\u2019ennemi : il suffit de tirer dessus pour le buter
-    mais il est un peu\r\nagressif (dans tous les cas tu respawn)\r\n8) La porte
-    s'ouvre gr\xE2ce \xE0 la clef et fin de ce build.\r\nUn autre suivra assez rapidement
-    pour tester les ateliers ;)"
+    mais il est un peu\r\nagressif (dans tous les cas tu respawn)\r, il faut 3 tirs
+    pour le tuer\n8) La porte s'ouvre gr\xE2ce \xE0 la clef et fin de ce build.\r\nUn
+    autre suivra assez rapidement pour tester les ateliers ;)"
 --- !u!222 &1399844687
 CanvasRenderer:
   m_ObjectHideFlags: 0

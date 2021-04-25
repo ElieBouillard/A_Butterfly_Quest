@@ -127,5 +127,13 @@ public class UIManager : MonoBehaviour
         {
             PauseMenuHUD.SetActive(value);
         }
+
+        if (!value)
+        {
+            BindingMenuHUD.SetActive(false);
+            ReadMeMenuHUD.SetActive(false);
+            OptionsMenuHUD.SetActive(false);
+            canShowPauseMenu = true;
+        }
     }
 }

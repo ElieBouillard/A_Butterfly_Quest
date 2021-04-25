@@ -11,8 +11,6 @@ public class RonceBehaviour : MonoBehaviour
             HealthSystem m_healthSystem = collision.gameObject.GetComponent<HealthSystem>();
             m_healthSystem.TakeDamage(m_healthSystem.CurrHealth);
         }
-
-       
     }
 
     private void OnTriggerEnter(Collider other)

@@ -75,7 +75,7 @@ public class ButterflyBehaviour : MonoBehaviour
     void FindOffsetInCluster()
     {
         //find new offset
-        offsetInCluster = new Vector3(Random.Range(-.5f, .5f), Random.Range(-.5f, .5f), Random.Range(-.5f, .5f));
+        offsetInCluster = new Vector3(Random.Range(-1, 1), Random.Range(-.5f, .5f), Random.Range(-1, 1));
     }
 
     void NoiseMovement()

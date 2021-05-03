@@ -24,6 +24,7 @@ public class EnemyAIv2 : MonoBehaviour
     public float AttackingCancelRange;
 
     [Header("Statistiques")]
+    public float Damage;
     public float PatrolingSpeed;
     public float ChasingSpeed;
     public float AttackingSpeed;
@@ -46,7 +47,10 @@ public class EnemyAIv2 : MonoBehaviour
     public Vector3? TurnBackPos1;
     public Vector3? TurnBackPos2;
 
+    [Header("Animation")]
+    public Animator m_animator;
 
+    [Header("Debug")]
     public float minDistStop;
     public bool useRange;
     private NavMeshAgent Agent;
@@ -60,13 +64,15 @@ public class EnemyAIv2 : MonoBehaviour
     {
         //ReferenceAuto
         Agent = gameObject.GetComponent<NavMeshAgent>();
-        _obstacleMask = LayerMask.GetMask("Grounded");
+        _obstacleMask = LayerMask.GetMask("Grounded") + LayerMask.GetMask("Obstacles");
 
         InitialPos = transform.position;
         _started = true;
         Target = Character3D.m_instance.gameObject;
         AttackingRangeTemp = AttackingRange;
         Agent.acceleration = Acceleration;
+
+        m_animator = transform.GetChild(0).gameObject.GetComponent<Animator>();
     }
 
     private void Update()
@@ -83,6 +89,13 @@ public class EnemyAIv2 : MonoBehaviour
         else
         {
             Agent.acceleration = 200;
+        }
+
+        if (Input.GetKeyDown("e"))
+        {
+            TurnOffAllAnimationTrigger();
+            m_animator.SetBool("Running", false);
+            m_animator.SetBool("Walking", false);
         }
 
         RangeSystem();
@@ -152,6 +165,9 @@ public class EnemyAIv2 : MonoBehaviour
             if (WaitingPatrolingClock <= 0)
             {
                 SearchPatrolingPos();
+
+                //Anim Start Walk
+                m_animator.SetBool("Walk", true);
             }
             else if (WaitingPatrolingClock > 0)
             {
@@ -168,6 +184,9 @@ public class EnemyAIv2 : MonoBehaviour
             if (DistanceToPatrolingPos.magnitude < 0.5f)
             {
                 WaitForNewPatrolingPos();
+
+                //Anim start Idle
+                m_animator.SetBool("Walk", false);
             }
         }
     }
@@ -190,6 +209,7 @@ public class EnemyAIv2 : MonoBehaviour
         {
             RandomPatrolingPos = null;
         }
+
     }
 
     private void WaitForNewPatrolingPos()
@@ -198,7 +218,6 @@ public class EnemyAIv2 : MonoBehaviour
         WaitingPatrolingClock = WaitingTime;
     }
 
-    bool canStop;
     private void Chasing()
     {
         Agent.speed = ChasingSpeed;
@@ -220,7 +239,8 @@ public class EnemyAIv2 : MonoBehaviour
         float distAttack;
         if(AttackingPos == null)
         {
-            dirAttack = Target.transform.position - transform.position;
+            Vector3 Targetpos = new Vector3(Target.transform.position.x, transform.position.y, Target.transform.position.z);
+            dirAttack = Targetpos - transform.position;
             distAttack = dirAttack.magnitude;
             dirAttack.Normalize();
 
@@ -255,7 +275,6 @@ public class EnemyAIv2 : MonoBehaviour
                 AttackingPos = null;
             }            
         }
-        canStop = true;
     }
 
     bool reachPos1;
@@ -267,7 +286,6 @@ public class EnemyAIv2 : MonoBehaviour
         Agent.speed = TurnBackSpeed;
         if(TurnBackPos1 == null)
         {
-            Debug.Log("d");
             Vector3 dir = Target.transform.position - transform.position;
             float dist = dir.magnitude;
             dir.Normalize();
@@ -331,6 +349,30 @@ public class EnemyAIv2 : MonoBehaviour
         {
             m_State = nextState;
         }
+    }
+
+    private void TurnOffAllAnimationTrigger()
+    {
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<Character3D>())
+        {
+            HealthSystem m_healthSystem = other.GetComponent<HealthSystem>();
+            m_healthSystem.TakeDamage(Damage);
+        }
+
+        if (other.GetComponent<ButterflyBullet>())
+        {
+            HealthSystem TargetHealth = gameObject.GetComponent<HealthSystem>();
+            if(TargetHealth != null)
+            {
+                TargetHealth.TakeDamage(other.GetComponent<ButterflyBullet>().Damage);
+            }
+        }
+
     }
 
     private void OnDrawGizmosSelected()

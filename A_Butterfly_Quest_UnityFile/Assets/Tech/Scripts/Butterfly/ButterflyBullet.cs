@@ -46,7 +46,6 @@ public class ButterflyBullet : MonoBehaviour
 
     private void FixedUpdate()
     {
-
         if (enabled)
         {
             //Si il y une cible
@@ -79,12 +78,18 @@ public class ButterflyBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        DisableButteryfly();
-
-        if (other.GetComponent<EnemyAI>())
+        //HitReceptacle
+        if(other.gameObject.GetComponent<Receptacle>())
         {
-            HealthSystem TargetHealth = other.GetComponent<HealthSystem>();
-            TargetHealth.TakeDamage(Damage);
+            Receptacle m_receptacle = other.gameObject.GetComponent<Receptacle>();
+            if((int)m_receptacle.m_ButterflyNeededType == Type)
+            {
+                HitReceptacle(m_receptacle);
+            }          
+        }
+        else
+        {
+            DisableButteryfly();
         }
     }
 
@@ -92,6 +97,13 @@ public class ButterflyBullet : MonoBehaviour
     {
         gameObject.SetActive(false);
         ButterflyInventory.Instance.AddToReloadList(m_butterfly);
+    }
+
+    public void HitReceptacle(Receptacle currReceptacle)
+    {
+        gameObject.SetActive(false);
+        ButterflyInventory.Instance.RemoveTravelList(m_butterfly);
+        currReceptacle.ValueGived++;
     }
 
     public void GetDirection1()

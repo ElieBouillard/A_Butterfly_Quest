@@ -253,11 +253,11 @@ public class AnimationManager : MonoBehaviour
             ////************
         }
 
-        if (Input.GetKeyDown(KeyCode.Joystick1Button3))
-        {
-            shoutTrigger = true;
-            Character3D.m_instance.FreezePosPlayer(0.5f, true, true);
-        }
+        //if (Input.GetKeyDown(KeyCode.Joystick1Button3))
+        //{
+        //    shoutTrigger = true;
+        //    Character3D.m_instance.FreezePosPlayer(0.5f, true, true);
+        //}
         //if ((Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKeyDown("left shift")))
         //{
         //    dashTrigger = true;
@@ -377,11 +377,5 @@ public class AnimationManager : MonoBehaviour
             airboneTrigger = false;
         }
     
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawCube(transform.position + new Vector3(2f, 1, 0), new Vector3(4, 2, 1));
     }
 }

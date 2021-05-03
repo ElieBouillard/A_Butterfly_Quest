@@ -6,7 +6,7 @@ public class ButterflyEntity
 {
     public float ButterflySpeed = 0;
     public float Damage = 0;
-    public enum m_ButterflyType { Classic, Illusion, Other }
+    public enum m_ButterflyType { Classic, Illusion, Tempete }
     public m_ButterflyType ButterflyType;
 
     public ButterflyEntity(float butterflySpeed, float damage, m_ButterflyType butterflyType)
@@ -14,5 +14,6 @@ public class ButterflyEntity
         ButterflySpeed = butterflySpeed;
         Damage = damage; 
         ButterflyType = butterflyType;
+        
     }
 }

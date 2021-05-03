@@ -28,6 +28,9 @@ public class Shoot : MonoBehaviour
 
     public bool canShoot = true;
 
+    private bool canResetFreeLookCam;
+    private bool canResetAimCam;
+
     private void Awake()
     {
         CameraAimingScpt = GetComponent<CameraAiming>();
@@ -45,11 +48,16 @@ public class Shoot : MonoBehaviour
             CamAnimator.SetBool("AimCamera", true);
 
             AnimationManager.m_instance.playerFocused = true; //Anim
+            canResetFreeLookCam = true;
         }
         //No Aim
         else if (Input.GetAxis("Aim") <= 0)
         {
-            ResetFreeLookCamPos();
+            if (canResetFreeLookCam)
+            {
+                ResetFreeLookCamPos();
+                canResetFreeLookCam = false;
+            }
             ResetAimCamPos();
             Aiming = false;
             CamAnimator.SetBool("AimCamera", false);
@@ -122,13 +130,14 @@ public class Shoot : MonoBehaviour
         }
     }
 
-    //Reset la camera "Aim" derriere le joueur dès que Aim = false
+    //Reset la camera "Aim" au centre de l'écran dès que Aim = false
     public void ResetAimCamPos()
     {
         if (CameraAimingScpt.yAxis.Value != 0)
         {
             CameraAimingScpt.yAxis.Value = 0;
         }
+        CameraAimingScpt.xAxis.Value = freeLookCam.m_XAxis.Value;
     }
 
     //Reset la camera "FreeLook" sur l'orientation de la camera "Aim" dès que Aim = false

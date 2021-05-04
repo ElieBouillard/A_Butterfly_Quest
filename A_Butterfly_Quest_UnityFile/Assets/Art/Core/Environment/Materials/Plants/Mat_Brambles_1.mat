@@ -8,19 +8,20 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Mat_Brambles_1
-  m_Shader: {fileID: 4800000, guid: 6e4ae4064600d784cac1e41a9e6f2e59, type: 3}
+  m_Shader: {fileID: 4800000, guid: de7c45ac850ea734e8ea0bf65f5195f6, type: 3}
   m_ShaderKeywords: _NORMALMAP _NORMALMAP_TANGENT_SPACE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 2000
+  stringTagMap:
+    MotionVector: User
   disabledShaderPasses:
   - DistortionVectors
-  - MOTIONVECTORS
+  - TransparentBackface
   - TransparentDepthPrepass
   - TransparentDepthPostpass
-  - TransparentBackface
+  - MOTIONVECTORS
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -55,6 +56,10 @@ Material:
     - _EmissiveColorMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FresnelNoiseMap:
+        m_Texture: {fileID: 2800000, guid: 9a6174c6675a3fa4bbc29fa67a98e98c, type: 3}
+        m_Scale: {x: 4, y: 3}
         m_Offset: {x: 0, y: 0}
     - _HeightMap:
         m_Texture: {fileID: 0}
@@ -105,6 +110,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TransmittanceColorMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -161,6 +170,8 @@ Material:
     - _EnableFogOnTransparent: 1
     - _EnableGeometricSpecularAA: 0
     - _EnergyConservingSpecularColor: 1
+    - _FresnelIntensity: 0.31
+    - _FresnelPower: -1.62
     - _HeightAmplitude: 0.02
     - _HeightCenter: 0.5
     - _HeightMapParametrization: 0
@@ -186,8 +197,10 @@ Material:
     - _PPDPrimitiveWidth: 1
     - _ReceivesSSR: 1
     - _RefractionModel: 0
+    - _RenderQueueType: 1
+    - _RequireSplitLighting: 0
     - _SSRefractionProjectionModel: 0
-    - _Smoothness: 0.5
+    - _Smoothness: 0
     - _SmoothnessRemapMax: 1
     - _SmoothnessRemapMin: 0
     - _SpecularAAScreenSpaceVariance: 0.1
@@ -217,7 +230,7 @@ Material:
     - _TransparentDepthPrepassEnable: 0
     - _TransparentSortPriority: 0
     - _TransparentWritingMotionVec: 0
-    - _TransparentZWrite: 0
+    - _TransparentZWrite: 1
     - _UVBase: 0
     - _UVDetail: 0
     - _UVEmissive: 0
@@ -228,6 +241,9 @@ Material:
     - _ZTestModeDistortion: 4
     - _ZTestTransparent: 4
     - _ZWrite: 1
+    - _depthfade: 0.25
+    - _dispForce: 0.1
+    - _outlineforce: 14.11
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
@@ -237,6 +253,8 @@ Material:
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
+    - _FresnelColor: {r: 1, g: 0.11764705, b: 0.8379929, a: 1}
+    - _FresnelNoiseSpeed: {r: -0.1, g: -0.4, b: 0, a: 0}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
@@ -245,6 +263,7 @@ Material:
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
+    - _outlinefresnelColor: {r: 0.48527497, g: 0, b: 0.8018868, a: 1}
 --- !u!114 &1624820711846445718
 MonoBehaviour:
   m_ObjectHideFlags: 11

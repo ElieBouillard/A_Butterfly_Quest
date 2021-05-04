@@ -21,6 +21,8 @@ public class ButterflySpawner : MonoBehaviour
         {
             GameObject newButterfly = Instantiate(butterfly_prefab, transform.position, Quaternion.identity);
             newButterfly.GetComponent<ButterflyBehaviour>().parentCluster = m_cluster;
+            float randomSize = Random.Range(.1f, .25f);
+            newButterfly.transform.localScale = new Vector3(randomSize,randomSize,randomSize);
         }
     }
 

@@ -6,18 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/main_scene.unity
-    guid: 0f1e6e8d18061214caa823996e93fab6
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+    path: Assets/Tech/Scenes/3C_Scene.unity
+    guid: 548e7c32b41bb5c4a84f0739693a1a1e
+  - enabled: 1
+    path: Assets/Tech/Scenes/Environment.unity
+    guid: 787254192bf587642a128268dbec4ddd
   - enabled: 1
     path: Assets/Tech/Scenes/GreyBoxLD.unity
     guid: 1dfa7c48897ff53479d27641067af0d6
   - enabled: 1
-    path: Assets/Tech/Scenes/VOLUMES.unity
-    guid: 644a7b1aba3f5c74cb247835d8bc66a7
-  - enabled: 1
     path: Assets/Tech/Scenes/UI_HUD_Scene.unity
     guid: 7f3002dddf378e74186ec28b8a1ba0f6
+  - enabled: 1
+    path: Assets/Tech/Scenes/UI_TIPS_Scene.unity
+    guid: eac331f8c8c3f794bb560ee122aadef3
+  - enabled: 1
+    path: Assets/Tech/Scenes/VOLUMES.unity
+    guid: 644a7b1aba3f5c74cb247835d8bc66a7
   m_configObjects: {}

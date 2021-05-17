@@ -18,9 +18,9 @@ EditorBuildSettings:
     path: Assets/Tech/Scenes/UI_HUD_Scene.unity
     guid: 7f3002dddf378e74186ec28b8a1ba0f6
   - enabled: 1
-    path: Assets/Tech/Scenes/UI_TIPS_Scene.unity
-    guid: eac331f8c8c3f794bb560ee122aadef3
-  - enabled: 1
     path: Assets/Tech/Scenes/VOLUMES.unity
     guid: 644a7b1aba3f5c74cb247835d8bc66a7
+  - enabled: 1
+    path: Assets/Tech/Scenes/UI_TIPS_Scene.unity
+    guid: eac331f8c8c3f794bb560ee122aadef3
   m_configObjects: {}

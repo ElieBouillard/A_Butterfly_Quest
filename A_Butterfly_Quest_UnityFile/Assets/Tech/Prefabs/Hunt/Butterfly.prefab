@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6457228339399310254}
   - component: {fileID: 6457228339399310161}
   - component: {fileID: 6457228339399310160}
+  - component: {fileID: -1265643424331802217}
   m_Layer: 0
   m_Name: Butterfly
   m_TagString: Untagged
@@ -97,6 +98,19 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   targetPosition: {x: 0, y: 0, z: 0}
   speed: 0
+--- !u!65 &-1265643424331802217
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6457228339399310163}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.1255732, y: 1, z: 2.1151876}
+  m_Center: {x: -0.08230448, y: 0, z: 0.061614513}
 --- !u!1 &7752699874157759287
 GameObject:
   m_ObjectHideFlags: 0

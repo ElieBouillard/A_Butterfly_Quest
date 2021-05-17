@@ -44,7 +44,7 @@ public class MovingCube : MonoBehaviour
 
     private bool checkDown()
     {
-        bool rayTemp = Physics.Raycast(transform.position, -transform.up, 4.49f);
+        bool rayTemp = Physics.Raycast(transform.position, -transform.up, 2.99f);
         return rayTemp;
     }
 
@@ -54,7 +54,7 @@ public class MovingCube : MonoBehaviour
         Character3D playerScpt = hit.gameObject.GetComponent<Character3D>();
         int indexValue = ButterflyTypeSelection.Instance.SelectionTypeValue;
         Vector3 dir = hit.contacts[0].normal;
-        bool raycast = Physics.Raycast(rayPos, dir, 4.49f);
+        bool raycast = Physics.Raycast(rayPos, dir, 2.99f);
 
         if (playerScpt.canDash == false && indexValue == 2 && canMoove && !raycast)
         {

@@ -26,6 +26,11 @@ public class UIManager : MonoBehaviour
     public Slider slideAimXaxis;
     public Slider slideAimYaxis;
 
+    [Header("HeatlHud")]
+    public Image[] hearts;
+    public Sprite fullHearth;
+    public Sprite emptyHearth;
+
 
     private bool canShowPauseMenu = true;
 

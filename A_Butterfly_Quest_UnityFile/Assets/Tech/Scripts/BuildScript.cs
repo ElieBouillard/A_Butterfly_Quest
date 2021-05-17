@@ -8,15 +8,15 @@ public class BuildScript : MonoBehaviour
 {
     public void Awake()
     {
-        //SceneManager.LoadScene("GreyBoxLD", LoadSceneMode.Additive);
-        //SceneManager.LoadScene("VOLUMES", LoadSceneMode.Additive);
-        //SceneManager.LoadScene("UI_HUD_Scene", LoadSceneMode.Additive);
-        //SceneManager.LoadScene("UI_TIPS_Scene", LoadSceneMode.Additive);
-        //SceneManager.LoadScene("Environment", LoadSceneMode.Additive);
     }
 
     private void Start()
     {
+        SceneManager.LoadScene("LD", LoadSceneMode.Additive);
+        SceneManager.LoadScene("VOLUMES", LoadSceneMode.Additive);
+        SceneManager.LoadScene("UI_HUD_Scene", LoadSceneMode.Additive);
+        SceneManager.LoadScene("UI_TIPS_Scene", LoadSceneMode.Additive);
+        SceneManager.LoadScene("Environment", LoadSceneMode.Additive);
         
     }
 }

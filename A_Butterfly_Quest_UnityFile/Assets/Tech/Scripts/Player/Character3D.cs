@@ -12,7 +12,9 @@ public class Character3D : MonoBehaviour
     public static Character3D m_instance;
 
     [Header("Physics")]
-    private Rigidbody m_rb;
+
+    [HideInInspector]
+    public Rigidbody m_rb;
     Vector3 target_Velocity;
     Vector3 jumpDirection = Vector3.up;
     private GameObject PlayerMesh;
@@ -56,6 +58,11 @@ public class Character3D : MonoBehaviour
     public bool dashDebug;
     private int m_butterflyTypeSelectionIndex;
     public GameObject IllusionMeshItem;
+    private Vector3 DashDir;
+
+    [Header("KnockBack")]
+    public bool inKnockBack;
+    private float KnockBackClock;
 
     [Header("Inputs")]
     public GameObject m_camera;
@@ -200,6 +207,7 @@ public class Character3D : MonoBehaviour
         }
 
         DashUpdate();
+        KnockBackUpdate();
     }
 
     void FixedUpdate()
@@ -217,8 +225,12 @@ public class Character3D : MonoBehaviour
 
             target_Velocity += jumpDirection * (jumpForce * frameVelocityCoefficient);
         }
+
         //Assign final velocity
-        m_rb.velocity = target_Velocity;
+        if (!inKnockBack)
+        {
+            m_rb.velocity = target_Velocity;
+        }
 
         //ClampY Velocity
         if (m_rb.velocity.y > ClampVelocityY && jumpTime == -1)
@@ -259,29 +271,22 @@ public class Character3D : MonoBehaviour
         freezeDirection = FreezeDirection;
     }
 
-    public void InitDash(float dashSpeed, float dashDuration, float canDashDuration)
+    public void InitDash(float dashSpeed, float dashDuration, float canDashDuration, bool illusionDash)
     {
         FreezePosPlayer(dashDuration, true, true);
         AnimationManager.m_instance.dashTrigger = true;
+        DashDir = PlayerMesh.transform.forward;
         clockDash = dashDuration;
         clockCanDash = canDashDuration;
         m_DashSpeed = dashSpeed;
         canDash = false;
+        if (illusionDash)
+        {
+            illusionMeshTemp = Instantiate(IllusionMeshItem, transform.position, Quaternion.identity);
+        }
     }
 
     GameObject illusionMeshTemp;
-
-    public void InitIllusionDash(float dashSpeed, float dashDuration, float canDashDuration)
-    {
-        FreezePosPlayer(dashDuration, true, true);
-        AnimationManager.m_instance.dashTrigger = true;
-        clockDash = dashDuration;
-        clockCanDash = canDashDuration;
-        m_DashSpeed = dashSpeed;
-        canDash = false;
-
-        illusionMeshTemp = Instantiate(IllusionMeshItem, transform.position, Quaternion.identity);
-    }
 
     public void DashUpdate()
     {
@@ -291,11 +296,11 @@ public class Character3D : MonoBehaviour
         {
             if(m_butterflyTypeSelectionIndex != 1)
             {
-                InitDash(DashSpeed, DashDuration, DashDuration);
+                InitDash(DashSpeed, DashDuration, DashDuration, false);
             }
             else
             {
-                InitIllusionDash(DashSpeed, DashDuration, DashIllusionDuration);
+                InitDash(DashSpeed, DashDuration, DashIllusionDuration, true);
             }
         }
 
@@ -319,6 +324,23 @@ public class Character3D : MonoBehaviour
             if(illusionMeshTemp != null)
             {
                 Destroy(illusionMeshTemp);
+            }
+        }
+    }
+
+    public void InitKnockBack()
+    {
+        transform.position = new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z);
+        inKnockBack = true;
+    }
+
+    private void KnockBackUpdate()
+    {
+        if (inKnockBack)
+        {
+            if (grounded)
+            {
+                inKnockBack = false;
             }
         }
     }

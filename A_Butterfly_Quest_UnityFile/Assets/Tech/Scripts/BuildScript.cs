@@ -6,11 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class BuildScript : MonoBehaviour
 {
-    private void Awake()
+    public void Awake()
     {
-        //SceneManager.LoadScene("GreyBoxLD", LoadSceneMode.Additive);
-        //SceneManager.LoadScene("VOLUMES", LoadSceneMode.Additive);
-        //SceneManager.LoadScene("HUD_Scene", LoadSceneMode.Additive);
-        //SceneManager.LoadScene("Blocking_LD_1", LoadSceneMode.Additive);
+    }
+
+    private void Start()
+    {
+        SceneManager.LoadScene("LD", LoadSceneMode.Additive);
+        SceneManager.LoadScene("VOLUMES", LoadSceneMode.Additive);
+        SceneManager.LoadScene("UI_HUD_Scene", LoadSceneMode.Additive);
+        SceneManager.LoadScene("UI_TIPS_Scene", LoadSceneMode.Additive);
+        SceneManager.LoadScene("Environment", LoadSceneMode.Additive);
+        
     }
 }

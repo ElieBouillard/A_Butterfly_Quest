@@ -265,7 +265,7 @@ Material:
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _MainColor: {r: 0.0257209, g: 0.117571056, b: 0.3207547, a: 1}
-    - _SecondaryColor: {r: 22.167337, g: 8.648006, b: 1.1605933, a: 1}
+    - _SecondaryColor: {r: 1.1605933, g: 1.9444575, b: 22.167337, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}

@@ -153,7 +153,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9289136}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0.8926736, z: -0, w: 0.45070377}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -161,7 +161,7 @@ Transform:
   - {fileID: 1517676956}
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -126.422005, z: 0}
 --- !u!114 &9289138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,6 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de4876c3236c19041996ea242847a08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_rb: {fileID: 0}
   jumpTime: 0
   jumpCurve:
     serializedVersion: 2
@@ -258,6 +259,7 @@ MonoBehaviour:
   dashDebug: 1
   IllusionMeshItem: {fileID: 2331409774595580149, guid: 94f122f9843a46e4d96d8561f4be9d95,
     type: 3}
+  inKnockBack: 0
   m_camera: {fileID: 1215292935}
   horizontalInput: 0
   verticalInput: 0
@@ -421,7 +423,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CharacterType: 0
-  InitialHealth: 10
+  InitialHealth: 5
+  numOfHearts: 5
   CurrHealth: 0
   TakingDamageFeedBack: {fileID: 0}
 --- !u!1 &246973519
@@ -620,7 +623,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 369401182}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d75a0ebca627b11468c2f2f0b39180ba, type: 3}
   m_Name: 

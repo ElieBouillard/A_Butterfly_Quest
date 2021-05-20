@@ -36,8 +36,7 @@ public class ButterflyBehaviour : MonoBehaviour
                 direction = Vector3.Lerp(direction, (targetPosition - transform.position).normalized + (noiseOffset.normalized * noiseForce), Time.deltaTime * steeringSpeed);
                 transform.forward = direction.normalized;
                 transform.position += direction * speed * Time.deltaTime;
-            }
-           
+            }           
         }
         else
         {
@@ -49,22 +48,18 @@ public class ButterflyBehaviour : MonoBehaviour
         CalculateNextPosition();
     }
 
-    void CalculateNextPosition()
+    public void CalculateNextPosition()
     {
         targetPosition = parentCluster.transform.position + offsetInCluster /*+ noiseOffset*/;
     }
 
-    void AssignNewCluster(ButterflyCluster newCluster)
+    public void AssignNewCluster(ButterflyCluster newCluster)
     {
         parentCluster = newCluster;
-        if (newCluster == null)
-        {
-
-        }
-        else
+        if(newCluster != null)
         {
             FindOffsetInCluster();
-        }
+        } 
     }
 
     void MoveForward()

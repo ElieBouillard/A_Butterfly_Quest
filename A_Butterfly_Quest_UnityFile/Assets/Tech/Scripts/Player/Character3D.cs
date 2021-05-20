@@ -283,6 +283,7 @@ public class Character3D : MonoBehaviour
         if (illusionDash)
         {
             illusionMeshTemp = Instantiate(IllusionMeshItem, transform.position, Quaternion.identity);
+            Physics.IgnoreCollision(GetComponent<Collider>(), illusionMeshTemp.GetComponent<Collider>(), true);
         }
     }
 

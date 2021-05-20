@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6242397282077152198}
   - component: {fileID: 6242397282077152199}
   - component: {fileID: 5816825965553047875}
+  - component: {fileID: 4883241695718466016}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -93,5 +94,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_doorType: 0
-  Receptacles: []
-  PressurePlates: []
+  OpenSpeed: 0
+  CloseSpeed: 0
+  ItemsWichUnlock: []
+  isOpen: 0
+--- !u!64 &4883241695718466016
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6242397282077152201}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2619086233303812490, guid: 94b1462c51a0d2a4982eef97067fd26f, type: 3}

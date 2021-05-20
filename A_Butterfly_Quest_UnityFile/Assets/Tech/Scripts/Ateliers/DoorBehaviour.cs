@@ -6,12 +6,13 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-[ExecuteInEditMode]
 public class DoorBehaviour : MonoBehaviour
 {
     public enum DoorType { UnlockWithReceptacle, UnlockWithPressurePlates }
-    [Header("Type")]
+    [Header("Parametres")]
     public DoorType m_doorType;
+    public float OpenSpeed;
+    public float CloseSpeed;
 
     [Header("References")]
     public GameObject[] ItemsWichUnlock;
@@ -20,33 +21,71 @@ public class DoorBehaviour : MonoBehaviour
     public bool isOpen;
 
 
+    private float Speed;
+    private Vector3 closePos;
+    private Vector3 openPos;
+    private Vector3 targetPos;
+
+    private void Start()
+    {
+        Speed = OpenSpeed;
+        closePos = transform.position;
+        targetPos = closePos;
+        openPos = closePos + Vector3.right * 5;
+    }
+
     private void Update()
     {
-
-        if(m_doorType == DoorType.UnlockWithReceptacle)
+        if (isOpen)
         {
-            if (ItemsWichUnlock != null)
-            {
-                isOpen = isAllReceptaclesCompleted();
-            }
-            else
-            {
-                Debug.LogError("Receptacles List is Empty !");
-            }
+            OpenDoor();
+        }
+        else
+        {
+            CloseDoor();
+        }
+
+        transform.position = Vector3.MoveTowards(transform.position, targetPos, Speed / 10);
+
+        if(ItemsWichUnlock != null)
+        {
+            isOpen = isAllItemsActivated();
         }
     }
 
-    private bool isAllReceptaclesCompleted()
+    private void OpenDoor()
     {
-        for (int i = 0; i < ItemsWichUnlock.Length - 1; i++)
+        targetPos = openPos;
+        Speed = OpenSpeed;
+    }
+
+    private void CloseDoor()
+    {
+        targetPos = closePos;
+        Speed = CloseSpeed;
+    }
+
+    private bool isAllItemsActivated()
+    {
+        for (int i = 0; i < ItemsWichUnlock.Length; i++)
         {
-            Receptacle currReceptacle = ItemsWichUnlock[i].GetComponent<Receptacle>();
-            if (!currReceptacle.Completed)
+            if (m_doorType == DoorType.UnlockWithPressurePlates)
             {
-                return false;
+                PresurePlate currPresurePlate = ItemsWichUnlock[i].GetComponent<PresurePlate>();
+                if (!currPresurePlate.Activated)
+                {
+                    return false;
+                }
+            }
+            else if (m_doorType == DoorType.UnlockWithReceptacle)
+            {
+                Receptacle currReceptacle = ItemsWichUnlock[i].GetComponent<Receptacle>();
+                if (!currReceptacle.Completed)
+                {
+                    return false;
+                }
             }
         }
         return true;
     }
 }
-

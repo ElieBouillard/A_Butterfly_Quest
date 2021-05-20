@@ -32,7 +32,6 @@ public class PresurePlate : MonoBehaviour
     {
         Pos = transform.position + new Vector3(0f, PosY, 0f);
 
-        Debug.Log(transform.position);
         if (Physics.CheckSphere(Pos, Radius))
         {
             Activated = true;

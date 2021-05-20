@@ -213,7 +213,7 @@ public class Character3D : MonoBehaviour
     void FixedUpdate()
     {
         //Main velocity operation
-        target_Velocity = directionForward * currentSpeed * verticalInput + directionRight * currentSpeed * horizontalInput + new Vector3(0, (m_rb.velocity.y + (-9.81f * GravityBoost)) * ((jumpTime != -1) ? 0 : 1), 0) + PlayerMesh.transform.forward * m_DashSpeed;
+        target_Velocity = directionForward * currentSpeed * verticalInput + directionRight * currentSpeed * horizontalInput + new Vector3(0, (m_rb.velocity.y + (-9.81f * GravityBoost)) * ((jumpTime != -1) ? 0 : 1), 0) + DashDir * m_DashSpeed;
 
         //Jump velocity operation
         if (jumpTime != -1)

@@ -31,7 +31,7 @@ public class DoorBehaviour : MonoBehaviour
         Speed = OpenSpeed;
         closePos = transform.position;
         targetPos = closePos;
-        openPos = closePos + Vector3.right * 5;
+        openPos = closePos + transform.right.normalized * 5;
     }
 
     private void Update()

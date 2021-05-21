@@ -65,7 +65,7 @@ public class AnimationManager : MonoBehaviour
     public bool shootTrigger;
 
     //Shouting
-    private bool shoutTrigger;
+    public bool shoutTrigger;
 
     //Dashing
     public bool dashTrigger;

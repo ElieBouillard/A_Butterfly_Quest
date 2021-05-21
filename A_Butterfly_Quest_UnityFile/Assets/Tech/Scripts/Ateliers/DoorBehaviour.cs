@@ -8,11 +8,16 @@ using UnityEditor;
 
 public class DoorBehaviour : MonoBehaviour
 {
-    public enum DoorType { UnlockWithReceptacle, UnlockWithPressurePlates }
+    public enum DoorType { UnlockWithReceptacle, UnlockWithPressurePlates, UnlockWithKey }
     [Header("Parametres")]
     public DoorType m_doorType;
     public float OpenSpeed;
     public float CloseSpeed;
+
+    [Header("KeySystem")]
+    public int KeyNeeded;
+    [Range(0f, 20f)]
+    public float DetectionPlayerRange;
 
     [Header("References")]
     public GameObject[] ItemsWichUnlock;
@@ -25,9 +30,15 @@ public class DoorBehaviour : MonoBehaviour
     private Vector3 closePos;
     private Vector3 openPos;
     private Vector3 targetPos;
+    private LayerMask PlayerMask;
 
     private void Start()
     {
+        if(m_doorType == DoorType.UnlockWithKey)
+        {
+            PlayerMask = LayerMask.GetMask("Player");
+        }
+
         Speed = OpenSpeed;
         closePos = transform.position;
         targetPos = closePos;
@@ -47,9 +58,16 @@ public class DoorBehaviour : MonoBehaviour
 
         transform.position = Vector3.MoveTowards(transform.position, targetPos, Speed / 10);
 
-        if(ItemsWichUnlock != null)
+        if(m_doorType == DoorType.UnlockWithKey)
         {
-            isOpen = isAllItemsActivated();
+            CheckPlayerUpdate();
+        }
+        else
+        {
+            if (ItemsWichUnlock.Length != 0)
+            {
+                isOpen = isAllItemsActivated();
+            }
         }
     }
 
@@ -67,6 +85,7 @@ public class DoorBehaviour : MonoBehaviour
 
     private bool isAllItemsActivated()
     {
+        
         for (int i = 0; i < ItemsWichUnlock.Length; i++)
         {
             if (m_doorType == DoorType.UnlockWithPressurePlates)
@@ -87,5 +106,23 @@ public class DoorBehaviour : MonoBehaviour
             }
         }
         return true;
+    }
+
+    private void CheckPlayerUpdate()
+    {
+        if(Physics.CheckSphere(transform.position + transform.right * transform.localScale.x, DetectionPlayerRange, PlayerMask))
+        {
+            if(KeyInventory.instance.GetKeyCount() >= KeyNeeded)
+            {
+                KeyInventory.instance.RemoveKeyFromInventory(KeyNeeded);
+                isOpen = true;
+            }
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position + transform.right * transform.localScale.x, DetectionPlayerRange);
     }
 }

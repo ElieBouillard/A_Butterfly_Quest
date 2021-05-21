@@ -166,7 +166,22 @@ public class Character3D : MonoBehaviour
         {
             currentSpeed = maxSpeed/2;
         }
-        
+
+        //Chasse Coup de Filet
+        if (Input.GetKeyDown(KeyCode.Joystick1Button1))
+        {
+            RaycastHit[] hit;
+            m_animManager.shoutTrigger = true;
+            hit = Physics.BoxCastAll(transform.position, new Vector3(0.4f, 1f, 0.4f), PlayerMesh.transform.forward, PlayerMesh.transform.rotation, 3f);
+            for (int i = 0; i < hit.Length; i++)
+            {
+                if (hit[i].transform.gameObject.GetComponent<ButterflyBehaviour>())
+                {
+                    ButterflyBehaviour currButterfly = hit[i].transform.gameObject.GetComponent<ButterflyBehaviour>();
+                    currButterfly.AssignNewCluster(gameObject.GetComponent<ButterflyCluster>());
+                }
+            }          
+        }
 
         //Animation Run
         //if (animator != null)
@@ -288,7 +303,6 @@ public class Character3D : MonoBehaviour
     }
 
     GameObject illusionMeshTemp;
-
     public void DashUpdate()
     {
         m_butterflyTypeSelectionIndex = ButterflyTypeSelection.Instance.SelectionTypeValue;

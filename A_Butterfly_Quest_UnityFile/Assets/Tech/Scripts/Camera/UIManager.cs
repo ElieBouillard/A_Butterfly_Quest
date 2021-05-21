@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
 
     [Header("ButterlyTypeSelectionSprites")]
     public Sprite[] ButterflyType;
+    public Image DashCd;
 
     [Header("Sensisivity")]
     public Slider slideFreeLookXaxis;

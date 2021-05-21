@@ -50,14 +50,17 @@ public class Character3D : MonoBehaviour
     [Header("DashValues")]
     public float DashSpeed = 1f;
     public float DashDuration = 1f;
-    public float DashIllusionDuration = 4f;
+    public float DashCouldown = 2f;
+    public float DashIllusionCouldown = 4f;
     private float m_DashSpeed = 0f;
     private float clockDash = 0f;
-    private float clockCanDash = 0f;
-    public bool canDash = true;
+    private float[] clocksCanDash;
+    private bool[] CanDash;
+    private float clockHud;
     public bool dashDebug;
     private int m_butterflyTypeSelectionIndex;
     public GameObject IllusionMeshItem;
+    private GameObject illusionMeshTemp;
     private Vector3 DashDir;
 
     [Header("KnockBack")]
@@ -93,6 +96,9 @@ public class Character3D : MonoBehaviour
     private void Start()
     {
         m_animManager = AnimationManager.m_instance;
+        clocksCanDash = new float[3];
+        CanDash = new bool[3];
+
     }
 
     void Update()
@@ -222,6 +228,7 @@ public class Character3D : MonoBehaviour
         }
 
         DashUpdate();
+        DashHudUpdate();
         KnockBackUpdate();
     }
 
@@ -286,39 +293,36 @@ public class Character3D : MonoBehaviour
         freezeDirection = FreezeDirection;
     }
 
-    public void InitDash(float dashSpeed, float dashDuration, float canDashDuration, bool illusionDash)
+
+    public void InitDash(int DashType)
     {
-        FreezePosPlayer(dashDuration, true, true);
+        FreezePosPlayer(DashDuration, true, true);
         AnimationManager.m_instance.dashTrigger = true;
         DashDir = PlayerMesh.transform.forward;
-        clockDash = dashDuration;
-        clockCanDash = canDashDuration;
-        m_DashSpeed = dashSpeed;
-        canDash = false;
-        if (illusionDash)
+        clockDash = DashDuration;
+        m_DashSpeed = DashSpeed;
+        CanDash[DashType] = false;
+        if (DashType != 1)
+        {
+            clocksCanDash[DashType] = DashCouldown;
+        }
+        else
         {
             illusionMeshTemp = Instantiate(IllusionMeshItem, transform.position, Quaternion.identity);
             Physics.IgnoreCollision(GetComponent<Collider>(), illusionMeshTemp.GetComponent<Collider>(), true);
-        }
+            clocksCanDash[DashType] = DashIllusionCouldown;
+        } 
     }
-
-    GameObject illusionMeshTemp;
     public void DashUpdate()
     {
         m_butterflyTypeSelectionIndex = ButterflyTypeSelection.Instance.SelectionTypeValue;
 
-        if ((Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKeyDown("left shift")) && canDash)
+        if ((Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKeyDown("left shift")) && CanDash[m_butterflyTypeSelectionIndex])
         {
-            if(m_butterflyTypeSelectionIndex != 1)
-            {
-                InitDash(DashSpeed, DashDuration, DashDuration, false);
-            }
-            else
-            {
-                InitDash(DashSpeed, DashDuration, DashIllusionDuration, true);
-            }
+            InitDash(m_butterflyTypeSelectionIndex);
         }
 
+        //DashDuration
         if(clockDash > 0)
         {
             clockDash -= Time.deltaTime;
@@ -327,20 +331,43 @@ public class Character3D : MonoBehaviour
         {
             m_DashSpeed = 0;
         }
-        
 
-        if (clockCanDash > 0)
+        //DashCouldownDuration
+        for (int i = 0; i < clocksCanDash.Length; i++)
         {
-            clockCanDash -= Time.deltaTime;
+            if(clocksCanDash[i] > 0)
+            {
+                clocksCanDash[i] -= Time.deltaTime;
+            }
+            else
+            {
+                CanDash[i] = true;
+                if (i == 1)
+                {
+                  Destroy(illusionMeshTemp);
+                }
+            }
+        }
+    }
+
+    public void DashHudUpdate()
+    {
+        clockHud = clocksCanDash[m_butterflyTypeSelectionIndex];
+
+        if(m_butterflyTypeSelectionIndex != 1)
+        {
+            UIManager.instance.DashCd.fillAmount =  clockHud / DashCouldown;
         }
         else
         {
-            canDash = true;
-            if(illusionMeshTemp != null)
-            {
-                Destroy(illusionMeshTemp);
-            }
+            UIManager.instance.DashCd.fillAmount =  clockHud / DashIllusionCouldown;
         }
+
+    }
+
+    public bool GetCanDash(int value)
+    {
+        return CanDash[value];
     }
 
     public void InitKnockBack()

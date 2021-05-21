@@ -26,11 +26,13 @@ public class UIManager : MonoBehaviour
     public Slider slideAimXaxis;
     public Slider slideAimYaxis;
 
-    [Header("HeatlHud")]
+    [Header("HealthHud")]
     public Image[] hearts;
     public Sprite fullHearth;
     public Sprite emptyHearth;
 
+    [Header("KeyHud")]
+    public Text KeyCountTxt;
 
     private bool canShowPauseMenu = true;
 

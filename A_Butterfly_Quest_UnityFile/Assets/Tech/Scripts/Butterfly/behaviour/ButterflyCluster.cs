@@ -24,7 +24,7 @@ public class ButterflyCluster : MonoBehaviour
         }
         if (followPlayer)
         {
-            clusterSpeed = 8;
+            clusterSpeed = 0;
         }
         randomoffset = Random.Range(0, 100);
     }

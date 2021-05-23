@@ -33,6 +33,7 @@ public class Character3D : MonoBehaviour
     [Header("RaysGrounded")]
     public bool IsGroundedDebug;
     public float DetectionDistanceGround = 1;
+    private float _detectionDistanceGround;
     public float OffSetX = 0.5f;
     public float OffSetY = 0.5f;
     public LayerMask ground_Layer;
@@ -65,7 +66,6 @@ public class Character3D : MonoBehaviour
 
     [Header("KnockBack")]
     public bool inKnockBack;
-    private float KnockBackClock;
 
     [Header("Inputs")]
     public GameObject m_camera;
@@ -98,6 +98,7 @@ public class Character3D : MonoBehaviour
         m_animManager = AnimationManager.m_instance;
         clocksCanDash = new float[3];
         CanDash = new bool[3];
+        _detectionDistanceGround = DetectionDistanceGround;
 
     }
 
@@ -230,6 +231,7 @@ public class Character3D : MonoBehaviour
         DashUpdate();
         DashHudUpdate();
         KnockBackUpdate();
+        StairMovementUpdate();
     }
 
     void FixedUpdate()
@@ -264,25 +266,40 @@ public class Character3D : MonoBehaviour
     public bool IsGrounded()
     {
         bool groundRayCast = false;
-        if (Physics.Raycast(transform.position + new Vector3(OffSetX, 0, 0), Vector3.down, DetectionDistanceGround, ground_Layer))
+        if (Physics.Raycast(transform.position + new Vector3(OffSetX, 0, 0), Vector3.down, _detectionDistanceGround, ground_Layer))
         {
             groundRayCast = true;
         }
-        if (Physics.Raycast(transform.position + new Vector3(-OffSetX, 0, 0), Vector3.down, DetectionDistanceGround, ground_Layer))
+        if (Physics.Raycast(transform.position + new Vector3(-OffSetX, 0, 0), Vector3.down, _detectionDistanceGround, ground_Layer))
         {
             groundRayCast = true;
         }
-        if (Physics.Raycast(transform.position + new Vector3(0, 0, OffSetY), Vector3.down, DetectionDistanceGround, ground_Layer))
+        if (Physics.Raycast(transform.position + new Vector3(0, 0, OffSetY), Vector3.down, _detectionDistanceGround, ground_Layer))
         {
             groundRayCast = true;
         }
-        if (Physics.Raycast(transform.position + new Vector3(0, 0, -OffSetY), Vector3.down, DetectionDistanceGround, ground_Layer))
+        if (Physics.Raycast(transform.position + new Vector3(0, 0, -OffSetY), Vector3.down, _detectionDistanceGround, ground_Layer))
         {
             groundRayCast = true;
         }
-
 
         return groundRayCast;
+    }
+
+    private void StairMovementUpdate()
+    {
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position + new Vector3(OffSetX, 0, 0), Vector3.down, out hit, _detectionDistanceGround) || Physics.Raycast(transform.position + new Vector3(-OffSetX, 0, 0), Vector3.down, out hit, _detectionDistanceGround) || Physics.Raycast(transform.position + new Vector3(0, 0, OffSetY), Vector3.down, out hit, _detectionDistanceGround) || Physics.Raycast(transform.position + new Vector3(0, 0, -OffSetY), Vector3.down, out hit, _detectionDistanceGround))
+        {
+            if(hit.transform.tag == "Stair")
+            {
+                _detectionDistanceGround = 2f;
+            }
+        }
+        else
+        {
+            _detectionDistanceGround = DetectionDistanceGround;
+        }
     }
 
     public void FreezePosPlayer(float duration, bool CantJump = false, bool FreezeDirection = false)
@@ -292,7 +309,6 @@ public class Character3D : MonoBehaviour
         forceNoJump = CantJump;
         freezeDirection = FreezeDirection;
     }
-
 
     public void InitDash(int DashType)
     {
@@ -313,6 +329,7 @@ public class Character3D : MonoBehaviour
             clocksCanDash[DashType] = DashIllusionCouldown;
         } 
     }
+
     public void DashUpdate()
     {
         m_butterflyTypeSelectionIndex = ButterflyTypeSelection.Instance.SelectionTypeValue;

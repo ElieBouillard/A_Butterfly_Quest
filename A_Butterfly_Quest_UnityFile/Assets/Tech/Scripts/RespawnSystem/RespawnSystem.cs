@@ -5,6 +5,7 @@ using UnityEngine;
 public class RespawnSystem : MonoBehaviour
 {
     public Vector3 currRespawnPoint;
+    public Quaternion currRotationSpawn;
 
     private void Start()
     {
@@ -17,7 +18,8 @@ public class RespawnSystem : MonoBehaviour
         {
             RespawnTrigger currRespawnTrigger = other.GetComponent<RespawnTrigger>();
             currRespawnPoint = currRespawnTrigger.GetRespawnPoint();
-            Debug.Log("Save at " + currRespawnPoint);
+            currRotationSpawn = currRespawnTrigger.GetRotationSpawn();
+            Debug.Log("-RESPAWNSYSTEM- Save at " + currRespawnPoint);
         }
     }
 }

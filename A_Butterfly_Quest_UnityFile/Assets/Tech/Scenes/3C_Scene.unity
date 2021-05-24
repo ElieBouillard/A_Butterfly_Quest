@@ -120,7 +120,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 283ab78a2c6968040a167e05fa5f991f, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 548dbcf316f802247adf739686afb578, type: 2}
 --- !u!1 &9289136
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,6 +139,8 @@ GameObject:
   - component: {fileID: 9289143}
   - component: {fileID: 9289145}
   - component: {fileID: 9289146}
+  - component: {fileID: 9289147}
+  - component: {fileID: 9289148}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -153,15 +155,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9289136}
-  m_LocalRotation: {x: -0, y: -0.8926736, z: -0, w: 0.45070377}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.83, y: 1, z: 4.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1804809347}
   - {fileID: 1517676956}
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: -126.422005, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9289138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,7 +245,7 @@ MonoBehaviour:
   jumpDelay: 0.25
   jumpTimer: 0
   IsGroundedDebug: 1
-  DetectionDistanceGround: 1.1
+  DetectionDistanceGround: 1.2
   OffSetX: 0.35
   OffSetY: 0.35
   ground_Layer:
@@ -254,8 +256,8 @@ MonoBehaviour:
   ClampVelocityY: 2
   DashSpeed: 15
   DashDuration: 0.5
-  DashIllusionDuration: 4
-  canDash: 1
+  DashCouldown: 2.75
+  DashIllusionCouldown: 4
   dashDebug: 1
   IllusionMeshItem: {fileID: 2331409774595580149, guid: 94f122f9843a46e4d96d8561f4be9d95,
     type: 3}
@@ -410,6 +412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currRespawnPoint: {x: 0, y: 0, z: 0}
+  currRotationSpawn: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &9289146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,6 +430,34 @@ MonoBehaviour:
   numOfHearts: 5
   CurrHealth: 0
   TakingDamageFeedBack: {fileID: 0}
+--- !u!114 &9289147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9289136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81f8f71f582912547a57a0dfaa587d43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clusterDirection: {x: 0, y: 0, z: 0}
+  clusterSpeed: 0
+  currentSpeed: 0
+  followPlayer: 1
+--- !u!114 &9289148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9289136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddae374ab6072c945a80ba2cbe05005b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &246973519
 GameObject:
   m_ObjectHideFlags: 0
@@ -1703,7 +1734,7 @@ PrefabInstance:
     - target: {fileID: 7255424630249739047, guid: 12583edab3bcabf4ea7d3e7c9a483275,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.001
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7255424630249739047, guid: 12583edab3bcabf4ea7d3e7c9a483275,
         type: 3}
@@ -1713,7 +1744,7 @@ PrefabInstance:
     - target: {fileID: 7255424630249739047, guid: 12583edab3bcabf4ea7d3e7c9a483275,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.062
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7255424630249739047, guid: 12583edab3bcabf4ea7d3e7c9a483275,
         type: 3}
@@ -2383,7 +2414,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195822808}
   m_LocalRotation: {x: -0.038267843, y: -0.86121774, z: -0.096695215, w: 0.4974833}
-  m_LocalPosition: {x: 0.31819367, y: -1.2043552, z: -2.2706847}
+  m_LocalPosition: {x: -3.6872666, y: -0.508893, z: -3.612888}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1780449882}
@@ -3134,7 +3165,7 @@ MonoBehaviour:
     m_Radius: 4.5
   - m_Height: 3
     m_Radius: 5.5
-  - m_Height: 0
+  - m_Height: -0.75
     m_Radius: 4.5
   m_LegacyHeadingBias: 3.4028235e+38
   m_Rigs:

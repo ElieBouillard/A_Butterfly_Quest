@@ -103,7 +103,7 @@ public class ButterflyBullet : MonoBehaviour
     {
         gameObject.SetActive(false);
         ButterflyInventory.Instance.RemoveTravelList(m_butterfly);
-        currReceptacle.ValueGived++;
+        currReceptacle.AddButterfly();
     }
 
     public void GetDirection1()

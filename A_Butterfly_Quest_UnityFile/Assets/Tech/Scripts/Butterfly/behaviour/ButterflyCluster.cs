@@ -24,7 +24,7 @@ public class ButterflyCluster : MonoBehaviour
         }
         if (followPlayer)
         {
-            clusterSpeed = 8;
+            clusterSpeed = 0;
         }
         randomoffset = Random.Range(0, 100);
     }
@@ -48,7 +48,7 @@ public class ButterflyCluster : MonoBehaviour
         {
             clusterDirection = new Vector3((Mathf.PerlinNoise(Time.time/5 + randomoffset, Time.time/5 + randomoffset) -.5f) * 2,0, (Mathf.PerlinNoise(Time.time/5 + randomoffset, Time.time/5 + randomoffset) - .5f) * 2);
             //clusterDirection = transform.forward + transform.right * Mathf.PerlinNoise(Time.time, Time.time)*2;
-            currentSpeed = 8;
+            currentSpeed = clusterSpeed;
             MoveForward();
         }
 
@@ -70,7 +70,5 @@ public class ButterflyCluster : MonoBehaviour
     void MoveForward()
     {
         transform.position += (clusterDirection * currentSpeed * Time.deltaTime);
-    }
-
-  
+    }  
 }

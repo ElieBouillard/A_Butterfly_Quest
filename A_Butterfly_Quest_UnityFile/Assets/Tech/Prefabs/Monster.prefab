@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 1674603350770619190}
   - component: {fileID: 1674603350770619191}
   m_Layer: 0
-  m_Name: Monster (1)
-  m_TagString: Untagged
+  m_Name: Monster
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,6 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CharacterType: 1
   InitialHealth: 5
+  numOfHearts: 0
   CurrHealth: 0
   TakingDamageFeedBack: {fileID: 0}
 --- !u!65 &1674603350770619191

@@ -23,12 +23,16 @@ public class HealthSystem : MonoBehaviour
     public float CurrHealth;
     public Material TakingDamageFeedBack;
 
+    private bool canHit;
+    private float clockCanHit;
+
     private void Start()
     {
         m_repsawnSystem = gameObject.GetComponent<RespawnSystem>();
         CurrHealth = InitialHealth;
         fullHearth = UIManager.instance.fullHearth;
         emptyHearth = UIManager.instance.emptyHearth;
+        canHit = true;
     }
 
     private void Update()
@@ -42,6 +46,19 @@ public class HealthSystem : MonoBehaviour
         }
 
         HUDHealthUpdate();
+
+        if(m_CharacterType == CharacterType.Player)
+        {
+            if(clockCanHit > 0)
+            {
+                clockCanHit -= Time.deltaTime;
+                canHit = false;
+            }
+            else
+            {
+                canHit = true;
+            }
+        }
     }
 
     private void HUDHealthUpdate()
@@ -77,7 +94,20 @@ public class HealthSystem : MonoBehaviour
 
     public void TakeDamage(float DamageValue)
     {
-        CurrHealth -= DamageValue;
+        if(m_CharacterType == CharacterType.Player)
+        {
+            if (canHit)
+            {
+                CurrHealth -= DamageValue;
+                clockCanHit = 0.5f;
+            }
+            
+        }
+        else
+        {
+            CurrHealth -= DamageValue;
+        }
+
 
         if(CurrHealth <= 0)
         {
@@ -94,6 +124,8 @@ public class HealthSystem : MonoBehaviour
         else if(m_CharacterType == CharacterType.Player)
         {
             gameObject.transform.position = m_repsawnSystem.currRespawnPoint;
+            gameObject.transform.rotation = m_repsawnSystem.currRotationSpawn;
+            
         }
     }
 }

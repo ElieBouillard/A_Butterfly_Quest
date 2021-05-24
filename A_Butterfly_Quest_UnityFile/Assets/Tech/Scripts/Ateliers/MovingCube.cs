@@ -52,11 +52,10 @@ public class MovingCube : MonoBehaviour
     private void OnCollisionEnter(Collision hit)
     {
         Character3D playerScpt = hit.gameObject.GetComponent<Character3D>();
-        int indexValue = ButterflyTypeSelection.Instance.SelectionTypeValue;
         Vector3 dir = hit.contacts[0].normal;
         bool raycast = Physics.Raycast(rayPos, dir, 2.99f);
 
-        if (playerScpt.canDash == false && indexValue == 2 && canMoove && !raycast)
+        if (!playerScpt.GetCanDash(2) && canMoove && !raycast)
         {
             target = new Vector3(transform.position.x, transform.position.y, transform.position.z) + dir * 3f;
             mooveClock = 1f;

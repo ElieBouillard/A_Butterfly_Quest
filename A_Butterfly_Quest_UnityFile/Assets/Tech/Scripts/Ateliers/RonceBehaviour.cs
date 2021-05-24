@@ -17,26 +17,21 @@ public class RonceBehaviour : MonoBehaviour
                 gameObject.SetActive(false);
             }
         }
+
         if (collision.gameObject.GetComponent<Character3D>())
         {
             playerOb = collision.gameObject;
 
             Character3D PlayerScpt;
             PlayerScpt = collision.gameObject.GetComponent<Character3D>();
+            Vector3 dir = playerOb.transform.position - transform.position;
+            dir.y = 0.2f;
+            PlayerScpt.InitKnockBack();
+            PlayerScpt.m_rb.AddForce(dir.normalized * KnockBackStrenght, ForceMode.Impulse);
 
             HealthSystem m_healthSystem = collision.gameObject.GetComponent<HealthSystem>();
             m_healthSystem.TakeDamage(1);
-
-            Vector3 dir = playerOb.transform.position - transform.position;
-            dir.y = 0.1f;
-            PlayerScpt.InitKnockBack();
-            PlayerScpt.m_rb.AddForce(dir.normalized * KnockBackStrenght, ForceMode.Impulse);
         }
 
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        
     }
 }

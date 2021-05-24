@@ -91,13 +91,6 @@ public class EnemyAIv2 : MonoBehaviour
             Agent.acceleration = 200;
         }
 
-        if (Input.GetKeyDown("e"))
-        {
-            TurnOffAllAnimationTrigger();
-            m_animator.SetBool("Running", false);
-            m_animator.SetBool("Walking", false);
-        }
-
         RangeSystem();
         StateSystem();
     }
@@ -141,9 +134,13 @@ public class EnemyAIv2 : MonoBehaviour
         if(m_State == States.Chasing)
         {
             Chasing();
+            SetAllAnimBool(false);
+            m_animator.SetBool("Run", true);
         }
         if(m_State == States.Attacking)
         {
+            SetAllAnimBool(false);
+            //m_animator.SetBool("Attack", true);
             Attacking();
         }
         if(m_State == States.TurnBack)
@@ -153,6 +150,15 @@ public class EnemyAIv2 : MonoBehaviour
         if(m_State == States.Off)
         {
             Off();
+            if(nextState == States.Attacking)
+            {
+
+            }
+            else
+            {
+                SetAllAnimBool(false);
+            }
+
         }
     }
 
@@ -167,6 +173,7 @@ public class EnemyAIv2 : MonoBehaviour
                 SearchPatrolingPos();
 
                 //Anim Start Walk
+                SetAllAnimBool(false);
                 m_animator.SetBool("Walk", true);
             }
             else if (WaitingPatrolingClock > 0)
@@ -181,7 +188,7 @@ public class EnemyAIv2 : MonoBehaviour
 
             DistanceToPatrolingPos = RandomPatrolingPos.Value - transform.position;
 
-            if (DistanceToPatrolingPos.magnitude < 0.5f)
+            if (DistanceToPatrolingPos.magnitude < 0.2f)
             {
                 WaitForNewPatrolingPos();
 
@@ -226,7 +233,9 @@ public class EnemyAIv2 : MonoBehaviour
         canResetPath = true;
         AttackingPos = null;
     }
-   
+
+
+    float clockAttackAnim;
     private void Attacking()
     {
         if (!canResetPath)
@@ -259,14 +268,27 @@ public class EnemyAIv2 : MonoBehaviour
             }
             inAttack = true;
             AttackingPos = AttackingPosTemp;
+            clockAttackAnim = 0.4f;
+
         }
         else
         {
-            Agent.speed = AttackingSpeed;
-            Agent.SetDestination(AttackingPos.Value);
-            Debug.DrawRay(AttackingPos.Value, Vector3.up, Color.cyan, 3);
+            float distToAttackPos;
+            m_animator.SetBool("Attack", true);
 
-            float distToAttackPos = Vector3.Distance(AttackingPos.Value, transform.position);
+            if (clockAttackAnim > 0)
+            {
+                clockAttackAnim -= Time.deltaTime;
+                distToAttackPos = Mathf.Infinity;
+            }
+            else
+            {
+                Agent.speed = AttackingSpeed;
+                Agent.SetDestination(AttackingPos.Value);
+                Debug.DrawRay(AttackingPos.Value, Vector3.up, Color.cyan, 3);
+
+                distToAttackPos = Vector3.Distance(AttackingPos.Value, transform.position);
+            }            
 
             if (distToAttackPos < minDistStop)
             {
@@ -304,7 +326,7 @@ public class EnemyAIv2 : MonoBehaviour
             {
                 Agent.SetDestination(TurnBackPos1.Value);
                 float dist1 = Vector3.Distance(transform.position, TurnBackPos1.Value);
-                if(dist1 < 0.5f)
+                if(dist1 < 1f)
                 {
                     reachPos1 = true;
                 }
@@ -313,7 +335,7 @@ public class EnemyAIv2 : MonoBehaviour
             {
                 Agent.SetDestination(TurnBackPos2.Value);
                 float dist2 = Vector3.Distance(transform.position, TurnBackPos2.Value);
-                if(dist2 < 0.5f)
+                if(dist2 < 1f)
                 {
                     reachPos2 = true;
                 }
@@ -331,6 +353,7 @@ public class EnemyAIv2 : MonoBehaviour
 
     public float clockOff;
     States nextState;
+
     public void TurnOff(float time, States state)
     {
         m_State = States.Off;
@@ -343,17 +366,16 @@ public class EnemyAIv2 : MonoBehaviour
         useRange = false;
         if(clockOff > 0)
         {
-            clockOff -= Time.deltaTime;
+            clockOff -= Time.deltaTime;    
+            if(nextState == States.Attacking)
+            {
+                transform.LookAt(new Vector3(Target.transform.position.x, transform.position.y, Target.transform.position.z));
+            }
         }
         else if(clockOff <=0)
         {
             m_State = nextState;
         }
-    }
-
-    private void TurnOffAllAnimationTrigger()
-    {
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -400,4 +422,15 @@ public class EnemyAIv2 : MonoBehaviour
             Gizmos.DrawWireSphere(InitialPos, PatrolingRange);
         }
     }
+
+
+    #region animation
+    private void SetAllAnimBool(bool value)
+    {
+        m_animator.SetBool("Walk", value);
+        m_animator.SetBool("Attack", value);
+        m_animator.SetBool("Attack2", value);
+        m_animator.SetBool("Run", value);
+    }
+    #endregion
 }

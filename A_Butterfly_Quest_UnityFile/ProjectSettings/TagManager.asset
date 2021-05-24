@@ -15,12 +15,12 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Grounded
+  - Butterfly
+  - Player
+  - Enemy
+  - Obstacles
+  - RenderTexture
   - 
   - 
   - 

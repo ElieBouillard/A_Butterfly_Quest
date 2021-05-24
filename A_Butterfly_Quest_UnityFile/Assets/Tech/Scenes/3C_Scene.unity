@@ -156,7 +156,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9289136}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.6, y: 9.91, z: 21.985}
+  m_LocalPosition: {x: 121.68, y: 16.16, z: 308.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1804809347}
@@ -256,7 +256,7 @@ MonoBehaviour:
   ClampVelocityY: 2
   DashSpeed: 15
   DashDuration: 0.5
-  DashCouldown: 2
+  DashCouldown: 2.75
   DashIllusionCouldown: 4
   dashDebug: 1
   IllusionMeshItem: {fileID: 2331409774595580149, guid: 94f122f9843a46e4d96d8561f4be9d95,
@@ -2412,8 +2412,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195822808}
-  m_LocalRotation: {x: -0.038267825, y: -0.86121774, z: -0.09669517, w: 0.4974833}
-  m_LocalPosition: {x: -10.9518385, y: 11.723118, z: -22.94326}
+  m_LocalRotation: {x: -0.038267873, y: -0.86121774, z: -0.09669525, w: 0.4974833}
+  m_LocalPosition: {x: -322.50775, y: 62.99872, z: -46.773773}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1780449882}

@@ -158,7 +158,7 @@ Material:
     - _ATDistance: 1
     - _AddPrecomputedVelocity: 0
     - _AlbedoAffectEmissive: 0
-    - _AlphaCutoff: 0.254
+    - _AlphaCutoff: 0.543
     - _AlphaCutoffEnable: 1
     - _AlphaCutoffPostpass: 0.5
     - _AlphaCutoffPrepass: 0.328
@@ -174,7 +174,7 @@ Material:
     - _CullMode: 0
     - _CullModeForward: 0
     - _CullingMode: 0
-    - _Cutoff: 0.254
+    - _Cutoff: 0.543
     - _DarkFloor: 0.558
     - _DarkenBottom: 1
     - _DebugLUT: 0

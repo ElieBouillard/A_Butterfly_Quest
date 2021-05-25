@@ -4,32 +4,15 @@ using UnityEngine;
 
 public class RespawnTrigger : MonoBehaviour
 {
-    protected Vector3 m_RespawnPoint;
-    protected Quaternion m_RotationSpawn;
-    public bool ShowGizmo;
+    protected Transform m_RespawnPoint;
 
     private void Start()
     {
-        m_RespawnPoint = gameObject.transform.GetChild(0).gameObject.transform.position;
-        m_RotationSpawn = gameObject.transform.GetChild(0).gameObject.transform.rotation;
+        m_RespawnPoint = gameObject.transform.GetChild(0).gameObject.transform;
     }
 
-    public Vector3 GetRespawnPoint()
+    public Transform GetRespawnPoint()
     {
         return m_RespawnPoint;
-    }
-
-    public Quaternion GetRotationSpawn()
-    {
-        return m_RotationSpawn;
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        if (ShowGizmo)
-        {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireCube(transform.position + GetComponent<BoxCollider>().center, GetComponent<BoxCollider>().size);
-        }
     }
 }

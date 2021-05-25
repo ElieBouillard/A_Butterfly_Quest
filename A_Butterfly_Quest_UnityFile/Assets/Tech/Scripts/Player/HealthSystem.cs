@@ -11,7 +11,7 @@ public class HealthSystem : MonoBehaviour
 
     [Header("Stats")]
     public float InitialHealth;
-    public int numOfHearts;
+    private int numOfHearts;
 
     [Header("Links")]
     private RespawnSystem m_repsawnSystem;
@@ -30,6 +30,7 @@ public class HealthSystem : MonoBehaviour
     {
         m_repsawnSystem = gameObject.GetComponent<RespawnSystem>();
         CurrHealth = InitialHealth;
+        numOfHearts = (int)InitialHealth;
         fullHearth = UIManager.instance.fullHearth;
         emptyHearth = UIManager.instance.emptyHearth;
         canHit = true;
@@ -37,16 +38,6 @@ public class HealthSystem : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown("k"))
-        {
-            if(m_CharacterType == CharacterType.Player)
-            {
-                Death();
-            }
-        }
-
-        HUDHealthUpdate();
-
         if(m_CharacterType == CharacterType.Player)
         {
             if(clockCanHit > 0)
@@ -58,6 +49,7 @@ public class HealthSystem : MonoBehaviour
             {
                 canHit = true;
             }
+            HUDHealthUpdate();
         }
     }
 
@@ -108,7 +100,6 @@ public class HealthSystem : MonoBehaviour
             CurrHealth -= DamageValue;
         }
 
-
         if(CurrHealth <= 0)
         {
             Death();
@@ -123,9 +114,12 @@ public class HealthSystem : MonoBehaviour
         }
         else if(m_CharacterType == CharacterType.Player)
         {
-            gameObject.transform.position = m_repsawnSystem.currRespawnPoint;
-            gameObject.transform.rotation = m_repsawnSystem.currRotationSpawn;
-            
+            RespawnSystem.instance.Death();
         }
+    }
+
+    public void Respawn()
+    {
+        CurrHealth = InitialHealth;
     }
 }

@@ -145,4 +145,10 @@ public class Shoot : MonoBehaviour
     {
         freeLookCam.m_XAxis.Value = CameraAimingScpt.xAxis.Value;
     }
+
+    public void ResetFreeLookBehindPlayer()
+    {
+        freeLookCam.m_XAxis.Value = PlayerMesh.transform.rotation.eulerAngles.y;
+        freeLookCam.m_YAxis.Value = 0.4f;
+    }
 }

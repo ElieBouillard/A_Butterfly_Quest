@@ -35,6 +35,9 @@ public class UIManager : MonoBehaviour
     [Header("KeyHud")]
     public Text KeyCountTxt;
 
+    [Header("DeathHud")]
+    public Image BlackScreenDeath;
+
     private bool canShowPauseMenu = true;
 
     private void Awake()

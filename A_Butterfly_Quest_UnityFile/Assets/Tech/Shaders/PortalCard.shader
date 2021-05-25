@@ -9,9 +9,11 @@ Shader "PortalCard"
 		[ASEBegin][HDR]_StartColor("Start Color", Color) = (0.5411765,0.7279669,1,0)
 		[HDR]_EndColor("End Color", Color) = (0.508366,0.8864185,0.9056604,0)
 		_Softness("Softness", Float) = 0
-		[ASEEnd]_DistanceToFade("DistanceToFade", Float) = 0
+		_DistanceToFade("DistanceToFade", Float) = 0
+		[ASEEnd]_RadialGradient("RadialGradient", 2D) = "white" {}
+		[HideInInspector] _texcoord( "", 2D ) = "white" {}
 
-		[HideInInspector]_RenderQueueType("Render Queue Type", Float) = 5
+		[HideInInspector]_RenderQueueType("Render Queue Type", Float) = 1
 		[HideInInspector][ToggleUI]_AddPrecomputedVelocity("Add Precomputed Velocity", Float) = 1
 		//[HideInInspector]_ShadowMatteFilter("Shadow Matte Filter", Float) = 2
 		[HideInInspector]_StencilRef("Stencil Ref", Int) = 0
@@ -27,7 +29,7 @@ Shader "PortalCard"
 		[HideInInspector]_ZTestGBuffer("_ZTestGBuffer", Int) = 4
 		[HideInInspector][ToggleUI]_RequireSplitLighting("_RequireSplitLighting", Float) = 0
 		[HideInInspector][ToggleUI]_ReceivesSSR("_ReceivesSSR", Float) = 0
-		[HideInInspector]_SurfaceType("_SurfaceType", Float) = 1
+		[HideInInspector]_SurfaceType("_SurfaceType", Float) = 0
 		[HideInInspector]_BlendMode("_BlendMode", Float) = 0
 		[HideInInspector]_SrcBlend("_SrcBlend", Float) = 1
 		[HideInInspector]_DstBlend("_DstBlend", Float) = 0
@@ -61,15 +63,13 @@ Shader "PortalCard"
 		LOD 0
 
 		
-		Tags { "RenderPipeline"="HDRenderPipeline" "RenderType"="Opaque" "Queue"="Transparent" }
+		Tags { "RenderPipeline"="HDRenderPipeline" "RenderType"="Opaque" "Queue"="Geometry" }
 
 		HLSLINCLUDE
 		#pragma target 4.5
 		#pragma only_renderers d3d11 ps4 xboxone vulkan metal switch
 		#pragma instancing_options renderinglayer
 
-		#ifndef ASE_TESS_FUNCS
-		#define ASE_TESS_FUNCS
 		float4 FixedTess( float tessValue )
 		{
 			return tessValue;
@@ -167,7 +167,6 @@ Shader "PortalCard"
 			}
 			return tess;
 		}
-		#endif //ASE_TESS_FUNCS
 		ENDHLSL
 
 		
@@ -255,6 +254,7 @@ Shader "PortalCard"
 			CBUFFER_START( UnityPerMaterial )
 			float4 _EndColor;
 			float4 _StartColor;
+			float4 _RadialGradient_ST;
 			float _DistanceToFade;
 			float _Softness;
 			float4 _EmissionColor;
@@ -309,7 +309,8 @@ Shader "PortalCard"
 				float _TessMaxDisp;
 			#endif
 			CBUFFER_END
-			
+			sampler2D _RadialGradient;
+
 
 			
 			struct SurfaceDescription
@@ -512,7 +513,8 @@ Shader "PortalCard"
 				ase_screenPosNorm7.z = ( UNITY_NEAR_CLIP_VALUE >= 0 ) ? ase_screenPosNorm7.z : ase_screenPosNorm7.z * 0.5 + 0.5;
 				float screenDepth7 = LinearEyeDepth(SampleCameraDepth( ase_screenPosNorm7.xy ),_ZBufferParams);
 				float distanceDepth7 = abs( ( screenDepth7 - LinearEyeDepth( ase_screenPosNorm7.z,_ZBufferParams ) ) / ( _Softness ) );
-				float temp_output_10_0 = ( saturate( cameraDepthFade15 ) * saturate( distanceDepth7 ) );
+				float2 uv_RadialGradient = packedInput.ase_texcoord1.xy * _RadialGradient_ST.xy + _RadialGradient_ST.zw;
+				float temp_output_10_0 = ( saturate( cameraDepthFade15 ) * saturate( distanceDepth7 ) * tex2D( _RadialGradient, uv_RadialGradient ).r );
 				
 				surfaceDescription.Color = ( lerpResult20 * temp_output_10_0 ).rgb;
 				surfaceDescription.Emission = 0;
@@ -573,7 +575,7 @@ Shader "PortalCard"
 			Name "ShadowCaster"
 			Tags { "LightMode"="ShadowCaster" }
 
-			Cull [_CullMode]
+			Cull Back
 			ZWrite On
 			ZClip [_ZClip]
 			ColorMask 0
@@ -611,7 +613,7 @@ Shader "PortalCard"
 			{
 				float3 positionOS : POSITION;
 				float3 normalOS : NORMAL;
-				
+				float4 ase_texcoord : TEXCOORD0;
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -627,6 +629,7 @@ Shader "PortalCard"
 			CBUFFER_START( UnityPerMaterial )
 			float4 _EndColor;
 			float4 _StartColor;
+			float4 _RadialGradient_ST;
 			float _DistanceToFade;
 			float _Softness;
 			float4 _EmissionColor;
@@ -681,7 +684,8 @@ Shader "PortalCard"
 				float _TessMaxDisp;
 			#endif
 			CBUFFER_END
-			
+			sampler2D _RadialGradient;
+
 
 			
 			struct SurfaceDescription
@@ -721,9 +725,10 @@ Shader "PortalCard"
 				float4 screenPos7 = ComputeScreenPos( ase_clipPos7 , _ProjectionParams.x );
 				o.ase_texcoord1 = screenPos7;
 				
+				o.ase_texcoord.yz = inputMesh.ase_texcoord.xy;
 				
 				//setting value to unused interpolator channels and avoid initialization warnings
-				o.ase_texcoord.yzw = 0;
+				o.ase_texcoord.w = 0;
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 				float3 defaultVertexValue = inputMesh.positionOS.xyz;
 				#else
@@ -748,7 +753,8 @@ Shader "PortalCard"
 			{
 				float3 positionOS : INTERNALTESSPOS;
 				float3 normalOS : NORMAL;
-				
+				float4 ase_texcoord : TEXCOORD0;
+
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -765,7 +771,7 @@ Shader "PortalCard"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				o.positionOS = v.positionOS;
 				o.normalOS = v.normalOS;
-				
+				o.ase_texcoord = v.ase_texcoord;
 				return o;
 			}
 
@@ -809,7 +815,7 @@ Shader "PortalCard"
 				VertexInput o = (VertexInput) 0;
 				o.positionOS = patch[0].positionOS * bary.x + patch[1].positionOS * bary.y + patch[2].positionOS * bary.z;
 				o.normalOS = patch[0].normalOS * bary.x + patch[1].normalOS * bary.y + patch[2].normalOS * bary.z;
-				
+				o.ase_texcoord = patch[0].ase_texcoord * bary.x + patch[1].ase_texcoord * bary.y + patch[2].ase_texcoord * bary.z;
 				#if defined(ASE_PHONG_TESSELLATION)
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
@@ -866,7 +872,8 @@ Shader "PortalCard"
 				ase_screenPosNorm7.z = ( UNITY_NEAR_CLIP_VALUE >= 0 ) ? ase_screenPosNorm7.z : ase_screenPosNorm7.z * 0.5 + 0.5;
 				float screenDepth7 = LinearEyeDepth(SampleCameraDepth( ase_screenPosNorm7.xy ),_ZBufferParams);
 				float distanceDepth7 = abs( ( screenDepth7 - LinearEyeDepth( ase_screenPosNorm7.z,_ZBufferParams ) ) / ( _Softness ) );
-				float temp_output_10_0 = ( saturate( cameraDepthFade15 ) * saturate( distanceDepth7 ) );
+				float2 uv_RadialGradient = packedInput.ase_texcoord.yz * _RadialGradient_ST.xy + _RadialGradient_ST.zw;
+				float temp_output_10_0 = ( saturate( cameraDepthFade15 ) * saturate( distanceDepth7 ) * tex2D( _RadialGradient, uv_RadialGradient ).r );
 				
 				surfaceDescription.Alpha = temp_output_10_0;
 				surfaceDescription.AlphaClipThreshold = _AlphaCutoff;
@@ -952,6 +959,7 @@ Shader "PortalCard"
 			CBUFFER_START( UnityPerMaterial )
 			float4 _EndColor;
 			float4 _StartColor;
+			float4 _RadialGradient_ST;
 			float _DistanceToFade;
 			float _Softness;
 			float4 _EmissionColor;
@@ -1014,7 +1022,8 @@ Shader "PortalCard"
 
 			float unity_OneOverOutputBoost;
 			float unity_MaxOutputValue;
-			
+			sampler2D _RadialGradient;
+
 
 			
 			struct SurfaceDescription
@@ -1202,7 +1211,8 @@ Shader "PortalCard"
 				ase_screenPosNorm7.z = ( UNITY_NEAR_CLIP_VALUE >= 0 ) ? ase_screenPosNorm7.z : ase_screenPosNorm7.z * 0.5 + 0.5;
 				float screenDepth7 = LinearEyeDepth(SampleCameraDepth( ase_screenPosNorm7.xy ),_ZBufferParams);
 				float distanceDepth7 = abs( ( screenDepth7 - LinearEyeDepth( ase_screenPosNorm7.z,_ZBufferParams ) ) / ( _Softness ) );
-				float temp_output_10_0 = ( saturate( cameraDepthFade15 ) * saturate( distanceDepth7 ) );
+				float2 uv_RadialGradient = packedInput.ase_texcoord.xy * _RadialGradient_ST.xy + _RadialGradient_ST.zw;
+				float temp_output_10_0 = ( saturate( cameraDepthFade15 ) * saturate( distanceDepth7 ) * tex2D( _RadialGradient, uv_RadialGradient ).r );
 				
 				surfaceDescription.Color = ( lerpResult20 * temp_output_10_0 ).rgb;
 				surfaceDescription.Emission = 0;
@@ -1240,7 +1250,7 @@ Shader "PortalCard"
 			Name "SceneSelectionPass"
 			Tags { "LightMode"="SceneSelectionPass" }
 
-			Cull [_CullMode]
+			Cull Back
 			ZWrite On
 
 			ColorMask 0
@@ -1279,7 +1289,7 @@ Shader "PortalCard"
 			{
 				float3 positionOS : POSITION;
 				float3 normalOS : NORMAL;
-				
+				float4 ase_texcoord : TEXCOORD0;
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -1298,6 +1308,7 @@ Shader "PortalCard"
 			CBUFFER_START( UnityPerMaterial )
 			float4 _EndColor;
 			float4 _StartColor;
+			float4 _RadialGradient_ST;
 			float _DistanceToFade;
 			float _Softness;
 			float4 _EmissionColor;
@@ -1352,7 +1363,8 @@ Shader "PortalCard"
 				float _TessMaxDisp;
 			#endif
 			CBUFFER_END
-			
+			sampler2D _RadialGradient;
+
 
 			
 			struct SurfaceDescription
@@ -1392,9 +1404,10 @@ Shader "PortalCard"
 				float4 screenPos7 = ComputeScreenPos( ase_clipPos7 , _ProjectionParams.x );
 				o.ase_texcoord1 = screenPos7;
 				
+				o.ase_texcoord.yz = inputMesh.ase_texcoord.xy;
 				
 				//setting value to unused interpolator channels and avoid initialization warnings
-				o.ase_texcoord.yzw = 0;
+				o.ase_texcoord.w = 0;
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 				float3 defaultVertexValue = inputMesh.positionOS.xyz;
 				#else
@@ -1419,7 +1432,8 @@ Shader "PortalCard"
 			{
 				float3 positionOS : INTERNALTESSPOS;
 				float3 normalOS : NORMAL;
-				
+				float4 ase_texcoord : TEXCOORD0;
+
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -1436,7 +1450,7 @@ Shader "PortalCard"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				o.positionOS = v.positionOS;
 				o.normalOS = v.normalOS;
-				
+				o.ase_texcoord = v.ase_texcoord;
 				return o;
 			}
 
@@ -1480,7 +1494,7 @@ Shader "PortalCard"
 				VertexInput o = (VertexInput) 0;
 				o.positionOS = patch[0].positionOS * bary.x + patch[1].positionOS * bary.y + patch[2].positionOS * bary.z;
 				o.normalOS = patch[0].normalOS * bary.x + patch[1].normalOS * bary.y + patch[2].normalOS * bary.z;
-				
+				o.ase_texcoord = patch[0].ase_texcoord * bary.x + patch[1].ase_texcoord * bary.y + patch[2].ase_texcoord * bary.z;
 				#if defined(ASE_PHONG_TESSELLATION)
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
@@ -1527,7 +1541,8 @@ Shader "PortalCard"
 				ase_screenPosNorm7.z = ( UNITY_NEAR_CLIP_VALUE >= 0 ) ? ase_screenPosNorm7.z : ase_screenPosNorm7.z * 0.5 + 0.5;
 				float screenDepth7 = LinearEyeDepth(SampleCameraDepth( ase_screenPosNorm7.xy ),_ZBufferParams);
 				float distanceDepth7 = abs( ( screenDepth7 - LinearEyeDepth( ase_screenPosNorm7.z,_ZBufferParams ) ) / ( _Softness ) );
-				float temp_output_10_0 = ( saturate( cameraDepthFade15 ) * saturate( distanceDepth7 ) );
+				float2 uv_RadialGradient = packedInput.ase_texcoord.yz * _RadialGradient_ST.xy + _RadialGradient_ST.zw;
+				float temp_output_10_0 = ( saturate( cameraDepthFade15 ) * saturate( distanceDepth7 ) * tex2D( _RadialGradient, uv_RadialGradient ).r );
 				
 				surfaceDescription.Alpha = temp_output_10_0;
 				surfaceDescription.AlphaClipThreshold =  _AlphaCutoff;
@@ -1551,12 +1566,11 @@ Shader "PortalCard"
 			Name "DepthForwardOnly"
 			Tags { "LightMode"="DepthForwardOnly" }
 
-			Cull [_CullMode]
+			Cull Back
 			ZWrite On
 			Stencil
 			{
-				Ref [_StencilRefDepth]
-				WriteMask [_StencilWriteMaskDepth]
+				Ref 0
 				Comp Always
 				Pass Replace
 				Fail Keep
@@ -1599,7 +1613,7 @@ Shader "PortalCard"
 			{
 				float3 positionOS : POSITION;
 				float3 normalOS : NORMAL;
-				
+				float4 ase_texcoord : TEXCOORD0;
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -1615,6 +1629,7 @@ Shader "PortalCard"
 			CBUFFER_START( UnityPerMaterial )
 			float4 _EndColor;
 			float4 _StartColor;
+			float4 _RadialGradient_ST;
 			float _DistanceToFade;
 			float _Softness;
 			float4 _EmissionColor;
@@ -1669,7 +1684,8 @@ Shader "PortalCard"
 				float _TessMaxDisp;
 			#endif
 			CBUFFER_END
-			
+			sampler2D _RadialGradient;
+
 
 			
 			struct SurfaceDescription
@@ -1709,9 +1725,10 @@ Shader "PortalCard"
 				float4 screenPos7 = ComputeScreenPos( ase_clipPos7 , _ProjectionParams.x );
 				o.ase_texcoord1 = screenPos7;
 				
+				o.ase_texcoord.yz = inputMesh.ase_texcoord.xy;
 				
 				//setting value to unused interpolator channels and avoid initialization warnings
-				o.ase_texcoord.yzw = 0;
+				o.ase_texcoord.w = 0;
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 				float3 defaultVertexValue = inputMesh.positionOS.xyz;
 				#else
@@ -1736,7 +1753,8 @@ Shader "PortalCard"
 			{
 				float3 positionOS : INTERNALTESSPOS;
 				float3 normalOS : NORMAL;
-				
+				float4 ase_texcoord : TEXCOORD0;
+
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -1753,7 +1771,7 @@ Shader "PortalCard"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				o.positionOS = v.positionOS;
 				o.normalOS = v.normalOS;
-				
+				o.ase_texcoord = v.ase_texcoord;
 				return o;
 			}
 
@@ -1797,7 +1815,7 @@ Shader "PortalCard"
 				VertexInput o = (VertexInput) 0;
 				o.positionOS = patch[0].positionOS * bary.x + patch[1].positionOS * bary.y + patch[2].positionOS * bary.z;
 				o.normalOS = patch[0].normalOS * bary.x + patch[1].normalOS * bary.y + patch[2].normalOS * bary.z;
-				
+				o.ase_texcoord = patch[0].ase_texcoord * bary.x + patch[1].ase_texcoord * bary.y + patch[2].ase_texcoord * bary.z;
 				#if defined(ASE_PHONG_TESSELLATION)
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
@@ -1853,7 +1871,8 @@ Shader "PortalCard"
 				ase_screenPosNorm7.z = ( UNITY_NEAR_CLIP_VALUE >= 0 ) ? ase_screenPosNorm7.z : ase_screenPosNorm7.z * 0.5 + 0.5;
 				float screenDepth7 = LinearEyeDepth(SampleCameraDepth( ase_screenPosNorm7.xy ),_ZBufferParams);
 				float distanceDepth7 = abs( ( screenDepth7 - LinearEyeDepth( ase_screenPosNorm7.z,_ZBufferParams ) ) / ( _Softness ) );
-				float temp_output_10_0 = ( saturate( cameraDepthFade15 ) * saturate( distanceDepth7 ) );
+				float2 uv_RadialGradient = packedInput.ase_texcoord.yz * _RadialGradient_ST.xy + _RadialGradient_ST.zw;
+				float temp_output_10_0 = ( saturate( cameraDepthFade15 ) * saturate( distanceDepth7 ) * tex2D( _RadialGradient, uv_RadialGradient ).r );
 				
 				surfaceDescription.Alpha = temp_output_10_0;
 				surfaceDescription.AlphaClipThreshold =  _AlphaCutoff;
@@ -1889,14 +1908,13 @@ Shader "PortalCard"
 			Name "Motion Vectors"
 			Tags { "LightMode"="MotionVectors" }
 
-			Cull [_CullMode]
+			Cull Back
 
 			ZWrite On
 
 			Stencil
 			{
-				Ref [_StencilRefMV]
-				WriteMask [_StencilWriteMaskMV]
+				Ref 0
 				Comp Always
 				Pass Replace
 				Fail Keep
@@ -1941,7 +1959,7 @@ Shader "PortalCard"
 				#if defined (_ADD_PRECOMPUTED_VELOCITY)
 					float3 precomputedVelocity : TEXCOORD5;
 				#endif
-				
+				float4 ase_texcoord : TEXCOORD0;
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -1960,6 +1978,7 @@ Shader "PortalCard"
 			CBUFFER_START( UnityPerMaterial )
 			float4 _EndColor;
 			float4 _StartColor;
+			float4 _RadialGradient_ST;
 			float _DistanceToFade;
 			float _Softness;
 			float4 _EmissionColor;
@@ -2014,7 +2033,8 @@ Shader "PortalCard"
 				float _TessMaxDisp;
 			#endif
 			CBUFFER_END
-			
+			sampler2D _RadialGradient;
+
 
 			
 			struct SurfaceDescription
@@ -2050,9 +2070,10 @@ Shader "PortalCard"
 				float4 screenPos7 = ComputeScreenPos( ase_clipPos7 , _ProjectionParams.x );
 				o.ase_texcoord4 = screenPos7;
 				
+				o.ase_texcoord3.yz = inputMesh.ase_texcoord.xy;
 				
 				//setting value to unused interpolator channels and avoid initialization warnings
-				o.ase_texcoord3.yzw = 0;
+				o.ase_texcoord3.w = 0;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 				float3 defaultVertexValue = inputMesh.positionOS.xyz;
@@ -2151,7 +2172,8 @@ Shader "PortalCard"
 				#if defined (_ADD_PRECOMPUTED_VELOCITY)
 					float3 precomputedVelocity : TEXCOORD5;
 				#endif
-				
+				float4 ase_texcoord : TEXCOORD0;
+
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -2172,7 +2194,7 @@ Shader "PortalCard"
 				#if defined (_ADD_PRECOMPUTED_VELOCITY)
 					o.precomputedVelocity = v.precomputedVelocity;
 				#endif
-				
+				o.ase_texcoord = v.ase_texcoord;
 				return o;
 			}
 
@@ -2220,7 +2242,7 @@ Shader "PortalCard"
 				#if defined (_ADD_PRECOMPUTED_VELOCITY)
 					o.precomputedVelocity = patch[0].precomputedVelocity * bary.x + patch[1].precomputedVelocity * bary.y + patch[2].precomputedVelocity * bary.z;
 				#endif
-				
+				o.ase_texcoord = patch[0].ase_texcoord * bary.x + patch[1].ase_texcoord * bary.y + patch[2].ase_texcoord * bary.z;
 				#if defined(ASE_PHONG_TESSELLATION)
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
@@ -2276,7 +2298,8 @@ Shader "PortalCard"
 				ase_screenPosNorm7.z = ( UNITY_NEAR_CLIP_VALUE >= 0 ) ? ase_screenPosNorm7.z : ase_screenPosNorm7.z * 0.5 + 0.5;
 				float screenDepth7 = LinearEyeDepth(SampleCameraDepth( ase_screenPosNorm7.xy ),_ZBufferParams);
 				float distanceDepth7 = abs( ( screenDepth7 - LinearEyeDepth( ase_screenPosNorm7.z,_ZBufferParams ) ) / ( _Softness ) );
-				float temp_output_10_0 = ( saturate( cameraDepthFade15 ) * saturate( distanceDepth7 ) );
+				float2 uv_RadialGradient = packedInput.ase_texcoord3.yz * _RadialGradient_ST.xy + _RadialGradient_ST.zw;
+				float temp_output_10_0 = ( saturate( cameraDepthFade15 ) * saturate( distanceDepth7 ) * tex2D( _RadialGradient, uv_RadialGradient ).r );
 				
 				surfaceDescription.Alpha = temp_output_10_0;
 				surfaceDescription.AlphaClipThreshold = _AlphaCutoff;
@@ -2322,40 +2345,43 @@ Shader "PortalCard"
 	
 	}
 	CustomEditor "UnityEditor.Rendering.HighDefinition.HDLitGUI"
-	Fallback "Hidden/InternalErrorShader"
+	Fallback "-21"
 	
+
 }
 /*ASEBEGIN
-Version=18900
-11;416;1125;610;2056.269;830.0054;2.653047;True;False
+Version=18800
+-1920;0;1920;1019;1945.017;539.4114;1.445709;True;False
 Node;AmplifyShaderEditor.PosVertexDataNode;9;-849.9142,213.0517;Inherit;False;0;0;5;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.RangedFloatNode;8;-716.1637,425.3463;Inherit;False;Property;_Softness;Softness;2;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;16;-816.9312,117.8772;Inherit;False;Property;_DistanceToFade;DistanceToFade;3;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;8;-716.1637,425.3463;Inherit;False;Property;_Softness;Softness;2;0;Create;True;0;0;0;False;0;False;0;20;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;16;-816.9312,117.8772;Inherit;False;Property;_DistanceToFade;DistanceToFade;3;0;Create;True;0;0;0;False;0;False;0;50;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.DepthFade;7;-536.8966,299.8292;Inherit;False;True;False;True;2;1;FLOAT3;0,0,0;False;0;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.CameraDepthFade;15;-591.1324,85.98477;Inherit;False;3;2;FLOAT3;0,0,0;False;0;FLOAT;1;False;1;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.SaturateNode;18;-347.0932,16.22528;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SaturateNode;17;-269.218,222.2701;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.ColorNode;11;-826.6743,-363.6817;Inherit;False;Property;_StartColor;Start Color;0;1;[HDR];Create;True;0;0;0;False;0;False;0.5411765,0.7279669,1,0;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.SimpleMultiplyOpNode;10;-110.5538,53.09234;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SamplerNode;23;-466.0561,539.0878;Inherit;True;Property;_RadialGradient;RadialGradient;4;0;Create;True;0;0;0;False;0;False;-1;0000000000000000f000000000000000;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SaturateNode;18;-347.0932,16.22528;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.ColorNode;11;-826.6743,-363.6817;Inherit;False;Property;_StartColor;Start Color;0;1;[HDR];Create;True;0;0;0;False;0;False;0.5411765,0.7279669,1,0;0.352941,1,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;10;-110.5538,53.09234;Inherit;False;3;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.LerpOp;20;-556.4968,-367.2492;Inherit;False;3;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;2;FLOAT;0;False;1;COLOR;0
-Node;AmplifyShaderEditor.ColorNode;21;-823.1095,-538.066;Inherit;False;Property;_EndColor;End Color;1;1;[HDR];Create;True;0;0;0;False;0;False;0.508366,0.8864185,0.9056604,0;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;19;54.0657,-110.813;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;FLOAT;0;False;1;COLOR;0
 Node;AmplifyShaderEditor.TextureCoordinatesNode;22;-823.1094,-186.1155;Inherit;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;6;0,0;Float;False;False;-1;2;UnityEditor.Rendering.HighDefinition.HDLitGUI;0;1;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;DistortionVectors;0;6;DistortionVectors;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;0;False;True;4;1;False;-1;1;False;-1;4;1;False;-1;1;False;-1;True;1;False;-1;1;False;-1;False;False;False;False;False;False;False;False;False;False;False;True;0;True;-26;False;False;False;False;False;False;False;False;False;True;True;0;True;-11;255;False;-1;255;True;-12;7;False;-1;3;False;-1;1;False;-1;1;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;False;True;2;False;-1;True;3;False;-1;False;True;1;LightMode=DistortionVectors;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;5;0,0;Float;False;False;-1;2;UnityEditor.Rendering.HighDefinition.HDLitGUI;0;1;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;Motion Vectors;0;5;Motion Vectors;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;0;True;-26;False;False;False;False;False;False;False;False;False;True;True;0;True;-9;255;False;-1;255;True;-10;7;False;-1;3;False;-1;1;False;-1;1;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;False;True;1;False;-1;False;False;True;1;LightMode=MotionVectors;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;4;0,0;Float;False;False;-1;2;UnityEditor.Rendering.HighDefinition.HDLitGUI;0;1;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;DepthForwardOnly;0;4;DepthForwardOnly;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;0;True;-26;False;True;False;False;False;False;0;False;-1;False;False;False;False;False;False;False;True;True;0;True;-7;255;False;-1;255;True;-8;7;False;-1;3;False;-1;1;False;-1;1;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;False;True;1;False;-1;False;False;True;1;LightMode=DepthForwardOnly;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;3;0,0;Float;False;False;-1;2;UnityEditor.Rendering.HighDefinition.HDLitGUI;0;1;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;SceneSelectionPass;0;3;SceneSelectionPass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;0;True;-26;False;True;False;False;False;False;0;False;-1;False;False;False;False;False;False;False;False;False;True;1;False;-1;False;False;True;1;LightMode=SceneSelectionPass;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;2;0,0;Float;False;False;-1;2;UnityEditor.Rendering.HighDefinition.HDLitGUI;0;1;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;META;0;2;META;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;-1;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=Meta;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;1;0,0;Float;False;False;-1;2;UnityEditor.Rendering.HighDefinition.HDLitGUI;0;1;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;ShadowCaster;0;1;ShadowCaster;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;0;True;-26;False;True;False;False;False;False;0;False;-1;False;False;False;False;False;False;False;False;False;True;1;False;-1;False;False;True;1;LightMode=ShadowCaster;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;299.9588,-38.43638;Float;False;True;-1;2;UnityEditor.Rendering.HighDefinition.HDLitGUI;0;13;PortalCard;7f5cb9c3ea6481f469fdd856555439ef;True;Forward Unlit;0;0;Forward Unlit;9;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Transparent=Queue=0;True;5;0;False;True;1;0;True;-20;0;True;-21;1;0;True;-22;0;True;-23;False;False;False;False;False;False;False;False;False;False;False;False;True;0;True;-26;False;False;False;False;False;False;False;False;False;True;True;0;True;-5;255;False;-1;255;True;-6;7;False;-1;3;False;-1;1;False;-1;1;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;False;True;0;True;-24;True;0;True;-32;False;True;1;LightMode=ForwardOnly;False;0;Hidden/InternalErrorShader;0;0;Standard;29;Surface Type;1;  Rendering Pass ;0;  Rendering Pass;1;  Blending Mode;0;  Receive Fog;1;  Distortion;0;    Distortion Mode;0;    Distortion Only;1;  Depth Write;1;  Cull Mode;0;  Depth Test;4;Double-Sided;0;Alpha Clipping;0;Motion Vectors;1;  Add Precomputed Velocity;0;Shadow Matte;0;Cast Shadows;1;DOTS Instancing;0;GPU Instancing;1;Tessellation;0;  Phong;0;  Strength;0.5,False,-1;  Type;0;  Tess;16,False,-1;  Min;10,False,-1;  Max;25,False,-1;  Edge Length;16,False,-1;  Max Displacement;25,False,-1;Vertex Position,InvertActionOnDeselection;1;0;7;True;True;True;True;True;True;False;False;;False;0
+Node;AmplifyShaderEditor.ColorNode;21;-823.1095,-538.066;Inherit;False;Property;_EndColor;End Color;1;1;[HDR];Create;True;0;0;0;False;0;False;0.508366,0.8864185,0.9056604,0;5.212166,5.267321,1.434035,1;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;299.9588,-38.43638;Float;False;True;-1;2;UnityEditor.Rendering.HighDefinition.HDLitGUI;0;13;PortalCard;7f5cb9c3ea6481f469fdd856555439ef;True;Forward Unlit;0;0;Forward Unlit;9;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;0;True;1;0;True;-20;0;True;-21;1;0;True;-22;0;True;-23;False;False;False;False;False;False;False;False;True;0;True;-26;False;False;False;False;True;True;0;True;-5;255;False;-1;255;True;-6;7;False;-1;3;False;-1;1;False;-1;1;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;True;0;True;-24;True;0;True;-32;False;True;1;LightMode=ForwardOnly;False;0;-21;1;=;0;-22;29;Surface Type;0;  Rendering Pass ;0;  Rendering Pass;1;  Blending Mode;0;  Receive Fog;1;  Distortion;0;    Distortion Mode;0;    Distortion Only;1;  Depth Write;1;  Cull Mode;0;  Depth Test;4;Double-Sided;0;Alpha Clipping;0;Motion Vectors;1;  Add Precomputed Velocity;0;Shadow Matte;0;Cast Shadows;1;DOTS Instancing;0;GPU Instancing;1;Tessellation;0;  Phong;0;  Strength;0.5,False,-1;  Type;0;  Tess;16,False,-1;  Min;10,False,-1;  Max;25,False,-1;  Edge Length;16,False,-1;  Max Displacement;25,False,-1;Vertex Position,InvertActionOnDeselection;1;0;7;True;True;True;True;True;True;False;False;;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;6;0,0;Float;False;False;-1;2;UnityEditor.Rendering.HighDefinition.HDLitGUI;0;1;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;DistortionVectors;0;6;DistortionVectors;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;0;True;4;1;False;-1;1;False;-1;4;1;False;-1;1;False;-1;True;1;False;-1;1;False;-1;False;False;False;False;False;False;False;True;0;False;-1;False;False;False;False;True;True;0;False;-1;255;False;-1;255;False;-1;7;False;-1;3;False;-1;1;False;-1;1;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;True;2;False;-1;True;3;False;-1;False;True;1;LightMode=DistortionVectors;False;0;-1;4;=;=;=;=;0;-1;0;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;5;0,0;Float;False;False;-1;2;UnityEditor.Rendering.HighDefinition.HDLitGUI;0;1;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;Motion Vectors;0;5;Motion Vectors;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;0;False;False;False;False;False;False;False;False;False;True;0;False;-1;False;False;False;False;True;True;0;False;-1;255;False;-1;255;False;-1;7;False;-1;3;False;-1;1;False;-1;1;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;True;1;False;-1;False;False;True;1;LightMode=MotionVectors;False;0;False;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;4;0,0;Float;False;False;-1;2;UnityEditor.Rendering.HighDefinition.HDLitGUI;0;1;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;DepthForwardOnly;0;4;DepthForwardOnly;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;0;False;False;False;False;False;False;False;False;False;True;0;False;-1;True;False;False;False;False;0;False;-1;False;False;False;True;True;0;False;-1;255;False;-1;255;False;-1;7;False;-1;3;False;-1;1;False;-1;1;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;True;1;False;-1;False;False;True;1;LightMode=DepthForwardOnly;False;0;False;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;3;0,0;Float;False;False;-1;2;UnityEditor.Rendering.HighDefinition.HDLitGUI;0;1;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;SceneSelectionPass;0;3;SceneSelectionPass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;0;False;False;False;False;False;False;False;False;False;True;0;False;-1;True;False;False;False;False;0;False;-1;False;False;False;False;True;1;False;-1;False;False;True;1;LightMode=SceneSelectionPass;False;0;False;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;2;0,0;Float;False;False;-1;2;UnityEditor.Rendering.HighDefinition.HDLitGUI;0;1;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;META;0;2;META;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;0;False;False;False;False;False;False;False;False;False;True;2;False;-1;False;False;False;False;False;False;False;False;True;1;LightMode=Meta;False;0;False;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;1;0,0;Float;False;False;-1;2;UnityEditor.Rendering.HighDefinition.HDLitGUI;0;1;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;ShadowCaster;0;1;ShadowCaster;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;0;False;False;False;False;False;False;False;False;False;True;0;False;-1;True;False;False;False;False;0;False;-1;False;False;False;False;True;1;False;-1;False;False;True;1;LightMode=ShadowCaster;False;0;False;0;0;Standard;0;False;0
 WireConnection;7;1;9;0
 WireConnection;7;0;8;0
 WireConnection;15;2;9;0
 WireConnection;15;0;16;0
-WireConnection;18;0;15;0
 WireConnection;17;0;7;0
+WireConnection;18;0;15;0
 WireConnection;10;0;18;0
 WireConnection;10;1;17;0
+WireConnection;10;2;23;1
 WireConnection;20;0;21;0
 WireConnection;20;1;11;0
 WireConnection;20;2;22;2
@@ -2364,4 +2390,4 @@ WireConnection;19;1;10;0
 WireConnection;0;0;19;0
 WireConnection;0;2;10;0
 ASEEND*/
-//CHKSM=D7FFAADE1597E5EAA595EE99D4BEDCBA57B71027
+//CHKSM=C91758AEC664B3BA0E88445D84E8AC01FF41AA57

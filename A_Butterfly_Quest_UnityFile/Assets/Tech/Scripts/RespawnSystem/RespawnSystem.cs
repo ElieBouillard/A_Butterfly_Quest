@@ -82,7 +82,7 @@ public class RespawnSystem : MonoBehaviour
     public void Respawn()
     {
         deathCount++;
-        Player.transform.position = currRespawnPoint.transform.localPosition; 
+        Player.transform.position = currRespawnPoint.transform.position; 
         Player.gameObject.transform.GetChild(0).gameObject.transform.rotation = currRespawnPoint.transform.rotation;
         Player.GetComponent<HealthSystem>().Respawn();
         Shoot.Instance.ResetFreeLookBehindPlayer();

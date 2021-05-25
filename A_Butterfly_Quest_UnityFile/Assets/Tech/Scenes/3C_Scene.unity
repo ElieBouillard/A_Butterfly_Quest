@@ -120,7 +120,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 283ab78a2c6968040a167e05fa5f991f, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 548dbcf316f802247adf739686afb578, type: 2}
 --- !u!1 &9289136
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,7 +156,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9289136}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0.83, y: 1, z: 4.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1804809347}
@@ -256,7 +256,7 @@ MonoBehaviour:
   ClampVelocityY: 2
   DashSpeed: 15
   DashDuration: 0.5
-  DashCouldown: 2
+  DashCouldown: 2.75
   DashIllusionCouldown: 4
   dashDebug: 1
   IllusionMeshItem: {fileID: 2331409774595580149, guid: 94f122f9843a46e4d96d8561f4be9d95,
@@ -412,6 +412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currRespawnPoint: {x: 0, y: 0, z: 0}
+  currRotationSpawn: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &9289146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2413,7 +2414,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195822808}
   m_LocalRotation: {x: -0.038267843, y: -0.86121774, z: -0.096695215, w: 0.4974833}
-  m_LocalPosition: {x: 0.31819367, y: -1.2043552, z: -2.2706847}
+  m_LocalPosition: {x: -3.6872666, y: -0.508893, z: -3.612888}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1780449882}
@@ -3164,7 +3165,7 @@ MonoBehaviour:
     m_Radius: 4.5
   - m_Height: 3
     m_Radius: 5.5
-  - m_Height: 0
+  - m_Height: -0.75
     m_Radius: 4.5
   m_LegacyHeadingBias: 3.4028235e+38
   m_Rigs:

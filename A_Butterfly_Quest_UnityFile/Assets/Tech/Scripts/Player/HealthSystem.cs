@@ -124,6 +124,8 @@ public class HealthSystem : MonoBehaviour
         else if(m_CharacterType == CharacterType.Player)
         {
             gameObject.transform.position = m_repsawnSystem.currRespawnPoint;
+            gameObject.transform.rotation = m_repsawnSystem.currRotationSpawn;
+            
         }
     }
 }

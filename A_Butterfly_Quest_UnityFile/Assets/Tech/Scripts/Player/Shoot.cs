@@ -72,7 +72,7 @@ public class Shoot : MonoBehaviour
         if (Input.GetButtonDown("Reload"))
         {
             ButterflyInventory.Instance.StartReload();
-        }      
+        }
     }
 
     private void ShootButterfly()
@@ -93,7 +93,7 @@ public class Shoot : MonoBehaviour
             butterflyBulletScpt.GetButterflyInfo(currButterflyEntity);
 
             //Si touche un mesh alors prend les coordonees en direction
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out ShootInfo, Range, ButterflyMask))
+            if (Physics.Raycast(Camera.main.transform.position + Camera.main.transform.forward * 5f, Camera.main.transform.forward, out ShootInfo, Range, ButterflyMask))
             {
                 butterflyBulletScpt.onHit = true;
                 butterflyBulletScpt.target = ShootInfo.point;

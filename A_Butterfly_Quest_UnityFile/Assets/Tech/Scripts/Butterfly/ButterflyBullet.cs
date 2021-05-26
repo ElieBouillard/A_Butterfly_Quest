@@ -92,7 +92,7 @@ public class ButterflyBullet : MonoBehaviour
             DisableButteryfly();
         }
     }
-
+    
     public void DisableButteryfly()
     {
         gameObject.SetActive(false);

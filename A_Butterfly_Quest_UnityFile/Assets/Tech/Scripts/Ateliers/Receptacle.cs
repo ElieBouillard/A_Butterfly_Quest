@@ -12,7 +12,7 @@ public class Receptacle : MonoBehaviour
     public ButterflyNeededType m_ButterflyNeededType;
     [Range(0,20)]
     public int ValueNeeded;
-    [Range(0, 10)]
+    [Range(0, 20)]
     public float DetectionRange;
 
     private TextMesh m_text;

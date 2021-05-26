@@ -46,6 +46,9 @@ public class TipsManager : MonoBehaviour
                  
             }
         }
+
+
+       
     }
 
 

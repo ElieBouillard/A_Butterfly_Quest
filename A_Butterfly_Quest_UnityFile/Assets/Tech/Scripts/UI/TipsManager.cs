@@ -85,7 +85,6 @@ public class TipsManager : MonoBehaviour
                 m_anim.SetTrigger("BottomTip_Disappear");
                 break;
         }
-        Debug.Log("HIDEE");
     }
 
 }

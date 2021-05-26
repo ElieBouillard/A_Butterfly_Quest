@@ -436,10 +436,13 @@ MonoBehaviour:
   - Press B to give Butterfly
   - Move
   - Camera
-  - Press <sprite=8> to Aim
-  - Press <sprite=4> to Shoot in the Receptacle
+  - Press <sprite=8> + <sprite=4>to Aim and Shoot in the Receptacle
+  - Press <sprite=8> + <sprite=4> with Storm Butterfly to Destroy the Brambles
   - Press <sprite=1> to use the Net and catch Butterflies
   - Press <sprite=10> or <sprite=6>  to Equip a Butterfly
+  - Press  <sprite=3> against the Rock with Storm Butterfly to move it
+  - Press  <sprite=0> +  <sprite=3> to Jump Farther
+  - Press  <sprite=3> with Illusion Butterfly to create a clone
   bottomTipText: {fileID: 1121569129}
 --- !u!1 &1501285012
 GameObject:

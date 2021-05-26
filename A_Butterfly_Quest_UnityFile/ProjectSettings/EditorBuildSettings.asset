@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Tech/Scenes/MainMenu.unity
+    guid: 6d143a8342a276544831942c5254141a
+  - enabled: 1
     path: Assets/Tech/Scenes/3C_Scene.unity
     guid: 548e7c32b41bb5c4a84f0739693a1a1e
   - enabled: 1
@@ -15,11 +18,11 @@ EditorBuildSettings:
     path: Assets/Tech/Scenes/LD.unity
     guid: 1dfa7c48897ff53479d27641067af0d6
   - enabled: 1
-    path: Assets/Tech/Scenes/UI_HUD_Scene.unity
-    guid: 7f3002dddf378e74186ec28b8a1ba0f6
-  - enabled: 1
     path: Assets/Tech/Scenes/VOLUMES.unity
     guid: 644a7b1aba3f5c74cb247835d8bc66a7
+  - enabled: 1
+    path: Assets/Tech/Scenes/UI_HUD_Scene.unity
+    guid: 7f3002dddf378e74186ec28b8a1ba0f6
   - enabled: 1
     path: Assets/Tech/Scenes/UI_TIPS_Scene.unity
     guid: eac331f8c8c3f794bb560ee122aadef3

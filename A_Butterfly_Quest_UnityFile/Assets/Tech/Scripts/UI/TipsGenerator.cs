@@ -5,10 +5,21 @@ using UnityEngine;
 public class TipsGenerator : MonoBehaviour
 {
    public int intTip;
-    public enum endCondition { PressB, PressA, Scope, EnumShoot, Move, Dash, Net, Equip}
+    public enum endCondition { 
+        PressB, 
+        PressA, 
+        ScopeAndShoot, 
+        EnumShoot, 
+        Move, 
+        Dash, 
+        Net, 
+        Equip, 
+        BigJump}
+
     public endCondition m_condition;
     public bool isShowingTip;
-    bool move;
+
+   public bool jump;
 
 
     private void Start()
@@ -32,14 +43,14 @@ public class TipsGenerator : MonoBehaviour
     {
         if (m_condition == endCondition.PressB && isShowingTip)
         {
-            if (Input.GetKeyDown(KeyCode.Joystick1Button0))
+            if (Input.GetKeyDown(KeyCode.Joystick1Button1))
             {
                 Hide();
             }
         }
         if (m_condition == endCondition.PressA && isShowingTip)
         {
-            if (Input.GetKeyDown(KeyCode.Joystick1Button1))
+            if (Input.GetKeyDown(KeyCode.Joystick1Button0))
             {
                 Hide();
             }
@@ -65,26 +76,26 @@ public class TipsGenerator : MonoBehaviour
                 Hide();
             }
         }
-
-        //Scope into Fire
-        if (m_condition == endCondition.Scope && isShowingTip)
+        if (m_condition == endCondition.ScopeAndShoot && isShowingTip) 
         {
-            if (Input.GetAxis("Aim") > 0)
-            {
-                Hide();
-                m_condition = endCondition.EnumShoot;
-                TipsManager.instance.ShowTip(7, TipsManager.TipType.BottomTip);
-                isShowingTip = true;
-            }
-        }
-
-        if (m_condition == endCondition.EnumShoot && isShowingTip)
-        {
-            if (Input.GetAxisRaw("Fire1") == 1)
+            if (Input.GetAxis("Aim") > 0 && Input.GetAxisRaw("Fire1") == 1)
             {
                 Hide();
             }
         }
+        if (m_condition == endCondition.BigJump && isShowingTip) 
+        {
+            if (Input.GetKeyDown(KeyCode.Joystick1Button0))
+            {
+                jump = true;
+            }
+            if (jump && Input.GetKeyDown(KeyCode.Joystick1Button2))
+            {
+                Hide();
+            }
+        }
+
+
 
         //if (m_condition == endCondition.Move && isShowingTip)
         //{
@@ -99,14 +110,14 @@ public class TipsGenerator : MonoBehaviour
         //{
         //    TipsManager.instance.ShowTip(5, TipsManager.TipType.BottomTip);
         //    isShowingTip = true;
-            
+
         //        if (Input.GetAxisRaw("MouseX") != 0 || Input.GetAxisRaw("MouseY") != 0)
         //        {
         //            Hide();
         //        }
-            
+
         //}
-        
+
     }
 
 

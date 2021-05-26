@@ -409,7 +409,7 @@ RectTransform:
   m_Children:
   - {fileID: 75640588}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -430,10 +430,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_anim: {fileID: 75640589}
   BottomTipsText:
-  - Press  <sprite=1> to Dash through the wall
-  - Press  <sprite=3> to Jump over the fence
+  - Press  <sprite=3> to Dash
+  - Press  <sprite=0> to Jump over the rock
   - Press  <sprite=2> + <sprite=4> to Reload
   - Press B to give Butterfly
+  - Move
+  - Camera
+  - Press <sprite=8> to Aim
+  - Press <sprite=4> to Shoot in the Receptacle
+  - Press <sprite=1> to use the Net and catch Butterflies
+  - Press <sprite=10> or <sprite=6>  to Equip a Butterfly
   bottomTipText: {fileID: 1121569129}
 --- !u!1 &1501285012
 GameObject:
@@ -515,7 +521,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1782033444
 GameObject:

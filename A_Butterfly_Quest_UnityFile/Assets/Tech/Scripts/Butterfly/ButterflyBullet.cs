@@ -87,7 +87,7 @@ public class ButterflyBullet : MonoBehaviour
                 HitReceptacle(m_receptacle);
             }          
         }
-        else
+        else if(other.tag != "RespawnSystem")
         {
             DisableButteryfly();
         }

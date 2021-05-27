@@ -188,7 +188,7 @@ public class EnemyAIv2 : MonoBehaviour
 
             DistanceToPatrolingPos = RandomPatrolingPos.Value - transform.position;
 
-            if (DistanceToPatrolingPos.magnitude < 0.2f)
+            if (DistanceToPatrolingPos.magnitude < 1f)
             {
                 WaitForNewPatrolingPos();
 

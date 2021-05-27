@@ -16,11 +16,9 @@ public class ButterflyBullet : MonoBehaviour
     public int Type = 0;
 
     private Vector3 direction;
-    private Vector3 direction2;
     public float distPlayerToButterfly;
     public float distanceMax;
     private ButterflyEntity m_butterfly;
-    public bool onHit;
 
     public Material[] TypesMat;
 
@@ -48,16 +46,7 @@ public class ButterflyBullet : MonoBehaviour
     {
         if (enabled)
         {
-            //Si il y une cible
-            if (onHit)
-            {
-                rb.velocity = direction * ButterflySpeed * Time.deltaTime;
-            }
-            //Si le tir est dans le vide
-            else
-            {
-                rb.velocity = direction2 * ButterflySpeed * Time.fixedDeltaTime;
-            }
+            rb.velocity = direction * ButterflySpeed * Time.deltaTime;
         }            
     }
 
@@ -106,14 +95,9 @@ public class ButterflyBullet : MonoBehaviour
         currReceptacle.AddButterfly();
     }
 
-    public void GetDirection1()
+    public void GetDirection()
     {
         direction = target - transform.position;
         direction.Normalize();
-    }
-
-    public void GetDirection2()
-    {
-        direction2 = Camera.main.transform.forward;
     }
 }

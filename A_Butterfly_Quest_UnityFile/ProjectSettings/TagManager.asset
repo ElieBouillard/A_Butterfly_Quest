@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Stair
+  - RespawnSystem
   layers:
   - Default
   - TransparentFX

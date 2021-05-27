@@ -15,7 +15,7 @@ public class Shoot : MonoBehaviour
     public GameObject PrefabButterly;
     public GameObject ButterflyLauncher;
     private ButterflyEntity currButterflyEntity;
-    private LayerMask ButterflyMask;
+    public LayerMask IgnoreMask;
 
     [Header("References")]
     public Animator CamAnimator;
@@ -35,12 +35,11 @@ public class Shoot : MonoBehaviour
     {
         CameraAimingScpt = GetComponent<CameraAiming>();
         PlayerMesh = gameObject.transform.GetChild(0).gameObject;
-        ButterflyMask =~ LayerMask.GetMask("Butterfly") + LayerMask.GetMask("Player");
         Instance = this;
     }
 
     private void Update()
-    {        
+    {
         //Aim
         if (Input.GetAxis("Aim") > 0)
         {
@@ -93,17 +92,19 @@ public class Shoot : MonoBehaviour
             butterflyBulletScpt.GetButterflyInfo(currButterflyEntity);
 
             //Si touche un mesh alors prend les coordonees en direction
-            if (Physics.Raycast(Camera.main.transform.position + Camera.main.transform.forward * 5f, Camera.main.transform.forward, out ShootInfo, Range, ButterflyMask))
+            if (Physics.Raycast(Camera.main.transform.position + Camera.main.transform.forward * 5f, Camera.main.transform.forward, out ShootInfo, Range, IgnoreMask))
             {
-                butterflyBulletScpt.onHit = true;
                 butterflyBulletScpt.target = ShootInfo.point;
-                butterflyBulletScpt.GetDirection1();
+                butterflyBulletScpt.GetDirection();
+                Debug.Log("dsqq");
             }
             //Sinon le papillon part du perso pour aller tout droit
             else
             {
-                butterflyBulletScpt.GetDirection2();
-                butterflyBulletScpt.onHit = false;
+
+                Ray shootRay = new Ray(Camera.main.transform.position + Camera.main.transform.forward * 5f, Camera.main.transform.forward * Range);
+                butterflyBulletScpt.target = shootRay.GetPoint(Range);
+                butterflyBulletScpt.GetDirection();
             }
         }        
     }

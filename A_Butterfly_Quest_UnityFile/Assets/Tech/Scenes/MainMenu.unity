@@ -603,7 +603,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 1023609876}
   m_HandleRect: {fileID: 0}
   m_Direction: 0
-  m_MinValue: -80
+  m_MinValue: -70
   m_MaxValue: 0
   m_WholeNumbers: 0
   m_Value: 0
@@ -1159,6 +1159,7 @@ MonoBehaviour:
   - Environment
   - VOLUMES
   - UI_TIPS_Scene
+  - Integration
   instantLoad: 0
 --- !u!114 &372682442
 MonoBehaviour:
@@ -1802,7 +1803,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 1617648892}
   m_HandleRect: {fileID: 0}
   m_Direction: 0
-  m_MinValue: -80
+  m_MinValue: -70
   m_MaxValue: 0
   m_WholeNumbers: 0
   m_Value: 0
@@ -3415,7 +3416,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 1917717049}
   m_HandleRect: {fileID: 0}
   m_Direction: 0
-  m_MinValue: -80
+  m_MinValue: -70
   m_MaxValue: 0
   m_WholeNumbers: 0
   m_Value: 0

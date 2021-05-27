@@ -108,30 +108,30 @@ public class MenuManager : MonoBehaviour
             {
                 if (m_MenuControllerScpt.Index == 0)
                 {
-                    MasterSlider.value++;
+                    MasterSlider.value += 0.2f;
                 }
                 else if (m_MenuControllerScpt.Index == 1)
                 {
-                    MusicSlider.value++;
+                    MusicSlider.value += 0.2f;
                 }
                 else if (m_MenuControllerScpt.Index == 2)
                 {
-                    SFXSlider.value++;
+                    SFXSlider.value += 0.2f;
                 }
             }
             else if (Input.GetAxis("Horizontal") < 0)
             {
                 if (m_MenuControllerScpt.Index == 0)
                 {
-                    MasterSlider.value--;
+                    MasterSlider.value -= 0.2f;
                 }
                 else if (m_MenuControllerScpt.Index == 1)
                 {
-                    MusicSlider.value--;
+                    MusicSlider.value -= 0.2f;
                 }
                 else if (m_MenuControllerScpt.Index == 2)
                 {
-                    SFXSlider.value--;
+                    SFXSlider.value -= 0.2f;
                 }
             }
         }

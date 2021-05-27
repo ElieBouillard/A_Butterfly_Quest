@@ -11,44 +11,54 @@ public class MenuController : MonoBehaviour
 
     public GameObject[] Buttons;
 
+    public bool CanMooveInMenu;
+
     //[HideInInspector]
     public bool canPlaySound;
 
+    private void Start()
+    {
+        CanMooveInMenu = true;
+    }
+
     private void Update()
     {
-        if(Input.GetAxis("Vertical") != 0)
+        if (CanMooveInMenu)
         {
-            if (!KeyDown)
+            if (Input.GetAxis("Vertical") != 0)
             {
-                if(Input.GetAxis("Vertical")< 0)
+                if (!KeyDown)
                 {
-                    if(Index < MaxIndex)
+                    if (Input.GetAxis("Vertical") < 0)
                     {
-                        Index++;
+                        if (Index < MaxIndex)
+                        {
+                            Index++;
+                        }
+                        else
+                        {
+                            Index = 0;
+                        }
                     }
-                    else
+                    else if (Input.GetAxis("Vertical") > 0)
                     {
-                        Index = 0;
+                        if (Index > 0)
+                        {
+                            Index--;
+                        }
+                        else
+                        {
+                            Index = MaxIndex;
+                        }
                     }
+                    KeyDown = true;
+                    canPlaySound = true;
                 }
-                else if(Input.GetAxis("Vertical") > 0)
-                {
-                    if(Index > 0)
-                    {
-                        Index--;
-                    }
-                    else
-                    {
-                        Index = MaxIndex;
-                    }
-                }
-                KeyDown = true;
-                canPlaySound = true;
             }
-        }
-        else
-        {
-            KeyDown = false;
-        }
+            else
+            {
+                KeyDown = false;
+            }
+        }        
     }
 }

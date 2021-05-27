@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class MenuManager : MonoBehaviour
 {
-    public enum MenuType {StartMenu, OptionsMenu}
+    public enum MenuType {StartMenu, OptionsMenu, AudioMenu}
     [Header("Type")]
     public MenuType m_menuType;
 
@@ -13,6 +15,16 @@ public class MenuManager : MonoBehaviour
     public MainSceneManager m_MainSceneManager;
     public GameObject StartMenu;
     public GameObject OptionsMenu;
+    public GameObject AudioMenu;
+
+    [Header("UiObjects")]
+    public GameObject BlackScreenObj;
+    public GameObject Title;
+
+    [Header("Audio")]
+    public Slider MasterSlider;
+    public Slider MusicSlider;
+    public Slider SFXSlider;
 
     private MenuController m_MenuControllerScpt;
     private Animator m_Animator;
@@ -24,31 +36,40 @@ public class MenuManager : MonoBehaviour
         m_Animator = gameObject.GetComponent<Animator>();
     }
 
-    float clock;
+    float turnOffClock;
     bool canOff;
+
+    float goPlayClock;
+    bool canPlay;
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button0))
+        if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Return))
         {
             if(m_menuType == MenuType.StartMenu)
             {
                 if (m_MenuControllerScpt.Index == 0)
                 {
-                    m_MainSceneManager.LoadGameplayScenes();
+                    goPlayClock = 1f;
+                    canPlay = true;
+                    m_Animator.SetBool("Off", true);
+                    BlackScreenObj.GetComponent<Animator>().SetBool("FadeIn", true);
+                    Title.GetComponent<Animator>().SetBool("Off", true);
                 }
                 else if (m_MenuControllerScpt.Index == 1)
                 {
-                    m_Animator.SetBool("Off", true);
-                    clock = 0.5f;
-                    canOff = true;
-                    NextMenu = OptionsMenu;
+                    TurnOff(OptionsMenu);
+                }
+                else if(m_MenuControllerScpt.Index == 2)
+                {
+                    Application.Quit();
                 }
             }
             else if(m_menuType == MenuType.OptionsMenu)
             {
                 if (m_MenuControllerScpt.Index == 0)
                 {
-                    Debug.Log("AudioSection");
+                    Title.GetComponent<Animator>().SetBool("Off", true);
+                    TurnOff(AudioMenu, 0);
                 }
                 else if (m_MenuControllerScpt.Index == 1)
                 {
@@ -56,20 +77,70 @@ public class MenuManager : MonoBehaviour
                 }
                 else if (m_MenuControllerScpt.Index == 2)
                 {
-                    m_Animator.SetBool("Off", true);
-                    clock = 0.5f;
-                    canOff = true;
-                    NextMenu = StartMenu;
-                    m_MenuControllerScpt.Index = 0;
+                    TurnOff(StartMenu, 0);
+                }
+            }
+            else if(m_menuType == MenuType.AudioMenu)
+            {
+                if (m_MenuControllerScpt.Index == 0)
+                {
+                    m_MenuControllerScpt.CanMooveInMenu = false;
+                }
+                else if (m_MenuControllerScpt.Index == 1)
+                {
+                    Debug.Log("MusicVolume");
+                }
+                else if (m_MenuControllerScpt.Index == 2)
+                {
+                    Debug.Log("SFX/UIVolume");
+                }
+                else if (m_MenuControllerScpt.Index == 3)
+                {
+                    TurnOff(OptionsMenu, 0);
+                    Title.GetComponent<Animator>().SetBool("Off", false);
+                }
+            }
+        }
+
+        if (m_menuType == MenuType.AudioMenu)
+        {
+            if (Input.GetAxis("Horizontal") > 0)
+            {
+                if (m_MenuControllerScpt.Index == 0)
+                {
+                    MasterSlider.value++;
+                }
+                else if (m_MenuControllerScpt.Index == 1)
+                {
+                    MusicSlider.value++;
+                }
+                else if (m_MenuControllerScpt.Index == 2)
+                {
+                    SFXSlider.value++;
+                }
+            }
+            else if (Input.GetAxis("Horizontal") < 0)
+            {
+                if (m_MenuControllerScpt.Index == 0)
+                {
+                    MasterSlider.value--;
+                }
+                else if (m_MenuControllerScpt.Index == 1)
+                {
+                    MusicSlider.value--;
+                }
+                else if (m_MenuControllerScpt.Index == 2)
+                {
+                    SFXSlider.value--;
                 }
             }
         }
 
         if (canOff)
         {
-            if (clock > 0)
+            if (turnOffClock > 0)
             {
-                clock -= Time.deltaTime;
+                turnOffClock -= Time.deltaTime;
             }
             else
             {
@@ -77,6 +148,36 @@ public class MenuManager : MonoBehaviour
                 NextMenu.SetActive(true);
                 canOff = false;
             }
-        }       
+        }
+
+        if (canPlay)
+        {
+            if (goPlayClock > 0)
+            {
+                goPlayClock -= Time.deltaTime;
+            }
+            else
+            {
+                GoPlay();
+                canPlay = false;
+            }
+        }
+    }
+
+    private void GoPlay()
+    {
+        m_MainSceneManager.LoadGameplayScenes();
+    }
+
+    public void TurnOff(GameObject nextMenu = null, int buttonIndex = -1)
+    {
+        m_Animator.SetBool("Off", true);
+        turnOffClock = 0.5f;
+        canOff = true;
+        NextMenu = nextMenu;
+        if(buttonIndex != -1)
+        {
+            m_MenuControllerScpt.Index = buttonIndex;
+        }
     }
 }

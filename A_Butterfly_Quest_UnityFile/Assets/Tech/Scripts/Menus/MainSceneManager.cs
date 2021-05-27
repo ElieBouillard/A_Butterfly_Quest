@@ -9,8 +9,6 @@ public class MainSceneManager : MonoBehaviour
     [SerializeField]
     private bool instantLoad = false;
 
-    public GameObject ee;
-
     private void Awake()
     {
         if (instantLoad)
@@ -32,8 +30,6 @@ public class MainSceneManager : MonoBehaviour
                 SceneManager.LoadScene(scenesToLoad[i], LoadSceneMode.Additive);
             }            
         }
-        ee.SetActive(false);
-        //SceneManager.UnloadSceneAsync(0);
     }
 
 

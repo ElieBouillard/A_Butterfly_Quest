@@ -16,7 +16,7 @@ public class MenuButton : MonoBehaviour
         if (m_MenuController.Index == thisIndex)
         {
             Selected(true);
-            if (Input.GetKeyDown(KeyCode.Joystick1Button0))
+            if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Return))
             {
                 Pressed();
             }

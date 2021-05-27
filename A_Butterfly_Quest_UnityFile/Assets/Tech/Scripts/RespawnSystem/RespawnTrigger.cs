@@ -11,8 +11,13 @@ public class RespawnTrigger : MonoBehaviour
         m_RespawnPoint = gameObject.transform.GetChild(0).gameObject.transform;
     }
 
-    public Transform GetRespawnPoint()
+    public Vector3 GetCoorRespawnPoint()
     {
-        return m_RespawnPoint;
+        return transform.position + m_RespawnPoint.transform.localPosition;
+    } 
+    public Quaternion GetOrientationRespawnPoint()
+    {
+        return m_RespawnPoint.rotation;
     }
+
 }

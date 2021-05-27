@@ -13,7 +13,9 @@ public class RespawnSystem : MonoBehaviour
     private GameObject Player;
 
     [HideInInspector]
-    public Transform currRespawnPoint;
+    public Vector3 currRespawnCoord;
+    [HideInInspector]
+    public Quaternion currRespawnOrientation;
 
     private Image BlackScreenDeath;
     private float deathClock;
@@ -32,7 +34,8 @@ public class RespawnSystem : MonoBehaviour
         Player = Character3D.m_instance.gameObject;
         BlackScreenDeath = UIManager.instance.BlackScreenDeath;
         BlackScreenDeath.color = new Color(0, 0, 0, 0);
-        currRespawnPoint = gameObject.transform;
+        currRespawnCoord = gameObject.transform.position;
+        currRespawnOrientation = gameObject.transform.rotation;
     }
 
     private void Update()
@@ -82,8 +85,8 @@ public class RespawnSystem : MonoBehaviour
     public void Respawn()
     {
         deathCount++;
-        Player.transform.position = currRespawnPoint.transform.position; 
-        Player.gameObject.transform.GetChild(0).gameObject.transform.rotation = currRespawnPoint.transform.rotation;
+        Player.transform.position = currRespawnCoord;
+        Player.gameObject.transform.GetChild(0).gameObject.transform.rotation = currRespawnOrientation;
         Player.GetComponent<HealthSystem>().Respawn();
         Shoot.Instance.ResetFreeLookBehindPlayer();
     }
@@ -93,8 +96,9 @@ public class RespawnSystem : MonoBehaviour
         if (other.GetComponent<RespawnTrigger>())
         {
             RespawnTrigger currRespawnTrigger = other.GetComponent<RespawnTrigger>();
-            currRespawnPoint = currRespawnTrigger.GetRespawnPoint();
-            Debug.Log("-RESPAWNSYSTEM- Save at " + currRespawnPoint);
+            currRespawnCoord = currRespawnTrigger.GetCoorRespawnPoint();
+            currRespawnOrientation = currRespawnTrigger.GetOrientationRespawnPoint();
+            Debug.Log("-RESPAWNSYSTEM- Save at " + currRespawnCoord);
         }
     }
 }

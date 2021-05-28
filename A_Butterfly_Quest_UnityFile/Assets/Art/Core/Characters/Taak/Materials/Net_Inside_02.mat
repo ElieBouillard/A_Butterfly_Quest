@@ -20,11 +20,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Net_Inside
+  m_Name: Net_Inside_02
   m_Shader: {fileID: 4800000, guid: c66b2bbe51b959840ab81052dafd9a39, type: 3}
-  m_ShaderKeywords: _ACTIVATEEFFECT_ON _BLENDMODE_ALPHA _DISABLE_SSR _DOUBLESIDED_ON
-    _ENABLE_FOG_ON_TRANSPARENT _ISEMISSIVE_ON _ISPANNING3_ON _ISPANNING_ON _NORMALMAP_TANGENT_SPACE
-    _SURFACE_TYPE_TRANSPARENT
+  m_ShaderKeywords: _BLENDMODE_ALPHA _DISABLE_SSR _DOUBLESIDED_ON _ENABLE_FOG_ON_TRANSPARENT
+    _ISPANNING3_ON _ISPANNING_ON _NORMALMAP_TANGENT_SPACE _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
@@ -96,7 +95,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTexture:
-        m_Texture: {fileID: 2800000, guid: 14efe29213deb174eac8afc9ba1e46cf, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2c740d14e6064be488668776c8bb5ae1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
@@ -151,7 +150,7 @@ Material:
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
-    - _ActivateEffect: 1
+    - _ActivateEffect: 0
     - _ActivateEffect2: 0
     - _ActivateEffect3: 0
     - _AddPrecomputedVelocity: 0
@@ -210,7 +209,7 @@ Material:
     - _EnergyConservingSpecularColor: 1
     - _Erosion: 0
     - _Flow: 0
-    - _Glow: 19.5
+    - _Glow: 50
     - _HeightAmplitude: 0.02
     - _HeightCenter: 0.5
     - _HeightMapParametrization: 0
@@ -226,7 +225,7 @@ Material:
     - _Ior: 1.5
     - _IridescenceMask: 1
     - _IridescenceThickness: 1
-    - _IsEmissive: 1
+    - _IsEmissive: 0
     - _IsPanning: 1
     - _IsPanning3: 1
     - _IsPanning4: 0
@@ -306,9 +305,9 @@ Material:
     - _FakeFogColor: {r: 1, g: 1, b: 1, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _MainColor: {r: 0.08962262, g: 0.5386579, b: 1, a: 1}
+    - _MainColor: {r: 0.06132078, g: 0.5144766, b: 1, a: 1}
     - _PannerSpeed2: {r: 1, g: 0, b: 0, a: 0}
-    - _SecondaryColor: {r: 0, g: 0.8512273, b: 1, a: 1}
+    - _SecondaryColor: {r: 0.30308342, g: 0, b: 1, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
@@ -316,7 +315,7 @@ Material:
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
     - _UVMasking: {r: 1, g: 0, b: 0, a: 0}
-    - _UVPanningSPEED: {r: 0, g: 0.1, b: 0, a: 0}
+    - _UVPanningSPEED: {r: 1, g: 0.5, b: 0, a: 0}
     - _UnlitColor: {r: 1, g: 1, b: 1, a: 1}
     - _UnlitColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _XYSpeedZWClampAlpha: {r: 0, g: 0, b: 0, a: 1}

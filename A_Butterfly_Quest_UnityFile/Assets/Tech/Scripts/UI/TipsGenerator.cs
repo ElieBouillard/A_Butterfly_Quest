@@ -17,9 +17,8 @@ public class TipsGenerator : MonoBehaviour
         BigJump}
 
     public endCondition m_condition;
-    public bool isShowingTip;
-
-   public bool jump;
+    bool isShowingTip;
+    bool jump;
 
 
     private void Start()

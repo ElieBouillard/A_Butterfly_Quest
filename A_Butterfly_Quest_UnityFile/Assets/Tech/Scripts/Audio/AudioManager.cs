@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager instance;
     public Sound[] sounds;
     public AudioMixerGroup m_piste;
     void Awake()
     {
+        instance = this;
         foreach(Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();

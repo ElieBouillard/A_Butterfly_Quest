@@ -312,9 +312,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Range: 20
-  PrefabButterly: {fileID: 9118633422063191064, guid: 2ec3869f9051116409f9f27ffe2581fd,
-    type: 3}
-  ButterflyLauncher: {fileID: 1185888069}
   IgnoreMask:
     serializedVersion: 2
     m_Bits: 14647
@@ -431,8 +428,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CharacterType: 0
   InitialHealth: 5
+  EnemyMesh: {fileID: 0}
   CurrHealth: 0
-  TakingDamageFeedBack: {fileID: 0}
 --- !u!114 &9289147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -892,6 +889,7 @@ GameObject:
   - component: {fileID: 369401184}
   - component: {fileID: 369401186}
   - component: {fileID: 369401185}
+  - component: {fileID: 369401187}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -956,6 +954,50 @@ MonoBehaviour:
   m_freelook: {fileID: 2043809381}
   m_cameraAiming: {fileID: 0}
   OnPauseMenu: 0
+--- !u!114 &369401187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369401182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b811e11acead524d97a0546709a19ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Bush
+    clip: {fileID: 8300000, guid: 0a34d79c0958eb64a9d8720fc2cba678, type: 3}
+    volume: 0.2
+    loop: 0
+    source: {fileID: 0}
+  - name: Tips
+    clip: {fileID: 8300000, guid: bc8ddd0c57c219f4497a76893d5eb6b3, type: 3}
+    volume: 0.1
+    loop: 0
+    source: {fileID: 0}
+  - name: Key
+    clip: {fileID: 8300000, guid: 49c14afcc17340d43bf9638539e95fdf, type: 3}
+    volume: 0.2
+    loop: 0
+    source: {fileID: 0}
+  - name: CourseForet
+    clip: {fileID: 8300000, guid: 12f3cf674e0d7eb4f8010dbe258cd73f, type: 3}
+    volume: 0.5
+    loop: 0
+    source: {fileID: 0}
+  - name: Net
+    clip: {fileID: 8300000, guid: 3dc3fce6ea128f840ba9ef75ae3c472d, type: 3}
+    volume: 0.5
+    loop: 0
+    source: {fileID: 0}
+  - name: StoneDoor
+    clip: {fileID: 8300000, guid: d07c66fd2a8972047bd59ac1e15e30a8, type: 3}
+    volume: 0.5
+    loop: 0
+    source: {fileID: 0}
+  m_piste: {fileID: -685239805798855273, guid: 27a16097e22ce6b4093a9c5d789c26a7, type: 2}
 --- !u!1 &388899378
 GameObject:
   m_ObjectHideFlags: 1
@@ -1706,8 +1748,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195822808}
-  m_LocalRotation: {x: -0.06756255, y: -0.85400957, z: -0.14735563, w: 0.49435753}
-  m_LocalPosition: {x: -582.27954, y: 83.03359, z: 77.09485}
+  m_LocalRotation: {x: -0.07983309, y: -0.85008174, z: -0.1685437, w: 0.49252483}
+  m_LocalPosition: {x: -582.4007, y: 82.83965, z: 77.01776}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1780449882}

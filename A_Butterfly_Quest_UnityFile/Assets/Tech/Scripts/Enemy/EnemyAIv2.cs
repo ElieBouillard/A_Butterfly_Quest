@@ -234,7 +234,6 @@ public class EnemyAIv2 : MonoBehaviour
         AttackingPos = null;
     }
 
-
     float clockAttackAnim;
     private void Attacking()
     {
@@ -378,23 +377,13 @@ public class EnemyAIv2 : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        if (other.GetComponent<Character3D>())
+        if (other.gameObject.GetComponent<Character3D>())
         {
-            HealthSystem m_healthSystem = other.GetComponent<HealthSystem>();
+            HealthSystem m_healthSystem = other.gameObject.GetComponent<HealthSystem>();
             m_healthSystem.TakeDamage(Damage);
         }
-
-        if (other.GetComponent<ButterflyBullet>())
-        {
-            HealthSystem TargetHealth = gameObject.GetComponent<HealthSystem>();
-            if(TargetHealth != null)
-            {
-                TargetHealth.TakeDamage(other.GetComponent<ButterflyBullet>().Damage);
-            }
-        }
-
     }
 
     private void OnDrawGizmosSelected()
@@ -422,7 +411,6 @@ public class EnemyAIv2 : MonoBehaviour
             Gizmos.DrawWireSphere(InitialPos, PatrolingRange);
         }
     }
-
 
     #region animation
     private void SetAllAnimBool(bool value)

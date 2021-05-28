@@ -92,7 +92,11 @@ public class Shoot : MonoBehaviour
             if (ShootInfo.transform.gameObject.GetComponent<Receptacle>())
             {
                 Receptacle currReceptacle = ShootInfo.transform.gameObject.GetComponent<Receptacle>();
-                currReceptacle.AddButterfly();
+                if(ButterflyTypeSelection.Instance.SelectionTypeValue == (int)currReceptacle.m_ButterflyNeededType)
+                {
+                    currReceptacle.AddButterfly();
+                }               
+
             }
         }
         //Sinon le papillon part du perso pour aller tout droit

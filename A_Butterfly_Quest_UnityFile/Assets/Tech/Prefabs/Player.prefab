@@ -10836,9 +10836,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Range: 20
-  PrefabButterly: {fileID: 9118633422063191064, guid: 2ec3869f9051116409f9f27ffe2581fd,
-    type: 3}
-  ButterflyLauncher: {fileID: 8470097402540347268}
+  IgnoreMask:
+    serializedVersion: 2
+    m_Bits: 0
   CamAnimator: {fileID: 0}
   freeLookCam: {fileID: 0}
   Aiming: 0
@@ -10859,7 +10859,7 @@ MonoBehaviour:
   xAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 250
+    m_MaxSpeed: 100
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Mouse X
@@ -10877,7 +10877,7 @@ MonoBehaviour:
   yAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 250
+    m_MaxSpeed: 100
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Mouse Y
@@ -10936,7 +10936,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DeathAnimTime: 0
-  currRespawnPoint: {fileID: 0}
+  currRespawnCoord: {x: 0, y: 0, z: 0}
+  currRespawnOrientation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &8470097403645707643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10951,8 +10952,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CharacterType: 0
   InitialHealth: 5
+  EnemyMesh: {fileID: 0}
   CurrHealth: 0
-  TakingDamageFeedBack: {fileID: 0}
 --- !u!114 &8470097403645707642
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ public class HealthSystem : MonoBehaviour
     private int numOfHearts;
 
     [Header("Links")]
+    public Renderer EnemyMesh;
     private RespawnSystem m_repsawnSystem;
     private Image[] hearts;
     private Sprite fullHearth;
@@ -21,7 +22,6 @@ public class HealthSystem : MonoBehaviour
 
     [Header("Debug")]
     public float CurrHealth;
-    public Material TakingDamageFeedBack;
 
     private bool canHit;
     private float clockCanHit;
@@ -40,7 +40,8 @@ public class HealthSystem : MonoBehaviour
     {
         if(m_CharacterType == CharacterType.Player)
         {
-            if(clockCanHit > 0)
+            HUDHealthUpdate();
+            if (clockCanHit > 0)
             {
                 clockCanHit -= Time.deltaTime;
                 canHit = false;
@@ -49,8 +50,8 @@ public class HealthSystem : MonoBehaviour
             {
                 canHit = true;
             }
-            HUDHealthUpdate();
         }
+
     }
 
     private void HUDHealthUpdate()
@@ -98,6 +99,7 @@ public class HealthSystem : MonoBehaviour
         else
         {
             CurrHealth -= DamageValue;
+            EnemyMesh.material.SetFloat("_HitForce", 1f);
         }
 
         if(CurrHealth <= 0)

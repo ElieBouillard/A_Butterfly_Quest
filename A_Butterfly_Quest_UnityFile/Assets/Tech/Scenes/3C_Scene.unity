@@ -264,7 +264,6 @@ GameObject:
   - component: {fileID: 369401183}
   - component: {fileID: 369401184}
   - component: {fileID: 369401186}
-  - component: {fileID: 369401185}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -298,22 +297,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d75a0ebca627b11468c2f2f0b39180ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &369401185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 369401182}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcbc2c31a2209fc42ab87e8046306b73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pooledButterfly: []
-  ButterflyToPool: {fileID: 9118633422063191064, guid: 2ec3869f9051116409f9f27ffe2581fd,
-    type: 3}
-  amountToPool: 10
 --- !u!114 &369401186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -929,8 +912,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195822808}
-  m_LocalRotation: {x: -0.01431106, y: -0.8648702, z: -0.055187248, w: 0.4987477}
-  m_LocalPosition: {x: -581.80896, y: 83.98089, z: 77.40149}
+  m_LocalRotation: {x: 0.13688812, y: -0.84119356, z: 0.20842111, w: 0.47980794}
+  m_LocalPosition: {x: 0.9987317, y: 2.7293139, z: -1.7374549}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1780449882}
@@ -1421,7 +1404,7 @@ MonoBehaviour:
   m_YAxis:
     Value: 0.35
     m_SpeedMode: 0
-    m_MaxSpeed: 3.045526
+    m_MaxSpeed: 1.5
     m_AccelTime: 0.1
     m_DecelTime: 0.01
     m_InputAxisName: Mouse Y
@@ -1561,17 +1544,17 @@ PrefabInstance:
     - target: {fileID: 8470097403645707632, guid: 6b8aac42b52358546b98240c7f4ea7d0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 358.56
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8470097403645707632, guid: 6b8aac42b52358546b98240c7f4ea7d0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15.65
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8470097403645707632, guid: 6b8aac42b52358546b98240c7f4ea7d0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 473.44
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8470097403645707632, guid: 6b8aac42b52358546b98240c7f4ea7d0,
         type: 3}

@@ -328,7 +328,7 @@ public class Character3D : MonoBehaviour
             Physics.IgnoreCollision(GetComponent<Collider>(), illusionMeshTemp.GetComponent<Collider>(), true);
             clocksCanDash[DashType] = DashIllusionCouldown;
         }
-        m_rb.velocity = new Vector3(m_rb.velocity.x, 0, m_rb.velocity.z);
+        
     }
 
     public void DashUpdate()
@@ -344,6 +344,7 @@ public class Character3D : MonoBehaviour
         if(clockDash > 0)
         {
             clockDash -= Time.deltaTime;
+            m_rb.velocity = new Vector3(m_rb.velocity.x, 0.2f, m_rb.velocity.z);
         }
         else
         {

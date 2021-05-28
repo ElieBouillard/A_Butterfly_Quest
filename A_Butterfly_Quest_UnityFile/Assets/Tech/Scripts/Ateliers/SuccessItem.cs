@@ -18,7 +18,7 @@ public class SuccessItem : MonoBehaviour
         mode = transform.GetChild(0).gameObject;
     }
 
-    private void Update()
+    private void Update() 
     {
         transform.Rotate(new Vector3(0, 0, 50f * Time.deltaTime));
         Ray ray = new Ray(transform.position, transform.position);

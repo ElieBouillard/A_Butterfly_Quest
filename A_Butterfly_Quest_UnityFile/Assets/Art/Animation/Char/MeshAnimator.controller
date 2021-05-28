@@ -133,7 +133,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Silent Walk
-  m_Speed: 2
+  m_Speed: 8
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 5088135597826415659}
@@ -148,7 +148,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 84b0a76558a8f8a41a782cadeb8864ea, type: 2}
+  m_Motion: {fileID: 7400000, guid: bed71f643305a59439ddb8a4ab8219ab, type: 2}
   m_Tag: 
   m_SpeedParameter: Speed
   m_MirrorParameter: 
@@ -762,7 +762,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: ca86408d896817a458201e6d0b51d156, type: 2}
+    m_Motion: {fileID: 7400000, guid: 1647ec8df369e8845b04faee94a7e12c, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -1316,16 +1316,16 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: Speed
-    m_EventTreshold: 0.6
+    m_EventTreshold: 0.2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8523971233068577022}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25000012
+  m_TransitionDuration: 0.1808744
   m_TransitionOffset: 0
-  m_ExitTime: 0.6178345
+  m_ExitTime: 0.604054
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 2
@@ -1401,8 +1401,8 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Magic Shout
-  m_Speed: 1.5
+  m_Name: NetAttack
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 178784393369760475}
@@ -1415,7 +1415,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: e77b57f34e09f6f4188f1561b59401a4, type: 2}
+  m_Motion: {fileID: 7400000, guid: 48c8d81e2b755b845b71a18871d21900, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -2674,16 +2674,16 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: Speed
-    m_EventTreshold: 0.6
+    m_EventTreshold: 0.2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3441956991196364751}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.24999988
+  m_TransitionDuration: 0.08367154
   m_TransitionOffset: 0
-  m_ExitTime: 0.8126984
+  m_ExitTime: 0.54241484
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 2
@@ -3013,9 +3013,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.14264423
+  m_TransitionDuration: 0.21361417
   m_TransitionOffset: 0
-  m_ExitTime: 0.85243696
+  m_ExitTime: 0.60316026
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 2

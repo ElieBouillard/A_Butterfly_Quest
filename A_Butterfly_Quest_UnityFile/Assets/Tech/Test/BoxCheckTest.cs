@@ -12,17 +12,6 @@ public class BoxCheckTest : MonoBehaviour
 
     public bool debugGizmos;
 
-    private void Update()
-    {
-         RaycastHit hit;
-        if (Physics.BoxCast(transform.position + transform.forward * offSetForward, transform.lossyScale / 2, transform.forward, out hit, transform.rotation, maxDist))
-        {
-            //Debug.Log(hit.transform);
-            //Debug.Log("Ca touche");
-        }
-        
-    }
-
     private void OnDrawGizmos()
     {
         if (debugGizmos)

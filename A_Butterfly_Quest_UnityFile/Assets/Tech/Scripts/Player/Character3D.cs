@@ -327,14 +327,15 @@ public class Character3D : MonoBehaviour
             illusionMeshTemp = Instantiate(IllusionMeshItem, transform.position, Quaternion.identity);
             Physics.IgnoreCollision(GetComponent<Collider>(), illusionMeshTemp.GetComponent<Collider>(), true);
             clocksCanDash[DashType] = DashIllusionCouldown;
-        } 
+        }
+        m_rb.velocity = new Vector3(m_rb.velocity.x, 0, m_rb.velocity.z);
     }
 
     public void DashUpdate()
     {
         m_butterflyTypeSelectionIndex = ButterflyTypeSelection.Instance.SelectionTypeValue;
 
-        if ((Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKeyDown("left shift")) && CanDash[m_butterflyTypeSelectionIndex])
+        if ((Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKeyDown("left shift")) && CanDash[m_butterflyTypeSelectionIndex] && ButterflyInventory.Instance.ButterflyInInventory[m_butterflyTypeSelectionIndex].Count > 0)
         {
             InitDash(m_butterflyTypeSelectionIndex);
         }
@@ -347,6 +348,8 @@ public class Character3D : MonoBehaviour
         else
         {
             m_DashSpeed = 0;
+            m_rb.velocity = new Vector3(m_rb.velocity.x, m_rb.velocity.y, m_rb.velocity.z);
+
         }
 
         //DashCouldownDuration

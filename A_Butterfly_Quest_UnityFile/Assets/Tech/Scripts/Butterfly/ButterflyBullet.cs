@@ -44,6 +44,7 @@ public class ButterflyBullet : MonoBehaviour
 
     private void FixedUpdate()
     {
+        
         if (enabled)
         {
             rb.velocity = direction * ButterflySpeed * Time.deltaTime;

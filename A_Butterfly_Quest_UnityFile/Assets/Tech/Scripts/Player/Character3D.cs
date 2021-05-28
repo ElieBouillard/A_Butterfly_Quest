@@ -334,7 +334,7 @@ public class Character3D : MonoBehaviour
     {
         m_butterflyTypeSelectionIndex = ButterflyTypeSelection.Instance.SelectionTypeValue;
 
-        if ((Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKeyDown("left shift")) && CanDash[m_butterflyTypeSelectionIndex])
+        if ((Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKeyDown("left shift")) && CanDash[m_butterflyTypeSelectionIndex] && ButterflyInventory.Instance.ButterflyInInventory[m_butterflyTypeSelectionIndex].Count > 0)
         {
             InitDash(m_butterflyTypeSelectionIndex);
         }

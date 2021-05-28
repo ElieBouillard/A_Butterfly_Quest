@@ -109,9 +109,7 @@ public class Shoot : MonoBehaviour
                 ShootButterfly();
 
                 //AnimationManager.m_instance.shootTrigger = true; //Anim   
-
                 canShoot = false;
-                Debug.Log("Ca tire");
             }
         }
         if (Input.GetAxisRaw("Fire1") == 0)

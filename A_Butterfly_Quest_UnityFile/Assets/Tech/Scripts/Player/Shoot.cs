@@ -88,6 +88,12 @@ public class Shoot : MonoBehaviour
                 currHealthSystem.TakeDamage(1);
                 currHealthSystem = null;
             }
+
+            if (ShootInfo.transform.gameObject.GetComponent<Receptacle>())
+            {
+                Receptacle currReceptacle = ShootInfo.transform.gameObject.GetComponent<Receptacle>();
+                currReceptacle.AddButterfly();
+            }
         }
         //Sinon le papillon part du perso pour aller tout droit
         else

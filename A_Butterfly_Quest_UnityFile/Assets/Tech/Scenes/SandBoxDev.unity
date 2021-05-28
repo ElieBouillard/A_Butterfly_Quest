@@ -2802,6 +2802,11 @@ PrefabInstance:
       propertyPath: DoorToOpen
       value: 
       objectReference: {fileID: 245488619}
+    - target: {fileID: 8831862233269092308, guid: 1c22218c22590f749a350e6912adb2d6,
+        type: 3}
+      propertyPath: DetectionRange
+      value: 10.6
+      objectReference: {fileID: 0}
     - target: {fileID: 8831862233269092309, guid: 1c22218c22590f749a350e6912adb2d6,
         type: 3}
       propertyPath: m_Name

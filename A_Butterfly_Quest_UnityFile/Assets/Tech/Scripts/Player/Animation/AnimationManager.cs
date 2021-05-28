@@ -151,11 +151,11 @@ public class AnimationManager : MonoBehaviour
                    
                     if (Vector3.Dot(reorientateDirection.normalized, m_parentMesh.transform.forward.normalized) >= negativeReorientationTreshold && Mathf.Sign(playerDirOffset) < 0)
                     {
-                        rotationDirection = -1f;
+                        rotationDirection = 1f;
                     }
                     else
                     {
-                        rotationDirection = 1f;
+                        rotationDirection = -1f;
                     }
 
                     

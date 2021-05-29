@@ -134,6 +134,13 @@ public class Receptacle : MonoBehaviour
                 BallsToColor.Add(Balls[2]);
                 BallsToColor.Add(Balls[3]);
             }
+            if (ValueNeeded == 2)
+            {
+                Balls[1].SetActive(true);
+                Balls[3].SetActive(true);
+                BallsToColor.Add(Balls[1]);
+                BallsToColor.Add(Balls[3]);
+            }
         }                
     }
 
@@ -141,4 +148,6 @@ public class Receptacle : MonoBehaviour
     {   
         BallsToColor[index].GetComponent<MeshRenderer>().material = Material;
     }
+    
+
 }

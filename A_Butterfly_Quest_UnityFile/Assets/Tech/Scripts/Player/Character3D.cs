@@ -12,7 +12,6 @@ public class Character3D : MonoBehaviour
     public static Character3D m_instance;
 
     [Header("Physics")]
-
     [HideInInspector]
     public Rigidbody m_rb;
     Vector3 target_Velocity;
@@ -63,6 +62,9 @@ public class Character3D : MonoBehaviour
     public GameObject IllusionMeshItem;
     private GameObject illusionMeshTemp;
     private Vector3 DashDir;
+
+    [Header("Hunt")]
+    public GameObject NetCollider;
 
     [Header("KnockBack")]
     public bool inKnockBack;
@@ -172,23 +174,7 @@ public class Character3D : MonoBehaviour
         else
         {
             currentSpeed = maxSpeed/2;
-        }
-
-        //Chasse Coup de Filet
-        if (Input.GetKeyDown(KeyCode.Joystick1Button1))
-        {
-            RaycastHit[] hit;
-            m_animManager.shoutTrigger = true;
-            hit = Physics.BoxCastAll(transform.position, new Vector3(0.4f, 1f, 0.4f), PlayerMesh.transform.forward, PlayerMesh.transform.rotation, 3f);
-            for (int i = 0; i < hit.Length; i++)
-            {
-                if (hit[i].transform.gameObject.GetComponent<ButterflyBehaviour>())
-                {
-                    ButterflyBehaviour currButterfly = hit[i].transform.gameObject.GetComponent<ButterflyBehaviour>();
-                    currButterfly.AssignNewCluster(gameObject.GetComponent<ButterflyCluster>());
-                }
-            }          
-        }
+        }        
 
         //Animation Run
         //if (animator != null)
@@ -206,8 +192,8 @@ public class Character3D : MonoBehaviour
         m_animManager.playerSpeed = Mathf.Max(Mathf.Abs(Input.GetAxis("Horizontal")), Mathf.Abs(Input.GetAxis("Vertical")));
         m_animManager.playerTargetDir = inputDirection;
         //m_animManager.airboneTrigger = grounded;
-        if (grounded == false && m_animManager.wasGrounded == true && jumpTime <= -0.8f)
-        {
+        if (grounded == false && m_animManager.wasGrounded == true && (jumpTime <= -0.8f || jumpTime > +.35f))
+            {
             m_animManager.airboneTrigger = true;
             m_animManager.wasGrounded = false;
         }
@@ -232,6 +218,7 @@ public class Character3D : MonoBehaviour
         DashHudUpdate();
         KnockBackUpdate();
         StairMovementUpdate();
+        HuntNetHitUpdate();
     }
 
     void FixedUpdate()
@@ -389,6 +376,46 @@ public class Character3D : MonoBehaviour
     public bool GetCanDash(int value)
     {
         return CanDash[value];
+    }
+
+    private float clockBeforeNetHit;
+    private float clockAfterNetHit;
+    private bool canClockAfterNetHit = false;
+    
+    private void HuntNetHitUpdate()
+    {
+        //Chasse Coup de Filet
+        if (Input.GetKeyDown(KeyCode.Joystick1Button1) && !Shoot.Instance.Aiming)
+        {
+            m_animManager.shoutTrigger = true;
+
+            clockBeforeNetHit = 0.4f;
+            canClockAfterNetHit = true;
+        }
+
+        if(clockBeforeNetHit > 0)
+        {
+            clockBeforeNetHit -= Time.deltaTime;
+        }
+        else
+        {
+            if (canClockAfterNetHit)
+            {
+                clockAfterNetHit = 0.2f;
+                canClockAfterNetHit = false;
+            }
+        }
+
+        if (clockAfterNetHit > 0)
+        {
+            NetCollider.SetActive(true);
+            clockAfterNetHit -= Time.deltaTime;
+        }
+        else
+        {
+            NetCollider.SetActive(false);
+
+        }
     }
 
     public void InitKnockBack()

@@ -83,7 +83,10 @@ public class DoorBehaviour : MonoBehaviour
     {
         targetPos = openPos;
         Speed = OpenSpeed;
-        animator.SetBool("Open", true);
+        if (bigDoor)
+        {
+            animator.SetBool("Open", true);
+        }
     }
 
     private void CloseDoor()

@@ -6,7 +6,7 @@ public class InputSystem : MonoBehaviour
 {
     public Cinemachine.CinemachineFreeLook m_freelook;
 
-    public CameraAiming m_cameraAiming;
+    private CameraAiming m_cameraAiming;
 
     public static InputSystem instance;
 

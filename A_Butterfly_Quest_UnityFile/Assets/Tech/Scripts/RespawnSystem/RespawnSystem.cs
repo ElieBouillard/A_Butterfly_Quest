@@ -24,6 +24,8 @@ public class RespawnSystem : MonoBehaviour
     private float blackScreenClock;
     private int deathCount;
 
+    private bool isDead;
+
     private void Awake()
     {
         instance = this;
@@ -46,8 +48,8 @@ public class RespawnSystem : MonoBehaviour
     public void Death()
     {
         Character3D.m_instance.FreezePosPlayer(DeathAnimTime + 1.5f, true, true);
+        canDeathClock = true; 
         deathClock = DeathAnimTime;
-        canDeathClock = true;
     }
 
     public void DeathUpdate()
@@ -60,8 +62,12 @@ public class RespawnSystem : MonoBehaviour
             }
             else
             {
-                blackScreenClock = 1.5f;
-                canDeathClock = false;
+                if (!isDead)
+                {
+                    blackScreenClock = 1.5f;
+                    canDeathClock = false;
+                    isDead = true;
+                }
             }
         }       
 
@@ -89,6 +95,7 @@ public class RespawnSystem : MonoBehaviour
         Player.gameObject.transform.GetChild(0).gameObject.transform.rotation = currRespawnOrientation;
         Player.GetComponent<HealthSystem>().Respawn();
         Shoot.Instance.ResetFreeLookBehindPlayer();
+        isDead = false;
     }
 
     private void OnTriggerEnter(Collider other)

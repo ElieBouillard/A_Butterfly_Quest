@@ -32,6 +32,9 @@ public class DoorBehaviour : MonoBehaviour
     private Vector3 targetPos;
     private LayerMask PlayerMask;
 
+    public Animator animator;
+    public bool bigDoor;
+
     private void Start()
     {
         if(m_doorType == DoorType.UnlockWithKey)
@@ -56,7 +59,13 @@ public class DoorBehaviour : MonoBehaviour
             CloseDoor();
         }
 
-        transform.position = Vector3.MoveTowards(transform.position, targetPos, Speed / 10);
+        if (!bigDoor)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, Speed / 10);
+        }
+       
+            
+        
 
         if(m_doorType == DoorType.UnlockWithKey)
         {
@@ -70,11 +79,11 @@ public class DoorBehaviour : MonoBehaviour
             }
         }
     }
-
     private void OpenDoor()
     {
         targetPos = openPos;
         Speed = OpenSpeed;
+        animator.SetBool("Open", true);
     }
 
     private void CloseDoor()

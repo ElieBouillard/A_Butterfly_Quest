@@ -23,6 +23,13 @@ public class Receptacle : MonoBehaviour
     private LayerMask PlayerMask;
     private int ValueGived;
 
+    [Header("Feedback")]
+    public List<GameObject> Balls = new List<GameObject>();
+    public Material Material;
+    List<GameObject> BallsToColor = new List<GameObject>();
+    int index = 0;
+
+
     private void Start()
     {
         m_text = gameObject.transform.GetChild(0).gameObject.GetComponent<TextMesh>();
@@ -30,20 +37,24 @@ public class Receptacle : MonoBehaviour
         m_text.anchor = TextAnchor.MiddleCenter;
         PlayerMask = LayerMask.GetMask("Player");
         m_text.color = Color.red;
+
+        CheckNumberOfBalls();
     }
 
     void Update()
     {
         m_text.transform.rotation = Quaternion.LookRotation(m_text.transform.position - Camera.main.transform.position);
 
-        PlayerDetection();
-        CheckTextLenght();
         CheckValue();
+        //PlayerDetection();
+        //CheckTextLenght();
     }
 
     public void AddButterfly(int value = 1)
     {
         ValueGived += value;
+        ColorBall();
+        index++;
     }
 
     private void CheckValue()
@@ -98,5 +109,36 @@ public class Receptacle : MonoBehaviour
     {
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position, DetectionRange);
+    }
+
+    private void CheckNumberOfBalls()
+    {
+        for (int i = 0; i < Balls.Count; i++)
+        {
+            if (ValueNeeded == 5)
+            {
+                Balls[i].SetActive(true);
+                BallsToColor.Add(Balls[i]);
+            }
+            if (ValueNeeded == 1)
+            {
+                Balls[2].SetActive(true);
+                BallsToColor.Add(Balls[2]);
+            }
+            if (ValueNeeded == 3)
+            {
+                Balls[1].SetActive(true);
+                Balls[2].SetActive(true);
+                Balls[3].SetActive(true);
+                BallsToColor.Add(Balls[1]);
+                BallsToColor.Add(Balls[2]);
+                BallsToColor.Add(Balls[3]);
+            }
+        }                
+    }
+
+    private void ColorBall()
+    {   
+        BallsToColor[index].GetComponent<MeshRenderer>().material = Material;
     }
 }

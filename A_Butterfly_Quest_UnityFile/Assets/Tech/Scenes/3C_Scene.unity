@@ -318,11 +318,11 @@ MonoBehaviour:
     m_Bits: 14647
   ReceptaclesMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 16384
   lookSpeed: 0
   CamAnimator: {fileID: 508540547}
   freeLookCam: {fileID: 2043809381}
-  CamTarget: {fileID: 0}
+  CamTarget: {fileID: 1808030407}
   Aiming: 0
   canShoot: 1
   isAimAssist: 0
@@ -376,7 +376,7 @@ MonoBehaviour:
       m_RecenteringTime: 0
       m_LegacyHeadingDefinition: 0
       m_LegacyVelocityFilterStrength: 0
-  AimCamera: {fileID: 0}
+  AimCamera: {fileID: 1078631262}
 --- !u!114 &9289143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1094,9 +1094,7 @@ MonoBehaviour:
   m_AnimatedTarget: {fileID: 508540547}
   m_LayerIndex: 0
   m_ShowDebugText: 0
-  m_ChildCameras:
-  - {fileID: 1078631265}
-  - {fileID: 2043809381}
+  m_ChildCameras: []
   m_Instructions:
   - m_FullHash: 1839989770
     m_VirtualCamera: {fileID: 2043809381}
@@ -1686,7 +1684,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195822808}
-  m_LocalRotation: {x: 0.10498858, y: -0.8530946, z: 0.15256378, w: 0.48778215}
+  m_LocalRotation: {x: 0.104988575, y: -0.8530945, z: 0.15256377, w: 0.48778215}
   m_LocalPosition: {x: 9.241991, y: 2.2576876, z: -5.0181103}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

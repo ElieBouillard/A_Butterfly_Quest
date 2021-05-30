@@ -166,7 +166,6 @@ public class Shoot : MonoBehaviour
                 AimTargetTransform = AimAssitHit.transform;
             }
             isAimAssist = true;
-            Debug.Log(AimAssitHit.transform.name);
         }
     }
 

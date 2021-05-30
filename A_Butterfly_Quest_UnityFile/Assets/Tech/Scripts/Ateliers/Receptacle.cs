@@ -12,8 +12,6 @@ public class Receptacle : MonoBehaviour
     public ButterflyNeededType m_ButterflyNeededType;
     [Range(0,20)]
     public int ValueNeeded;
-    [Range(0, 20)]
-    public float DetectionRange;
 
     private Collider m_collider;
 
@@ -56,13 +54,6 @@ public class Receptacle : MonoBehaviour
             m_collider.enabled = false;
             Completed = true;
         }
-    }
-
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(transform.position, DetectionRange);
     }
 
     private void CheckNumberOfBalls()

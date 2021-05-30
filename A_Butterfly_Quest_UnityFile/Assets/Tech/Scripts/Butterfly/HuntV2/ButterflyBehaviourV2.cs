@@ -31,6 +31,11 @@ public class ButterflyBehaviourV2 : MonoBehaviour
         followPlayer = true;
     }
 
+    public int GetButterflyType()
+    {
+        return (int)m_ButterflyType;
+    }
+
     float clockChangeTargetPos;
     private void Update()
     {

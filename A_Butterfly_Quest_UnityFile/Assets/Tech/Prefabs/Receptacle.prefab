@@ -502,7 +502,7 @@ GameObject:
   - component: {fileID: 8831862233269092308}
   - component: {fileID: 8831862233269092307}
   - component: {fileID: 5853645328649005988}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Receptacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

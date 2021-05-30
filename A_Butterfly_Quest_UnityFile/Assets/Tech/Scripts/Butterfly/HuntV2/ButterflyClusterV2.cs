@@ -14,8 +14,6 @@ public class ButterflyClusterV2 : MonoBehaviour
     public float m_MaxSpeed;
     [Range(0f,10f)]
     public float Range;
-    [Range(0f, 5f)]
-    public float MinMovementRange;
 
     [Space]
     [Header("Links")]
@@ -45,9 +43,9 @@ public class ButterflyClusterV2 : MonoBehaviour
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPos.Value, Random.Range(2f, 7f)/100f);
-            Vector3 myVector = targetPos.Value - transform.position;
-            if(myVector.magnitude < 0.2f)
+            transform.position = Vector3.MoveTowards(transform.position, targetPos.Value, Random.Range(2f, 4f)/100f);
+            Vector3 myDistance = targetPos.Value - transform.position;
+            if(myDistance.magnitude < 0.2f)
             {
                 targetPos = null;
             }
@@ -58,6 +56,5 @@ public class ButterflyClusterV2 : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.parent.position, Range);
-        Gizmos.DrawWireSphere(transform.parent.position, MinMovementRange);
     }
 }

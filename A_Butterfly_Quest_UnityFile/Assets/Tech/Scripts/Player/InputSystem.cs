@@ -36,8 +36,12 @@ public class InputSystem : MonoBehaviour
         m_freelook.m_XAxis.m_MaxSpeed = UIManager.instance.GetFreeLookSensi().x;
         m_freelook.m_YAxis.m_MaxSpeed = UIManager.instance.GetFreeLookSensi().y;
         //Affect Aim Sensi
-        m_cameraAiming.xAxis.m_MaxSpeed = UIManager.instance.GetAimSensi().x;
-        m_cameraAiming.yAxis.m_MaxSpeed = UIManager.instance.GetAimSensi().y;
+        if (!Shoot.Instance.isAimAssist)
+        {
+            m_cameraAiming.xAxis.m_MaxSpeed = UIManager.instance.GetAimSensi().x;
+            m_cameraAiming.yAxis.m_MaxSpeed = UIManager.instance.GetAimSensi().y;
+        }
+  
 
         //InputPause
         if (Input.GetKeyDown(KeyCode.Escape) || (Input.GetKeyDown(KeyCode.Joystick1Button7)))

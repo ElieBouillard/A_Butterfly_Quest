@@ -319,7 +319,6 @@ MonoBehaviour:
   ReceptaclesMask:
     serializedVersion: 2
     m_Bits: 16384
-  lookSpeed: 0
   CamAnimator: {fileID: 508540547}
   freeLookCam: {fileID: 2043809381}
   CamTarget: {fileID: 1808030407}
@@ -1605,7 +1604,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1185888069}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.044, y: -0.11, z: -0.372}
+  m_LocalPosition: {x: -0.396, y: -0.178, z: 0.324}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3759734084091347758}

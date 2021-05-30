@@ -14,26 +14,46 @@ public class Shoot : MonoBehaviour
     private Vector3 HitPos;
     private RaycastHit ShootInfo;
     public LayerMask IgnoreMask;
+    public LayerMask ReceptaclesMask;
+    public float lookSpeed;
 
     [Header("References")]
     public Animator CamAnimator;
     public CinemachineFreeLook freeLookCam;
+    public GameObject CamTarget;
     private CameraAiming CameraAimingScpt;
     private GameObject PlayerMesh;
 
     [HideInInspector]
     public bool Aiming = false;
 
+    [Header("Debug")]
     public bool canShoot = true;
 
     private bool canResetFreeLookCam;
     private bool canResetAimCam;
+    private float AimXStart;
+    private float AimYStart;
+
+    [HideInInspector]
+    public bool isAimAssist;
+    [HideInInspector]
+    public RaycastHit AimAssitHit;
+    [HideInInspector]
+    public Transform AimTargetTransform;
+
 
     private void Awake()
     {
         CameraAimingScpt = GetComponent<CameraAiming>();
         PlayerMesh = gameObject.transform.GetChild(0).gameObject;
         Instance = this;
+    }
+
+    private void Start()
+    {
+        AimXStart = CameraAimingScpt.xAxis.m_MaxSpeed;
+        AimYStart = CameraAimingScpt.yAxis.m_MaxSpeed;
     }
 
     private void Update()
@@ -57,13 +77,17 @@ public class Shoot : MonoBehaviour
             }
             ResetAimCamPos();
             Aiming = false;
+            isAimAssist = false;
             CamAnimator.SetBool("AimCamera", false);
             AnimationManager.m_instance.playerFocused = false; //Anim
         }
 
         //Shoot Papillons normaux
         if (Aiming)
+        {
             ShootInputSystem();
+            AimAssitReceptacle();
+        }
 
         //Reload
         if (Input.GetButtonDown("Reload"))
@@ -131,6 +155,22 @@ public class Shoot : MonoBehaviour
         if (Input.GetAxisRaw("Fire1") == 0)
         {
             canShoot = true;
+        }
+    }
+
+    private void AimAssitReceptacle()
+    {
+        if (Physics.Raycast(Camera.main.transform.position + Camera.main.transform.forward * 5f, Camera.main.transform.forward, out AimAssitHit, Range, ReceptaclesMask))
+        {
+            CameraAimingScpt.xAxis.m_MaxSpeed = AimXStart *0.25f;
+            CameraAimingScpt.yAxis.m_MaxSpeed = AimYStart * 0.25f;
+            isAimAssist = true;
+        }
+        else
+        {
+            CameraAimingScpt.xAxis.m_MaxSpeed = AimXStart;
+            CameraAimingScpt.yAxis.m_MaxSpeed = AimYStart;
+            isAimAssist = false;
         }
     }
 

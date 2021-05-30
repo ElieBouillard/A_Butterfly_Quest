@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CameraAiming : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class CameraAiming : MonoBehaviour
     public Transform cameraLookAT;
     public Cinemachine.AxisState xAxis;
     public Cinemachine.AxisState yAxis;
+
+    public CinemachineVirtualCamera aimCamera;
 
     private void Awake()
     {

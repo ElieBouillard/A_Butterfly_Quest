@@ -11,7 +11,7 @@ public class CameraAiming : MonoBehaviour
     public Cinemachine.AxisState xAxis;
     public Cinemachine.AxisState yAxis;
 
-    public CinemachineVirtualCamera aimCamera;
+    public GameObject AimCamera;
 
     private void Awake()
     {
@@ -23,7 +23,18 @@ public class CameraAiming : MonoBehaviour
         //Orientation de la camera "Aim" avec la souris
         xAxis.Update(Time.fixedDeltaTime);
         yAxis.Update(Time.fixedDeltaTime);
-        Vector3 cameralookat = new Vector3(yAxis.Value, xAxis.Value, 0f);
-        cameraLookAT.eulerAngles = cameralookat;
+
+        if (!Shoot.Instance.isAimAssist)
+        {
+            Vector3 cameralookat = new Vector3(yAxis.Value, xAxis.Value, 0f);
+            cameraLookAT.eulerAngles = cameralookat;
+        }
+        else
+        {
+            Vector3 dir = (Shoot.Instance.AimTargetTransform.localPosition - AimCamera.transform.position).normalized;
+            cameraLookAT.transform.forward = dir;
+            xAxis.Value = cameraLookAT.eulerAngles.y;
+            yAxis.Value = cameraLookAT.eulerAngles.x;
+        }
     }
 }

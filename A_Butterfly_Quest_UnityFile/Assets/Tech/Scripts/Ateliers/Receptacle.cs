@@ -12,10 +12,7 @@ public class Receptacle : MonoBehaviour
     public ButterflyNeededType m_ButterflyNeededType;
     [Range(0,20)]
     public int ValueNeeded;
-    [Range(0, 20)]
-    public float DetectionRange;
 
-    private TextMesh m_text;
     private Collider m_collider;
 
     [Header("Debug")]
@@ -32,19 +29,14 @@ public class Receptacle : MonoBehaviour
 
     private void Start()
     {
-        m_text = gameObject.transform.GetChild(0).gameObject.GetComponent<TextMesh>();
         m_collider = gameObject.GetComponent<Collider>();
-        m_text.anchor = TextAnchor.MiddleCenter;
         PlayerMask = LayerMask.GetMask("Player");
-        m_text.color = Color.red;
 
         CheckNumberOfBalls();
     }
 
     void Update()
     {
-        m_text.transform.rotation = Quaternion.LookRotation(m_text.transform.position - Camera.main.transform.position);
-
         CheckValue();
     }
 
@@ -61,15 +53,7 @@ public class Receptacle : MonoBehaviour
         {
             m_collider.enabled = false;
             Completed = true;
-            m_text.color = Color.green;
         }
-    }
-
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(transform.position, DetectionRange);
     }
 
     private void CheckNumberOfBalls()

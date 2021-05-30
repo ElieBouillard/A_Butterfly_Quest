@@ -25,6 +25,7 @@ public class AnimationManager : MonoBehaviour
     public bool airboneTrigger;
     public bool wasGrounded;
     public bool isGrounded;
+    public bool isAlive = true;
 
     //Freeze rotations
     private bool freezeRotations;
@@ -47,6 +48,8 @@ public class AnimationManager : MonoBehaviour
     //Torso Impulse
     private bool canTorsoImpulse = false;
     private bool TorsoImpulseTrigger = false;
+    [SerializeField]
+    private float minSpeedForImpulse = .3f;
 
     //Reorientation
     private bool reorientateTrigger = false;
@@ -69,6 +72,9 @@ public class AnimationManager : MonoBehaviour
 
     //Dashing
     public bool dashTrigger;
+
+    //hit
+    public bool hitTrigger;
 
     private void Awake()
     {
@@ -128,7 +134,7 @@ public class AnimationManager : MonoBehaviour
                 if(playerSpeed > minSpeedForBending)
                 {
                     HandleTorsoBend();
-                    if (canTorsoImpulse)
+                    if (canTorsoImpulse && playerSpeed > minSpeedForImpulse)
                     {
                         TorsoImpulseTrigger = true;
                         canTorsoImpulse = false;
@@ -330,6 +336,7 @@ public class AnimationManager : MonoBehaviour
         m_anim.SetFloat("DirY", playerTargetDir.y);
         m_anim.SetBool("Focused", playerFocused);
         m_anim.SetBool("Grounded", wasGrounded);
+        m_anim.SetBool("Alive", isAlive);
         //m_anim.SetBool("Grounded",airboneTrigger);
         if (jumpTrigger)
         {
@@ -375,6 +382,12 @@ public class AnimationManager : MonoBehaviour
         {
             m_anim.SetTrigger("Airborne");
             airboneTrigger = false;
+        }
+
+        if (hitTrigger)
+        {
+            m_anim.SetTrigger("Hit");
+            hitTrigger = false;
         }
     
     }

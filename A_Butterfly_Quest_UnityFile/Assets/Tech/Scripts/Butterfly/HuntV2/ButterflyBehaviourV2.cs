@@ -31,6 +31,11 @@ public class ButterflyBehaviourV2 : MonoBehaviour
         followPlayer = true;
     }
 
+    public int GetButterflyType()
+    {
+        return (int)m_ButterflyType;
+    }
+
     float clockChangeTargetPos;
     private void Update()
     {
@@ -48,7 +53,7 @@ public class ButterflyBehaviourV2 : MonoBehaviour
             {
                 m_Speed = Random.Range(2f,  3f);
                 m_TargetPos = new Vector3(transform.parent.position.x + Random.Range(-MovementRange, MovementRange), transform.parent.position.y + Random.Range(-MovementRange, MovementRange), transform.parent.position.z + Random.Range(-MovementRange, MovementRange));
-                clockChangeTargetPos = Random.Range(0.7f,2f);
+                clockChangeTargetPos = Random.Range(0.7f,1.5f);
                 transform.LookAt(m_TargetPos);
             }
         }

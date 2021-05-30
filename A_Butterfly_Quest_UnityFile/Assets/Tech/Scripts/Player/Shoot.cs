@@ -115,6 +115,14 @@ public class Shoot : MonoBehaviour
                 currHealthSystem = null;
             }
 
+            if(currButterlfy.GetButterflyType() == 2)
+            {
+                if (ShootInfo.transform.gameObject.GetComponent<RonceBehaviour>())
+                {
+                    ShootInfo.transform.gameObject.SetActive(false);
+                }
+            }            
+
             if (ShootInfo.transform.gameObject.GetComponent<Receptacle>())
             {
                 Receptacle currReceptacle = ShootInfo.transform.gameObject.GetComponent<Receptacle>();

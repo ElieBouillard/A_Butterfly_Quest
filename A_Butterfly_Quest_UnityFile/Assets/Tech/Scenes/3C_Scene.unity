@@ -315,7 +315,7 @@ MonoBehaviour:
   Range: 20
   IgnoreMask:
     serializedVersion: 2
-    m_Bits: 14647
+    m_Bits: 31031
   ReceptaclesMask:
     serializedVersion: 2
     m_Bits: 16384
@@ -1286,8 +1286,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.6373624, y: 2.120662, z: 2.4654806}
-  m_Center: {x: 0.009749323, y: -0.2022773, z: 0.9517683}
+  m_Size: {x: 0.6373624, y: 2.489722, z: 3.1773012}
+  m_Center: {x: 0.009749323, y: -0.017747283, z: 0.595858}
 --- !u!114 &723322831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1684,7 +1684,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195822808}
-  m_LocalRotation: {x: 0.104988575, y: -0.8530945, z: 0.15256377, w: 0.48778215}
+  m_LocalRotation: {x: 0.10498858, y: -0.8530946, z: 0.15256378, w: 0.48778215}
   m_LocalPosition: {x: 9.241991, y: 2.2576876, z: -5.0181103}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2256,16 +2256,19 @@ MonoBehaviour:
   airboneTrigger: 0
   wasGrounded: 0
   isGrounded: 0
+  isAlive: 1
   TorsoBendMultiplier: 2
   torsoMaxRange: 0.45
   minSpeedForBending: 0.3
   BodyRefacingSpeed: 15
   TorsoRefacingSpeed: 5
+  minSpeedForImpulse: 0.3
   reorientateDuration: 0.3
   reorientateSpeed: 300
   shootTrigger: 0
   shoutTrigger: 0
   dashTrigger: 0
+  hitTrigger: 0
 --- !u!4 &1693783888
 Transform:
   m_ObjectHideFlags: 0
@@ -2446,7 +2449,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1808030407}
   m_LocalRotation: {x: -0, y: -0.022797944, z: -0, w: -0.9997401}
-  m_LocalPosition: {x: 0, y: 0.91, z: 0}
+  m_LocalPosition: {x: 0.11, y: 1.187, z: -0.005}
   m_LocalScale: {x: 0.7692308, y: 0.7692308, z: 0.7692308}
   m_Children: []
   m_Father: {fileID: 7255424629777524410}
@@ -9629,7 +9632,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4772139246682523796
 Transform:
   m_ObjectHideFlags: 0

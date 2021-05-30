@@ -46,13 +46,13 @@ public class ButterflyBehaviourV2 : MonoBehaviour
             }
             else
             {
-                m_Speed = Random.Range(3f, 6f);
+                m_Speed = Random.Range(2f,  3f);
                 m_TargetPos = new Vector3(transform.parent.position.x + Random.Range(-MovementRange, MovementRange), transform.parent.position.y + Random.Range(-MovementRange, MovementRange), transform.parent.position.z + Random.Range(-MovementRange, MovementRange));
-                clockChangeTargetPos = Random.Range(1f,2f);
+                clockChangeTargetPos = Random.Range(0.7f,2f);
                 transform.LookAt(m_TargetPos);
             }
         }
 
-        transform.position = Vector3.MoveTowards(transform.position, m_TargetPos, m_Speed/100);
+        transform.position = Vector3.MoveTowards(transform.position, m_TargetPos, m_Speed / 100);
     }
 }

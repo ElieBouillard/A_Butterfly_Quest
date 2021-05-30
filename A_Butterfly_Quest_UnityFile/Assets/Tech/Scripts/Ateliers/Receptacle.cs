@@ -46,8 +46,6 @@ public class Receptacle : MonoBehaviour
         m_text.transform.rotation = Quaternion.LookRotation(m_text.transform.position - Camera.main.transform.position);
 
         CheckValue();
-        //PlayerDetection();
-        //CheckTextLenght();
     }
 
     public void AddButterfly(int value = 1)
@@ -67,43 +65,6 @@ public class Receptacle : MonoBehaviour
         }
     }
 
-    private void PlayerDetection()
-    {
-        if (Physics.CheckSphere(transform.position, DetectionRange, PlayerMask))
-        {
-            m_text.gameObject.SetActive(true); 
-        }
-        else
-        {
-            m_text.gameObject.SetActive(false);
-        }
-    }
-
-    private void CheckTextLenght()
-    {
-        string ValueGivedText;
-        string ValueNeededText;
-
-        if (ValueGived < 10)
-        {
-            ValueGivedText = "0" + ValueGived;
-        }
-        else
-        {
-            ValueGivedText = ValueGived.ToString();
-        }
-
-        if (ValueGived < 10)
-        {
-            ValueNeededText = "0" + ValueNeeded;
-        }
-        else
-        {
-            ValueNeededText = ValueNeeded.ToString();
-        }
-
-        m_text.text = ValueGivedText + "/" + ValueNeededText;
-    }
 
     private void OnDrawGizmosSelected()
     {
@@ -147,7 +108,6 @@ public class Receptacle : MonoBehaviour
     private void ColorBall()
     {   
         BallsToColor[index].GetComponent<MeshRenderer>().material = Material;
-    }
-    
+    }  
 
 }

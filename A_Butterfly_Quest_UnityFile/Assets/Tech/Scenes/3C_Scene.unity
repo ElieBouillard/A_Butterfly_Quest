@@ -316,10 +316,17 @@ MonoBehaviour:
   IgnoreMask:
     serializedVersion: 2
     m_Bits: 14647
+  ReceptaclesMask:
+    serializedVersion: 2
+    m_Bits: 0
+  lookSpeed: 0
   CamAnimator: {fileID: 508540547}
   freeLookCam: {fileID: 2043809381}
+  CamTarget: {fileID: 0}
   Aiming: 0
   canShoot: 1
+  isAimAssist: 0
+  AimTargetTransform: {fileID: 0}
 --- !u!114 &9289142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,6 +376,7 @@ MonoBehaviour:
       m_RecenteringTime: 0
       m_LegacyHeadingDefinition: 0
       m_LegacyVelocityFilterStrength: 0
+  AimCamera: {fileID: 0}
 --- !u!114 &9289143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1086,7 +1094,9 @@ MonoBehaviour:
   m_AnimatedTarget: {fileID: 508540547}
   m_LayerIndex: 0
   m_ShowDebugText: 0
-  m_ChildCameras: []
+  m_ChildCameras:
+  - {fileID: 1078631265}
+  - {fileID: 2043809381}
   m_Instructions:
   - m_FullHash: 1839989770
     m_VirtualCamera: {fileID: 2043809381}
@@ -1743,7 +1753,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 7991
+    m_Bits: 24375
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

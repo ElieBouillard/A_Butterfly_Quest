@@ -328,7 +328,7 @@ public class Character3D : MonoBehaviour
         }
 
         //DashDuration
-        if(clockDash > 0)
+        if (clockDash > 0)
         {
             clockDash -= Time.deltaTime;
             m_rb.velocity = new Vector3(m_rb.velocity.x, 0.2f, m_rb.velocity.z);
@@ -413,8 +413,12 @@ public class Character3D : MonoBehaviour
         }
         else
         {
-            NetCollider.SetActive(false);
-
+            if (NetCollider.activeSelf)
+            {
+                ButterflyInventory.Instance.CatchButterfly(NetCollider.GetComponent<NetCollider>().GetButterflyAndClearList());
+                NetCollider.SetActive(false);
+            }
+ 
         }
     }
 

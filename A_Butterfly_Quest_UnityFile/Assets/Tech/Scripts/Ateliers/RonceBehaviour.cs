@@ -25,17 +25,17 @@ public class RonceBehaviour : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider collision)
-    {
-        Debug.Log("qqlchose touche les ronces");
-        if (collision.gameObject.GetComponent<ButterflyBullet>())
-        {
-            Debug.Log("balle touche ronce");
-            ButterflyBullet m_bulletScp = collision.gameObject.GetComponent<ButterflyBullet>();
-            if (m_bulletScp.Type == 2)
-            {
-                gameObject.SetActive(false);
-            }
-        }
-    }
+    //private void OnTriggerEnter(Collider collision)
+    //{
+    //    Debug.Log("qqlchose touche les ronces");
+    //    if (collision.gameObject.GetComponent<ButterflyBullet>())
+    //    {
+    //        Debug.Log("balle touche ronce");
+    //        ButterflyBullet m_bulletScp = collision.gameObject.GetComponent<ButterflyBullet>();
+    //        if (m_bulletScp.Type == 2)
+    //        {
+    //            gameObject.SetActive(false);
+    //        }
+    //    }
+    //}
 }

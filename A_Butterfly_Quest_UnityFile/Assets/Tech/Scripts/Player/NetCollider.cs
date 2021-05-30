@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class NetCollider : MonoBehaviour
 {
-
     private List<Collider> currButterflyCatch = new List<Collider>();
     private void OnTriggerEnter(Collider other)
     {
@@ -14,16 +13,15 @@ public class NetCollider : MonoBehaviour
             {
                 currButterflyCatch.Add(other);
             }
-            //other.gameObject.SetActive(false);
         }
     }
 
-    public List<GameObject> GetButterflyAndClearList()
+    public List<ButterflyBehaviourV2> GetButterflyAndClearList()
     {
-        List<GameObject> ListToGive = new List<GameObject>();
+        List<ButterflyBehaviourV2> ListToGive = new List<ButterflyBehaviourV2>();
         for (int i = 0; i < currButterflyCatch.Count; i++)
         {
-            ListToGive.Add(currButterflyCatch[i].gameObject);
+            ListToGive.Add(currButterflyCatch[i].gameObject.GetComponent<ButterflyBehaviourV2>());
         }
         currButterflyCatch.Clear();
         return ListToGive;

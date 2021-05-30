@@ -33,7 +33,6 @@ public class CameraAiming : MonoBehaviour
         {
             Vector3 dir = (Shoot.Instance.AimTargetTransform.localPosition - AimCamera.transform.position).normalized;
             cameraLookAT.transform.forward = dir;
-            Debug.DrawRay(cameraLookAT.transform.position, cameraLookAT.transform.forward * 10f, Color.blue, 1f);
             xAxis.Value = cameraLookAT.eulerAngles.y;
             yAxis.Value = cameraLookAT.eulerAngles.x;
         }

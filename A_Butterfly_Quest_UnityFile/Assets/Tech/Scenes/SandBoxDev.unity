@@ -2507,6 +2507,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7067373692771414643, guid: 1c22218c22590f749a350e6912adb2d6,
+        type: 3}
+      propertyPath: m_Name
+      value: ReceptacelMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 8204084372152870255, guid: 1c22218c22590f749a350e6912adb2d6,
         type: 3}
       propertyPath: m_RootOrder
@@ -2515,17 +2520,17 @@ PrefabInstance:
     - target: {fileID: 8204084372152870255, guid: 1c22218c22590f749a350e6912adb2d6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.69
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8204084372152870255, guid: 1c22218c22590f749a350e6912adb2d6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.08
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 8204084372152870255, guid: 1c22218c22590f749a350e6912adb2d6,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.34
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8204084372152870255, guid: 1c22218c22590f749a350e6912adb2d6,
         type: 3}

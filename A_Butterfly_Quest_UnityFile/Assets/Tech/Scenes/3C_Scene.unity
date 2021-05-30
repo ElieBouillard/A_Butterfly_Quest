@@ -322,7 +322,7 @@ MonoBehaviour:
   lookSpeed: 0
   CamAnimator: {fileID: 508540547}
   freeLookCam: {fileID: 2043809381}
-  CamTarget: {fileID: 0}
+  CamTarget: {fileID: 1808030407}
   Aiming: 0
   canShoot: 1
   isAimAssist: 0
@@ -376,7 +376,7 @@ MonoBehaviour:
       m_RecenteringTime: 0
       m_LegacyHeadingDefinition: 0
       m_LegacyVelocityFilterStrength: 0
-  AimCamera: {fileID: 0}
+  AimCamera: {fileID: 1078631262}
 --- !u!114 &9289143
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -35,11 +35,10 @@ public class Shoot : MonoBehaviour
     private float AimXStart;
     private float AimYStart;
 
-    [HideInInspector]
+    
     public bool isAimAssist;
     [HideInInspector]
     public RaycastHit AimAssitHit;
-    [HideInInspector]
     public Transform AimTargetTransform;
 
 
@@ -70,6 +69,7 @@ public class Shoot : MonoBehaviour
         //No Aim
         else if (Input.GetAxis("Aim") <= 0)
         {
+            isAimAssist = false;
             if (canResetFreeLookCam)
             {
                 ResetFreeLookCamPos();
@@ -77,7 +77,6 @@ public class Shoot : MonoBehaviour
             }
             ResetAimCamPos();
             Aiming = false;
-            isAimAssist = false;
             CamAnimator.SetBool("AimCamera", false);
             AnimationManager.m_instance.playerFocused = false; //Anim
         }
@@ -162,15 +161,12 @@ public class Shoot : MonoBehaviour
     {
         if (Physics.Raycast(Camera.main.transform.position + Camera.main.transform.forward * 5f, Camera.main.transform.forward, out AimAssitHit, Range, ReceptaclesMask))
         {
-            CameraAimingScpt.xAxis.m_MaxSpeed = AimXStart *0.25f;
-            CameraAimingScpt.yAxis.m_MaxSpeed = AimYStart * 0.25f;
+            if (!isAimAssist)
+            {
+                AimTargetTransform = AimAssitHit.transform;
+            }
             isAimAssist = true;
-        }
-        else
-        {
-            CameraAimingScpt.xAxis.m_MaxSpeed = AimXStart;
-            CameraAimingScpt.yAxis.m_MaxSpeed = AimYStart;
-            isAimAssist = false;
+            Debug.Log(AimAssitHit.transform.name);
         }
     }
 

@@ -11,7 +11,6 @@ public class ButterflyClusterV2 : MonoBehaviour
     public ClusterType m_ClusterType;
     public int ButterflyAmountInCluster;
     public float m_Speed;
-    public float m_MaxSpeed;
     [Range(0f,10f)]
     public float Range;
 

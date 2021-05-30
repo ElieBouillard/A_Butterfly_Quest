@@ -30,16 +30,24 @@ public class ButterflyClusterV2 : MonoBehaviour
             currInstantiateButterfly.GetComponent<ButterflyBehaviourV2>().SetButterFlyTypeAtSpawn((int)m_ClusterType);
         }
     }
-
+    float clockMove;
     private void Update()
     {
         if(targetPos == null)
         {
-            targetPos = new Vector3(transform.parent.transform.position.x + Random.Range(-Range, Range), transform.parent.transform.position.y, transform.parent.transform.position.z + Random.Range(-Range, Range));
-            if (Vector3.Distance(transform.parent.transform.position, targetPos.Value) > Range)
+            if(clockMove > 0)
             {
-                targetPos = null;
-            } 
+                clockMove -= Time.deltaTime;
+            }
+            else
+            {
+                targetPos = new Vector3(transform.parent.transform.position.x + Random.Range(-Range, Range), transform.parent.transform.position.y, transform.parent.transform.position.z + Random.Range(-Range, Range));
+                if (Vector3.Distance(transform.parent.transform.position, targetPos.Value) > Range)
+                {
+                    targetPos = null;
+                }
+            }
+            
         }
         else
         {
@@ -48,6 +56,7 @@ public class ButterflyClusterV2 : MonoBehaviour
             if(myDistance.magnitude < 0.2f)
             {
                 targetPos = null;
+                clockMove = Random.Range(0f, 2f);
             }
         }
     }

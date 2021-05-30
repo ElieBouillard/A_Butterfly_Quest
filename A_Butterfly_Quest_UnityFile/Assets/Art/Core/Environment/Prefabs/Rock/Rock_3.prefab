@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4918482175400003282}
-  - component: {fileID: 4918482175400003285}
   m_Layer: 0
   m_Name: Rock_3
   m_TagString: Untagged
@@ -24,7 +23,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4918482175400003284}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.023101, y: 0.023101, z: 0.023101}
   m_Children:
@@ -32,20 +31,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &4918482175400003285
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4918482175400003284}
-  m_Material: {fileID: 13400000, guid: 06906d0e58272134fa14a4f7f2375c36, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!1 &4918482176148859896
 GameObject:
   m_ObjectHideFlags: 0
@@ -57,7 +42,8 @@ GameObject:
   - component: {fileID: 4918482176148859897}
   - component: {fileID: 4918482176148859847}
   - component: {fileID: 4918482176148859846}
-  m_Layer: 0
+  - component: {fileID: 5418180655943770104}
+  m_Layer: 8
   m_Name: Group46007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,3 +111,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &5418180655943770104
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4918482176148859896}
+  m_Material: {fileID: 13400000, guid: 06906d0e58272134fa14a4f7f2375c36, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5427572749521767095, guid: e1cfacc49221f1849a72fc3d33a2a377, type: 3}

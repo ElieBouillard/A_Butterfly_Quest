@@ -10,11 +10,18 @@ public class ButterflyClusterV2 : MonoBehaviour
     [Header("Settings")]
     public ClusterType m_ClusterType;
     public int ButterflyAmountInCluster;
+    public float m_Speed;
+    public float m_MaxSpeed;
+    [Range(0f,10f)]
+    public float Range;
+    [Range(0f, 5f)]
+    public float MinMovementRange;
 
     [Space]
     [Header("Links")]
     public GameObject ButterflyObj;
 
+    private Vector3? targetPos;
 
     private void Start()
     {
@@ -28,6 +35,29 @@ public class ButterflyClusterV2 : MonoBehaviour
 
     private void Update()
     {
-       
+        if(targetPos == null)
+        {
+            targetPos = new Vector3(transform.parent.transform.position.x + Random.Range(-Range, Range), transform.parent.transform.position.y, transform.parent.transform.position.z + Random.Range(-Range, Range));
+            if (Vector3.Distance(transform.parent.transform.position, targetPos.Value) > Range)
+            {
+                targetPos = null;
+            } 
+        }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPos.Value, Random.Range(2f, 7f)/100f);
+            Vector3 myVector = targetPos.Value - transform.position;
+            if(myVector.magnitude < 0.2f)
+            {
+                targetPos = null;
+            }
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.parent.position, Range);
+        Gizmos.DrawWireSphere(transform.parent.position, MinMovementRange);
     }
 }

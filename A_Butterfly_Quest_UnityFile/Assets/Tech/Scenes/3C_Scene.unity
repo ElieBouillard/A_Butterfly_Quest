@@ -156,7 +156,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9289136}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.75, z: 0}
+  m_LocalPosition: {x: -6.96, y: 1.75, z: -4.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7255424629777524410}
@@ -386,6 +386,8 @@ MonoBehaviour:
   ButterflyTempeteInInventoryValue: 0
   ButterflyInTravelValue: 0
   ButterflyToReloadValue: 0
+  ButterflyInTravel: []
+  ButterflyToReload: []
 --- !u!114 &9289144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1276,8 +1278,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.6373624, y: 2.120662, z: 2.2633746}
-  m_Center: {x: 0.009749323, y: -0.2022773, z: 1.0528213}
+  m_Size: {x: 0.6373624, y: 2.120662, z: 2.4654806}
+  m_Center: {x: 0.009749323, y: -0.2022773, z: 0.9517683}
 --- !u!114 &723322831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1674,8 +1676,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195822808}
-  m_LocalRotation: {x: 0.10498855, y: -0.8530945, z: 0.15256372, w: 0.48778218}
-  m_LocalPosition: {x: 1.6716641, y: 2.865241, z: -1.3417615}
+  m_LocalRotation: {x: 0.10498858, y: -0.8530946, z: 0.15256378, w: 0.48778215}
+  m_LocalPosition: {x: 9.241991, y: 2.2576876, z: -5.0181103}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1780449882}

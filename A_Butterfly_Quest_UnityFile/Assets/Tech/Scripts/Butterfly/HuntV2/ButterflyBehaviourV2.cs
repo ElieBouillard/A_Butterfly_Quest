@@ -14,11 +14,17 @@ public class ButterflyBehaviourV2 : MonoBehaviour
 
     private GameObject player;
     private bool followPlayer;
+    private GameObject butterflyLauncher;
+    private GameObject PlayerCluster;
+    private bool randomMove;
 
     private void Start()
     {
         player = Character3D.m_instance.gameObject;
         m_TargetPos = transform.position;
+        PlayerCluster = GameObject.Find("PlayerCluster");
+        butterflyLauncher = GameObject.Find("ButterflyLauncher");
+        randomMove = true;
     }
 
     public void SetButterFlyTypeAtSpawn(int currButterflyType)
@@ -26,9 +32,19 @@ public class ButterflyBehaviourV2 : MonoBehaviour
         m_ButterflyType = (ButterflyType)currButterflyType;
     }
 
+    public void SetButterFlyToLauncherPos()
+    {
+        randomMove = false;
+        m_Speed = 10f;
+        m_TargetPos = butterflyLauncher.transform.position;
+        gameObject.transform.forward = player.transform.GetChild(0).transform.forward;
+    }
+
     public void SetCatched()
     {
-        followPlayer = true;
+        randomMove = true;
+        transform.SetParent(PlayerCluster.transform);
+        gameObject.GetComponent<Collider>().enabled = false;
     }
 
     public int GetButterflyType()
@@ -39,25 +55,20 @@ public class ButterflyBehaviourV2 : MonoBehaviour
     float clockChangeTargetPos;
     private void Update()
     {
-        if (followPlayer)
+        if (randomMove)
         {
-            m_TargetPos = player.transform.position;
-        }
-        else
-        {
-            if(clockChangeTargetPos > 0)
+            if (clockChangeTargetPos > 0)
             {
                 clockChangeTargetPos -= Time.deltaTime;
             }
             else
             {
-                m_Speed = Random.Range(2f,  3f);
+                m_Speed = Random.Range(2f, 3f);
                 m_TargetPos = new Vector3(transform.parent.position.x + Random.Range(-MovementRange, MovementRange), transform.parent.position.y + Random.Range(-MovementRange, MovementRange), transform.parent.position.z + Random.Range(-MovementRange, MovementRange));
-                clockChangeTargetPos = Random.Range(0.7f,1.5f);
+                clockChangeTargetPos = Random.Range(0.7f, 1.5f);
                 transform.LookAt(m_TargetPos);
             }
         }
-
         transform.position = Vector3.MoveTowards(transform.position, m_TargetPos, m_Speed / 100);
     }
 }

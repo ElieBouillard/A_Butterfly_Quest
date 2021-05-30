@@ -72,15 +72,18 @@ public class Shoot : MonoBehaviour
         }
     }
 
-    private void ShootButterfly()
+    private void ShootButterfly(int ButterflyType)
     {
+        ButterflyBehaviourV2 currButterlfy;
+        currButterlfy = ButterflyInventory.Instance.GetFirstButterfly(ButterflyType);
+        ButterflyInventory.Instance.ShootedButterfly(currButterlfy);
+
         //Si touche un mesh alors prend les coordonees en direction
         if (Physics.Raycast(Camera.main.transform.position + Camera.main.transform.forward * 5f, Camera.main.transform.forward, out ShootInfo, Range, IgnoreMask))
         {
             Debug.DrawRay(Camera.main.transform.position + Camera.main.transform.forward * 5f, Camera.main.transform.forward * Range, Color.red, 5f);
             HitPos = ShootInfo.point;
             Debug.DrawRay(HitPos, Vector3.up * 5f, Color.red, 5f);
-            /*ShootInfo.transform.gameObject.TryGetComponent<HealthSystem>(out currHealthSystem)*/
 
             if (ShootInfo.transform.gameObject.GetComponent<HealthSystem>())
             {
@@ -95,19 +98,23 @@ public class Shoot : MonoBehaviour
                 if(ButterflyTypeSelection.Instance.SelectionTypeValue == (int)currReceptacle.m_ButterflyNeededType)
                 {
                     currReceptacle.AddButterfly();
-                }               
-
+                }
+            }
+            else
+            {
+                ButterflyInventory.Instance.AddToReloadList(currButterlfy);
             }
         }
-        //Sinon le papillon part du perso pour aller tout droit
         else
         {
-
             Ray shootRay = new Ray(Camera.main.transform.position + Camera.main.transform.forward * 5f, Camera.main.transform.forward * Range);
             Debug.DrawRay(Camera.main.transform.position + Camera.main.transform.forward * 5f, Camera.main.transform.forward * Range, Color.blue, 5f);
             HitPos = shootRay.GetPoint(Range);
             Debug.DrawRay(HitPos, Vector3.up * 5f, Color.blue, 5f);
+            ButterflyInventory.Instance.AddToReloadList(currButterlfy);
         }
+
+
     }
 
     private void ShootInputSystem()
@@ -116,8 +123,7 @@ public class Shoot : MonoBehaviour
         {
             if (Input.GetAxisRaw("Fire1") == 1 && canShoot)
             {
-                ShootButterfly();
-
+                ShootButterfly(ButterflyTypeSelection.Instance.SelectionTypeValue);
                 //AnimationManager.m_instance.shootTrigger = true; //Anim   
                 canShoot = false;
             }

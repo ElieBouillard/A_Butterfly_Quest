@@ -14,10 +14,10 @@ public class ButterflyInventory : MonoBehaviour
     public int ButterflyInTravelValue;
     public int ButterflyToReloadValue;
 
-    public List<List<ButterflyEntity>> ButterflyInInventory = new List<List<ButterflyEntity>>(3);
+    public List<List<ButterflyBehaviourV2>> ButterflyInInventory = new List<List<ButterflyBehaviourV2>>(3);
 
-    public List<ButterflyEntity> ButterflyInTravel = new List<ButterflyEntity>();
-    public List<ButterflyEntity> ButterflyToReload = new List<ButterflyEntity>();
+    public List<ButterflyBehaviourV2> ButterflyInTravel = new List<ButterflyBehaviourV2>();
+    public List<ButterflyBehaviourV2> ButterflyToReload = new List<ButterflyBehaviourV2>();
 
     private float _clock;
     private bool _reloading = false;
@@ -31,38 +31,32 @@ public class ButterflyInventory : MonoBehaviour
     {
         for (int i = 0; i <= ButterflyTypeSelection.Instance.MaxButterflyType; i++)
         {
-            ButterflyInInventory.Add(new List<ButterflyEntity>());
+            ButterflyInInventory.Add(new List<ButterflyBehaviourV2>());
         }
     }
 
-    public void CatchButterfly(int butterflyNumbre,ButterflyEntity currButterfly)
+    public void CatchButterfly(List<ButterflyBehaviourV2> currButterfly)
     {
-        for (int i = 0; i < butterflyNumbre; i++)
+        for (int i = 0; i < currButterfly.Count; i++)
         {
-            ButterflyInInventory[(int)currButterfly.ButterflyType].Add(currButterfly);
-        }        
+            ButterflyInInventory[(int)currButterfly[i].m_ButterflyType].Add(currButterfly[i]);
+            currButterfly[i].SetCatched();
+        }
     }
 
-    public void ShootedButterfly(ButterflyEntity currButterfly)
+    public void ShootedButterfly(ButterflyBehaviourV2 currButterfly)
     {
-        ButterflyInTravel.Add(currButterfly);
-        ButterflyInInventory[(int)currButterfly.ButterflyType].Remove(currButterfly);
+        ButterflyInInventory[(int)currButterfly.m_ButterflyType].Remove(currButterfly);
     }
 
-    public void AddToReloadList(ButterflyEntity currButterfly)
+    public void AddToReloadList(ButterflyBehaviourV2 currButterfly)
     {
         ButterflyToReload.Add(currButterfly);
-        ButterflyInTravel.Remove(currButterfly);
-    }
-
-    public void RemoveTravelList(ButterflyEntity currButterfly)
-    {
-        ButterflyInTravel.Remove(currButterfly);
     }
 
     public bool ReceptacleGiveButterfly(int ButterflyType)
     {
-        if(ButterflyInInventoryValue > 0)
+        if (ButterflyInInventoryValue > 0)
         {
             ButterflyInInventory[ButterflyType].RemoveAt(ButterflyInInventoryValue - 1);
             return true;
@@ -82,12 +76,12 @@ public class ButterflyInventory : MonoBehaviour
 
     public void Reload()
     {
-        if ( ButterflyToReload.Count > 0)
+        if (ButterflyToReload.Count > 0)
         {
             int reloadValue = ButterflyToReload.Count;
             for (int i = 0; i < ButterflyToReload.Count; i++)
-            { 
-                ButterflyInInventory[(int)ButterflyToReload[i].ButterflyType].Add(ButterflyToReload[i]);
+            {
+                ButterflyInInventory[(int)ButterflyToReload[i].m_ButterflyType].Add(ButterflyToReload[i]);
             }
             ButterflyToReload.Clear();
             Debug.Log("Reloading success with " + reloadValue + " butterfly !");
@@ -97,6 +91,11 @@ public class ButterflyInventory : MonoBehaviour
             Debug.Log("No butterfly to reload !");
         }
         _reloading = false;
+    }
+
+    public ButterflyBehaviourV2 GetFirstButterfly(int index)
+    {
+        return ButterflyInInventory[index][0];
     }
 
     private void Update()
@@ -112,7 +111,7 @@ public class ButterflyInventory : MonoBehaviour
         if (_reloading)
         {
             _clock -= Time.deltaTime;
-            if(_clock < 0)
+            if (_clock < 0)
             {
                 Reload();
             }

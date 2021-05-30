@@ -89,10 +89,10 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2029695501312832142}
   m_Material: {fileID: 13400000, guid: 06906d0e58272134fa14a4f7f2375c36, type: 2}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -951608786083511892, guid: b587db4500397ef4497913a92241a61d, type: 3}
 --- !u!114 &4687137491025903018
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Activated: 0
-  PosY: 0
-  Radius: 0
-  trueColor: {fileID: 0}
-  falseColor: {fileID: 0}
+  PosY: 0.7
+  Radius: 0.5
+  trueColor: {fileID: 2100000, guid: 43a9c6e396bd6e04c8d161f066391328, type: 2}
+  falseColor: {fileID: 2100000, guid: aa8426cabc882bc4f8f9327826584187, type: 2}

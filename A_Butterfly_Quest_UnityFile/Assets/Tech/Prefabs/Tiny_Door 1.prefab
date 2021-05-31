@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2029695501312832142
+--- !u!1 &3463832103287613029
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1684695773922846772}
-  - component: {fileID: 2364080240865240977}
-  - component: {fileID: 516244064389698395}
-  - component: {fileID: 1130802412950180223}
-  - component: {fileID: 4687137491025903018}
-  m_Layer: 8
-  m_Name: Pressure_plate
+  - component: {fileID: 4276678425537494239}
+  - component: {fileID: 933946942498681722}
+  - component: {fileID: 3103820729169397680}
+  - component: {fileID: 371887899179162042}
+  m_Layer: 0
+  m_Name: Tiny_Door 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1684695773922846772
+--- !u!4 &4276678425537494239
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2029695501312832142}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 58.09, y: 13.548316, z: 267.92}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_GameObject: {fileID: 3463832103287613029}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.1934478, y: 0.36266363, z: 1.2976525}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
---- !u!33 &2364080240865240977
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &933946942498681722
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2029695501312832142}
-  m_Mesh: {fileID: -951608786083511892, guid: b587db4500397ef4497913a92241a61d, type: 3}
---- !u!23 &516244064389698395
+  m_GameObject: {fileID: 3463832103287613029}
+  m_Mesh: {fileID: -1655681617800098922, guid: 92238477844d1f94096e57fe954662d2, type: 3}
+--- !u!23 &3103820729169397680
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2029695501312832142}
+  m_GameObject: {fileID: 3463832103287613029}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -60,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 417c96e6b3d308047bb608c05b35640c, type: 2}
+  - {fileID: 2100000, guid: 60d9bd2d129a13744976be5e907e7c8f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -81,34 +80,24 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &1130802412950180223
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2029695501312832142}
-  m_Material: {fileID: 13400000, guid: 06906d0e58272134fa14a4f7f2375c36, type: 2}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -951608786083511892, guid: b587db4500397ef4497913a92241a61d, type: 3}
---- !u!114 &4687137491025903018
+--- !u!114 &371887899179162042
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2029695501312832142}
+  m_GameObject: {fileID: 3463832103287613029}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17020e58e2d2c8d4e82a9fbdb4304d74, type: 3}
+  m_Script: {fileID: 11500000, guid: c616af3062cca7e41b1e81dd5c653021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Activated: 0
-  speed: 0.005
-  range: 0.1
-  targetPos: {x: 0, y: 0, z: 0}
-  startPos: {x: 0, y: 0, z: 0}
+  m_doorType: 0
+  OpenSpeed: 0
+  CloseSpeed: 0
+  KeyNeeded: 0
+  DetectionPlayerRange: 0
+  ItemsWichUnlock: []
+  isOpen: 0
+  animator: {fileID: 0}
+  bigDoor: 0

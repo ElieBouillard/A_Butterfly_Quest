@@ -25,6 +25,7 @@ public class HealthSystem : MonoBehaviour
 
     private bool canHit;
     private float clockCanHit;
+    private float clockColorHit;
 
     private void Start()
     {
@@ -51,7 +52,17 @@ public class HealthSystem : MonoBehaviour
                 canHit = true;
             }
         }
-
+        else
+        {
+            if (clockColorHit > 0)
+            {
+                clockColorHit -= Time.deltaTime;
+            }
+            else
+            {
+                EnemyMesh.material.SetFloat("_HitForce", 0f);
+            }
+        } 
     }
 
     private void HUDHealthUpdate()
@@ -99,13 +110,19 @@ public class HealthSystem : MonoBehaviour
         else
         {
             CurrHealth -= DamageValue;
-            EnemyMesh.material.SetFloat("_HitForce", 1f);
+            InitColorHit();
         }
 
         if(CurrHealth <= 0)
         {
             Death();
         }
+    }
+
+    public void InitColorHit()
+    {
+        EnemyMesh.material.SetFloat("_HitForce", 1f);
+        clockColorHit = 0.1f;
     }
 
     public void Death()

@@ -15,7 +15,6 @@ public class Shoot : MonoBehaviour
     private RaycastHit ShootInfo;
     public LayerMask IgnoreMask;
     public LayerMask ReceptaclesMask;
-    public float lookSpeed;
 
     [Header("References")]
     public Animator CamAnimator;
@@ -129,6 +128,10 @@ public class Shoot : MonoBehaviour
                 if(ButterflyTypeSelection.Instance.SelectionTypeValue == (int)currReceptacle.m_ButterflyNeededType)
                 {
                     currReceptacle.AddButterfly();
+                }
+                else
+                {
+                    ButterflyInventory.Instance.AddToReloadList(currButterlfy);
                 }
             }
             else

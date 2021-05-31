@@ -20,6 +20,11 @@ public class VFXManager : MonoBehaviour
     //Character
     public Renderer mesh_rend;
 
+    //Butterflies
+    public GameObject SuccessfulCatch_FX;
+    public GameObject SuccessfulCatch_Illusion_FX;
+    public GameObject SuccessfulCatch_Tempete_FX;
+
     //ArmGlow
     float target_armGlow;
     float armGlow_TurnOffDelay = 1.5f;
@@ -150,5 +155,22 @@ public class VFXManager : MonoBehaviour
 
 
         }
+    }
+
+    public void CatchButterfly(GameObject hitButterfly)
+    {
+        switch (hitButterfly.GetComponent<ButterflyBehaviourV2>().m_ButterflyType)
+        {
+            case ButterflyBehaviourV2.ButterflyType.Normal:
+                Instantiate(SuccessfulCatch_FX, hitButterfly.transform.position, Quaternion.identity);
+                break;
+            case ButterflyBehaviourV2.ButterflyType.Tempete:
+                Instantiate(SuccessfulCatch_Tempete_FX, hitButterfly.transform.position, Quaternion.identity);
+                break;
+            case ButterflyBehaviourV2.ButterflyType.Illusion:
+                Instantiate(SuccessfulCatch_Illusion_FX, hitButterfly.transform.position, Quaternion.identity);
+                break;
+        }
+        
     }
 }

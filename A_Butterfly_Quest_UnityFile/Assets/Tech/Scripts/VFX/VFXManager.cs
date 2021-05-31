@@ -77,7 +77,8 @@ public class VFXManager : MonoBehaviour
         {
             if (net_DelayTimer >= net_TurnOffDelay)
             {
-                net_Animator.SetTrigger("HideNet");
+                //net_Animator.SetTrigger("HideNet");
+                net_Animator.SetBool("NetVisibility", false);
                 net_DelayTimer = -1f;
             }
             else
@@ -88,12 +89,20 @@ public class VFXManager : MonoBehaviour
 
         if (waitingToShowNet)
         {
+            //Debug.Log(AnimationManager.m_instance.m_anim.GetCurrentAnimatorStateInfo(1).fullPathHash/*.IsName("NetAttack")*/);
+
             if (!AnimationManager.m_instance.m_anim.GetCurrentAnimatorStateInfo(1).IsName("NetAttack"))
             {
-                net_Animator.SetTrigger("ShowNet");
+                //net_Animator.SetTrigger("ShowNet");
+                net_Animator.SetBool("NetVisibility", true);
                 net_DelayTimer = 0;
                 waitingToShowNet = false;
             }
+        }
+
+        if (AnimationManager.m_instance.m_anim.GetCurrentAnimatorStateInfo(1).IsName("NetAttack"))
+        {
+            waitingToShowNet = true;
         }
 
 
@@ -130,13 +139,15 @@ public class VFXManager : MonoBehaviour
         if (visibility)
         {
             //net_Animator.SetTrigger("ShowNet");
-            net_Animator.SetTrigger("HideNet");
-            waitingToShowNet = true;
+            net_Animator.SetBool("NetVisibility",false);
+            //waitingToShowNet = true;
             //armGlow_DelayTimer = 0;
         }
         else
         {
-            net_Animator.SetTrigger("HideNet");
+            //net_Animator.SetTrigger("HideNet");
+            net_Animator.SetBool("NetVisibility", false);
+
 
         }
     }

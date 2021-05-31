@@ -35,6 +35,23 @@ public class ButterflyInventory : MonoBehaviour
         }
     }
 
+    ButterflyBehaviourV2 currButterfly;
+    public void SetButterflyToLauncherPos(int index)
+    {
+        if(ButterflyInInventory[index].Count > 0)
+        {
+            ButterflyInInventory[index][0].SetButterFlyToLauncherPos();    
+        }
+    }
+
+    public void SetButterflyToPlayerCluster(int index)
+    {
+        if (ButterflyInInventory[index].Count > 0)
+        {
+            ButterflyInInventory[index][0].SetCatched();
+        }
+    }
+
     public void CatchButterfly(List<ButterflyBehaviourV2> currButterfly)
     {
         for (int i = 0; i < currButterfly.Count; i++)
@@ -98,6 +115,8 @@ public class ButterflyInventory : MonoBehaviour
         return ButterflyInInventory[index][0];
     }
 
+    bool check = false;
+    int lastSelection  = 0;
     private void Update()
     {
         //Debug tailles des listes
@@ -106,6 +125,34 @@ public class ButterflyInventory : MonoBehaviour
         ButterflyTempeteInInventoryValue = ButterflyInInventory[2].Count;
         ButterflyInTravelValue = ButterflyInTravel.Count;
         ButterflyToReloadValue = ButterflyToReload.Count;
+
+        
+        //Deplacement Papillon Au Launcher
+        if (Shoot.Instance.Aiming)
+        {
+            if(ButterflyTypeSelection.Instance.SelectionTypeValue != lastSelection)
+            {
+                SetButterflyToPlayerCluster(lastSelection);
+                SetButterflyToLauncherPos(ButterflyTypeSelection.Instance.SelectionTypeValue);
+                lastSelection = ButterflyTypeSelection.Instance.SelectionTypeValue;
+            }
+            else
+            {
+
+                SetButterflyToLauncherPos(ButterflyTypeSelection.Instance.SelectionTypeValue);
+                check = true;
+            }
+
+        }
+        else
+        {
+            if(check == true)
+            {
+                SetButterflyToPlayerCluster(ButterflyTypeSelection.Instance.SelectionTypeValue);
+                check = false;
+            }
+
+        }
 
         //Clock reload
         if (_reloading)

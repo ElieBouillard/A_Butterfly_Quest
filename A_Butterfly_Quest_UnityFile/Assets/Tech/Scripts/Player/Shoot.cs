@@ -15,7 +15,6 @@ public class Shoot : MonoBehaviour
     private RaycastHit ShootInfo;
     public LayerMask IgnoreMask;
     public LayerMask ReceptaclesMask;
-    public float lookSpeed;
 
     [Header("References")]
     public Animator CamAnimator;

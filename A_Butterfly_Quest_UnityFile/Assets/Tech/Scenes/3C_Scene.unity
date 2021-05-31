@@ -156,7 +156,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9289136}
   m_LocalRotation: {x: -0, y: -0.98261976, z: -0, w: 0.18562989}
-  m_LocalPosition: {x: 353.2, y: 15.43, z: 482.3}
+  m_LocalPosition: {x: 107.1, y: 15.43, z: 299.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7255424629777524410}
@@ -952,6 +952,12 @@ MonoBehaviour:
   ShootVFX: {fileID: 0}
   ImpactVFX: {fileID: 0}
   mesh_rend: {fileID: 2361084464801384642}
+  SuccessfulCatch_FX: {fileID: 299559291818564437, guid: d6367ddd4a497a7418e3b222fd18d8c7,
+    type: 3}
+  SuccessfulCatch_Illusion_FX: {fileID: 299559291818564437, guid: 23dc2f918062b534f8990cbc5ff5c347,
+    type: 3}
+  SuccessfulCatch_Tempete_FX: {fileID: 299559291818564437, guid: 84809d23dcc8c7d438db6c33b53753d0,
+    type: 3}
   net_Animator: {fileID: 919132148984205168}
 --- !u!114 &369401186
 MonoBehaviour:
@@ -20898,8 +20904,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195822808}
-  m_LocalRotation: {x: 0.10498836, y: -0.8530946, z: 0.15256341, w: 0.48778218}
-  m_LocalPosition: {x: -585.94727, y: 88.385666, z: 68.950134}
+  m_LocalRotation: {x: 0.10498837, y: -0.8530946, z: 0.1525634, w: 0.4877822}
+  m_LocalPosition: {x: -306.27277, y: 64.49477, z: -54.159332}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1780449882}

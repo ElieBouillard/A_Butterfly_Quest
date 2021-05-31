@@ -120,7 +120,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 548dbcf316f802247adf739686afb578, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 283ab78a2c6968040a167e05fa5f991f, type: 2}
 --- !u!1 &13311944
 GameObject:
   m_ObjectHideFlags: 0
@@ -1688,6 +1688,7 @@ MonoBehaviour:
   TempeteCount: 0
   m_Speed: 2
   Range: 10
+  Respawn: 0
   PosBehindPlayer: 0
   PosY: 0
   PosX: 0
@@ -2123,8 +2124,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2016499041146192761, guid: 9a1041fc0ee29b143adaa1c83ca3d930,
         type: 3}
+      propertyPath: TurnBackSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016499041146192761, guid: 9a1041fc0ee29b143adaa1c83ca3d930,
+        type: 3}
       propertyPath: PatrolingRange
       value: 12.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016499041146192761, guid: 9a1041fc0ee29b143adaa1c83ca3d930,
+        type: 3}
+      propertyPath: TimeAfterAttacking
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2016499041146192762, guid: 9a1041fc0ee29b143adaa1c83ca3d930,
         type: 3}
@@ -2154,7 +2165,7 @@ PrefabInstance:
     - target: {fileID: 2051022722433862031, guid: 9a1041fc0ee29b143adaa1c83ca3d930,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 36.6
+      value: 26.07
       objectReference: {fileID: 0}
     - target: {fileID: 2051022722433862031, guid: 9a1041fc0ee29b143adaa1c83ca3d930,
         type: 3}
@@ -2164,7 +2175,7 @@ PrefabInstance:
     - target: {fileID: 2051022722433862031, guid: 9a1041fc0ee29b143adaa1c83ca3d930,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -36.7
+      value: -24.64
       objectReference: {fileID: 0}
     - target: {fileID: 2051022722433862031, guid: 9a1041fc0ee29b143adaa1c83ca3d930,
         type: 3}

@@ -128,7 +128,6 @@ public class ButterflyClusterV2 : MonoBehaviour
             currInstantiateButterfly = Instantiate(ButterflyTempete, this.transform);
             currInstantiateButterfly.GetComponent<ButterflyBehaviourV2>().SetButterFlyTypeAtSpawn(2);
         }
-        Debug.Log("aouaia");
     }
 
     private void OnDrawGizmosSelected()

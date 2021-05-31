@@ -130,12 +130,20 @@ public class EnemyAIv2 : MonoBehaviour
         if(m_State == States.Patroling)
         {
             Patroling();
+            if (Agent.isStopped)
+            {
+                Agent.isStopped = false;
+            }
         }
         if(m_State == States.Chasing)
         {
             Chasing();
             SetAllAnimBool(false);
             m_animator.SetBool("Run", true);
+            if (Agent.isStopped)
+            {
+                Agent.isStopped = false;
+            }
         }
         if(m_State == States.Attacking)
         {
@@ -152,7 +160,7 @@ public class EnemyAIv2 : MonoBehaviour
             Off();
             if(nextState == States.Attacking)
             {
-
+               
             }
             else
             {
@@ -188,7 +196,7 @@ public class EnemyAIv2 : MonoBehaviour
 
             DistanceToPatrolingPos = RandomPatrolingPos.Value - transform.position;
 
-            if (DistanceToPatrolingPos.magnitude < 1f)
+            if (DistanceToPatrolingPos.magnitude < 0.1f)
             {
                 WaitForNewPatrolingPos();
 
@@ -208,6 +216,10 @@ public class EnemyAIv2 : MonoBehaviour
         //NavMeshPosCheck
         NavMeshPath path = new NavMeshPath();
         Agent.CalculatePath(randPos, path);
+        if(Vector3.Distance(randPos, InitialPos) > PatrolingRange)
+        {
+            RandomPatrolingPos = null;
+        }
         if (path.status == NavMeshPathStatus.PathComplete)
         {
             RandomPatrolingPos = randPos;
@@ -216,7 +228,6 @@ public class EnemyAIv2 : MonoBehaviour
         {
             RandomPatrolingPos = null;
         }
-
     }
 
     private void WaitForNewPatrolingPos()
@@ -225,6 +236,7 @@ public class EnemyAIv2 : MonoBehaviour
         WaitingPatrolingClock = WaitingTime;
     }
 
+    bool AttackAfterChasing;
     private void Chasing()
     {
         Agent.speed = ChasingSpeed;
@@ -232,69 +244,91 @@ public class EnemyAIv2 : MonoBehaviour
 
         canResetPath = true;
         AttackingPos = null;
+        AttackAfterChasing = true;
     }
 
     float clockAttackAnim;
+
+    bool canFxCharge;
     private void Attacking()
     {
-        if (!canResetPath)
-        {
-            Agent.ResetPath();
-            canResetPath = false;
-        }
-
-        Vector3 dirAttack;
-        float distAttack;
-        if(AttackingPos == null)
-        {
-            Vector3 Targetpos = new Vector3(Target.transform.position.x, transform.position.y, Target.transform.position.z);
-            dirAttack = Targetpos - transform.position;
-            distAttack = dirAttack.magnitude;
-            dirAttack.Normalize();
-
-            Vector3 AttackingPosTemp;
-            if (Physics.Raycast(transform.position, dirAttack, out RaycastHit hit, AttackingRange * 2.5f, _obstacleMask))
-            {
-                AttackingPosTemp = transform.position + hit.distance * dirAttack;
-                Debug.DrawRay(transform.position, dirAttack * hit.distance, Color.red, 3);
-                minDistStop = 3f;
-            }
-            else
-            {
-                float distAttackTemp = distAttack;
-                AttackingPosTemp = transform.position + distAttackTemp  * 2 * dirAttack;
-                minDistStop = 0.5f;
-            }
-            inAttack = true;
-            AttackingPos = AttackingPosTemp;
-            clockAttackAnim = 0.4f;
-
+        if (AttackAfterChasing){
+            Agent.isStopped = true;
+            TurnOff(TimeAfterTurnBack, States.Attacking);
+            AttackAfterChasing = false;
         }
         else
         {
-            float distToAttackPos;
-            m_animator.SetBool("Attack", true);
-
-            if (clockAttackAnim > 0)
+            if (Agent.isStopped)
             {
-                clockAttackAnim -= Time.deltaTime;
-                distToAttackPos = Mathf.Infinity;
+                Agent.isStopped = false;
+            }
+
+            if (!canResetPath)
+            {
+                Agent.ResetPath();
+                canResetPath = false;
+            }
+
+            Vector3 dirAttack;
+            float distAttack;
+            if (AttackingPos == null)
+            {
+                Vector3 Targetpos = new Vector3(Target.transform.position.x, transform.position.y, Target.transform.position.z);
+                dirAttack = Targetpos - transform.position;
+                distAttack = dirAttack.magnitude;
+                dirAttack.Normalize();
+
+                Vector3 AttackingPosTemp;
+                if (Physics.Raycast(transform.position, dirAttack, out RaycastHit hit, AttackingRange * 2.5f, _obstacleMask))
+                {
+                    AttackingPosTemp = transform.position + hit.distance * dirAttack;
+                    Debug.DrawRay(transform.position, dirAttack * hit.distance, Color.red, 3);
+                    minDistStop = 3f;
+                }
+                else
+                {
+                    float distAttackTemp = distAttack;
+                    AttackingPosTemp = transform.position + distAttackTemp * 2 * dirAttack;
+                    minDistStop = 0.5f;
+                }
+                inAttack = true;
+                AttackingPos = AttackingPosTemp;
+                clockAttackAnim = 0.4f;
+                canFxCharge = true;
             }
             else
             {
-                Agent.speed = AttackingSpeed;
-                Agent.SetDestination(AttackingPos.Value);
-                Debug.DrawRay(AttackingPos.Value, Vector3.up, Color.cyan, 3);
+                float distToAttackPos;
+                if (canFxCharge)
+                {
+                    //FX CHARGE
+                    canFxCharge = false;
+                }
+                
+                m_animator.SetBool("Attack", true);
 
-                distToAttackPos = Vector3.Distance(AttackingPos.Value, transform.position);
-            }            
+                if (clockAttackAnim > 0)
+                {
+                    clockAttackAnim -= Time.deltaTime;
+                    distToAttackPos = Mathf.Infinity;
+                }
+                else
+                {
+                    Agent.speed = AttackingSpeed;
+                    Agent.SetDestination(AttackingPos.Value);
+                    Debug.DrawRay(AttackingPos.Value, Vector3.up, Color.cyan, 3);
 
-            if (distToAttackPos < minDistStop)
-            {
-                inAttack = false;
-                TurnOff(TimeAfterAttacking, States.TurnBack);
-                AttackingPos = null;
-            }            
+                    distToAttackPos = Vector3.Distance(AttackingPos.Value, transform.position);
+                }
+
+                if (distToAttackPos < minDistStop)
+                {
+                    inAttack = false;
+                    TurnOff(TimeAfterAttacking, States.TurnBack);
+                    AttackingPos = null;
+                }
+            }                    
         }
     }
 
@@ -303,6 +337,7 @@ public class EnemyAIv2 : MonoBehaviour
 
     private void TurnBack()
     {
+        m_animator.SetBool("Walk", true);
         useRange = false;
         Agent.speed = TurnBackSpeed;
         if(TurnBackPos1 == null)
@@ -341,6 +376,7 @@ public class EnemyAIv2 : MonoBehaviour
             }
             else if (reachPos1 && reachPos2)
             {
+                m_animator.SetBool("Walk", false);
                 TurnOff(TimeAfterTurnBack, States.Attacking);
                 reachPos1 = false;
                 reachPos2 = false;
@@ -366,10 +402,10 @@ public class EnemyAIv2 : MonoBehaviour
         if(clockOff > 0)
         {
             clockOff -= Time.deltaTime;    
-            if(nextState == States.Attacking)
-            {
-                transform.LookAt(new Vector3(Target.transform.position.x, transform.position.y, Target.transform.position.z));
-            }
+            //if(nextState == States.Attacking)
+            //{
+            //    transform.LookAt(new Vector3(Target.transform.position.x, transform.position.y, Target.transform.position.z));
+            //}
         }
         else if(clockOff <=0)
         {

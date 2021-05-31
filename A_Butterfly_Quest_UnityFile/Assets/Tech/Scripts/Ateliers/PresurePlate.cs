@@ -48,7 +48,6 @@ public class PresurePlate : MonoBehaviour
             Activated = false;
             targetPos = startPos;
         }
-        Debug.Log("Ca sort");
     }
 
     private void OnTriggerEnter(Collider other)

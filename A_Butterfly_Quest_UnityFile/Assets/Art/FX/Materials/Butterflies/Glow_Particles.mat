@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8233513736832978212
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 2
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
@@ -20,10 +7,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Net_Inside_02
+  m_Name: Glow_Particles
   m_Shader: {fileID: 4800000, guid: c66b2bbe51b959840ab81052dafd9a39, type: 3}
-  m_ShaderKeywords: _BLENDMODE_ALPHA _DISABLE_SSR _DOUBLESIDED_ON _ENABLE_FOG_ON_TRANSPARENT
-    _ISPANNING3_ON _ISPANNING_ON _NORMALMAP_TANGENT_SPACE _SURFACE_TYPE_TRANSPARENT
+  m_ShaderKeywords: _BLENDMODE_PRE_MULTIPLY _DISABLE_SSR _DOUBLESIDED_ON _ENABLE_FOG_ON_TRANSPARENT
+    _ISPANNING3_ON _NORMALMAP_TANGENT_SPACE _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
@@ -34,6 +21,8 @@ Material:
   disabledShaderPasses:
   - DistortionVectors
   - TransparentBackface
+  - TransparentDepthPrepass
+  - TransparentDepthPostpass
   - MOTIONVECTORS
   m_SavedProperties:
     serializedVersion: 3
@@ -63,7 +52,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DistortionTexture:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: c068f140c584612469e41c535e4aa1e7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DistortionVectorMap:
@@ -95,7 +84,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTexture:
-        m_Texture: {fileID: 2800000, guid: 2c740d14e6064be488668776c8bb5ae1, type: 3}
+        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
@@ -138,10 +127,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _UnlitColorMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -155,7 +140,7 @@ Material:
     - _ActivateEffect3: 0
     - _AddPrecomputedVelocity: 0
     - _AlbedoAffectEmissive: 0
-    - _AlphaCoefficient: 0
+    - _AlphaCoefficient: 1
     - _AlphaCutoff: 0.5
     - _AlphaCutoffEnable: 0
     - _AlphaCutoffPostpass: 0.5
@@ -164,7 +149,7 @@ Material:
     - _AlphaDstBlend: 10
     - _AlphaSrcBlend: 1
     - _Anisotropy: 0
-    - _BlendMode: 0
+    - _BlendMode: 4
     - _CoatMask: 0
     - _CullMode: 0
     - _CullModeForward: 0
@@ -189,7 +174,6 @@ Material:
     - _DistortionDepthTest: 1
     - _DistortionDstBlend: 1
     - _DistortionEnable: 0
-    - _DistortionOnly: 0
     - _DistortionScale: 1
     - _DistortionSrcBlend: 1
     - _DistortionVectorBias: -1
@@ -200,7 +184,7 @@ Material:
     - _DstBlendMode: 10
     - _EmissiveColorMode: 1
     - _EmissiveExposureWeight: 1
-    - _EmissiveGlow: 5
+    - _EmissiveGlow: 1
     - _EmissiveIntensity: 1
     - _EmissiveIntensityUnit: 0
     - _EnableBlendModePreserveSpecularLighting: 1
@@ -208,8 +192,8 @@ Material:
     - _EnableGeometricSpecularAA: 0
     - _EnergyConservingSpecularColor: 1
     - _Erosion: 0
-    - _Flow: 0
-    - _Glow: 50
+    - _Flow: 0.214
+    - _Glow: 10
     - _HeightAmplitude: 0.02
     - _HeightCenter: 0.5
     - _HeightMapParametrization: 0
@@ -219,14 +203,13 @@ Material:
     - _HeightPoMAmplitude: 2
     - _HeightTessAmplitude: 2
     - _HeightTessCenter: 0.5
-    - _IncludeIndirectLighting: 1
     - _InvTilingScale: 1
     - _Invert: 0
     - _Ior: 1.5
     - _IridescenceMask: 1
     - _IridescenceThickness: 1
     - _IsEmissive: 0
-    - _IsPanning: 1
+    - _IsPanning: 0
     - _IsPanning3: 1
     - _IsPanning4: 0
     - _LinkDetailsWithBase: 1
@@ -296,7 +279,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 0, g: 0, b: 0, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
@@ -305,9 +288,9 @@ Material:
     - _FakeFogColor: {r: 1, g: 1, b: 1, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _MainColor: {r: 0.06132078, g: 0.5144766, b: 1, a: 1}
+    - _MainColor: {r: 1.4980392, g: 1.4980392, b: 1.4980392, a: 1}
     - _PannerSpeed2: {r: 1, g: 0, b: 0, a: 0}
-    - _SecondaryColor: {r: 0.30308342, g: 0, b: 1, a: 1}
+    - _SecondaryColor: {r: 0, g: 13.57068, b: 15.999998, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
@@ -315,7 +298,18 @@ Material:
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
     - _UVMasking: {r: 1, g: 0, b: 0, a: 0}
-    - _UVPanningSPEED: {r: 1, g: 0.5, b: 0, a: 0}
-    - _UnlitColor: {r: 1, g: 1, b: 1, a: 1}
-    - _UnlitColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
-    - _XYSpeedZWClampAlpha: {r: 0, g: 0, b: 0, a: 1}
+    - _UVPanningSPEED: {r: 1, g: 0, b: 0, a: 0}
+    - _XYSpeedZWClampAlpha: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &9207081513502337269
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 2

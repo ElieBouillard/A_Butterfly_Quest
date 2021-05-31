@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Activated: 0
-  PosY: 0.7
-  Radius: 0.5
-  trueColor: {fileID: 2100000, guid: 43a9c6e396bd6e04c8d161f066391328, type: 2}
-  falseColor: {fileID: 2100000, guid: aa8426cabc882bc4f8f9327826584187, type: 2}
+  speed: 0.005
+  range: 0.1
+  targetPos: {x: 0, y: 0, z: 0}
+  startPos: {x: 0, y: 0, z: 0}

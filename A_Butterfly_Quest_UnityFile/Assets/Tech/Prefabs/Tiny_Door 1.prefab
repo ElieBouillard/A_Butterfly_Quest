@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4276678425537494239}
   - component: {fileID: 933946942498681722}
   - component: {fileID: 3103820729169397680}
+  - component: {fileID: 371887899179162042}
   m_Layer: 0
   m_Name: Tiny_Door 1
   m_TagString: Untagged
@@ -79,3 +80,24 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &371887899179162042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3463832103287613029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c616af3062cca7e41b1e81dd5c653021, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_doorType: 0
+  OpenSpeed: 0
+  CloseSpeed: 0
+  KeyNeeded: 0
+  DetectionPlayerRange: 0
+  ItemsWichUnlock: []
+  isOpen: 0
+  animator: {fileID: 0}
+  bigDoor: 0

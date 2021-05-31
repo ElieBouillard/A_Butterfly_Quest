@@ -45,7 +45,7 @@ public class DoorBehaviour : MonoBehaviour
         Speed = OpenSpeed;
         closePos = transform.position;
         targetPos = closePos;
-        openPos = closePos + transform.right.normalized * 5;
+        openPos = closePos - transform.forward.normalized * 5f;
     }
 
     private void Update()
@@ -62,8 +62,7 @@ public class DoorBehaviour : MonoBehaviour
         if (!bigDoor)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPos, Speed / 10);
-        }
-       
+        }    
             
         
 
@@ -122,7 +121,7 @@ public class DoorBehaviour : MonoBehaviour
 
     private void CheckPlayerUpdate()
     {
-        if(Physics.CheckSphere(transform.position + transform.right * transform.localScale.x, DetectionPlayerRange, PlayerMask))
+        if(Physics.CheckSphere(transform.position, DetectionPlayerRange, PlayerMask))
         {
             if(KeyInventory.instance.GetKeyCount() >= KeyNeeded)
             {

@@ -55,13 +55,13 @@ public class Character3D : MonoBehaviour
     private float m_DashSpeed = 0f;
     [HideInInspector]
     public float clockDash = 0f;
-    private float[] clocksCanDash;
+    [HideInInspector]
+    public float[] clocksCanDash;
     private bool[] CanDash;
     private float clockHud;
     public bool dashDebug;
     private int m_butterflyTypeSelectionIndex;
     public GameObject IllusionMeshItem;
-    private GameObject illusionMeshTemp;
     private Vector3 DashDir;
 
     [Header("Hunt")]
@@ -102,7 +102,8 @@ public class Character3D : MonoBehaviour
         clocksCanDash = new float[3];
         CanDash = new bool[3];
         _detectionDistanceGround = DetectionDistanceGround;
-
+        IllusionMeshItem.SetActive(false);
+        Physics.IgnoreCollision(GetComponent<Collider>(), IllusionMeshItem.GetComponent<Collider>(), true);
     }
 
     void Update()
@@ -312,9 +313,9 @@ public class Character3D : MonoBehaviour
         }
         else
         {
-            illusionMeshTemp = Instantiate(IllusionMeshItem, transform.position, Quaternion.identity);
-            Physics.IgnoreCollision(GetComponent<Collider>(), illusionMeshTemp.GetComponent<Collider>(), true);
             clocksCanDash[DashType] = DashIllusionCouldown;
+            IllusionMeshItem.transform.position = transform.position + Vector3.up * 0.3f;
+            IllusionMeshItem.SetActive(true);
         }
         
     }
@@ -353,7 +354,7 @@ public class Character3D : MonoBehaviour
                 CanDash[i] = true;
                 if (i == 1)
                 {
-                  Destroy(illusionMeshTemp);
+                    IllusionMeshItem.SetActive(false);
                 }
             }
         }

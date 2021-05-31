@@ -77,12 +77,12 @@ MonoBehaviour:
   PatrolingSpeed: 2
   ChasingSpeed: 6
   AttackingSpeed: 50
-  TurnBackSpeed: 2
+  TurnBackSpeed: 1
   Acceleration: 10
   WaitingTime: 2
   TimeAfterAttacking: 0.1
   inAttack: 0
-  TimeAfterTurnBack: 2
+  TimeAfterTurnBack: 0.5
   m_animator: {fileID: 2016499041488018614}
   minDistStop: 0
   useRange: 0
@@ -125,7 +125,6 @@ MonoBehaviour:
   InitialHealth: 5
   EnemyMesh: {fileID: 2012979630532251399}
   CurrHealth: 0
-  TakingDamageFeedBack: {fileID: 0}
 --- !u!65 &1674603350770619191
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -5,6 +5,8 @@ using UnityEngine;
 public class PresurePlate : MonoBehaviour
 {
 
+    public bool OnTopOfMovingCube;
+
     public bool Activated;
 
     private MeshRenderer m_meshRenderer;
@@ -37,6 +39,15 @@ public class PresurePlate : MonoBehaviour
                 Activated = false;
                 targetPos = startPos;
                 canFalse = false;
+            }
+        }
+
+        if (OnTopOfMovingCube)
+        {
+            startPos = transform.parent.transform.position + Vector3.up * 1.5f;
+            if (!Activated)
+            {
+                targetPos = startPos;
             }
         }
     }

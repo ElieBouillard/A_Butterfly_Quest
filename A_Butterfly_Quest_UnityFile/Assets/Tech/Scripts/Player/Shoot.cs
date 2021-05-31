@@ -129,6 +129,10 @@ public class Shoot : MonoBehaviour
                 {
                     currReceptacle.AddButterfly();
                 }
+                else
+                {
+                    ButterflyInventory.Instance.AddToReloadList(currButterlfy);
+                }
             }
             else
             {

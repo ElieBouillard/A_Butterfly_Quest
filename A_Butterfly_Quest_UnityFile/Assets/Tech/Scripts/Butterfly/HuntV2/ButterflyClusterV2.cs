@@ -15,6 +15,7 @@ public class ButterflyClusterV2 : MonoBehaviour
     public float m_Speed;
     [Range(0f,50f)]
     public float Range;
+    public bool Respawn;
 
     [Header("Debug / Player Cluster")]
     [Range(0, 10)]
@@ -36,27 +37,17 @@ public class ButterflyClusterV2 : MonoBehaviour
 
     private void Start()
     {
-        GameObject currInstantiateButterfly;
-        for (int i = 0; i < NormalCount; i++)
-        {
-            currInstantiateButterfly = Instantiate(ButterflyNormal, this.transform);
-            currInstantiateButterfly.GetComponent<ButterflyBehaviourV2>().SetButterFlyTypeAtSpawn(0);
-        }
-        for (int i = 0; i < IllusionCount; i++)
-        {
-            currInstantiateButterfly = Instantiate(ButterflyIllusion, this.transform);
-            currInstantiateButterfly.GetComponent<ButterflyBehaviourV2>().SetButterFlyTypeAtSpawn(1);
-        }
-        for (int i = 0; i < TempeteCount; i++)
-        {
-            currInstantiateButterfly = Instantiate(ButterflyTempete, this.transform);
-            currInstantiateButterfly.GetComponent<ButterflyBehaviourV2>().SetButterFlyTypeAtSpawn(2);
-        }
         player = Character3D.m_instance.gameObject.transform.GetChild(0).gameObject;
-        transform.position = player.transform.position;
+        if (isFollowingPlayer)
+        {
+            transform.position = player.transform.position;
+        }
+        SpawnButterflys();
 
     }
     float clockMove;
+    float clockSpawn;
+    bool canSpawn;
     private void Update()
     {
         if (isFollowingPlayer)
@@ -95,7 +86,49 @@ public class ButterflyClusterV2 : MonoBehaviour
                 }
             }
         }
-        
+
+        if (!isFollowingPlayer && Respawn)
+        {
+            if (gameObject.transform.childCount == 0 && canSpawn == false)
+            {
+                clockSpawn = Random.Range(5f, 10f);
+                canSpawn = true;
+            }
+
+            if (clockSpawn > 0)
+            {
+                clockSpawn -= Time.deltaTime;
+            }
+            else
+            {
+                if (canSpawn)
+                {
+                    SpawnButterflys();
+                    canSpawn = false;
+                }
+            }
+        }
+    }
+
+    private void SpawnButterflys()
+    {
+        GameObject currInstantiateButterfly;
+        for (int i = 0; i < NormalCount; i++)
+        {
+            currInstantiateButterfly = Instantiate(ButterflyNormal, this.transform);
+            currInstantiateButterfly.GetComponent<ButterflyBehaviourV2>().SetButterFlyTypeAtSpawn(0);
+        }
+        for (int i = 0; i < IllusionCount; i++)
+        {
+            currInstantiateButterfly = Instantiate(ButterflyIllusion, this.transform);
+            currInstantiateButterfly.GetComponent<ButterflyBehaviourV2>().SetButterFlyTypeAtSpawn(1);
+        }
+        for (int i = 0; i < TempeteCount; i++)
+        {
+            currInstantiateButterfly = Instantiate(ButterflyTempete, this.transform);
+            currInstantiateButterfly.GetComponent<ButterflyBehaviourV2>().SetButterFlyTypeAtSpawn(2);
+        }
+        Debug.Log("aouaia");
     }
 
     private void OnDrawGizmosSelected()

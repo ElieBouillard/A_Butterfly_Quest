@@ -64,6 +64,7 @@ public class Shoot : MonoBehaviour
 
             AnimationManager.m_instance.playerFocused = true; //Anim
             canResetFreeLookCam = true;
+            VFXManager.m_instance.StartAiming(); // VFX
         }
         //No Aim
         else if (Input.GetAxis("Aim") <= 0)
@@ -78,6 +79,7 @@ public class Shoot : MonoBehaviour
             Aiming = false;
             CamAnimator.SetBool("AimCamera", false);
             AnimationManager.m_instance.playerFocused = false; //Anim
+            VFXManager.m_instance.StopAiming(); // VFX
         }
 
         //Shoot Papillons normaux

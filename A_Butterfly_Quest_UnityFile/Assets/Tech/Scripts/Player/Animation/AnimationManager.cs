@@ -11,7 +11,7 @@ public class AnimationManager : MonoBehaviour
     public static AnimationManager m_instance;
 
     //Components
-    private Animator m_anim;
+    public Animator m_anim;
     private Transform m_parentMesh;
 
     //Inputs
@@ -68,7 +68,7 @@ public class AnimationManager : MonoBehaviour
     public bool shootTrigger;
 
     //Shouting
-    public bool shoutTrigger;
+    public bool netTrigger;
 
     //Dashing
     public bool dashTrigger;
@@ -366,10 +366,10 @@ public class AnimationManager : MonoBehaviour
             shootTrigger = false;
         }
 
-        if (shoutTrigger)
+        if (netTrigger)
         {
             m_anim.SetTrigger("Shout");
-            shoutTrigger = false;
+            netTrigger = false;
         }
 
         if (dashTrigger)

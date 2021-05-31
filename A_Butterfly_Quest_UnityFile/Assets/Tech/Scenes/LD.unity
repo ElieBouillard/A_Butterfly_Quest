@@ -7669,7 +7669,7 @@ PrefabInstance:
     - target: {fileID: 4077439044706012402, guid: 1c0efa609d216dd40aee98b5be177453,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4077439044706012402, guid: 1c0efa609d216dd40aee98b5be177453,
         type: 3}
@@ -7761,6 +7761,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RespawnSystem
       objectReference: {fileID: 0}
+    - target: {fileID: 4077439045365118334, guid: 1c0efa609d216dd40aee98b5be177453,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 4077439045670434270, guid: 1c0efa609d216dd40aee98b5be177453,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7800,6 +7805,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4077439045670434271, guid: 1c0efa609d216dd40aee98b5be177453,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c0efa609d216dd40aee98b5be177453, type: 3}
@@ -11078,7 +11088,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh519080
+  m_Name: pb_Mesh300690
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -12809,7 +12819,7 @@ GameObject:
   - component: {fileID: 278560906}
   - component: {fileID: 278560905}
   - component: {fileID: 278560904}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: RespawnTrigger (2)
   m_TagString: RespawnSystem
   m_Icon: {fileID: 0}
@@ -16644,7 +16654,7 @@ GameObject:
   - component: {fileID: 345963274}
   - component: {fileID: 345963273}
   - component: {fileID: 345963272}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: RespawnTrigger (3)
   m_TagString: RespawnSystem
   m_Icon: {fileID: 0}
@@ -24443,6 +24453,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TipsDash
+      objectReference: {fileID: 0}
+    - target: {fileID: 4795753064118367934, guid: e144a68d66a65f44d974c774359d135a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6675150008032613709, guid: e144a68d66a65f44d974c774359d135a,
         type: 3}
@@ -34822,6 +34837,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TipsDashTempete
       objectReference: {fileID: 0}
+    - target: {fileID: 4795753064118367934, guid: e144a68d66a65f44d974c774359d135a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 6675150008032613709, guid: e144a68d66a65f44d974c774359d135a,
         type: 3}
       propertyPath: m_Enabled
@@ -40505,7 +40525,7 @@ GameObject:
   m_Component:
   - component: {fileID: 785669134}
   - component: {fileID: 785669135}
-  m_Layer: 8
+  m_Layer: 15
   m_Name: RespawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42698,6 +42718,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TipsBrambles
+      objectReference: {fileID: 0}
+    - target: {fileID: 4795753064118367934, guid: e144a68d66a65f44d974c774359d135a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6675150008032613709, guid: e144a68d66a65f44d974c774359d135a,
         type: 3}
@@ -45364,7 +45389,7 @@ GameObject:
   - component: {fileID: 889277951}
   - component: {fileID: 889277950}
   - component: {fileID: 889277949}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: RespawnTrigger (1)
   m_TagString: RespawnSystem
   m_Icon: {fileID: 0}
@@ -52607,7 +52632,7 @@ GameObject:
   - component: {fileID: 1014879716}
   - component: {fileID: 1014879715}
   - component: {fileID: 1014879714}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: RespawnTrigger (4)
   m_TagString: RespawnSystem
   m_Icon: {fileID: 0}
@@ -55914,6 +55939,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TipsClone
+      objectReference: {fileID: 0}
+    - target: {fileID: 4795753064118367934, guid: e144a68d66a65f44d974c774359d135a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6675150008032613709, guid: e144a68d66a65f44d974c774359d135a,
         type: 3}
@@ -59299,7 +59329,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh522998
+  m_Name: pb_Mesh304594
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -64391,6 +64421,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TipsJump
       objectReference: {fileID: 0}
+    - target: {fileID: 4795753064118367934, guid: e144a68d66a65f44d974c774359d135a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 6675150008032613709, guid: e144a68d66a65f44d974c774359d135a,
         type: 3}
       propertyPath: m_Enabled
@@ -64567,7 +64602,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1231453593}
   - component: {fileID: 1231453594}
-  m_Layer: 8
+  m_Layer: 15
   m_Name: RespawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65474,7 +65509,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1247426026}
   - component: {fileID: 1247426027}
-  m_Layer: 8
+  m_Layer: 15
   m_Name: RespawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70581,7 +70616,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh519594
+  m_Name: pb_Mesh301210
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -73901,7 +73936,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1444479229}
   - component: {fileID: 1444479230}
-  m_Layer: 8
+  m_Layer: 15
   m_Name: RespawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78979,7 +79014,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh518058
+  m_Name: pb_Mesh299678
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -83696,7 +83731,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1602887445}
   - component: {fileID: 1602887446}
-  m_Layer: 8
+  m_Layer: 15
   m_Name: RespawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86619,7 +86654,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh523162
+  m_Name: pb_Mesh304760
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -90309,7 +90344,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh524170
+  m_Name: pb_Mesh305766
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -91308,7 +91343,7 @@ GameObject:
   - component: {fileID: 1723273859}
   - component: {fileID: 1723273858}
   - component: {fileID: 1723273857}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: RespawnTrigger (5)
   m_TagString: RespawnSystem
   m_Icon: {fileID: 0}
@@ -97600,6 +97635,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TipsEquipPap
       objectReference: {fileID: 0}
+    - target: {fileID: 4795753064118367934, guid: e144a68d66a65f44d974c774359d135a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 6675150008032613709, guid: e144a68d66a65f44d974c774359d135a,
         type: 3}
       propertyPath: m_Enabled
@@ -102051,6 +102091,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TipsAim&Shoot
       objectReference: {fileID: 0}
+    - target: {fileID: 4795753064118367934, guid: e144a68d66a65f44d974c774359d135a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 6675150008032613709, guid: e144a68d66a65f44d974c774359d135a,
         type: 3}
       propertyPath: m_Enabled
@@ -104801,7 +104846,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh521270
+  m_Name: pb_Mesh302878
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -108344,7 +108389,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh522398
+  m_Name: pb_Mesh304004
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -115773,6 +115818,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TipsNet
+      objectReference: {fileID: 0}
+    - target: {fileID: 4795753064118367934, guid: e144a68d66a65f44d974c774359d135a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6675150008032613709, guid: e144a68d66a65f44d974c774359d135a,
         type: 3}

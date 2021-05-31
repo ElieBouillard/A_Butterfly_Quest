@@ -183,24 +183,32 @@ MonoBehaviour:
   PlayerMask:
     serializedVersion: 2
     m_Bits: 1024
+  EnemyMask:
+    serializedVersion: 2
+    m_Bits: 0
+  obstacleMask: 0
   Speed: 5
   DetectionRange: 9
   AttackRange: 5.5
-  PlayerInDetectionRange: 0
-  PlayerInAttackRange: 0
   CancelAttackRange: 1.5
-  TargetPosRange: 11
+  RandomPosRange: 0
   WaitingTime: 2
   ChargeAttacksSpeed: 50
-  CanalisationAttackTime: 2
+  ChannelingTimeValue: 0
+  ChannelingClock: 0
   InChargeAttack: 0
-  InCanalisationAttack: 0
-  ChargeClock: 0
+  PlayerInAttackRange: 0
+  inChargeAttackRange: 0
+  dirChagre: {x: 0, y: 0, z: 0}
+  distChagre: 0
+  PlayerInDetectionRange: 0
   StatesMat:
   - {fileID: 2100000, guid: 43a9c6e396bd6e04c8d161f066391328, type: 2}
   - {fileID: 2100000, guid: 5382724637345f744b8b90e4aa20504f, type: 2}
   - {fileID: 2100000, guid: aa8426cabc882bc4f8f9327826584187, type: 2}
   InitialPos: {x: 0, y: 0, z: 0}
+  DisableAI: 0
+  horsState: 0
 --- !u!54 &6119684512079255966
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -225,7 +233,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6119684512079255967}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
@@ -265,6 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 046a640cbb31f904b9a3de0ab9dee8e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_CharacterType: 0
   InitialHealth: 7
+  EnemyMesh: {fileID: 0}
   CurrHealth: 0
-  TakingDamageFeedBack: {fileID: 0}

@@ -27,13 +27,37 @@ public class PresurePlate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Activated = true;
-        targetPos = startPos + new Vector3(0, -range, 0);
+        if(other.tag == "Player")
+        {
+            Activated = true;
+            targetPos = startPos + new Vector3(0, -range, 0);
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            Activated = true;
+            targetPos = startPos + new Vector3(0, -range, 0);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Activated = false;
-        targetPos = startPos;
+        if (other.tag == "Player")
+        {
+            Activated = false;
+            targetPos = startPos;
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            Activated = false;
+            targetPos = startPos;
+        }
     }
 }

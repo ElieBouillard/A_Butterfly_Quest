@@ -48,24 +48,34 @@ public class PresurePlate : MonoBehaviour
             Activated = false;
             targetPos = startPos;
         }
+
+        if (other.GetComponent<MovingCube>())
+        {
+            Activated = false;
+            targetPos = startPos;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            Debug.Log("Enter Tag Player");
             Activated = true;
             targetPos = startPos + new Vector3(0, -range, 0);
         }
 
         if(other.transform.name == "IllusionMeshPrefab")
         {
-            Debug.Log("C'est l'illus");
             Activated = true;
             targetPos = startPos + new Vector3(0, -range, 0);
             clock = Character3D.m_instance.clocksCanDash[1];
             canFalse = true;
+        }
+
+        if (other.GetComponent<MovingCube>())
+        {
+            Activated = true;
+            targetPos = startPos + new Vector3(0, -range, 0);
         }
     }
 }

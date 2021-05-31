@@ -13,7 +13,7 @@ public class ButterflyClusterV2 : MonoBehaviour
 
     [Header("Settings")]
     public float m_Speed;
-    [Range(0f,10f)]
+    [Range(0f,50f)]
     public float Range;
 
     [Header("Debug / Player Cluster")]
@@ -53,6 +53,7 @@ public class ButterflyClusterV2 : MonoBehaviour
             currInstantiateButterfly.GetComponent<ButterflyBehaviourV2>().SetButterFlyTypeAtSpawn(2);
         }
         player = Character3D.m_instance.gameObject.transform.GetChild(0).gameObject;
+        transform.position = player.transform.position;
 
     }
     float clockMove;

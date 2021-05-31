@@ -19,33 +19,29 @@ public class DoorBehaviour : MonoBehaviour
     [Range(0f, 20f)]
     public float DetectionPlayerRange;
 
-    [Header("References")]
+    [Header("Receptacles ou Pressures Plates")]
     public GameObject[] ItemsWichUnlock;
 
     [Header("Debug")]
     public bool isOpen;
 
-
     private float Speed;
     private Vector3 closePos;
     private Vector3 openPos;
     private Vector3 targetPos;
-    private LayerMask PlayerMask;
 
     public Animator animator;
     public bool bigDoor;
 
+    private GameObject player;
+
     private void Start()
     {
-        if(m_doorType == DoorType.UnlockWithKey)
-        {
-            PlayerMask = LayerMask.GetMask("Player");
-        }
-
         Speed = OpenSpeed;
         closePos = transform.position;
         targetPos = closePos;
         openPos = closePos - transform.forward.normalized * 5f;
+        player = Character3D.m_instance.gameObject;
     }
 
     private void Update()
@@ -62,13 +58,11 @@ public class DoorBehaviour : MonoBehaviour
         if (!bigDoor)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPos, Speed / 10);
-        }    
-            
+        }       
         
-
         if(m_doorType == DoorType.UnlockWithKey)
         {
-            CheckPlayerUpdate();
+            CheckPlayerRangeUpdate();
         }
         else
         {
@@ -119,16 +113,20 @@ public class DoorBehaviour : MonoBehaviour
         return true;
     }
 
-    private void CheckPlayerUpdate()
+    private void CheckPlayerRangeUpdate()
     {
-        if(Physics.CheckSphere(transform.position, DetectionPlayerRange, PlayerMask))
+        if((player.transform.position - transform.position).magnitude < DetectionPlayerRange)
         {
-            if(KeyInventory.instance.GetKeyCount() >= KeyNeeded)
+            if(Input.GetAxisRaw("GiveKey") == 1)
             {
-                KeyInventory.instance.RemoveKeyFromInventory(KeyNeeded);
-                isOpen = true;
-            }
+                if (KeyInventory.instance.GetKeyCount() >= KeyNeeded)
+                {
+                    KeyInventory.instance.RemoveKeyFromInventory(KeyNeeded);
+                    isOpen = true;
+                }
+            }            
         }
+
     }
 
     private void OnDrawGizmosSelected()

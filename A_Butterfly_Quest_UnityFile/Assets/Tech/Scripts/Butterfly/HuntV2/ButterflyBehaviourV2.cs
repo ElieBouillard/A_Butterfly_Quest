@@ -13,7 +13,6 @@ public class ButterflyBehaviourV2 : MonoBehaviour
     public float MovementRange;
 
     private GameObject player;
-    private bool followPlayer;
     private GameObject butterflyLauncher;
     private GameObject PlayerCluster;
     private bool randomMove;

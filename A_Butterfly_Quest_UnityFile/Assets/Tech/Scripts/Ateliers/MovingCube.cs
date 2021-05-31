@@ -14,6 +14,9 @@ public class MovingCube : MonoBehaviour
     public enum Direction { Front, Left, Back, Right };
     public Direction RayDir;
 
+    private bool CollideWithPlayer;
+    private Vector3 dir;
+
     private void Start()
     {
         target = new Vector3(transform.position.x, transform.position.y, transform.position.z);
@@ -39,6 +42,16 @@ public class MovingCube : MonoBehaviour
         }
 
         rayPos = new Vector3(transform.position.x, transform.position.y + OffsetY, transform.position.z);
+
+        if (CollideWithPlayer)
+        {            
+            bool raycast = Physics.Raycast(rayPos, dir, 2.99f);
+            if (Character3D .m_instance.clockDash > 0 && canMoove && !raycast && dir == transform.forward && ButterflyTypeSelection.Instance.SelectionTypeValue == 2)
+            {
+                target = new Vector3(transform.position.x, transform.position.y, transform.position.z) + dir * 3f;
+                mooveClock = 1f;
+            }
+        }
     }
 
 
@@ -51,15 +64,13 @@ public class MovingCube : MonoBehaviour
 
     private void OnCollisionEnter(Collision hit)
     {
-        Character3D playerScpt = hit.gameObject.GetComponent<Character3D>();
-        Vector3 dir = hit.contacts[0].normal;
-        bool raycast = Physics.Raycast(rayPos, dir, 2.99f);
+        dir = hit.contacts[0].normal;
+        CollideWithPlayer = true;
+    }
 
-        if (!playerScpt.GetCanDash(2) && canMoove && !raycast)
-        {
-            target = new Vector3(transform.position.x, transform.position.y, transform.position.z) + dir * 3f;
-            mooveClock = 1f;
-        }
+    private void OnCollisionExit(Collision collision)
+    {
+        CollideWithPlayer = false;
     }
 
     private void OnDrawGizmosSelected()

@@ -53,7 +53,8 @@ public class Character3D : MonoBehaviour
     public float DashCouldown = 2f;
     public float DashIllusionCouldown = 4f;
     private float m_DashSpeed = 0f;
-    private float clockDash = 0f;
+    [HideInInspector]
+    public float clockDash = 0f;
     private float[] clocksCanDash;
     private bool[] CanDash;
     private float clockHud;
@@ -381,16 +382,18 @@ public class Character3D : MonoBehaviour
     private float clockBeforeNetHit;
     private float clockAfterNetHit;
     private bool canClockAfterNetHit = false;
-    
+
+    private float clockNetHitCd;
     private void HuntNetHitUpdate()
     {
         //Chasse Coup de Filet
-        if (Input.GetKeyDown(KeyCode.Joystick1Button1) && !Shoot.Instance.Aiming)
+        if (Input.GetKeyDown(KeyCode.Joystick1Button1) && !Shoot.Instance.Aiming && clockNetHitCd <= 0)
         {
             m_animManager.shoutTrigger = true;
 
-            clockBeforeNetHit = 0.4f;
+            clockBeforeNetHit = 0.3f;
             canClockAfterNetHit = true;
+            clockNetHitCd = 1f;
         }
 
         if(clockBeforeNetHit > 0)
@@ -401,7 +404,7 @@ public class Character3D : MonoBehaviour
         {
             if (canClockAfterNetHit)
             {
-                clockAfterNetHit = 0.2f;
+                clockAfterNetHit = 0.3f;
                 canClockAfterNetHit = false;
             }
         }
@@ -419,6 +422,11 @@ public class Character3D : MonoBehaviour
                 NetCollider.SetActive(false);
             }
  
+        }
+
+        if(clockNetHitCd > 0)
+        {
+            clockNetHitCd -= Time.deltaTime;
         }
     }
 

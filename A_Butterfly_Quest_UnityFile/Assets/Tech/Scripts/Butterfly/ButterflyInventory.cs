@@ -64,6 +64,7 @@ public class ButterflyInventory : MonoBehaviour
     public void ShootedButterfly(ButterflyBehaviourV2 currButterfly)
     {
         ButterflyInInventory[(int)currButterfly.m_ButterflyType].Remove(currButterfly);
+        currButterfly.gameObject.SetActive(false);
     }
 
     public void AddToReloadList(ButterflyBehaviourV2 currButterfly)
@@ -88,7 +89,7 @@ public class ButterflyInventory : MonoBehaviour
     {
         _reloading = true;
         Debug.Log("Reloading...");
-        _clock = 2f;
+        _clock = 1f;
     }
 
     public void Reload()
@@ -99,6 +100,9 @@ public class ButterflyInventory : MonoBehaviour
             for (int i = 0; i < ButterflyToReload.Count; i++)
             {
                 ButterflyInInventory[(int)ButterflyToReload[i].m_ButterflyType].Add(ButterflyToReload[i]);
+                ButterflyToReload[i].SetCatched();
+                ButterflyToReload[i].gameObject.SetActive(true);
+
             }
             ButterflyToReload.Clear();
             Debug.Log("Reloading success with " + reloadValue + " butterfly !");

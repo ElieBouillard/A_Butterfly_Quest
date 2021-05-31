@@ -65,7 +65,7 @@ public class PresurePlate : MonoBehaviour
             Debug.Log("C'est l'illus");
             Activated = true;
             targetPos = startPos + new Vector3(0, -range, 0);
-            clock = Character3D.m_instance.DashIllusionCouldown;
+            clock = Character3D.m_instance.clocksCanDash[1];
             canFalse = true;
         }
     }

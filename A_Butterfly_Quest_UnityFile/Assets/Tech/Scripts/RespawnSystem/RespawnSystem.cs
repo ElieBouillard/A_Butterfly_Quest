@@ -50,6 +50,8 @@ public class RespawnSystem : MonoBehaviour
         Character3D.m_instance.FreezePosPlayer(DeathAnimTime + 1.5f, true, true);
         canDeathClock = true; 
         deathClock = DeathAnimTime;
+        AnimationManager.m_instance.isAlive = false;
+        AudioManager.instance.Play("Death");
     }
 
     public void DeathUpdate()
@@ -59,6 +61,7 @@ public class RespawnSystem : MonoBehaviour
             if (deathClock > 0)
             {
                 deathClock -= Time.deltaTime;
+                AnimationManager.m_instance.canPlayStepSound = false;
             }
             else
             {
@@ -96,6 +99,8 @@ public class RespawnSystem : MonoBehaviour
         Player.GetComponent<HealthSystem>().Respawn();
         Shoot.Instance.ResetFreeLookBehindPlayer();
         isDead = false;
+        AnimationManager.m_instance.isAlive = true;
+        AnimationManager.m_instance.canPlayStepSound = true;
     }
 
     private void OnTriggerEnter(Collider other)

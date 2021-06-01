@@ -21,13 +21,12 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ShootLine
-  m_Shader: {fileID: 4800000, guid: c66b2bbe51b959840ab81052dafd9a39, type: 3}
-  m_ShaderKeywords: _ACTIVATEEFFECT2_ON _ACTIVATEEFFECT3_ON _BLENDMODE_ALPHA _DISABLE_SSR
-    _DOUBLESIDED_ON _ENABLE_FOG_ON_TRANSPARENT _ISPANNING3_ON _ISPANNING4_ON _ISPANNING_ON
-    _NORMALMAP_TANGENT_SPACE _SURFACE_TYPE_TRANSPARENT
+  m_Shader: {fileID: 4800000, guid: bf44847ead7fcf6468ac55296191d95a, type: 3}
+  m_ShaderKeywords: _ACTIVATEEFFECT2_ON _ACTIVATEEFFECT4_ON _BLENDMODE_ALPHA _DISABLE_SSR
+    _ISPANNING3_ON _ISPANNING4_ON _ISPANNING_ON _NORMALMAP_TANGENT_SPACE _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 1
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
   stringTagMap:
     MotionVector: User
@@ -78,8 +77,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ErosionMap:
-        m_Texture: {fileID: 2800000, guid: d42697bdb7f1aaf428e4569b592bc320, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: 9a6174c6675a3fa4bbc29fa67a98e98c, type: 3}
+        m_Scale: {x: -1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _HeightMap:
         m_Texture: {fileID: 0}
@@ -99,7 +98,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTexture:
         m_Texture: {fileID: 2800000, guid: 9a6174c6675a3fa4bbc29fa67a98e98c, type: 3}
-        m_Scale: {x: 10, y: 1}
+        m_Scale: {x: 3, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
         m_Texture: {fileID: 0}
@@ -115,6 +114,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _NormalMapOS:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ProgressionMap:
+        m_Texture: {fileID: 2800000, guid: 0e6573cac54dcb54bb37364838381e4c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecularColorMap:
@@ -151,7 +154,8 @@ Material:
     - _ATDistance: 1
     - _ActivateEffect: 0
     - _ActivateEffect2: 1
-    - _ActivateEffect3: 1
+    - _ActivateEffect3: 0
+    - _ActivateEffect4: 1
     - _AddPrecomputedVelocity: 0
     - _AlbedoAffectEmissive: 0
     - _AlphaCoefficient: 1
@@ -165,8 +169,8 @@ Material:
     - _Anisotropy: 0
     - _BlendMode: 0
     - _CoatMask: 0
-    - _CullMode: 0
-    - _CullModeForward: 0
+    - _CullMode: 2
+    - _CullModeForward: 2
     - _Cutoff: 0.5
     - _Depth: 0
     - _DepthOffsetEnable: 0
@@ -192,7 +196,7 @@ Material:
     - _DistortionSrcBlend: 1
     - _DistortionVectorBias: -1
     - _DistortionVectorScale: 2
-    - _DoubleSidedEnable: 1
+    - _DoubleSidedEnable: 0
     - _DoubleSidedNormalMode: 1
     - _DstBlend: 10
     - _DstBlendMode: 10
@@ -202,12 +206,15 @@ Material:
     - _EmissiveIntensity: 1
     - _EmissiveIntensityUnit: 0
     - _EnableBlendModePreserveSpecularLighting: 1
-    - _EnableFogOnTransparent: 1
+    - _EnableFogOnTransparent: 0
     - _EnableGeometricSpecularAA: 0
     - _EnergyConservingSpecularColor: 1
     - _Erosion: 0
-    - _Flow: 0.2
-    - _Glow: 2
+    - _Erosion1: 0
+    - _Float0: 0.4
+    - _Flow: 0.373
+    - _Glow: 3.34
+    - _HeadGlow: 0
     - _HeightAmplitude: 0.02
     - _HeightCenter: 0.5
     - _HeightMapParametrization: 0
@@ -238,12 +245,15 @@ Material:
     - _PPDMinSamples: 5
     - _PPDPrimitiveLength: 1
     - _PPDPrimitiveWidth: 1
+    - _Progression: 1
     - _ReceivesSSR: 0
     - _RefractionModel: 0
     - _RenderQueueType: 5
     - _RequireSplitLighting: 0
     - _SSRefractionProjectionModel: 0
     - _Smoothness: 0.2
+    - _Smoothness1: 0.3
+    - _SmoothnessProgression: 0.4
     - _SmoothnessRemapMax: 1
     - _SmoothnessRemapMin: 0
     - _SpecularAAScreenSpaceVariance: 0.1
@@ -300,11 +310,12 @@ Material:
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
     - _FakeFogColor: {r: 1, g: 1, b: 1, a: 1}
+    - _HeadColor: {r: 1, g: 1, b: 1, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _MainColor: {r: 0.16558382, g: 0.2427903, b: 0.5754717, a: 1}
+    - _MainColor: {r: 0.61960787, g: 0.78431374, b: 1.4980392, a: 1}
     - _PannerSpeed2: {r: 1, g: 0, b: 0, a: 0}
-    - _SecondaryColor: {r: 0, g: 0.027437821, b: 0.23584908, a: 1}
+    - _SecondaryColor: {r: 0.13744363, g: 0, b: 0.6603774, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}

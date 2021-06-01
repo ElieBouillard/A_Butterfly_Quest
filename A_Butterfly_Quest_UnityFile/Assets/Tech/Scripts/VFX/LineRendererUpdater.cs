@@ -7,6 +7,10 @@ public class LineRendererUpdater : MonoBehaviour
     float timer;
     public float TimeToDissolve = 1;
     float erosionAmount;
+
+    public float TimeToProgress = .5f;
+    float progressAmount;
+
     List<LineRenderer> m_Renderers = new List<LineRenderer>();
     List<Material> m_Mats = new List<Material>();
     private void Start()
@@ -27,6 +31,7 @@ public class LineRendererUpdater : MonoBehaviour
         if(timer < TimeToDissolve)
         {
             erosionAmount = timer / TimeToDissolve;
+            progressAmount = timer / TimeToProgress;
             UpdateRenderers();
             timer += Time.deltaTime;
         }
@@ -43,6 +48,10 @@ public class LineRendererUpdater : MonoBehaviour
         {
             //m_Renderers.
             m_Renderers[i].material.SetFloat("_Erosion", erosionAmount);
+            if(progressAmount <= 1)
+            {
+                m_Renderers[i].material.SetFloat("_Progression", progressAmount);
+            }
         }
     }
 }

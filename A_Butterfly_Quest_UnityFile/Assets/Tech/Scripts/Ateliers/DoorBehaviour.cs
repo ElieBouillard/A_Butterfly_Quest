@@ -22,6 +22,12 @@ public class DoorBehaviour : MonoBehaviour
     [Header("Receptacles ou Pressures Plates")]
     public GameObject[] ItemsWichUnlock;
 
+    [Header("Sounds")]
+    public AudioClip DoorOpeningSound;
+    public AudioClip DoorClosingSound;
+    private AudioSource m_audioSource;
+    private Vector3 LastTagetPos;
+
     [Header("Debug")]
     public bool isOpen;
 
@@ -42,10 +48,27 @@ public class DoorBehaviour : MonoBehaviour
         targetPos = closePos;
         openPos = closePos - transform.forward.normalized * 5f;
         player = Character3D.m_instance.gameObject;
+        m_audioSource = GetComponent<AudioSource>();
+        LastTagetPos = targetPos;
     }
 
     private void Update()
     {
+        if(targetPos != LastTagetPos)
+        {
+            if(targetPos == closePos)
+            {
+                m_audioSource.PlayOneShot(DoorClosingSound);
+                //FX FERMETURE
+            }
+            else if (targetPos == openPos)
+            {
+                //FX FERMETURE
+                m_audioSource.PlayOneShot(DoorOpeningSound);
+            }            
+            LastTagetPos = targetPos;
+        }
+
         if (isOpen)
         {
             OpenDoor();

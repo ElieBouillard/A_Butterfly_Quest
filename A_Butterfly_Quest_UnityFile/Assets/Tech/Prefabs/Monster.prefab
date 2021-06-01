@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1674603350770619189}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 2051022722029796136}
   m_Father: {fileID: 0}
@@ -69,11 +69,14 @@ MonoBehaviour:
   PlayerMask:
     serializedVersion: 2
     m_Bits: 1024
+  _obstacleMask:
+    serializedVersion: 2
+    m_Bits: 37120
   PatrolingRange: 10.5
   ChasingRange: 14
   AttackingRange: 5.5
   AttackingCancelRange: 2.5
-  Damage: 2
+  Damage: 0
   PatrolingSpeed: 2
   ChasingSpeed: 6
   AttackingSpeed: 50
@@ -123,7 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CharacterType: 1
   InitialHealth: 5
-  EnemyMesh: {fileID: 2012979630532251399}
+  EnemyMesh: {fileID: 3985053752450475357}
   CurrHealth: 0
 --- !u!65 &1674603350770619191
 BoxCollider:
@@ -133,7 +136,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1674603350770619189}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.47693253, y: 0.93341863, z: 1.1768982}
@@ -251,6 +254,12 @@ Transform:
 --- !u!1 &2012979630532251399 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5490406809834436, guid: 9b215aa75a3325748b51b644ff6c3129,
+    type: 3}
+  m_PrefabInstance: {fileID: 2016499042437717187}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &3985053752450475357 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -6002794212237526626, guid: 9b215aa75a3325748b51b644ff6c3129,
     type: 3}
   m_PrefabInstance: {fileID: 2016499042437717187}
   m_PrefabAsset: {fileID: 0}

@@ -6,6 +6,13 @@ public class RonceBehaviour : MonoBehaviour
 {
     public float KnockBackStrenght;
     private GameObject playerOb;
+    private AudioSource m_audioSource;
+    public AudioClip hitPlayerSound;
+
+    private void Start()
+    {
+        m_audioSource = GetComponent<AudioSource>();
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -22,6 +29,7 @@ public class RonceBehaviour : MonoBehaviour
 
             HealthSystem m_healthSystem = collision.gameObject.GetComponent<HealthSystem>();
             m_healthSystem.TakeDamage(1);
+            m_audioSource.PlayOneShot(hitPlayerSound);
         }
     }
 }

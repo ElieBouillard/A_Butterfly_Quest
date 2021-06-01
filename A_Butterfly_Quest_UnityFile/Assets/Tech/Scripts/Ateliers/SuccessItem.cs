@@ -9,23 +9,28 @@ public class SuccessItem : MonoBehaviour
     public float RangeToGiveKeyPlayer;
 
     LayerMask PlayerMask;
-    GameObject mode; 
+    GameObject mode;
+    GameObject Player;
 
     private bool _allReadyGived;
+    private bool canPlayMusic;
     private void Start()
     {
         PlayerMask = LayerMask.GetMask("Player");
         mode = transform.GetChild(0).gameObject;
+        Player = Character3D.m_instance.gameObject;
     }
 
+    float distToPlayer;
     private void Update() 
     {
         transform.Rotate(new Vector3(0, 0, 50f * Time.deltaTime));
-        Ray ray = new Ray(transform.position, transform.position);
-        if (Physics.CheckSphere(transform.position, RangeToGiveKeyPlayer, PlayerMask))
+        distToPlayer = (Player.transform.position - transform.position).magnitude;
+        if(distToPlayer < RangeToGiveKeyPlayer)
         {
             if (!_allReadyGived)
             {
+                AudioManager.instance.Play("Key");
                 KeyInventory.instance.AddKeyToInvetory();
                 mode.SetActive(false);
                 _allReadyGived = true;

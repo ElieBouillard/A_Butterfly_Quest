@@ -34,7 +34,7 @@ public class ButterflyBehaviourV2 : MonoBehaviour
     public void SetButterFlyToLauncherPos()
     {
         randomMove = false;
-        m_Speed = 10f;
+        m_Speed = 4f;
         m_TargetPos = butterflyLauncher.transform.position;
         gameObject.transform.forward = player.transform.GetChild(0).transform.forward;
     }
@@ -64,7 +64,14 @@ public class ButterflyBehaviourV2 : MonoBehaviour
             { 
                 m_Speed = Random.Range(2f, 3f);
                 m_TargetPos = new Vector3(transform.parent.position.x + Random.Range(-MovementRange, MovementRange), transform.parent.position.y + Random.Range(-MovementRange, MovementRange), transform.parent.position.z + Random.Range(-MovementRange, MovementRange));
-                clockChangeTargetPos = Random.Range(0.7f, 1.5f);
+                if (transform.parent.GetComponent<ButterflyClusterV2>().isFollowingPlayer)
+                {
+                    clockChangeTargetPos = Random.Range(0.2f, 0.4f);
+                }
+                else
+                {
+                    clockChangeTargetPos = Random.Range(0.7f, 1.5f);
+                }
                 transform.LookAt(m_TargetPos);
             }
         }

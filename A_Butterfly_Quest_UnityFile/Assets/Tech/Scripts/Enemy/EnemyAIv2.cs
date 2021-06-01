@@ -166,7 +166,6 @@ public class EnemyAIv2 : MonoBehaviour
             {
                 SetAllAnimBool(false);
             }
-
         }
     }
 

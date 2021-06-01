@@ -1683,9 +1683,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFollowingPlayer: 0
-  NormalCount: 1
-  IllusionCount: 0
-  TempeteCount: 0
+  NormalCount: 2
+  IllusionCount: 2
+  TempeteCount: 2
   m_Speed: 2
   Range: 10
   Respawn: 0
@@ -2061,6 +2061,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1674603350770619189, guid: 9a1041fc0ee29b143adaa1c83ca3d930,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1674603350770619190, guid: 9a1041fc0ee29b143adaa1c83ca3d930,
         type: 3}
@@ -2573,6 +2578,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 590550599605393959, guid: 83c604700b7bb034cb2ba8b0e5b799a0,
+        type: 3}
+      propertyPath: Speedydididi
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83c604700b7bb034cb2ba8b0e5b799a0, type: 3}

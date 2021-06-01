@@ -19,6 +19,7 @@ public class VFXManager : MonoBehaviour
 
     //Character
     public Renderer mesh_rend;
+    public Transform shoot_startPoint;
 
     //Butterflies
     public GameObject SuccessfulCatch_FX;
@@ -172,5 +173,11 @@ public class VFXManager : MonoBehaviour
                 break;
         }
         
+    }
+
+    public void SpawnShootVFX(Vector3 endPos)
+    {
+        Vector3 startPos = shoot_startPoint.transform.position;
+        Instantiate(ShootVFX, shoot_startPoint.transform.position, Quaternion.identity);
     }
 }

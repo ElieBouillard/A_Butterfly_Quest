@@ -151,6 +151,10 @@ public class Shoot : MonoBehaviour
         }
 
 
+        //VFX
+        VFXManager.m_instance.SpawnShootVFX(HitPos);
+
+
     }
 
     private void ShootInputSystem()
@@ -159,6 +163,7 @@ public class Shoot : MonoBehaviour
         {
             if (Input.GetAxisRaw("Fire1") == 1 && canShoot)
             {
+
                 ShootButterfly(ButterflyTypeSelection.Instance.SelectionTypeValue);
                 //AnimationManager.m_instance.shootTrigger = true; //Anim   
                 canShoot = false;

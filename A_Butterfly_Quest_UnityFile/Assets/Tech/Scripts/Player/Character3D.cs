@@ -372,6 +372,16 @@ public class Character3D : MonoBehaviour
     public void DashHudUpdate()
     {
         clockHud = clocksCanDash[m_butterflyTypeSelectionIndex];
+        if(ButterflyInventory.Instance.ButterflyInInventory[m_butterflyTypeSelectionIndex].Count == 0 || CanDash[m_butterflyTypeSelectionIndex] == false)
+        {
+            UIManager.instance.DashSprite.color = UIManager.instance.DashColors[3];
+        }
+        else
+        {
+            UIManager.instance.DashSprite.color = UIManager.instance.DashColors[m_butterflyTypeSelectionIndex];
+        }
+
+        UIManager.instance.DashCd.color = UIManager.instance.DashColors[m_butterflyTypeSelectionIndex];
 
         if(m_butterflyTypeSelectionIndex != 1)
         {

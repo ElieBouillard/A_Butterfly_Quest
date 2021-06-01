@@ -22,6 +22,8 @@ public class UIManager : MonoBehaviour
     public Image[] ButterflyImage;
     public ButterflyImages[] Butterflys;
     public Image DashCd;
+    public Image DashSprite;
+    public Color[] DashColors;
     [System.Serializable]
     public class ButterflyImages
     {
@@ -56,6 +58,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         ShowCrosshair(true);
+        //DashColors = new Color[4] { new Color(170f, 255f, 240f, 255f), new Color(255f, 200f, 255f, 255f), new Color(220f, 255f, 140f, 255f), new Color(255f, 255f, 255f, 55f)};
     }
 
     private void Update()

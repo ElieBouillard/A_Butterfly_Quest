@@ -76,6 +76,9 @@ public class AnimationManager : MonoBehaviour
     //hit
     public bool hitTrigger;
 
+    //Sound
+    public bool canPlayStepSound;
+
     private void Awake()
     {
         if (DEBUG == false)
@@ -95,7 +98,7 @@ public class AnimationManager : MonoBehaviour
             cameraRight = Vector3.right;
             reorientateTimer = -1.0f;
         }
-        
+        canPlayStepSound = true;       
     }
 
 
@@ -395,13 +398,20 @@ public class AnimationManager : MonoBehaviour
 
     public void PlayRightStepSound()
     {
-        AudioManager.instance.Play("FootStepForest");
+        if (canPlayStepSound)
+        {
+            AudioManager.instance.Play("FootStepForest");
+        }
+
         //FX STEP
     }
 
     public void PlayLeftStepSound()
     {
-        AudioManager.instance.Play("FootStepForest");
-        //FX STEP
+        if (canPlayStepSound)
+        {
+            AudioManager.instance.Play("FootStepForest");
+            //FX STEP
+        }
     }
 }

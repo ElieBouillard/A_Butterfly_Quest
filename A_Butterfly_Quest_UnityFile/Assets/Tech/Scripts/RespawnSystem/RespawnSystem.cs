@@ -61,6 +61,7 @@ public class RespawnSystem : MonoBehaviour
             if (deathClock > 0)
             {
                 deathClock -= Time.deltaTime;
+                AnimationManager.m_instance.canPlayStepSound = false;
             }
             else
             {
@@ -99,6 +100,7 @@ public class RespawnSystem : MonoBehaviour
         Shoot.Instance.ResetFreeLookBehindPlayer();
         isDead = false;
         AnimationManager.m_instance.isAlive = true;
+        AnimationManager.m_instance.canPlayStepSound = true;
     }
 
     private void OnTriggerEnter(Collider other)

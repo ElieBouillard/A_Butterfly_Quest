@@ -105,7 +105,7 @@ public class Character3D : MonoBehaviour
         IllusionMeshItem.SetActive(false);
         Physics.IgnoreCollision(GetComponent<Collider>(), IllusionMeshItem.GetComponent<Collider>(), true);
     }
-
+    bool checkStepSound = false;
     void Update()
     {
         grounded = IsGrounded();
@@ -136,6 +136,8 @@ public class Character3D : MonoBehaviour
             Debug.DrawRay(transform.position, directionRight * 10, Color.red);
         }
 
+
+ 
         // Jump
         if (Input.GetButtonDown("Jump"))
         {
@@ -158,7 +160,6 @@ public class Character3D : MonoBehaviour
         else
         {
             jumpTime = -1;
-
             //m_animManager.jumpTrigger = false; //anim
         }
 
@@ -299,10 +300,14 @@ public class Character3D : MonoBehaviour
         freezeDirection = FreezeDirection;
     }
 
+    bool checkPlaySound;
     public void InitDash(int DashType)
     {
+
         FreezePosPlayer(DashDuration, true, true);
         AnimationManager.m_instance.dashTrigger = true;
+        AnimationManager.m_instance.canPlayStepSound = false;
+        checkPlaySound = true;
         DashDir = PlayerMesh.transform.forward;
         clockDash = DashDuration;
         m_DashSpeed = DashSpeed;
@@ -339,7 +344,11 @@ public class Character3D : MonoBehaviour
         {
             m_DashSpeed = 0;
             m_rb.velocity = new Vector3(m_rb.velocity.x, m_rb.velocity.y, m_rb.velocity.z);
-
+            if (checkPlaySound)
+            {
+                AnimationManager.m_instance.canPlayStepSound = true;
+                checkPlaySound = false;
+            }
         }
 
         //DashCouldownDuration
@@ -438,6 +447,7 @@ public class Character3D : MonoBehaviour
     {
         transform.position = new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z);
         inKnockBack = true;
+        AnimationManager.m_instance.canPlayStepSound = false;
     }
 
     private void KnockBackUpdate()
@@ -446,6 +456,7 @@ public class Character3D : MonoBehaviour
         {
             if (grounded)
             {
+                AnimationManager.m_instance.canPlayStepSound = true;
                 inKnockBack = false;
             }
         }

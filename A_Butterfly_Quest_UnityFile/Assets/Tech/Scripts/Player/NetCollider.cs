@@ -12,6 +12,8 @@ public class NetCollider : MonoBehaviour
             if (!currButterflyCatch.Contains(other))
             {
                 currButterflyCatch.Add(other);
+
+                VFXManager.m_instance.CatchButterfly(other.gameObject);//VFX
             }
         }
     }

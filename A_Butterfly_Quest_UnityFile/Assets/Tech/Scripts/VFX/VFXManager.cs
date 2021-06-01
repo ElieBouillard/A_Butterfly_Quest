@@ -13,6 +13,7 @@ public class VFXManager : MonoBehaviour
     public ParticleSystem idleAimEnergyVFX;
     public ParticleSystem AimVFX;
     public ParticleSystem ShootVFX;
+    public GameObject ShootLine;
     public ParticleSystem ImpactVFX;
     bool isAiming;
 
@@ -178,6 +179,11 @@ public class VFXManager : MonoBehaviour
     public void SpawnShootVFX(Vector3 endPos)
     {
         Vector3 startPos = shoot_startPoint.transform.position;
+        
         Instantiate(ShootVFX, shoot_startPoint.transform.position, Quaternion.identity);
+        GameObject shoot_Line = Instantiate(ShootLine, new Vector3(0,0,0), Quaternion.identity);
+        LineRenderer LineRend = shoot_Line.GetComponent<LineRenderer>();
+        LineRend.SetPosition(0, startPos);
+        LineRend.SetPosition(1, endPos);
     }
 }

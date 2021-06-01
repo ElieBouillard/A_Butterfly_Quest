@@ -12,6 +12,7 @@ public class EnemyAIv2 : MonoBehaviour
     [Header("References")]
     public GameObject Target;
     public LayerMask PlayerMask;
+    public LayerMask _obstacleMask;
 
     [Header("Ranges")]
     [Range(0, 20)]
@@ -58,13 +59,11 @@ public class EnemyAIv2 : MonoBehaviour
     private Vector3 InitialPos;
     private float AttackingRangeTemp;
     private bool canResetPath;
-    private int _obstacleMask;
 
     private void Start()
     {
         //ReferenceAuto
         Agent = gameObject.GetComponent<NavMeshAgent>();
-        _obstacleMask = LayerMask.GetMask("Grounded") + LayerMask.GetMask("Obstacles");
 
         InitialPos = transform.position;
         _started = true;
@@ -195,7 +194,7 @@ public class EnemyAIv2 : MonoBehaviour
 
             DistanceToPatrolingPos = RandomPatrolingPos.Value - transform.position;
 
-            if (DistanceToPatrolingPos.magnitude < 0.1f)
+            if (DistanceToPatrolingPos.magnitude < 1f)
             {
                 WaitForNewPatrolingPos();
 
@@ -211,17 +210,19 @@ public class EnemyAIv2 : MonoBehaviour
         float randomZ = Random.Range(-PatrolingRange, PatrolingRange);
 
         Vector3 randPos = new Vector3(InitialPos.x + randomX, transform.position.y, InitialPos.z + randomZ);
-
-        //NavMeshPosCheck
         NavMeshPath path = new NavMeshPath();
         Agent.CalculatePath(randPos, path);
-        if(Vector3.Distance(randPos, InitialPos) > PatrolingRange)
+
+        if((randPos - InitialPos).magnitude < PatrolingRange)
         {
-            RandomPatrolingPos = null;
-        }
-        if (path.status == NavMeshPathStatus.PathComplete)
-        {
-            RandomPatrolingPos = randPos;
+            if (path.status == NavMeshPathStatus.PathComplete)
+            {
+                RandomPatrolingPos = randPos;
+            }
+            else
+            {
+                RandomPatrolingPos = null;
+            }
         }
         else
         {
@@ -279,20 +280,34 @@ public class EnemyAIv2 : MonoBehaviour
                 dirAttack.Normalize();
 
                 Vector3 AttackingPosTemp;
-                if (Physics.Raycast(transform.position, dirAttack, out RaycastHit hit, AttackingRange * 2.5f, _obstacleMask))
+                //if (Physics.Raycast(transform.position, dirAttack, out RaycastHit hit, AttackingRange * 3f, _obstacleMask))
+                //{
+                //    Debug.DrawRay(transform.position, dirAttack * AttackingRange * 3f, Color.cyan, 2f);
+                //    AttackingPosTemp = transform.position + (hit.distance - 1.5f) * dirAttack;
+                //    Debug.DrawRay(transform.position, dirAttack * hit.distance, Color.red, 3);
+                //    minDistStop = 3f;
+                //}
+                //else
+                //{
+                //    float distAttackTemp = distAttack;
+                //    AttackingPosTemp = transform.position + distAttackTemp * 2 * dirAttack;
+                //    minDistStop = 0.5f;
+                //}
+                
+                float distAttackTemp = distAttack;
+                AttackingPosTemp = transform.position + distAttackTemp * 2f * dirAttack;
+                minDistStop = 1f;
+
+                if(Physics.Raycast(transform.position, dirAttack, distAttackTemp * 2.5f, _obstacleMask))
                 {
-                    AttackingPosTemp = transform.position + hit.distance * dirAttack;
-                    Debug.DrawRay(transform.position, dirAttack * hit.distance, Color.red, 3);
-                    minDistStop = 3f;
+                    AttackingPos = Target.transform.position;
                 }
                 else
                 {
-                    float distAttackTemp = distAttack;
-                    AttackingPosTemp = transform.position + distAttackTemp * 2 * dirAttack;
-                    minDistStop = 0.5f;
-                }
+                    AttackingPos = AttackingPosTemp;
+                }               
+
                 inAttack = true;
-                AttackingPos = AttackingPosTemp;
                 clockAttackAnim = 0.4f;
                 canFxCharge = true;
             }
@@ -318,10 +333,10 @@ public class EnemyAIv2 : MonoBehaviour
                     Agent.SetDestination(AttackingPos.Value);
                     Debug.DrawRay(AttackingPos.Value, Vector3.up, Color.cyan, 3);
 
-                    distToAttackPos = Vector3.Distance(AttackingPos.Value, transform.position);
                 }
+                    distToAttackPos = (AttackingPos.Value - transform.position).magnitude;
 
-                if (distToAttackPos < minDistStop)
+                if (distToAttackPos < 2f)
                 {
                     inAttack = false;
                     TurnOff(TimeAfterAttacking, States.TurnBack);

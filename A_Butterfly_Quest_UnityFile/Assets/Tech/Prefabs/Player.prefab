@@ -2536,6 +2536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DEBUG: 0
+  m_anim: {fileID: 0}
   cameraForward: {x: 0, y: 0, z: 0}
   cameraRight: {x: 0, y: 0, z: 0}
   playerSpeed: 0
@@ -2545,16 +2546,20 @@ MonoBehaviour:
   airboneTrigger: 0
   wasGrounded: 0
   isGrounded: 0
+  isAlive: 1
   TorsoBendMultiplier: 2
   torsoMaxRange: 0.45
   minSpeedForBending: 0.3
   BodyRefacingSpeed: 15
   TorsoRefacingSpeed: 5
+  minSpeedForImpulse: 0.3
   reorientateDuration: 0.3
   reorientateSpeed: 300
   shootTrigger: 0
-  shoutTrigger: 0
+  netTrigger: 0
   dashTrigger: 0
+  hitTrigger: 0
+  canPlayStepSound: 0
 --- !u!1 &1929685789685168600
 GameObject:
   m_ObjectHideFlags: 0
@@ -10812,9 +10817,12 @@ MonoBehaviour:
   DashDuration: 0.5
   DashCouldown: 2.75
   DashIllusionCouldown: 4
+  clockDash: 0
+  clocksCanDash: []
   dashDebug: 1
   IllusionMeshItem: {fileID: 2331409774595580149, guid: 94f122f9843a46e4d96d8561f4be9d95,
     type: 3}
+  NetCollider: {fileID: 0}
   inKnockBack: 0
   m_camera: {fileID: 0}
   horizontalInput: 0
@@ -10839,10 +10847,16 @@ MonoBehaviour:
   IgnoreMask:
     serializedVersion: 2
     m_Bits: 0
+  ReceptaclesMask:
+    serializedVersion: 2
+    m_Bits: 0
   CamAnimator: {fileID: 0}
   freeLookCam: {fileID: 0}
+  CamTarget: {fileID: 0}
   Aiming: 0
   canShoot: 1
+  isAimAssist: 0
+  AimTargetTransform: {fileID: 0}
 --- !u!114 &8470097403645707639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10892,6 +10906,7 @@ MonoBehaviour:
       m_RecenteringTime: 0
       m_LegacyHeadingDefinition: 0
       m_LegacyVelocityFilterStrength: 0
+  AimCamera: {fileID: 0}
 --- !u!114 &8470097403645707641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10923,6 +10938,8 @@ MonoBehaviour:
   ButterflyTempeteInInventoryValue: 0
   ButterflyInTravelValue: 0
   ButterflyToReloadValue: 0
+  ButterflyInTravel: []
+  ButterflyToReload: []
 --- !u!114 &8470097403645707640
 MonoBehaviour:
   m_ObjectHideFlags: 0

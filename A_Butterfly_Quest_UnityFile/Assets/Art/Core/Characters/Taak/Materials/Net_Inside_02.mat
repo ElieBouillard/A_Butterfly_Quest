@@ -155,7 +155,7 @@ Material:
     - _ActivateEffect3: 0
     - _AddPrecomputedVelocity: 0
     - _AlbedoAffectEmissive: 0
-    - _AlphaCoefficient: 1
+    - _AlphaCoefficient: 0
     - _AlphaCutoff: 0.5
     - _AlphaCutoffEnable: 0
     - _AlphaCutoffPostpass: 0.5

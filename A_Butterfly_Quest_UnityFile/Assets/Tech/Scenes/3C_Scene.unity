@@ -156,7 +156,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9289136}
   m_LocalRotation: {x: -0, y: -0.98261976, z: -0, w: 0.18562989}
-  m_LocalPosition: {x: 353.2, y: 15.43, z: 482.3}
+  m_LocalPosition: {x: 107.1, y: 15.43, z: 299.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7255424629777524410}
@@ -952,6 +952,13 @@ MonoBehaviour:
   ShootVFX: {fileID: 0}
   ImpactVFX: {fileID: 0}
   mesh_rend: {fileID: 2361084464801384642}
+  SuccessfulCatch_FX: {fileID: 299559291818564437, guid: d6367ddd4a497a7418e3b222fd18d8c7,
+    type: 3}
+  SuccessfulCatch_Illusion_FX: {fileID: 299559291818564437, guid: 23dc2f918062b534f8990cbc5ff5c347,
+    type: 3}
+  SuccessfulCatch_Tempete_FX: {fileID: 299559291818564437, guid: 84809d23dcc8c7d438db6c33b53753d0,
+    type: 3}
+  net_Animator: {fileID: 919132148984205168}
 --- !u!114 &369401186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20897,8 +20904,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195822808}
-  m_LocalRotation: {x: 0.10498858, y: -0.8530946, z: 0.15256378, w: 0.48778215}
-  m_LocalPosition: {x: 20.523829, y: -0.55930805, z: 3.0917053}
+  m_LocalRotation: {x: 0.10498837, y: -0.8530946, z: 0.1525634, w: 0.4877822}
+  m_LocalPosition: {x: -306.27277, y: 64.49477, z: -54.159332}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1780449882}
@@ -21460,6 +21467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DEBUG: 0
+  m_anim: {fileID: 0}
   cameraForward: {x: 0, y: 0, z: 0}
   cameraRight: {x: 0, y: 0, z: 0}
   playerSpeed: 0
@@ -21479,7 +21487,7 @@ MonoBehaviour:
   reorientateDuration: 0.3
   reorientateSpeed: 300
   shootTrigger: 0
-  shoutTrigger: 0
+  netTrigger: 0
   dashTrigger: 0
   hitTrigger: 0
 --- !u!1 &1604021080
@@ -28287,6 +28295,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 543450652704511445}
+  - component: {fileID: 919132148984205168}
   m_Layer: 0
   m_Name: Net_Back
   m_TagString: Untagged
@@ -28294,6 +28303,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &919132148984205168
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148984205167}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b31b52535bb50114b846ccb85b3b64b9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &922575354914014622
 GameObject:
   m_ObjectHideFlags: 0

@@ -390,14 +390,16 @@ public class Character3D : MonoBehaviour
         //Chasse Coup de Filet
         if (Input.GetKeyDown(KeyCode.Joystick1Button1) && !Shoot.Instance.Aiming && clockNetHitCd <= 0)
         {
-            m_animManager.shoutTrigger = true;
-
             clockBeforeNetHit = 0.3f;
             canClockAfterNetHit = true;
             clockNetHitCd = 1f;
+
+            m_animManager.netTrigger = true;
+            VFXManager.m_instance.ShowNet(true);
+
         }
 
-        if(clockBeforeNetHit > 0)
+        if (clockBeforeNetHit > 0)
         {
             clockBeforeNetHit -= Time.deltaTime;
         }

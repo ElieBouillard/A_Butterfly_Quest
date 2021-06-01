@@ -27,6 +27,9 @@ public class ButterflyClusterV2 : MonoBehaviour
     [Range(0, 0.1f)]
     public float Speed;
 
+    private float Speedydididi;
+    
+
     [Header("Links")]
     public GameObject ButterflyNormal;
     public GameObject ButterflyIllusion;
@@ -34,6 +37,7 @@ public class ButterflyClusterV2 : MonoBehaviour
 
     private Vector3? targetPos;
     private GameObject player;
+    private float distToPlayer;
 
     private void Start()
     {
@@ -54,7 +58,33 @@ public class ButterflyClusterV2 : MonoBehaviour
         {
             Vector3 targetPos;
             targetPos = player.transform.position - player.transform.forward * PosBehindPlayer + Vector3.up * PosY + player.transform.right * PosX;
-            transform.position =  Vector3.MoveTowards(transform.position, targetPos, Speed);
+            distToPlayer = (targetPos - transform.position).magnitude;
+            if (distToPlayer < 0f)
+            {
+                Speedydididi = 0.02f;
+            }
+            else if (distToPlayer > 2.5f)
+            {
+                Speedydididi = 0.1f;
+            }
+            else
+            {
+                float distRatio = (distToPlayer - 0f) / (2.5f - 0);
+                float diffSpeed = 0.1f - 0.02f;
+                Speedydididi = (distRatio * diffSpeed) + 0.02f;
+            }
+
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, Speedydididi);
+
+            if (Shoot.Instance.Aiming)
+            {
+                PosX = -1f;
+            }
+            else
+            {
+                PosX = 0f;
+            }
+            
 
         }
         else

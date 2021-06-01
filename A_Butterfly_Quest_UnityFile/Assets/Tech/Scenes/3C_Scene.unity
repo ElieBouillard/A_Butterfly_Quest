@@ -97,7 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000002, guid: f7d68b5ff0fa3454590b8d8f3ebf0b4e,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -949,9 +950,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idleAimEnergyVFX: {fileID: 1604021083}
   AimVFX: {fileID: 375917399}
-  ShootVFX: {fileID: 0}
+  ShootVFX: {fileID: 2629178166941542265, guid: 0763225f5c853084e98b321e96db6017,
+    type: 3}
+  ShootLine: {fileID: 2067325504960722111, guid: 8b0fe82356c49564f9ed285ca032ae2c,
+    type: 3}
   ImpactVFX: {fileID: 0}
   mesh_rend: {fileID: 2361084464801384642}
+  shoot_startPoint: {fileID: 1185888070}
   SuccessfulCatch_FX: {fileID: 299559291818564437, guid: d6367ddd4a497a7418e3b222fd18d8c7,
     type: 3}
   SuccessfulCatch_Illusion_FX: {fileID: 299559291818564437, guid: 23dc2f918062b534f8990cbc5ff5c347,
@@ -20904,7 +20909,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195822808}
-  m_LocalRotation: {x: 0.10498837, y: -0.8530946, z: 0.1525634, w: 0.4877822}
+  m_LocalRotation: {x: 0.10498836, y: -0.8530946, z: 0.15256341, w: 0.48778218}
   m_LocalPosition: {x: -306.27277, y: 64.49477, z: -54.159332}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

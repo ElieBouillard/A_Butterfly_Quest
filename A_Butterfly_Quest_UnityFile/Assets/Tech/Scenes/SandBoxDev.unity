@@ -754,6 +754,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoucheFinAtelier
       objectReference: {fileID: 0}
+    - target: {fileID: 6496723472340070740, guid: d51e7fc9a09480748bf0974f43f4a2d5,
+        type: 3}
+      propertyPath: RangeToGiveKeyPlayer
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d51e7fc9a09480748bf0974f43f4a2d5, type: 3}
 --- !u!4 &447542104 stripped

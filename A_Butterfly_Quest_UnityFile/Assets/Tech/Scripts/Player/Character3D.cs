@@ -396,6 +396,7 @@ public class Character3D : MonoBehaviour
 
             m_animManager.netTrigger = true;
             VFXManager.m_instance.ShowNet(true);
+            AudioManager.instance.Play("Net");
 
         }
 

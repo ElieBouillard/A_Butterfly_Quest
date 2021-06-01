@@ -391,4 +391,17 @@ public class AnimationManager : MonoBehaviour
         }
     
     }
+
+
+    public void PlayRightStepSound()
+    {
+        AudioManager.instance.Play("FootStepForest");
+        //FX STEP
+    }
+
+    public void PlayLeftStepSound()
+    {
+        AudioManager.instance.Play("FootStepForest");
+        //FX STEP
+    }
 }

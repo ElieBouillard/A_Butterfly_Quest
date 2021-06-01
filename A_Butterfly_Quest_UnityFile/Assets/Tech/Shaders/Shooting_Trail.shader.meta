@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: bf44847ead7fcf6468ac55296191d95a
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _ProgressionMap: {fileID: 2800000, guid: e236ba0a72bc9ee4382e351c66ba411a, type: 3}
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

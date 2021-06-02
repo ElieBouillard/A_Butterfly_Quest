@@ -201,7 +201,7 @@ public class MenuManager : MonoBehaviour
         {
             if (Input.GetAxis("Horizontal") > 0)
             {
-                if(m_MenuControllerScpt.Index != 1)
+                if(m_MenuControllerScpt.Index != 1 && m_MenuControllerScpt.Index != 4)
                 {
                     SensitivitySliders[m_MenuControllerScpt.Index].value += 1f;
                 }
@@ -213,7 +213,7 @@ public class MenuManager : MonoBehaviour
             }
             else if (Input.GetAxis("Horizontal") < 0)
             {
-                if (m_MenuControllerScpt.Index != 1)
+                if (m_MenuControllerScpt.Index != 1 && m_MenuControllerScpt.Index != 4)
                 {
                     SensitivitySliders[m_MenuControllerScpt.Index].value -= 1f;
                 }

@@ -23,10 +23,10 @@ public class DoorBehaviour : MonoBehaviour
     public GameObject[] ItemsWichUnlock;
 
     [Header("Sounds")]
-    public AudioClip DoorOpeningSound;
-    public AudioClip DoorClosingSound;
+    public AudioClip DoorSound;
     private AudioSource m_audioSource;
-    private Vector3 LastTagetPos;
+    private bool lastIsOpenState;
+    private bool canStopSound;
 
     [Header("Debug")]
     public bool isOpen;
@@ -49,24 +49,22 @@ public class DoorBehaviour : MonoBehaviour
         openPos = closePos - transform.forward.normalized * 5f;
         player = Character3D.m_instance.gameObject;
         m_audioSource = GetComponent<AudioSource>();
-        LastTagetPos = targetPos;
+        lastIsOpenState = false;
+        m_audioSource.clip = DoorSound;
     }
 
     private void Update()
     {
-        if(targetPos != LastTagetPos)
+        if(lastIsOpenState != isOpen)
         {
-            if(targetPos == closePos)
-            {
-                m_audioSource.PlayOneShot(DoorClosingSound);
-                //FX FERMETURE
-            }
-            else if (targetPos == openPos)
-            {
-                //FX FERMETURE
-                m_audioSource.PlayOneShot(DoorOpeningSound);
-            }            
-            LastTagetPos = targetPos;
+            m_audioSource.Play();
+            Debug.Log("Play");
+            lastIsOpenState = isOpen;;
+        }
+        else if(targetPos == transform.position) 
+        {
+            m_audioSource.Stop();
+            Debug.Log("Stop");
         }
 
         if (isOpen)

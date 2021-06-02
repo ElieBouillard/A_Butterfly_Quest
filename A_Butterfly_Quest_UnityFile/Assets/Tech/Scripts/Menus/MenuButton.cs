@@ -11,6 +11,11 @@ public class MenuButton : MonoBehaviour
     public int thisIndex; 
     public Animator BackTextAnimator;
 
+    private void Start()
+    {
+        m_AudioManager = AudioManager.instance;
+    }
+
     private void Update()
     {
         if (m_MenuController.Index == thisIndex)

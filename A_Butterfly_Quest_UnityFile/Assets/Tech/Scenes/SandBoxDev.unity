@@ -1782,6 +1782,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tiny_Door 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3463832103287613029, guid: be5beb03e79ba844d96ca1c07441e6d7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4276678425537494239, guid: be5beb03e79ba844d96ca1c07441e6d7,
         type: 3}
       propertyPath: m_RootOrder

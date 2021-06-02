@@ -12,9 +12,6 @@ public class UIManager : MonoBehaviour
     [Header("Menus")]
     public GameObject InGameHUD;
     public GameObject PauseMenuHUD;
-    public GameObject OptionsMenuHUD;
-    public GameObject BindingMenuHUD;
-    public GameObject ReadMeMenuHUD;
     public GameObject Crosshair;
 
     [Header("ButterlyTypeSelectionSprites")]
@@ -48,8 +45,6 @@ public class UIManager : MonoBehaviour
     [Header("DeathHud")]
     public Image BlackScreenDeath;
 
-    private bool canShowPauseMenu = true;
-
     private void Awake()
     {
         instance = this;
@@ -58,9 +53,10 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         ShowCrosshair(true);
-        //DashColors = new Color[4] { new Color(170f, 255f, 240f, 255f), new Color(255f, 200f, 255f, 255f), new Color(220f, 255f, 140f, 255f), new Color(255f, 255f, 255f, 55f)};
+        PauseMenuHUD.SetActive(false);       
     }
 
+    bool freezePlayer;
     private void Update()
     {
         //CrossHairHUD
@@ -71,16 +67,6 @@ public class UIManager : MonoBehaviour
         else
         {
             ShowCrosshair(false);
-        }
-
-        //PauseMenu
-        if (InputSystem.instance.OnPauseMenu)
-        {
-            ShowPauseMenu(true);
-        }
-        else
-        {
-            ShowPauseMenu(false);
         }
 
         //AffectGoodSpriteButterflyTypeSelection
@@ -97,50 +83,24 @@ public class UIManager : MonoBehaviour
             }
         }
 
+        //FreezePlayerPosOnPauseMenu
+        if (freezePlayer)
+        {
+            Character3D.m_instance.forceNoJump = true;
+            Character3D.m_instance.freezeDirection = true;
+            Character3D.m_instance.FreezeInput = true;
+        }
+
         for (int i = 0; i < ButterflyCountText.Length; i++)
         {
             ButterflyCountText[i].text = ButterflyInventory.Instance.ButterflyInInventory[i].Count.ToString();
         }
 
-    }
+        if (Input.GetKeyDown(KeyCode.Escape) || (Input.GetKeyDown(KeyCode.Joystick1Button7)))
+        {
+            StartPauseMenu();
+        }
 
-    public void TurnOnOptions()
-    {
-        canShowPauseMenu = false;
-        OptionsMenuHUD.SetActive(true);
-        PauseMenuHUD.SetActive(false);
-    }
-    public void TurnOnControls()
-    {
-        canShowPauseMenu = false;
-        BindingMenuHUD.SetActive(true);
-        PauseMenuHUD.SetActive(false);
-    }
-    public void TurnOnReadMe()
-    {
-        canShowPauseMenu = false;
-        ReadMeMenuHUD.SetActive(true);
-        PauseMenuHUD.SetActive(false);
-    }
-    
-    public void BackToPauseMenu()
-    {
-        canShowPauseMenu = true;
-        PauseMenuHUD.SetActive(true);
-
-        ReadMeMenuHUD.SetActive(false);
-        BindingMenuHUD.SetActive(false);
-        OptionsMenuHUD.SetActive(false);
-    }
-
-    public void TurnOffPauseMenu()
-    {
-        canShowPauseMenu = true;
-        InputSystem.instance.OnPauseMenu = false;
-        BindingMenuHUD.SetActive(false);
-        ReadMeMenuHUD.SetActive(false);
-        OptionsMenuHUD.SetActive(false);
-        Time.timeScale = 1;
     }
 
     public Vector2 GetFreeLookSensi()
@@ -151,25 +111,24 @@ public class UIManager : MonoBehaviour
     {
         return new Vector2(slideAimXaxis.value, slideAimYaxis.value);
     }
-
     public void ShowCrosshair(bool value)
     {
         Crosshair.SetActive(value);
     }
 
-    public void ShowPauseMenu(bool value)
+    public void StartPauseMenu()
     {
-        if (canShowPauseMenu)
-        {
-            PauseMenuHUD.SetActive(value);
-        }
-
-        if (!value)
-        {
-            BindingMenuHUD.SetActive(false);
-            ReadMeMenuHUD.SetActive(false);
-            OptionsMenuHUD.SetActive(false);
-            canShowPauseMenu = true;
-        }
+        PauseMenuHUD.SetActive(true);
+        AnimationManager.m_instance.canPlayStepSound = false;
+        freezePlayer = true;
     }
+
+    public void Resume()
+    {
+        PauseMenuHUD.SetActive(false);
+        AnimationManager.m_instance.canPlayStepSound = true;
+        freezePlayer = false;
+        Character3D.m_instance.FreezePosPlayer(0.3f, true, true);
+    }
+
 }

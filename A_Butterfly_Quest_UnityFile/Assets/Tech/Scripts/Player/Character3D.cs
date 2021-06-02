@@ -42,10 +42,14 @@ public class Character3D : MonoBehaviour
     public float maxSpeed = 20;
     public float ClampVelocityY;
     private float currentSpeed = 0;
-    private bool FreezeInput = false;
+    [HideInInspector]
+    public bool FreezeInput = false;
     private float freezeClock;
-    private bool forceNoJump;
-    private bool freezeDirection;
+    [HideInInspector]
+    public bool forceNoJump;
+    [HideInInspector]
+    public bool freezeDirection;
+
 
     [Header("DashValues")]
     public float DashSpeed = 1f;

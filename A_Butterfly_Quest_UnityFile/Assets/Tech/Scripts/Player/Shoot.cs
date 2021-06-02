@@ -52,7 +52,6 @@ public class Shoot : MonoBehaviour
     {
         AimXStart = CameraAimingScpt.xAxis.m_MaxSpeed;
         AimYStart = CameraAimingScpt.yAxis.m_MaxSpeed;
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
@@ -207,6 +206,7 @@ public class Shoot : MonoBehaviour
     public void ResetFreeLookCamPos()
     {
         freeLookCam.m_XAxis.Value = CameraAimingScpt.xAxis.Value;
+        freeLookCam.m_YAxis.Value = 0;
     }
 
     public void ResetFreeLookBehindPlayer()

@@ -20,16 +20,22 @@ public class MenuController : MonoBehaviour
     {
         CanMooveInMenu = true;
     }
-
+    int lastIndex;
     private void Update()
     {
+        if(lastIndex != Index)
+        {
+            lastIndex = Index;
+            KeyDown = true;
+            canPlaySound = true;
+        }
         if (CanMooveInMenu)
         {
             if (Input.GetAxis("Vertical") != 0)
             {
                 if (!KeyDown)
                 {
-                    if (Input.GetAxis("Vertical") < 0)
+                    if (Input.GetAxis("Vertical") < -0.7f)
                     {
                         if (Index < MaxIndex)
                         {
@@ -40,7 +46,7 @@ public class MenuController : MonoBehaviour
                             Index = 0;
                         }
                     }
-                    else if (Input.GetAxis("Vertical") > 0)
+                    else if (Input.GetAxis("Vertical") > 0.7f)
                     {
                         if (Index > 0)
                         {
@@ -51,8 +57,6 @@ public class MenuController : MonoBehaviour
                             Index = MaxIndex;
                         }
                     }
-                    KeyDown = true;
-                    canPlaySound = true;
                 }
             }
             else

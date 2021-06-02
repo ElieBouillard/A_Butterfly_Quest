@@ -89,7 +89,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 7913
   m_UseColorTemperature: 1
-  m_BoundingSphereOverride: {x: 1, y: 0, z: 7.06e-43, w: 6e-44}
+  m_BoundingSphereOverride: {x: 0, y: 1.794e-42, z: 0, w: -1}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -24225,7 +24225,7 @@ ParticleSystemRenderer:
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
-  m_MaxParticleSize: 10
+  m_MaxParticleSize: 0.5
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2

@@ -99,6 +99,7 @@ public class Shoot : MonoBehaviour
 
     private void ShootButterfly(int ButterflyType)
     {
+        bool hitSomething = false;
         ButterflyBehaviourV2 currButterlfy;
         currButterlfy = ButterflyInventory.Instance.GetFirstButterfly(ButterflyType);
         ButterflyInventory.Instance.ShootedButterfly(currButterlfy);
@@ -141,6 +142,8 @@ public class Shoot : MonoBehaviour
             {
                 ButterflyInventory.Instance.AddToReloadList(currButterlfy);
             }
+
+            hitSomething = (ShootInfo.transform.gameObject.GetComponent<RonceBehaviour>() || ShootInfo.transform.gameObject.GetComponent<HealthSystem>());
         }
         else
         {
@@ -153,7 +156,8 @@ public class Shoot : MonoBehaviour
 
 
         //VFX
-        VFXManager.m_instance.SpawnShootVFX(HitPos);
+        
+        VFXManager.m_instance.SpawnShootVFX(HitPos,hitSomething);
 
 
     }

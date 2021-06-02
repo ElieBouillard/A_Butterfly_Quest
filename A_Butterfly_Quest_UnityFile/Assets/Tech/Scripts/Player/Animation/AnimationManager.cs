@@ -78,6 +78,7 @@ public class AnimationManager : MonoBehaviour
 
     //Sound
     public bool canPlayStepSound;
+    public int stepSoundIndex;
 
     private void Awake()
     {
@@ -165,9 +166,7 @@ public class AnimationManager : MonoBehaviour
                     else
                     {
                         rotationDirection = -1f;
-                    }
-
-                    
+                    }                  
 
                     
                 }
@@ -395,14 +394,23 @@ public class AnimationManager : MonoBehaviour
     
     }
 
+    public AudioClip CheckForNewStepSound()
+    {
+        //if (stepSoundIndex == AudioManager.instance.footSteps.Length - 1)
+        //{
+        //    stepSoundIndex = 0;
+        //}
+        //stepSoundIndex++;
+        stepSoundIndex = Random.Range(0, 5);
+        return AudioManager.instance.footSteps[stepSoundIndex];
+    }
 
     public void PlayRightStepSound()
     {
         if (canPlayStepSound)
         {
-            AudioManager.instance.Play("FootStepForest");
+            AudioManager.instance.Play(CheckForNewStepSound());
         }
-
         //FX STEP
     }
 
@@ -410,7 +418,7 @@ public class AnimationManager : MonoBehaviour
     {
         if (canPlayStepSound)
         {
-            AudioManager.instance.Play("FootStepForest");
+            AudioManager.instance.Play(CheckForNewStepSound());
             //FX STEP
         }
     }

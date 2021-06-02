@@ -26,12 +26,14 @@ public class TipsGenerator : MonoBehaviour
     public string SFXName;
     float clockHide;
     bool canHide;
+    bool canClockHide;
 
     private void Start()
     {
         //TipsManager.instance.ShowTip(4, TipsManager.TipType.BottomTip);
         //TipsManager.instance.ShowTip(4, TipsManager.TipType.BottomTip);
         //isShowingTip = true;
+        canClockHide = true;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -66,6 +68,7 @@ public class TipsGenerator : MonoBehaviour
             {
                 Hide();
                 canHide = false;
+                canClockHide = true;
             }
         }
 
@@ -138,28 +141,30 @@ public class TipsGenerator : MonoBehaviour
             }
             
         }
+
+
+
         if (m_condition == endCondition.EndKey && isShowingTip)
         {
             if (Input.GetAxisRaw("GiveKey") == 1 && KeyInventory.instance.GetKeyCount() >= 3)
             {
                 Hide();
             }
-            if (KeyInventory.instance.GetKeyCount() < 3)
+            if (KeyInventory.instance.GetKeyCount() < 3 && canClockHide)
             {
                 clockHide = 5;
+                Debug.Log(clockHide);
+                canClockHide = false;
             }
 
         }
     }
-
-
-
-
         private void Hide()
-    {
-        isShowingTip = false;
-        TipsManager.instance.HideTip(TipsManager.TipType.BottomTip);
-    }
+        {
+            isShowingTip = false;
+            TipsManager.instance.HideTip(TipsManager.TipType.BottomTip);
+        }
+
     private void Show()
     {
         if (dontShowTipAgain == false)

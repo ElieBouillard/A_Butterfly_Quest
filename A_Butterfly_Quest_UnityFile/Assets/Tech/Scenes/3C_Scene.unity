@@ -156,8 +156,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9289136}
-  m_LocalRotation: {x: -0, y: 0.9939513, z: -0, w: -0.10982141}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 100.03891, y: 18.67668, z: 284.03204}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7255424629777524410}
@@ -165,7 +165,7 @@ Transform:
   - {fileID: 1114170078}
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 192.60999, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9289138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1293,6 +1293,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 103024197}
   m_PrefabAsset: {fileID: 0}
+--- !u!108 &1141279500 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 2149148245335199935, guid: 32196014b4e7af64c9a8601f9e25a764,
+    type: 3}
+  m_PrefabInstance: {fileID: 2149148244194450355}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1185888070 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9144179547612746664, guid: f5bc2ac7457a5ca4d9a5979310c076e3,
@@ -1372,8 +1378,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195822808}
-  m_LocalRotation: {x: 0.095840335, y: -0.8558006, z: 0.13656962, w: 0.48966178}
-  m_LocalPosition: {x: 1.5879285, y: 1.872139, z: -1.4252167}
+  m_LocalRotation: {x: 0.09584006, y: -0.8558007, z: 0.13656911, w: 0.48966184}
+  m_LocalPosition: {x: -288.97577, y: 64.98008, z: -52.263763}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1780449882}
@@ -1603,6 +1609,12 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!4 &1426560175 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7354176284542609461, guid: f5bc2ac7457a5ca4d9a5979310c076e3,
+    type: 3}
+  m_PrefabInstance: {fileID: 9144179546633184494}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1445771898
 GameObject:
   m_ObjectHideFlags: 3
@@ -2202,6 +2214,75 @@ Animator:
     type: 3}
   m_PrefabInstance: {fileID: 9144179546633184494}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2149148244194450355
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1426560175}
+    m_Modifications:
+    - target: {fileID: 2149148245318512721, guid: 32196014b4e7af64c9a8601f9e25a764,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149148245318512721, guid: 32196014b4e7af64c9a8601f9e25a764,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0833
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149148245318512721, guid: 32196014b4e7af64c9a8601f9e25a764,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0031
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149148245318512721, guid: 32196014b4e7af64c9a8601f9e25a764,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0128
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149148245318512721, guid: 32196014b4e7af64c9a8601f9e25a764,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.6766793
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149148245318512721, guid: 32196014b4e7af64c9a8601f9e25a764,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.12659015
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149148245318512721, guid: 32196014b4e7af64c9a8601f9e25a764,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7211847
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149148245318512721, guid: 32196014b4e7af64c9a8601f9e25a764,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.07728333
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149148245318512721, guid: 32196014b4e7af64c9a8601f9e25a764,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149148245318512721, guid: 32196014b4e7af64c9a8601f9e25a764,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 16.973001
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149148245318512721, guid: 32196014b4e7af64c9a8601f9e25a764,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149148245318512722, guid: 32196014b4e7af64c9a8601f9e25a764,
+        type: 3}
+      propertyPath: m_Name
+      value: FlowerGlow
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 32196014b4e7af64c9a8601f9e25a764, type: 3}
 --- !u!137 &2361084464801384642 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 6783238071226248236, guid: f5bc2ac7457a5ca4d9a5979310c076e3,
@@ -2247,6 +2328,16 @@ PrefabInstance:
       objectReference: {fileID: 919132148984205168}
     - target: {fileID: 3340417402739704078, guid: 664e653c31a29c0408643f1de8d4a39a,
         type: 3}
+      propertyPath: flowerGlowMAT
+      value: 
+      objectReference: {fileID: 2100000, guid: a93354aeb61ba084185c01100b709b95, type: 2}
+    - target: {fileID: 3340417402739704078, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
+      propertyPath: flowerGlowLight
+      value: 
+      objectReference: {fileID: 1141279500}
+    - target: {fileID: 3340417402739704078, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
       propertyPath: idleAimEnergyVFX
       value: 
       objectReference: {fileID: 1604021083}
@@ -2255,6 +2346,66 @@ PrefabInstance:
       propertyPath: shoot_startPoint
       value: 
       objectReference: {fileID: 1185888070}
+    - target: {fileID: 3340417402739704078, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
+      propertyPath: NormalGlowColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340417402739704078, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
+      propertyPath: NormalGlowColor.b
+      value: 0.7924528
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340417402739704078, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
+      propertyPath: NormalGlowColor.g
+      value: 0.63813996
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340417402739704078, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
+      propertyPath: NormalGlowColor.r
+      value: 0.34015664
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340417402739704078, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
+      propertyPath: TempeteGlowColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340417402739704078, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
+      propertyPath: TempeteGlowColor.b
+      value: 0.4094874
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340417402739704078, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
+      propertyPath: TempeteGlowColor.g
+      value: 0.8113208
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340417402739704078, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
+      propertyPath: TempeteGlowColor.r
+      value: 0.7987142
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340417402739704078, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
+      propertyPath: IllusionGlowColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340417402739704078, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
+      propertyPath: IllusionGlowColor.b
+      value: 0.7870026
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340417402739704078, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
+      propertyPath: IllusionGlowColor.g
+      value: 0.53466535
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340417402739704078, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
+      propertyPath: IllusionGlowColor.r
+      value: 0.8396226
+      objectReference: {fileID: 0}
     - target: {fileID: 3340417402739704112, guid: 664e653c31a29c0408643f1de8d4a39a,
         type: 3}
       propertyPath: m_RootOrder

@@ -50,21 +50,33 @@ public class DoorBehaviour : MonoBehaviour
         player = Character3D.m_instance.gameObject;
         m_audioSource = GetComponent<AudioSource>();
         lastIsOpenState = false;
-        m_audioSource.clip = DoorSound;
+        if(m_audioSource != null)
+        {
+            m_audioSource.clip = DoorSound;
+        }
+        
     }
 
     private void Update()
     {
         if(lastIsOpenState != isOpen)
         {
-            m_audioSource.Play();
-            Debug.Log("Play");
+            if(m_audioSource != null)
+            {
+                m_audioSource.Play();
+            }
+         
+            //Debug.Log("Play");
             lastIsOpenState = isOpen;;
         }
         else if(targetPos == transform.position) 
         {
-            m_audioSource.Stop();
-            Debug.Log("Stop");
+            if (m_audioSource != null)
+            {
+                m_audioSource.Stop();
+            }
+         
+            //Debug.Log("Stop");
         }
 
         if (isOpen)

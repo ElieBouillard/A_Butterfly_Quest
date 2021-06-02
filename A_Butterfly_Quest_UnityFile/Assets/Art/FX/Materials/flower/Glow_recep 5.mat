@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Glow_recep 4
+  m_Name: Glow_recep 5
   m_Shader: {fileID: 4800000, guid: c66b2bbe51b959840ab81052dafd9a39, type: 3}
   m_ShaderKeywords: _BLENDMODE_PRE_MULTIPLY _DISABLE_SSR _DOUBLESIDED_ON _ENABLE_FOG_ON_TRANSPARENT
     _ISPANNING3_ON _ISPANNING4_ON _NORMALMAP_TANGENT_SPACE _SURFACE_TYPE_TRANSPARENT
@@ -288,7 +288,7 @@ Material:
     - _FakeFogColor: {r: 1, g: 1, b: 1, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _MainColor: {r: 45.25485, g: 0, b: 37.644707, a: 1}
+    - _MainColor: {r: 45.25485, g: 43.509068, b: 0, a: 1}
     - _PannerSpeed2: {r: 0.2, g: 0, b: 0, a: 0}
     - _SecondaryColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}

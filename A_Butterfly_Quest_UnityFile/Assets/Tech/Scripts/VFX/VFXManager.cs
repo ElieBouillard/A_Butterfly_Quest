@@ -14,7 +14,9 @@ public class VFXManager : MonoBehaviour
     public ParticleSystem AimVFX;
     public ParticleSystem ShootVFX;
     public GameObject ShootLine;
-    public ParticleSystem ImpactVFX;
+    public ParticleSystem ImpactVFX_missed;
+    public ParticleSystem ImpactVFX_hit;
+
     bool isAiming;
 
 
@@ -180,7 +182,13 @@ public class VFXManager : MonoBehaviour
     {
         Vector3 startPos = shoot_startPoint.transform.position;
         
-        Instantiate(ShootVFX, shoot_startPoint.transform.position, Quaternion.identity);
+        
+        Instantiate(ShootVFX, shoot_startPoint.transform.position, Quaternion.identity); //shoot
+
+        Instantiate(ImpactVFX_missed, endPos, Quaternion.identity); //impact
+
+        //line renderer
+
         GameObject shoot_Line = Instantiate(ShootLine, new Vector3(0,0,0), Quaternion.identity);
         LineRenderer LineRend = shoot_Line.GetComponent<LineRenderer>();
         LineRend.SetPosition(0, startPos);

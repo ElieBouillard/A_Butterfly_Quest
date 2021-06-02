@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e23e8016b73b0574d90d8c604c88b3c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RangeToGiveKeyPlayer: 0.97
+  RangeToGiveKeyPlayer: 1.32
 --- !u!1 &8608079182992157310
 GameObject:
   m_ObjectHideFlags: 0

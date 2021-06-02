@@ -636,7 +636,11 @@ MonoBehaviour:
     Unselected: {fileID: 21300000, guid: 9a2b60de589923946a8f4a6e5d7d34de, type: 3}
   DashCd: {fileID: 1312661378}
   DashSprite: {fileID: 854943388}
-  DashColors: []
+  DashColors:
+  - {r: 0.6666667, g: 1, b: 0.9411765, a: 1}
+  - {r: 1, g: 0.78431374, b: 1, a: 1}
+  - {r: 0.8627451, g: 1, b: 0.54901963, a: 1}
+  - {r: 1, g: 1, b: 1, a: 0.19607843}
   slideFreeLookXaxis: {fileID: 1267669814}
   slideFreeLookYaxis: {fileID: 231852570}
   slideAimXaxis: {fileID: 1358516500}
@@ -5801,7 +5805,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0

@@ -320,6 +320,7 @@ public class Character3D : MonoBehaviour
         {
             clocksCanDash[DashType] = DashIllusionCouldown;
             IllusionMeshItem.transform.position = transform.position + Vector3.up * 0.3f;
+            IllusionMeshItem.transform.rotation = AnimationManager.m_instance.gameObject.transform.rotation;
             IllusionMeshItem.SetActive(true);
         }
         

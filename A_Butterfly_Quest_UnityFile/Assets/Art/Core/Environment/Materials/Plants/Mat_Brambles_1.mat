@@ -164,7 +164,7 @@ Material:
     - _DoubleSidedEnable: 0
     - _DoubleSidedNormalMode: 1
     - _DstBlend: 10
-    - _EmissiveAmount: 1000
+    - _EmissiveAmount: 10000
     - _EmissiveColorMode: 1
     - _EmissiveExposureWeight: 1
     - _EmissiveIntensity: 1
@@ -173,8 +173,8 @@ Material:
     - _EnableFogOnTransparent: 1
     - _EnableGeometricSpecularAA: 0
     - _EnergyConservingSpecularColor: 1
-    - _FresnelIntensity: 0.31
-    - _FresnelPower: -1.62
+    - _FresnelIntensity: 0.4
+    - _FresnelPower: -1.99
     - _HeightAmplitude: 0.02
     - _HeightCenter: 0.5
     - _HeightMapParametrization: 0
@@ -203,7 +203,7 @@ Material:
     - _RenderQueueType: 5
     - _RequireSplitLighting: 0
     - _SSRefractionProjectionModel: 0
-    - _Smoothness: 0
+    - _Smoothness: 1
     - _SmoothnessRemapMax: 1
     - _SmoothnessRemapMin: 0
     - _SpecularAAScreenSpaceVariance: 0.1
@@ -246,7 +246,7 @@ Material:
     - _ZWrite: 1
     - _depthfade: 0.25
     - _dispForce: 0.3
-    - _outlineforce: 7
+    - _outlineforce: 165.12
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
@@ -256,7 +256,7 @@ Material:
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
-    - _FresnelColor: {r: 0.735849, g: 0.12842643, b: 0.57735705, a: 1}
+    - _FresnelColor: {r: 1, g: 0, b: 0.5882354, a: 1}
     - _FresnelNoiseSpeed: {r: -0.1, g: -0.4, b: 0, a: 0}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
@@ -266,7 +266,7 @@ Material:
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
-    - _outlinefresnelColor: {r: 0.62264144, g: 0, b: 0.39144713, a: 1}
+    - _outlinefresnelColor: {r: 1, g: 0, b: 0.49217415, a: 1}
 --- !u!114 &1624820711846445718
 MonoBehaviour:
   m_ObjectHideFlags: 11

@@ -35,7 +35,7 @@ public class MenuController : MonoBehaviour
             {
                 if (!KeyDown)
                 {
-                    if (Input.GetAxis("Vertical") > -0.7f)
+                    if (Input.GetAxis("Vertical") < -0.7f)
                     {
                         if (Index < MaxIndex)
                         {

@@ -56,8 +56,8 @@ public class VFXManager : MonoBehaviour
         m_instance = this;
 
         //LOCK FRAMERATE (oui c'est pas au bon endroit flemme)
-        QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = 60;
+        //QualitySettings.vSyncCount = 0;
+        //Application.targetFrameRate = 60;
         
     }
 

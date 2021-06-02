@@ -207,7 +207,7 @@ public class MenuManager : MonoBehaviour
                 }
                 else
                 {
-                    SensitivitySliders[m_MenuControllerScpt.Index].value += 0.05f;
+                    SensitivitySliders[1].value += 0.05f;
 
                 }
             }
@@ -219,7 +219,7 @@ public class MenuManager : MonoBehaviour
                 }
                 else
                 {
-                    SensitivitySliders[m_MenuControllerScpt.Index].value -= 0.05f;
+                    SensitivitySliders[1].value -= 0.05f;
 
                 }
             }

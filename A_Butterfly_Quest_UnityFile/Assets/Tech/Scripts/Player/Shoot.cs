@@ -52,6 +52,7 @@ public class Shoot : MonoBehaviour
     {
         AimXStart = CameraAimingScpt.xAxis.m_MaxSpeed;
         AimYStart = CameraAimingScpt.yAxis.m_MaxSpeed;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()

@@ -6,7 +6,9 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
     public Sound[] sounds;
+    public AudioClip[] footSteps;
     public AudioMixerGroup m_piste;
+    public AudioSource m_audioSource;
     void Awake()
     {
         instance = this;
@@ -24,6 +26,11 @@ public class AudioManager : MonoBehaviour
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         s.source.Play();
+    }
+
+    public void Play(AudioClip item)
+    {
+        m_audioSource.PlayOneShot(item);
     }
 
     public void Stop(string name)

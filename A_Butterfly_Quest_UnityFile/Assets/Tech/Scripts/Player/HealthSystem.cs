@@ -103,7 +103,7 @@ public class HealthSystem : MonoBehaviour
             if (canHit)
             {
                 CurrHealth -= DamageValue;
-                clockCanHit = 0.5f;
+                clockCanHit = 1.5f;
             }
             
         }

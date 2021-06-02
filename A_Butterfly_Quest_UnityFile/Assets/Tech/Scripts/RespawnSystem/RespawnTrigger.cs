@@ -13,11 +13,20 @@ public class RespawnTrigger : MonoBehaviour
 
     public Vector3 GetCoorRespawnPoint()
     {
-        return transform.position + m_RespawnPoint.transform.localPosition;
+        return m_RespawnPoint.position;
     } 
     public Quaternion GetOrientationRespawnPoint()
     {
         return m_RespawnPoint.rotation;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.GetComponent<RespawnSystem>())
+        {
+            other.gameObject.GetComponent<RespawnSystem>().AsignRespawnCoor(GetCoorRespawnPoint());
+            other.gameObject.GetComponent<RespawnSystem>().AsignRepsawnRotation(GetOrientationRespawnPoint());
+        }
     }
 
 }

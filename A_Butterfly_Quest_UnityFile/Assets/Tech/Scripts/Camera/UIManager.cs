@@ -7,6 +7,8 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
 
+ 
+
     [Header("Menus")]
     public GameObject InGameHUD;
     public GameObject PauseMenuHUD;
@@ -14,12 +16,20 @@ public class UIManager : MonoBehaviour
     public GameObject BindingMenuHUD;
     public GameObject ReadMeMenuHUD;
     public GameObject Crosshair;
-    public Text ButterflyCountText;
-    public GameObject ButterflyTypeSelected;
 
     [Header("ButterlyTypeSelectionSprites")]
-    public Sprite[] ButterflyType;
+    public Text[] ButterflyCountText;
+    public Image[] ButterflyImage;
+    public ButterflyImages[] Butterflys;
     public Image DashCd;
+    public Image DashSprite;
+    public Color[] DashColors;
+    [System.Serializable]
+    public class ButterflyImages
+    {
+        public Sprite Selected;
+        public Sprite Unselected;
+    }
 
     [Header("Sensisivity")]
     public Slider slideFreeLookXaxis;
@@ -48,6 +58,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         ShowCrosshair(true);
+        //DashColors = new Color[4] { new Color(170f, 255f, 240f, 255f), new Color(255f, 200f, 255f, 255f), new Color(220f, 255f, 140f, 255f), new Color(255f, 255f, 255f, 55f)};
     }
 
     private void Update()
@@ -74,9 +85,23 @@ public class UIManager : MonoBehaviour
 
         //AffectGoodSpriteButterflyTypeSelection
         int selectedType = ButterflyTypeSelection.Instance.SelectionTypeValue;
-        Image ButterflyTypeSrite = ButterflyTypeSelected.GetComponent<Image>();
-        ButterflyTypeSrite.sprite = ButterflyType[selectedType];
-        ButterflyCountText.text = ButterflyInventory.Instance.ButterflyInInventory[ButterflyTypeSelection.Instance.SelectionTypeValue].Count.ToString();
+        for (int i = 0; i < ButterflyImage.Length; i++)
+        {
+            if(selectedType == i)
+            {
+                ButterflyImage[i].sprite = Butterflys[i].Selected;
+            }
+            else
+            {
+                ButterflyImage[i].sprite = Butterflys[i].Unselected;
+            }
+        }
+
+        for (int i = 0; i < ButterflyCountText.Length; i++)
+        {
+            ButterflyCountText[i].text = ButterflyInventory.Instance.ButterflyInInventory[i].Count.ToString();
+        }
+
     }
 
     public void TurnOnOptions()

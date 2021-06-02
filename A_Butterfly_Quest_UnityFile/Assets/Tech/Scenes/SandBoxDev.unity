@@ -1076,6 +1076,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1325299937}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &785262653
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785262651}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.4186196, y: 2.41862, z: 0.18387741}
+  m_Center: {x: 0, y: 0, z: 0.091938704}
 --- !u!4 &785361241 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8204084372152870255, guid: 1c22218c22590f749a350e6912adb2d6,
@@ -1480,8 +1493,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1130802412950180223, guid: 8ba109ed12d917d498c465cbcf531489,
         type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1130802412950180223, guid: 8ba109ed12d917d498c465cbcf531489,
+        type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1684695773922846772, guid: 8ba109ed12d917d498c465cbcf531489,
         type: 3}
@@ -1543,7 +1561,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pressure_plate
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1130802412950180223, guid: 8ba109ed12d917d498c465cbcf531489, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8ba109ed12d917d498c465cbcf531489, type: 3}
 --- !u!1 &1333529897
 GameObject:
@@ -1831,12 +1850,12 @@ PrefabInstance:
     - target: {fileID: 371887899179162042, guid: be5beb03e79ba844d96ca1c07441e6d7,
         type: 3}
       propertyPath: OpenSpeed
-      value: 0.1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 371887899179162042, guid: be5beb03e79ba844d96ca1c07441e6d7,
         type: 3}
       propertyPath: CloseSpeed
-      value: 0.1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 371887899179162042, guid: be5beb03e79ba844d96ca1c07441e6d7,
         type: 3}

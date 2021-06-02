@@ -11,19 +11,37 @@ public class LineRendererUpdater : MonoBehaviour
     public float TimeToProgress = .5f;
     float progressAmount;
 
+
+    float offsetX = 1;
+    public Vector2 soulerCoasterRange = new Vector2(-1, 1);
+
+    LineRenderer m_rend;
     List<LineRenderer> m_Renderers = new List<LineRenderer>();
     List<Material> m_Mats = new List<Material>();
     private void Start()
     {
-        m_Renderers.Add(GetComponent<LineRenderer>());
+        m_rend = GetComponent<LineRenderer>();
+        m_Renderers.Add(m_rend);
         for (int i = 0; i < transform.childCount; i++)
         {
-            m_Renderers.Add(transform.GetChild(i).GetComponent<LineRenderer>());
+            LineRenderer childrend = transform.GetChild(i).GetComponent<LineRenderer>();
+
+            childrend.SetPosition(0, m_rend.GetPosition(0));
+            childrend.SetPosition(1, m_rend.GetPosition(1));
+
+            LineRendererUpdater m_script;
+            if(transform.GetChild(i).TryGetComponent<LineRendererUpdater>(out m_script) == false)
+            {
+                m_Renderers.Add(childrend);
+            }
+
+            
         }
         for (int i = 0; i < m_Renderers.Count; i++)
         {
             m_Mats.Add(m_Renderers[i].sharedMaterial);
         }
+        UpdateRenderers(); //reset values
     }
 
     void Update()
@@ -32,6 +50,7 @@ public class LineRendererUpdater : MonoBehaviour
         {
             erosionAmount = timer / TimeToDissolve;
             progressAmount = timer / TimeToProgress;
+            offsetX = Mathf.Lerp(soulerCoasterRange.x, soulerCoasterRange.y, progressAmount);
             UpdateRenderers();
             timer += Time.deltaTime;
         }
@@ -46,11 +65,17 @@ public class LineRendererUpdater : MonoBehaviour
     {
         for (int i = 0; i < m_Renderers.Count; i++)
         {
-            //m_Renderers.
-            m_Renderers[i].material.SetFloat("_Erosion", erosionAmount);
+            Material accessedMat = m_Renderers[i].material;
+            accessedMat.SetFloat("_Erosion", erosionAmount * accessedMat.GetFloat("_LifetimeMultiplicator"));
             if(progressAmount <= 1)
             {
-                m_Renderers[i].material.SetFloat("_Progression", progressAmount);
+                accessedMat.SetFloat("_Progression", progressAmount * accessedMat.GetFloat("_LifetimeMultiplicator")); //LINES
+             
+                if(accessedMat.GetFloat("_IsSoulerCoaster") == 1) //SOULER COASTERS
+                {
+                    accessedMat.SetFloat("_OffsetX", offsetX * accessedMat.mainTextureScale.x);
+
+                }
             }
         }
     }

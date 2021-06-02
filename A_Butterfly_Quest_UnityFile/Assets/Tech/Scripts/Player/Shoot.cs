@@ -206,7 +206,6 @@ public class Shoot : MonoBehaviour
     public void ResetFreeLookCamPos()
     {
         freeLookCam.m_XAxis.Value = CameraAimingScpt.xAxis.Value;
-        freeLookCam.m_YAxis.Value = 0;
     }
 
     public void ResetFreeLookBehindPlayer()

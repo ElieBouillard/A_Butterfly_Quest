@@ -1160,9 +1160,10 @@ MonoBehaviour:
   scenesToLoad:
   - 3C_Scene
   - UI_HUD_Scene
-  - SandBoxDev
+  - 
   - VOLUMES
   - UI_TIPS_Scene
+  - LD
   instantLoad: 0
 --- !u!114 &372682442
 MonoBehaviour:

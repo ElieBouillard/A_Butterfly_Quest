@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6675150008032613709}
   - component: {fileID: 8512461031492156475}
   - component: {fileID: 4734433848562627398}
-  - component: {fileID: 2062971320744942649}
   m_Layer: 0
   m_Name: TipsTrigger
   m_TagString: Untagged
@@ -109,16 +108,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   intTip: 6
   m_condition: 2
---- !u!114 &2062971320744942649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4795753064118367934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17510624aa693b342834351fe8efd20c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   SFXName: Tips

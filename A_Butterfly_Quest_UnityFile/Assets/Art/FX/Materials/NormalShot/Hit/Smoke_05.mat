@@ -20,12 +20,11 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Smoke_02
-  m_Shader: {fileID: 4800000, guid: c66b2bbe51b959840ab81052dafd9a39, type: 3}
+  m_Name: Smoke_05
+  m_Shader: {fileID: 4800000, guid: 31dc5f3ff4ce058439b97fd1064e9e17, type: 3}
   m_ShaderKeywords: _ACTIVATEEFFECT2_ON _ACTIVATEEFFECT3_ON _ACTIVATEEFFECT_ON _BLENDMODE_ALPHA
-    _DISABLE_SSR _DOUBLESIDED_ON _ENABLE_FOG_ON_TRANSPARENT _ISPANNING3_ON _ISPANNING4_ON
-    _NORMALMAP_TANGENT_SPACE _SURFACE_TYPE_TRANSPARENT _USECUSTOMVERTEXSTREAMS1X_ON
-    _USEGREENCHANNELASEROSION_ON
+    _DISABLE_SSR _DOUBLESIDED_ON _ISPANNING4_ON _NORMALMAP_TANGENT_SPACE _SURFACE_TYPE_TRANSPARENT
+    _USECUSTOMVERTEXSTREAMS1X_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
@@ -68,7 +67,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _DistortionTexture:
         m_Texture: {fileID: 2800000, guid: c068f140c584612469e41c535e4aa1e7, type: 3}
-        m_Scale: {x: 1, y: 2}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DistortionVectorMap:
         m_Texture: {fileID: 0}
@@ -79,8 +78,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ErosionMap:
-        m_Texture: {fileID: 2800000, guid: 9a6174c6675a3fa4bbc29fa67a98e98c, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: 44ba4e742c7a61a4392516cffec0189a, type: 3}
+        m_Scale: {x: 0.5, y: 0.5}
         m_Offset: {x: 0, y: 0}
     - _HeightMap:
         m_Texture: {fileID: 0}
@@ -99,7 +98,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTexture:
-        m_Texture: {fileID: 2800000, guid: 2cffeb83ffbda164194cffd39155118f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7ed4801b970b4a345ae5e6ffd6346330, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
@@ -107,8 +106,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTexture:
-        m_Texture: {fileID: 2800000, guid: 9a6174c6675a3fa4bbc29fa67a98e98c, type: 3}
-        m_Scale: {x: 3, y: 3}
+        m_Texture: {fileID: 2800000, guid: 8def348075ed3574681d619d738f911e, type: 3}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
         m_Texture: {fileID: 0}
@@ -155,7 +154,7 @@ Material:
     - _ActivateEffect3: 1
     - _AddPrecomputedVelocity: 0
     - _AlbedoAffectEmissive: 0
-    - _AlphaCoefficient: 1
+    - _AlphaCoefficient: 2
     - _AlphaCutoff: 0.5
     - _AlphaCutoffEnable: 0
     - _AlphaCutoffPostpass: 0.5
@@ -169,7 +168,7 @@ Material:
     - _CullMode: 0
     - _CullModeForward: 0
     - _Cutoff: 0.5
-    - _Depth: 0.2
+    - _Depth: 0.5
     - _DepthOffsetEnable: 0
     - _DetailAlbedoScale: 1
     - _DetailNormalScale: 1
@@ -196,19 +195,19 @@ Material:
     - _DoubleSidedEnable: 1
     - _DoubleSidedNormalMode: 1
     - _DstBlend: 10
-    - _DstBlendMode: 10
+    - _DstBlendMode: 0
     - _EmissiveColorMode: 1
     - _EmissiveExposureWeight: 1
-    - _EmissiveGlow: 0.28
+    - _EmissiveGlow: 1
     - _EmissiveIntensity: 1
     - _EmissiveIntensityUnit: 0
     - _EnableBlendModePreserveSpecularLighting: 1
-    - _EnableFogOnTransparent: 1
+    - _EnableFogOnTransparent: 0
     - _EnableGeometricSpecularAA: 0
     - _EnergyConservingSpecularColor: 1
     - _Erosion: 0
-    - _Flow: 0.139
-    - _Glow: 1
+    - _Flow: 0.242
+    - _Glow: 4.61
     - _HeightAmplitude: 0.02
     - _HeightCenter: 0.5
     - _HeightMapParametrization: 0
@@ -225,11 +224,11 @@ Material:
     - _IridescenceThickness: 1
     - _IsEmissive: 0
     - _IsPanning: 0
-    - _IsPanning3: 1
+    - _IsPanning3: 0
     - _IsPanning4: 1
     - _LinkDetailsWithBase: 1
     - _MaskAlongUVs: 0
-    - _MaskCoefficient: 0.41
+    - _MaskCoefficient: 0.576
     - _MaterialID: 1
     - _Metallic: 0
     - _NormalMapSpace: 0
@@ -244,7 +243,7 @@ Material:
     - _RenderQueueType: 5
     - _RequireSplitLighting: 0
     - _SSRefractionProjectionModel: 0
-    - _Smoothness: 1
+    - _Smoothness: 0.514
     - _SmoothnessRemapMax: 1
     - _SmoothnessRemapMin: 0
     - _SpecularAAScreenSpaceVariance: 0.1
@@ -284,7 +283,7 @@ Material:
     - _UseCustomVertexStreams2: 0
     - _UseCustomVertexStreams3: 0
     - _UseEmissiveIntensity: 0
-    - _UseGreenChannelasErosion: 1
+    - _UseGreenChannelasErosion: 0
     - _UseShadowThreshold: 0
     - _ZTestDepthEqualForOpaque: 4
     - _ZTestGBuffer: 4
@@ -303,9 +302,9 @@ Material:
     - _FakeFogColor: {r: 1, g: 1, b: 1, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _MainColor: {r: 0.056692775, g: 0.09296018, b: 0.24528301, a: 1}
+    - _MainColor: {r: 0.31759524, g: 0.3534784, b: 0.5754717, a: 1}
     - _PannerSpeed2: {r: 1, g: 0, b: 0, a: 0}
-    - _SecondaryColor: {r: 0.1960783, g: 0, b: 1, a: 1}
+    - _SecondaryColor: {r: 0.3247597, g: 0.6405148, b: 0.7735849, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
@@ -314,4 +313,4 @@ Material:
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
     - _UVMasking: {r: 1, g: 0, b: 0, a: 0}
     - _UVPanningSPEED: {r: 1, g: 0, b: 0, a: 0}
-    - _XYSpeedZWClampAlpha: {r: 1, g: 0, b: -0.23, a: 1}
+    - _XYSpeedZWClampAlpha: {r: 0.2, g: 0.2, b: -0.5, a: 1}

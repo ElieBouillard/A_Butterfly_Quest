@@ -25,6 +25,7 @@ public class RespawnSystem : MonoBehaviour
     private int deathCount;
 
     private bool isDead;
+    private bool isAlive;
 
     private void Awake()
     {
@@ -38,6 +39,7 @@ public class RespawnSystem : MonoBehaviour
         BlackScreenDeath.color = new Color(0, 0, 0, 0);
         currRespawnCoord = gameObject.transform.position;
         currRespawnOrientation = gameObject.transform.rotation;
+        isAlive = true;
     }
 
     private void Update()
@@ -47,11 +49,15 @@ public class RespawnSystem : MonoBehaviour
 
     public void Death()
     {
-        Character3D.m_instance.FreezePosPlayer(DeathAnimTime + 1.5f, true, true);
-        canDeathClock = true; 
-        deathClock = DeathAnimTime;
-        AnimationManager.m_instance.isAlive = false;
-        AudioManager.instance.Play("Death");
+        if (isAlive)
+        {
+            Character3D.m_instance.FreezePosPlayer(DeathAnimTime + 1.5f, true, true);
+            canDeathClock = true;
+            deathClock = DeathAnimTime;
+            AnimationManager.m_instance.isAlive = false;
+            AudioManager.instance.Play("Death");
+            isAlive = false;
+        }
     }
 
     public void DeathUpdate()
@@ -101,6 +107,7 @@ public class RespawnSystem : MonoBehaviour
         isDead = false;
         AnimationManager.m_instance.isAlive = true;
         AnimationManager.m_instance.canPlayStepSound = true;
+        isAlive = true;
     }
 
     private void OnTriggerEnter(Collider other)

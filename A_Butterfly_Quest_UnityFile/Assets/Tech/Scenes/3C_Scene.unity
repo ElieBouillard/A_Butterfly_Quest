@@ -107,21 +107,21 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.5
-    agentHeight: 2
-    agentSlope: 45
+    agentRadius: 1
+    agentHeight: 1
+    agentSlope: 35
     agentClimb: 0.4
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.16666667
+    cellSize: 0.33333334
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: ca764708f270beb4a8c2265c68348924, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 283ab78a2c6968040a167e05fa5f991f, type: 2}
 --- !u!1 &9289136
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,8 +156,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9289136}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.7, y: 6.55, z: 9.2}
+  m_LocalRotation: {x: -0, y: 0.9939513, z: -0, w: -0.10982141}
+  m_LocalPosition: {x: 362.21, y: 15.131, z: 479.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7255424629777524410}
@@ -165,7 +165,7 @@ Transform:
   - {fileID: 1114170078}
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 192.60999, z: 0}
 --- !u!114 &9289138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1336,8 +1336,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195822808}
-  m_LocalRotation: {x: 0.095840365, y: -0.8558006, z: 0.13656965, w: 0.4896618}
-  m_LocalPosition: {x: -9.90074, y: 8.652164, z: 2.2044153}
+  m_LocalRotation: {x: 0.09584009, y: -0.85580075, z: 0.1365692, w: 0.48966184}
+  m_LocalPosition: {x: -588.37555, y: 87.13822, z: 77.92053}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1780449882}

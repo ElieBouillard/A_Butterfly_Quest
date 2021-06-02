@@ -90,8 +90,8 @@ MonoBehaviour:
     volume: 0.2
     loop: 0
     source: {fileID: 0}
-  - name: 0
-    clip: {fileID: 0}
+  - name: Selected
+    clip: {fileID: 8300000, guid: 818cccd4776d79f488ab4748df9cc73e, type: 3}
     volume: 0.2
     loop: 0
     source: {fileID: 0}
@@ -102,6 +102,11 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Death
     clip: {fileID: 8300000, guid: 4ffca449894d1da4ea44b4ce62d4592d, type: 3}
+    volume: 0.3
+    loop: 0
+    source: {fileID: 0}
+  - name: Pressed
+    clip: {fileID: 8300000, guid: 5bdfa4e365d1c604ca4bf6a56b38ce1c, type: 3}
     volume: 0.3
     loop: 0
     source: {fileID: 0}

@@ -445,6 +445,7 @@ MonoBehaviour:
   - Press  <sprite=3> with Illusion Butterfly to create a clone
   - Press  <sprite=2> to get the Butterflies back to you
   - Press  <sprite=11> to Use the Key and Open the Door
+  - Collect 3 Keys and Press  <sprite=11> to Open the Door
   bottomTipText: {fileID: 1121569129}
 --- !u!1 &1501285012
 GameObject:

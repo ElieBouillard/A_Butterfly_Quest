@@ -14,7 +14,9 @@ public class TipsGenerator : MonoBehaviour
         Dash, 
         Net, 
         Equip, 
-        BigJump}
+        BigJump,
+        Key,
+        EndKey}
 
     public endCondition m_condition;
     bool isShowingTip;
@@ -93,35 +95,36 @@ public class TipsGenerator : MonoBehaviour
                 Hide();
             }
         }
+        if (m_condition == endCondition.Key && isShowingTip)
+        {
+            if (Input.GetAxisRaw("GiveKey") == 1)
+            {
+               Hide();
+            }
+        }
+        if (m_condition == endCondition.EndKey && isShowingTip)
+        {
+            if (Input.GetAxisRaw("GiveKey") == 1 && KeyInventory.instance.GetKeyCount() >= 3)
+            {
+                Hide();
+            }
+            if (KeyInventory.instance.GetKeyCount() < 3)
+            {
+                StartCoroutine(HideAfterTimer());
+            }
 
-
-
-        //if (m_condition == endCondition.Move && isShowingTip)
-        //{
-        //    if (Input.GetAxisRaw("Vertical") != 0 || Input.GetAxisRaw("Vertical") != 0)
-        //    {
-        //        Hide();
-        //        move = true;
-        //    }
-        //}
-
-        //if (move == true)
-        //{
-        //    TipsManager.instance.ShowTip(5, TipsManager.TipType.BottomTip);
-        //    isShowingTip = true;
-
-        //        if (Input.GetAxisRaw("MouseX") != 0 || Input.GetAxisRaw("MouseY") != 0)
-        //        {
-        //            Hide();
-        //        }
-
-        //}
+        }
 
     }
 
+    IEnumerator HideAfterTimer()
+    {
+        yield return new WaitForSeconds(5);
+        Hide();
+    }
 
 
-    private void Hide()
+        private void Hide()
     {
         isShowingTip = false;
         TipsManager.instance.HideTip(TipsManager.TipType.BottomTip);

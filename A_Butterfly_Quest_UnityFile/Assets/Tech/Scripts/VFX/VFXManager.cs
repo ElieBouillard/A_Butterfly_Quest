@@ -178,14 +178,23 @@ public class VFXManager : MonoBehaviour
         
     }
 
-    public void SpawnShootVFX(Vector3 endPos)
+    public void SpawnShootVFX(Vector3 endPos, bool hitSomething = false)
     {
         Vector3 startPos = shoot_startPoint.transform.position;
         
         
         Instantiate(ShootVFX, shoot_startPoint.transform.position, Quaternion.identity); //shoot
 
-        Instantiate(ImpactVFX_missed, endPos, Quaternion.identity); //impact
+        if (hitSomething)
+        {
+            Instantiate(ImpactVFX_hit, endPos, Quaternion.identity); //impact
+
+        }
+        else
+        {
+            Instantiate(ImpactVFX_missed, endPos, Quaternion.identity); //impact
+
+        }
 
         //line renderer
 

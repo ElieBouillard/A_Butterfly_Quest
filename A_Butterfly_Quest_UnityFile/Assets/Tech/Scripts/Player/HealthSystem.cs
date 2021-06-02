@@ -117,6 +117,7 @@ public class HealthSystem : MonoBehaviour
         {
             Death();
         }
+        SimpleCameraShakeInCinemachine.m_instance.StartShake(0.2f, 3f,2f);
     }
 
     public void InitColorHit()

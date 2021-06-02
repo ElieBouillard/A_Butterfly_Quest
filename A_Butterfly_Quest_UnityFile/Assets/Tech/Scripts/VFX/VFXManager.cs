@@ -29,6 +29,13 @@ public class VFXManager : MonoBehaviour
     public GameObject SuccessfulCatch_Illusion_FX;
     public GameObject SuccessfulCatch_Tempete_FX;
 
+    //Flower Glow
+    public Material flowerGlowMAT;
+    public Light flowerGlowLight;
+    public Color NormalGlowColor;
+    public Color IllusionGlowColor;
+    public Color TempeteGlowColor;
+
     //ArmGlow
     float target_armGlow;
     float armGlow_TurnOffDelay = 1.5f;
@@ -51,6 +58,7 @@ public class VFXManager : MonoBehaviour
         //LOCK FRAMERATE (oui c'est pas au bon endroit flemme)
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
+        
     }
 
     void Start()
@@ -206,5 +214,25 @@ public class VFXManager : MonoBehaviour
         LineRenderer LineRend = shoot_Line.GetComponent<LineRenderer>();
         LineRend.SetPosition(0, startPos);
         LineRend.SetPosition(1, endPos);
+    }
+
+
+    public void ChangeFlowerGlowColor(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                flowerGlowMAT.SetColor("_MainColor", NormalGlowColor);
+                flowerGlowLight.color = NormalGlowColor;
+                break;
+            case 1:
+                flowerGlowMAT.SetColor("_MainColor", IllusionGlowColor);
+                flowerGlowLight.color = IllusionGlowColor;
+                break;
+            case 2:
+                flowerGlowMAT.SetColor("_MainColor", TempeteGlowColor);
+                flowerGlowLight.color = TempeteGlowColor;
+                break;
+        }
     }
 }

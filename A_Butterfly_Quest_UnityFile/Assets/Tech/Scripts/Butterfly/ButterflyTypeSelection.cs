@@ -27,6 +27,10 @@ public class ButterflyTypeSelection : MonoBehaviour
             {
                 SelectionTypeValue = 0;
             }
+
+            //VFX
+            VFXManager.m_instance.ChangeFlowerGlowColor(SelectionTypeValue);
+
         }
 
         if (Input.GetButtonDown("ButterflySelectionLeft"))
@@ -39,6 +43,9 @@ public class ButterflyTypeSelection : MonoBehaviour
             {
                 SelectionTypeValue = MaxButterflyType;
             }
+
+            //VFX
+            VFXManager.m_instance.ChangeFlowerGlowColor(SelectionTypeValue);
         }
     }
 }

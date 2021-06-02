@@ -25,7 +25,21 @@ public class Receptacle : MonoBehaviour
     public Material Material;
     List<GameObject> BallsToColor = new List<GameObject>();
     int index = 0;
+    
 
+    [Header("VFX")]
+    //[ColorUsage(true, true)]
+    //public Color NormalGlowColor;
+    //[ColorUsage(true, true)]
+    //public Color IllusionGlowColor;
+    //[ColorUsage(true, true)]
+    //public Color TempeteGlowColor;
+    //public Renderer Hole_Glow;
+    //public Renderer LogoButterfly;
+
+    public GameObject Butterfly_Normal;
+    public GameObject Butterfly_Illusion;
+    public GameObject Butterfly_Tempete;
 
     private void Start()
     {
@@ -33,6 +47,7 @@ public class Receptacle : MonoBehaviour
         PlayerMask = LayerMask.GetMask("Player");
 
         CheckNumberOfBalls();
+        UpdateVFXColors();
     }
 
     void Update()
@@ -94,4 +109,38 @@ public class Receptacle : MonoBehaviour
         BallsToColor[index].GetComponent<MeshRenderer>().material = Material;
     }  
 
+
+    void UpdateVFXColors()
+    {
+        switch (m_ButterflyNeededType)
+        {
+            //case ButterflyNeededType.Normal:
+            //    Hole_Glow.material.SetColor("_MainColor", NormalGlowColor);
+            //    LogoButterfly.material.SetTexture("_MainTexture",Butterfly_Normal);
+            //    break;
+            //case ButterflyNeededType.Illusion:
+            //    Hole_Glow.material.SetColor("_MainColor", IllusionGlowColor);
+            //    LogoButterfly.material.SetTexture("_MainTexture", Butterfly_Illusion);
+            //    break;
+            //case ButterflyNeededType.Tempete:
+            //    Hole_Glow.material.SetColor("_MainColor", TempeteGlowColor);
+            //    LogoButterfly.material.SetTexture("_MainTexture", Butterfly_Tempete);
+            //    break;
+            case ButterflyNeededType.Normal:
+                Butterfly_Normal.SetActive(true);
+                Butterfly_Illusion.SetActive(false);
+                Butterfly_Tempete.SetActive(false);
+                break;
+            case ButterflyNeededType.Illusion:
+                Butterfly_Normal.SetActive(false);
+                Butterfly_Illusion.SetActive(true);
+                Butterfly_Tempete.SetActive(false);
+                break;
+            case ButterflyNeededType.Tempete:
+                Butterfly_Normal.SetActive(false);
+                Butterfly_Illusion.SetActive(false);
+                Butterfly_Tempete.SetActive(true);
+                break;
+        }
+    }
 }

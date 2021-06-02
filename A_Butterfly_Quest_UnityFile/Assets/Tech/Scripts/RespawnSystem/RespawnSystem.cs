@@ -110,14 +110,13 @@ public class RespawnSystem : MonoBehaviour
         isAlive = true;
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void AsignRespawnCoor(Vector3 m_coord)
     {
-        if (other.GetComponent<RespawnTrigger>())
-        {
-            RespawnTrigger currRespawnTrigger = other.GetComponent<RespawnTrigger>();
-            currRespawnCoord = currRespawnTrigger.GetCoorRespawnPoint();
-            currRespawnOrientation = currRespawnTrigger.GetOrientationRespawnPoint();
-            Debug.Log("-RESPAWNSYSTEM- Save at " + currRespawnCoord);
-        }
+        currRespawnCoord = m_coord;
+    }
+
+    public void AsignRepsawnRotation(Quaternion m_rotat)
+    {
+        currRespawnOrientation = m_rotat;
     }
 }

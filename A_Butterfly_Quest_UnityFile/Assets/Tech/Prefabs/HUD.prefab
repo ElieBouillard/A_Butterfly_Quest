@@ -5081,7 +5081,6 @@ GameObject:
   m_Component:
   - component: {fileID: 868339472480752609}
   - component: {fileID: 868339472480752611}
-  - component: {fileID: 868339472480752608}
   m_Layer: 5
   m_Name: MusicSlider
   m_TagString: Untagged
@@ -5160,7 +5159,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 868339472480752608}
+      - m_Target: {fileID: 0}
         m_MethodName: SetMusic
         m_Mode: 0
         m_Arguments:
@@ -5171,19 +5170,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &868339472480752608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 868339472480752622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee42baddc5b786c4f8456fcec1adb6cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currAudioMixer: {fileID: 24100000, guid: 27a16097e22ce6b4093a9c5d789c26a7, type: 2}
 --- !u!1 &868339472499673563
 GameObject:
   m_ObjectHideFlags: 0

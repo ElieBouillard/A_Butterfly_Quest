@@ -198,11 +198,16 @@ MonoBehaviour:
   StartMenu: {fileID: 1551969825}
   OptionsMenu: {fileID: 0}
   AudioMenu: {fileID: 1353815666}
+  ControlsMenu: {fileID: 0}
+  KeyboardMenu: {fileID: 0}
+  ControllerMenu: {fileID: 0}
+  SensitivityMenu: {fileID: 0}
   BlackScreenObj: {fileID: 0}
   Title: {fileID: 1303872353}
   MasterSlider: {fileID: 0}
   MusicSlider: {fileID: 0}
   SFXSlider: {fileID: 0}
+  SensitivitySliders: []
 --- !u!114 &5628717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,11 +426,11 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -4231378794514679092, guid: 27a16097e22ce6b4093a9c5d789c26a7,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: fd3ef88d0e388ba419d0d20292704d76, type: 3}
+  m_audioClip: {fileID: 8300000, guid: fcd7adff14a1b9d47a4deb3a1e4a4b0d, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.26
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1155,11 +1160,10 @@ MonoBehaviour:
   scenesToLoad:
   - 3C_Scene
   - UI_HUD_Scene
-  - LD
-  - Environment
+  - 
   - VOLUMES
   - UI_TIPS_Scene
-  - Integration
+  - LD
   instantLoad: 0
 --- !u!114 &372682442
 MonoBehaviour:
@@ -3527,11 +3531,16 @@ MonoBehaviour:
   StartMenu: {fileID: 1551969825}
   OptionsMenu: {fileID: 5628713}
   AudioMenu: {fileID: 0}
+  ControlsMenu: {fileID: 0}
+  KeyboardMenu: {fileID: 0}
+  ControllerMenu: {fileID: 0}
+  SensitivityMenu: {fileID: 0}
   BlackScreenObj: {fileID: 1313044984}
   Title: {fileID: 1303872353}
   MasterSlider: {fileID: 1331230620}
   MusicSlider: {fileID: 229341100}
   SFXSlider: {fileID: 931426670}
+  SensitivitySliders: []
 --- !u!95 &1353815670
 Animator:
   serializedVersion: 3
@@ -4024,11 +4033,16 @@ MonoBehaviour:
   StartMenu: {fileID: 0}
   OptionsMenu: {fileID: 5628713}
   AudioMenu: {fileID: 0}
+  ControlsMenu: {fileID: 0}
+  KeyboardMenu: {fileID: 0}
+  ControllerMenu: {fileID: 0}
+  SensitivityMenu: {fileID: 0}
   BlackScreenObj: {fileID: 1313044984}
   Title: {fileID: 1303872353}
   MasterSlider: {fileID: 0}
   MusicSlider: {fileID: 0}
   SFXSlider: {fileID: 0}
+  SensitivitySliders: []
 --- !u!114 &1551969829
 MonoBehaviour:
   m_ObjectHideFlags: 0

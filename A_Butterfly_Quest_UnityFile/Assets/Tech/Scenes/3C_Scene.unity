@@ -157,7 +157,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9289136}
   m_LocalRotation: {x: -0, y: 0.9939513, z: -0, w: -0.10982141}
-  m_LocalPosition: {x: 362.21, y: 15.131, z: 479.82}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7255424629777524410}
@@ -592,6 +592,7 @@ GameObject:
   - component: {fileID: 256243153}
   - component: {fileID: 256243152}
   - component: {fileID: 256243151}
+  - component: {fileID: 256243154}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -706,6 +707,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &256243154
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256243149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 1
+  m_FrequencyGain: 1
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!198 &375917399 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 9144179546795192249, guid: f5bc2ac7457a5ca4d9a5979310c076e3,
@@ -1057,6 +1075,7 @@ GameObject:
   - component: {fileID: 1015959387}
   - component: {fileID: 1015959386}
   - component: {fileID: 1015959385}
+  - component: {fileID: 1015959388}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -1171,6 +1190,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1015959388
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015959383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 1
+  m_FrequencyGain: 1
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &1078631262
 GameObject:
   m_ObjectHideFlags: 0
@@ -1336,8 +1372,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195822808}
-  m_LocalRotation: {x: 0.09584009, y: -0.8558007, z: 0.13656917, w: 0.48966187}
-  m_LocalPosition: {x: -588.37555, y: 87.13822, z: 77.92053}
+  m_LocalRotation: {x: 0.095840335, y: -0.8558006, z: 0.13656962, w: 0.48966178}
+  m_LocalPosition: {x: 1.5879285, y: 1.872139, z: -1.4252167}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1780449882}
@@ -1578,6 +1614,7 @@ GameObject:
   - component: {fileID: 1445771899}
   - component: {fileID: 1445771901}
   - component: {fileID: 1445771900}
+  - component: {fileID: 1445771902}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -1633,6 +1670,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1445771902
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445771898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 1
+  m_FrequencyGain: 1
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &1511218141
 GameObject:
   m_ObjectHideFlags: 0
@@ -1825,6 +1879,7 @@ GameObject:
   - component: {fileID: 1780449885}
   - component: {fileID: 1780449884}
   - component: {fileID: 1780449883}
+  - component: {fileID: 1780449886}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -1939,6 +1994,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1780449886
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1780449881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 1
+  m_FrequencyGain: 1
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &1808030407 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9144179548331638313, guid: f5bc2ac7457a5ca4d9a5979310c076e3,
@@ -2143,6 +2215,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 307107144614600022, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
+      propertyPath: VirtualCamera
+      value: 
+      objectReference: {fileID: 1078631265}
+    - target: {fileID: 307107144614600022, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
+      propertyPath: FreeLookCamera
+      value: 
+      objectReference: {fileID: 2043809381}
     - target: {fileID: 3340417402739704077, guid: 664e653c31a29c0408643f1de8d4a39a,
         type: 3}
       propertyPath: m_freelook
@@ -2163,18 +2245,6 @@ PrefabInstance:
       propertyPath: net_Animator
       value: 
       objectReference: {fileID: 919132148984205168}
-    - target: {fileID: 3340417402739704078, guid: 664e653c31a29c0408643f1de8d4a39a,
-        type: 3}
-      propertyPath: ImpactVFX_hit
-      value: 
-      objectReference: {fileID: 8307959452185332233, guid: a3c910de1b32b054bab557700a3c496f,
-        type: 3}
-    - target: {fileID: 3340417402739704078, guid: 664e653c31a29c0408643f1de8d4a39a,
-        type: 3}
-      propertyPath: ImpactVFX_missed
-      value: 
-      objectReference: {fileID: 3634744335522477685, guid: 3ba3e249b998f104c991c196a70cb1ac,
-        type: 3}
     - target: {fileID: 3340417402739704078, guid: 664e653c31a29c0408643f1de8d4a39a,
         type: 3}
       propertyPath: idleAimEnergyVFX

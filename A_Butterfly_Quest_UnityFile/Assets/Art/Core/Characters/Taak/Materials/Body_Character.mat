@@ -143,7 +143,7 @@ Material:
     - _AlphaDstBlend: 0
     - _AlphaSrcBlend: 1
     - _Anisotropy: 0
-    - _ArmGlow: 1
+    - _ArmGlow: 0
     - _BlendMode: 0
     - _CoatMask: 0
     - _CullMode: 2

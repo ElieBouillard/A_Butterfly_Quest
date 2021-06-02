@@ -159,6 +159,7 @@ public class Shoot : MonoBehaviour
         
         VFXManager.m_instance.SpawnShootVFX(HitPos,hitSomething);
 
+        SimpleCameraShakeInCinemachine.m_instance.StartShake();
 
     }
 

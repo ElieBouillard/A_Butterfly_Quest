@@ -47,6 +47,10 @@ public class VFXManager : MonoBehaviour
     private void Awake()
     {
         m_instance = this;
+
+        //LOCK FRAMERATE (oui c'est pas au bon endroit flemme)
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
     }
 
     void Start()

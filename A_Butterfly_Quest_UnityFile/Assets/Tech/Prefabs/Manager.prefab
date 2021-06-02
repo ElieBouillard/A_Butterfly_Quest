@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3340417402739704076}
   - component: {fileID: 3340417402739704078}
   - component: {fileID: 103712040351518269}
+  - component: {fileID: 307107144614600022}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -130,7 +131,10 @@ MonoBehaviour:
     type: 3}
   ShootLine: {fileID: 2067325504960722111, guid: 8b0fe82356c49564f9ed285ca032ae2c,
     type: 3}
-  ImpactVFX: {fileID: 0}
+  ImpactVFX_missed: {fileID: 3634744335522477685, guid: 3ba3e249b998f104c991c196a70cb1ac,
+    type: 3}
+  ImpactVFX_hit: {fileID: 8307959452185332233, guid: a3c910de1b32b054bab557700a3c496f,
+    type: 3}
   mesh_rend: {fileID: 0}
   shoot_startPoint: {fileID: 0}
   SuccessfulCatch_FX: {fileID: 299559291818564437, guid: d6367ddd4a497a7418e3b222fd18d8c7,
@@ -236,3 +240,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &307107144614600022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3340417402739704113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56872a1c2cb5c7348bd312d113dba804, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShakeDuration: 0.1
+  ShakeAmplitude: 1
+  ShakeFrequency: 1
+  VirtualCamera: {fileID: 0}
+  FreeLookCamera: {fileID: 0}

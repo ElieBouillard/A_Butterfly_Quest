@@ -17,7 +17,9 @@ public class WavesManager : MonoBehaviour
     private float clockSpawn;
     public float clockBetweenWaves;
 
+    public GameObject WinBlackScreen;
 
+    bool canWin = true;
     private void Awake()
     {
         instance = this;
@@ -29,11 +31,13 @@ public class WavesManager : MonoBehaviour
         waveIndex = 0;
         InitiateNextWave();
         clockBetweenWaves = TimeBetweenWaves;
+        canWin = true;
     }
 
     private void Update()
     {
         WaveSystemUpdate();
+        WinGame();
     }
 
     private void InitiateNextWave()
@@ -50,17 +54,17 @@ public class WavesManager : MonoBehaviour
         clockSpawn = Waves[waveIndex].RateTimingSpawn;
     }
 
-    private void InstantiateRateGroup()
-    {
-        foreach (GameObject spawner in Spawners)
-        {
-            Spawner currScpt = spawner.GetComponent<Spawner>();
-            for (int i = 0; i < Waves[waveIndex].HowManyPerRate; i++)
-            {
-                CurrWaveEnemys.Add(currScpt.InstantiateEnemy());
-            }
-        }
-    }
+    //private void InstantiateRateGroup()
+    //{
+    //    foreach (GameObject spawner in Spawners)
+    //    {
+    //        Spawner currScpt = spawner.GetComponent<Spawner>();
+    //        for (int i = 0; i < Waves[waveIndex].HowManyPerRate; i++)
+    //        {
+    //            CurrWaveEnemys.Add(currScpt.InstantiateEnemy());
+    //        }
+    //    }
+    //}
 
     public void KillAllEnemys()
     {
@@ -72,37 +76,37 @@ public class WavesManager : MonoBehaviour
 
     private void WaveSystemUpdate()
     {
-        if(clockWave > 0)
-        {
-            clockWave -= Time.deltaTime;
+        //if(clockWave > 0)
+        //{
+        //    clockWave -= Time.deltaTime;
 
-            if (clockSpawn > 0)
-            {
-                clockSpawn -= Time.deltaTime;
-            }
-            else
-            {
-                InstantiateRateGroup();
-                clockSpawn = Waves[waveIndex].RateTimingSpawn;
-            }
-        }
-        else
-        {
-            if (CheckIfAllEnemyDead())
-            {
-                if(clockBetweenWaves > 0)
-                {
-                    clockBetweenWaves -= Time.deltaTime;
-                }
-                else
-                {
-                    CurrWaveEnemys.Clear();
-                    waveIndex++;
-                    InitiateNextWave();
-                    clockBetweenWaves = TimeBetweenWaves;
-                }
-            }
-        }
+        //    if (clockSpawn > 0)
+        //    {
+        //        clockSpawn -= Time.deltaTime;
+        //    }
+        //    else
+        //    {
+        //        InstantiateRateGroup();
+        //        clockSpawn = Waves[waveIndex].RateTimingSpawn;
+        //    }
+        //}
+        //else
+        //{
+        //    if (CheckIfAllEnemyDead())
+        //    {
+        //        if(clockBetweenWaves > 0)
+        //        {
+        //            clockBetweenWaves -= Time.deltaTime;
+        //        }
+        //        else
+        //        {
+        //            CurrWaveEnemys.Clear();
+        //            waveIndex++;
+        //            InitiateNextWave();
+        //            clockBetweenWaves = TimeBetweenWaves;
+        //        }
+        //    }
+        //}
     }
 
     private bool CheckIfAllEnemyDead()
@@ -120,5 +124,17 @@ public class WavesManager : MonoBehaviour
             }
         }
         return true;
+    }
+
+    private void WinGame()
+    {
+        if (CheckIfAllEnemyDead())
+        {
+            if (canWin)
+            {
+                WinBlackScreen.GetComponent<Animator>().SetBool("Opace", true);
+                canWin = false;
+            }
+        }
     }
 }

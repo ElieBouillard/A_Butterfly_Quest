@@ -1159,11 +1159,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scenesToLoad:
   - 3C_Scene
-  - UI_HUD_Scene
+  - LD
   - Integration
   - VOLUMES
   - UI_TIPS_Scene
-  - LD
+  - UI_HUD_Scene
   instantLoad: 0
 --- !u!114 &372682442
 MonoBehaviour:
@@ -1292,8 +1292,11 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   footSteps: []
+  shootsSounds: []
+  dashsSounds: []
   m_piste: {fileID: -685239805798855273, guid: 27a16097e22ce6b4093a9c5d789c26a7, type: 2}
   m_audioSource: {fileID: 0}
+  m_audioSource2: {fileID: 0}
 --- !u!1 &392954637
 GameObject:
   m_ObjectHideFlags: 0

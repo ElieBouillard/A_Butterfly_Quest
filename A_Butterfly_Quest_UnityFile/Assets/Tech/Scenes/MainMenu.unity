@@ -1160,7 +1160,7 @@ MonoBehaviour:
   scenesToLoad:
   - 3C_Scene
   - UI_HUD_Scene
-  - 
+  - Integration
   - VOLUMES
   - UI_TIPS_Scene
   - LD

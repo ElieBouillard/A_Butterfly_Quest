@@ -170,6 +170,8 @@ public class Shoot : MonoBehaviour
             {
 
                 ShootButterfly(ButterflyTypeSelection.Instance.SelectionTypeValue);
+                AudioManager.instance.m_audioSource2.clip = AudioManager.instance.shootsSounds[ButterflyTypeSelection.Instance.SelectionTypeValue];
+                AudioManager.instance.m_audioSource2.Play();
                 //AnimationManager.m_instance.shootTrigger = true; //Anim   
                 canShoot = false;
             }

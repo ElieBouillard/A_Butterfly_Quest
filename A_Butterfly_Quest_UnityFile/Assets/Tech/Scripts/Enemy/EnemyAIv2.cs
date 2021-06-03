@@ -60,6 +60,8 @@ public class EnemyAIv2 : MonoBehaviour
     private float AttackingRangeTemp;
     private bool canResetPath;
 
+    private GameObject IllusionMeshPrefab;
+
     private void Start()
     {
         //ReferenceAuto
@@ -72,8 +74,11 @@ public class EnemyAIv2 : MonoBehaviour
         Agent.acceleration = Acceleration;
 
         m_animator = transform.GetChild(0).gameObject.GetComponent<Animator>();
+        IllusionMeshPrefab = Character3D.m_instance.IllusionMeshItem;
+        Physics.IgnoreCollision(GetComponent<Collider>(), IllusionMeshPrefab.GetComponent<Collider>(), true);
     }
 
+    bool check = true;
     private void Update()
     {
         if (m_State != States.TurnBack && m_State != States.Off)
@@ -92,6 +97,25 @@ public class EnemyAIv2 : MonoBehaviour
 
         RangeSystem();
         StateSystem();
+
+        if (IllusionMeshPrefab.activeSelf)
+        {
+            if (!check)
+            {
+                Target = IllusionMeshPrefab;
+                check = true;
+            }
+  
+        }
+        else
+        {
+            if (check)
+            {
+                Target = Character3D.m_instance.gameObject;
+                check = false;
+            }
+
+        }
     }
 
     private void RangeSystem()

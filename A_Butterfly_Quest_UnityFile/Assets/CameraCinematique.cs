@@ -15,18 +15,15 @@ public class CameraCinematique : MonoBehaviour
     }
     private void Start()
     {
-        Character3D.m_instance.FreezeInput = true;
+
     }
     void Update()
     {
         if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0))
         {
             isAnimationFinished = true;
-            if (check)
-            {
-                Character3D.m_instance.FreezeInput = false;
-                check = false;
-            }
+
+            
 
         }
     }

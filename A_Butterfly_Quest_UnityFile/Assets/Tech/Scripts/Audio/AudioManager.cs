@@ -7,8 +7,11 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
     public Sound[] sounds;
     public AudioClip[] footSteps;
+    public AudioClip[] shootsSounds;
+    public AudioClip[] dashsSounds;
     public AudioMixerGroup m_piste;
     public AudioSource m_audioSource;
+    public AudioSource m_audioSource2;
     void Awake()
     {
         instance = this;

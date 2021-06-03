@@ -314,6 +314,9 @@ public class Character3D : MonoBehaviour
         FreezePosPlayer(DashDuration, true, true);
         AnimationManager.m_instance.dashTrigger = true;
         AnimationManager.m_instance.canPlayStepSound = false;
+        AudioManager.instance.m_audioSource2.clip = AudioManager.instance.dashsSounds[DashType];
+        AudioManager.instance.m_audioSource2.Play();
+
         checkPlaySound = true;
         DashDir = PlayerMesh.transform.forward;
         clockDash = DashDuration;
@@ -329,8 +332,7 @@ public class Character3D : MonoBehaviour
             IllusionMeshItem.transform.position = transform.position + Vector3.up * 0.3f;
             IllusionMeshItem.transform.rotation = AnimationManager.m_instance.gameObject.transform.rotation;
             IllusionMeshItem.SetActive(true);
-        }
-        
+        }        
     }
 
     public void DashUpdate()
@@ -415,7 +417,7 @@ public class Character3D : MonoBehaviour
     private void HuntNetHitUpdate()
     {
         //Chasse Coup de Filet
-        if (Input.GetKeyDown(KeyCode.Joystick1Button1) && !Shoot.Instance.Aiming && clockNetHitCd <= 0)
+        if (Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKeyDown("f") && !Shoot.Instance.Aiming && clockNetHitCd <= 0)
         {
             clockBeforeNetHit = 0.3f;
             canClockAfterNetHit = true;

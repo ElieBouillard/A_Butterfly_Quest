@@ -415,7 +415,7 @@ public class Character3D : MonoBehaviour
     private void HuntNetHitUpdate()
     {
         //Chasse Coup de Filet
-        if (Input.GetKeyDown(KeyCode.Joystick1Button1) && !Shoot.Instance.Aiming && clockNetHitCd <= 0)
+        if (Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKeyDown("f") && !Shoot.Instance.Aiming && clockNetHitCd <= 0)
         {
             clockBeforeNetHit = 0.3f;
             canClockAfterNetHit = true;

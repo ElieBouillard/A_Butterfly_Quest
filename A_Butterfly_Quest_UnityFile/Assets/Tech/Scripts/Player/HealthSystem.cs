@@ -51,6 +51,10 @@ public class HealthSystem : MonoBehaviour
             {
                 canHit = true;
             }
+            if (Input.GetKeyDown("k"))
+            {
+                Death();
+            }
         }
         else
         {
@@ -62,7 +66,9 @@ public class HealthSystem : MonoBehaviour
             {
                 EnemyMesh.material.SetFloat("_HitForce", 0f);
             }
-        } 
+        }
+
+
     }
 
     private void HUDHealthUpdate()

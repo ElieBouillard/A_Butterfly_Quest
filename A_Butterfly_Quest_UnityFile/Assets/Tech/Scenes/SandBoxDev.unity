@@ -547,7 +547,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &357534919
 Transform:
   m_ObjectHideFlags: 0
@@ -643,6 +643,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SoucheFinAtelier
+      objectReference: {fileID: 0}
+    - target: {fileID: 766005762950495125, guid: d51e7fc9a09480748bf0974f43f4a2d5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6496723472340070740, guid: d51e7fc9a09480748bf0974f43f4a2d5,
         type: 3}
@@ -1262,7 +1267,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1096048240
 Transform:
   m_ObjectHideFlags: 0
@@ -1450,6 +1455,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pressure_plate
+      objectReference: {fileID: 0}
+    - target: {fileID: 2029695501312832142, guid: 8ba109ed12d917d498c465cbcf531489,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1130802412950180223, guid: 8ba109ed12d917d498c465cbcf531489, type: 3}
@@ -1958,7 +1968,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1903514331
 Transform:
   m_ObjectHideFlags: 0
@@ -2453,6 +2463,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCluster
       objectReference: {fileID: 0}
+    - target: {fileID: 590550599605393953, guid: 83c604700b7bb034cb2ba8b0e5b799a0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 590550599605393958, guid: 83c604700b7bb034cb2ba8b0e5b799a0,
         type: 3}
       propertyPath: m_RootOrder
@@ -2794,6 +2809,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RespawnSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 4077439045365118334, guid: 1c0efa609d216dd40aee98b5be177453,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4077439045670434270, guid: 1c0efa609d216dd40aee98b5be177453,
         type: 3}

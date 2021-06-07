@@ -120,7 +120,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 283ab78a2c6968040a167e05fa5f991f, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 5ec82b43643e399408716b848afb5dd5, type: 2}
 --- !u!1 &353175788 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 868339472754628101, guid: 9a9dcf9add3a600429b9c089395c60d5,
@@ -671,6 +671,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: Horizontal
+      objectReference: {fileID: 0}
+    - target: {fileID: 868339473249883645, guid: 9a9dcf9add3a600429b9c089395c60d5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 868339473370203011, guid: 9a9dcf9add3a600429b9c089395c60d5,
         type: 3}

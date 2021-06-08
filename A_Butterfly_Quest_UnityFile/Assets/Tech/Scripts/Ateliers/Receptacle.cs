@@ -41,6 +41,14 @@ public class Receptacle : MonoBehaviour
     public GameObject Butterfly_Illusion;
     public GameObject Butterfly_Tempete;
 
+
+
+    [Header("Camera")]
+    public GameObject cam;
+    public bool camAffilied;
+
+
+
     private void Start()
     {
         m_collider = gameObject.GetComponent<Collider>();
@@ -68,6 +76,10 @@ public class Receptacle : MonoBehaviour
         {
             m_collider.enabled = false;
             Completed = true;
+            if (camAffilied)
+            {
+                camAnimation();
+            }
         }
     }
 
@@ -142,5 +154,10 @@ public class Receptacle : MonoBehaviour
                 Butterfly_Tempete.SetActive(true);
                 break;
         }
+    }
+
+    void camAnimation()
+    {
+        cam.SetActive(true);
     }
 }

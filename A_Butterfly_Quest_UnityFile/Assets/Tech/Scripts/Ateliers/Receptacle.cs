@@ -44,8 +44,10 @@ public class Receptacle : MonoBehaviour
 
 
     [Header("Camera")]
-    public GameObject cam;
     public bool camAffilied;
+    public GameObject cam;
+    public bool haveConnectedReceptacle;
+    public GameObject connectedReceptacle;
 
 
 
@@ -76,10 +78,7 @@ public class Receptacle : MonoBehaviour
         {
             m_collider.enabled = false;
             Completed = true;
-            if (camAffilied)
-            {
-                camAnimation();
-            }
+            camLaunch();          
         }
     }
 
@@ -159,5 +158,20 @@ public class Receptacle : MonoBehaviour
     void camAnimation()
     {
         cam.SetActive(true);
+    }
+    void camLaunch()
+    {
+        if (camAffilied)
+        {
+            if (haveConnectedReceptacle && connectedReceptacle.GetComponent<Receptacle>().Completed == true)
+            {
+                camAnimation();
+
+            }
+            if (!haveConnectedReceptacle)
+            {
+                camAnimation();
+            }
+        }
     }
 }

@@ -4,18 +4,36 @@ using UnityEngine;
 
 public class Tips : MonoBehaviour
 {
-    public List<GameObject> trigger = new List<GameObject>();
-
-    void Start()
-    {
-        TipsManager.instance.ShowTip(4, TipsManager.TipType.BottomTip);
-    }
+    bool butterflyCatch;
+    bool isShowingTip;
+    public string SFXName;
+    bool canHide = true;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
+        if (!butterflyCatch)
         {
-            TipsManager.instance.ShowTip(0, TipsManager.TipType.BottomTip);
+            if (Character3D.m_instance.GetComponent<ButterflyInventory>().ButterflyIllusionInInventoryValue >= 1 || Character3D.m_instance.GetComponent<ButterflyInventory>().ButterflyTempeteInInventoryValue >=1)
+            {
+
+                if (AudioManager.instance.sounds[0].source != null)
+                {
+                    AudioManager.instance.Play(SFXName);
+                }
+                butterflyCatch = true;
+                TipsManager.instance.ShowTip(9, TipsManager.TipType.BottomTip);
+                isShowingTip = true;
+            }
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.Joystick1Button4) || Input.GetKeyDown(KeyCode.Joystick1Button5))
+        {
+            if (isShowingTip && canHide)
+            {
+                TipsManager.instance.HideTip(TipsManager.TipType.BottomTip);
+                canHide = false;
+            }
         }
     }
 }

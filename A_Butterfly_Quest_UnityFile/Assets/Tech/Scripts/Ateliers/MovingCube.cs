@@ -14,7 +14,7 @@ public class MovingCube : MonoBehaviour
     public enum Direction { Front, Left, Back, Right };
     public Direction RayDir;
 
-    private bool CollideWithPlayer;
+    public bool CollideWithPlayer;
     private Vector3 dir;
 
     private void Start()

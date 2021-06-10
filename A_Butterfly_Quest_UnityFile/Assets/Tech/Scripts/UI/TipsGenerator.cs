@@ -5,10 +5,12 @@ using UnityEngine;
 public class TipsGenerator : MonoBehaviour
 {
    public int intTip;
-    public enum endCondition { 
+    public enum endCondition 
+    { 
         PressB, 
         PressA, 
-        ScopeAndShoot, 
+        ScopeAndShoot,
+        ScopeAndShootBrambles,
         EnumShoot, 
         Move, 
         Dash, 
@@ -16,7 +18,11 @@ public class TipsGenerator : MonoBehaviour
         Equip, 
         BigJump,
         Key,
-        EndKey}
+        EndKey,
+        DashTempete,
+        TirTempete,
+        DashIllu
+    }
 
     public endCondition m_condition;
     bool isShowingTip;
@@ -28,22 +34,28 @@ public class TipsGenerator : MonoBehaviour
     bool canHide;
     bool canClockHide;
 
+    bool canPlaySFX;
+
+    public GameObject gameObjectNeeded;
+
     private void Start()
     {
         //TipsManager.instance.ShowTip(4, TipsManager.TipType.BottomTip);
         //TipsManager.instance.ShowTip(4, TipsManager.TipType.BottomTip);
         //isShowingTip = true;
         canClockHide = true;
+        canPlaySFX = true;
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            if (dontShowTipAgain == false)
+            if (dontShowTipAgain == false )
             {          
-                if (AudioManager.instance.sounds[0].source != null)
+                if (AudioManager.instance.sounds[0].source != null && canPlaySFX)
                 {
                     AudioManager.instance.Play(SFXName);
+                    canPlaySFX = false;
                 }           
             }
 
@@ -72,14 +84,8 @@ public class TipsGenerator : MonoBehaviour
             }
         }
 
-        if (m_condition == endCondition.PressB && isShowingTip)
-        {
-            if (Input.GetKeyDown(KeyCode.Joystick1Button1))
-            {
-                Hide();
-                dontShowTipAgain = true;
-            }
-        }
+
+        
         if (m_condition == endCondition.PressA && isShowingTip)
         {
             if (Input.GetKeyDown(KeyCode.Joystick1Button0))
@@ -90,7 +96,23 @@ public class TipsGenerator : MonoBehaviour
         }
         if (m_condition == endCondition.Dash && isShowingTip)
         {
-            if (Input.GetKeyDown(KeyCode.Joystick1Button2))
+            if (gameObjectNeeded.GetComponent<TriggerTips>().succes == true)
+            {
+                Hide();
+                dontShowTipAgain = true;
+            }
+        }
+        if (m_condition == endCondition.DashTempete && isShowingTip)
+        {
+            if (Input.GetKeyDown(KeyCode.Joystick1Button2) && gameObjectNeeded.GetComponent<MovingCube>().CollideWithPlayer == true)
+            {
+                Hide();
+                dontShowTipAgain = true;
+            }
+        }
+        if (m_condition == endCondition.DashIllu && isShowingTip)
+        {
+            if (Input.GetKeyDown(KeyCode.Joystick1Button2) && Character3D.m_instance.GetComponent<ButterflyTypeSelection>().SelectionTypeValue == 1)
             {
                 Hide();
                 dontShowTipAgain = true;
@@ -98,7 +120,7 @@ public class TipsGenerator : MonoBehaviour
         }
         if (m_condition == endCondition.Net && isShowingTip)
         {
-            if (Input.GetKeyDown(KeyCode.Joystick1Button1))
+            if (Character3D.m_instance.GetComponent<ButterflyInventory>().ButterflyInInventoryValue >= 1)
             {
                 Hide();
                 dontShowTipAgain = true;
@@ -114,6 +136,19 @@ public class TipsGenerator : MonoBehaviour
         }
         if (m_condition == endCondition.ScopeAndShoot && isShowingTip) 
         {
+            if (gameObjectNeeded.GetComponent<Receptacle>().Completed == true)
+            {
+                Hide();
+                dontShowTipAgain = true;
+            }
+            //if (Input.GetAxis("Aim") > 0 && Input.GetAxisRaw("Fire1") == 1)
+            //{
+                
+            //}
+        }
+        if (m_condition == endCondition.ScopeAndShoot && isShowingTip)
+        {
+            
             if (Input.GetAxis("Aim") > 0 && Input.GetAxisRaw("Fire1") == 1)
             {
                 Hide();
@@ -150,11 +185,12 @@ public class TipsGenerator : MonoBehaviour
             {
                 Hide();
             }
-            if (KeyInventory.instance.GetKeyCount() < 3 && canClockHide)
+            if (KeyInventory.instance.GetKeyCount() < 3)
             {
-                clockHide = 5;
-                Debug.Log(clockHide);
-                canClockHide = false;
+                if (gameObjectNeeded.GetComponent<TriggerTips>().succes == true)
+                {
+                    Hide();
+                }
             }
 
         }

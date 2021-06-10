@@ -53,7 +53,8 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         ShowCrosshair(true);
-        PauseMenuHUD.SetActive(false);       
+        PauseMenuHUD.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     bool freezePlayer;
@@ -99,6 +100,7 @@ public class UIManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) || (Input.GetKeyDown(KeyCode.Joystick1Button7)))
         {
             StartPauseMenu();
+            Cursor.lockState = CursorLockMode.None;
         }
 
     }
@@ -125,10 +127,11 @@ public class UIManager : MonoBehaviour
 
     public void Resume()
     {
-        PauseMenuHUD.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
         AnimationManager.m_instance.canPlayStepSound = true;
         freezePlayer = false;
         Character3D.m_instance.FreezePosPlayer(0.3f, true, true);
+        PauseMenuHUD.SetActive(false);
     }
 
 }

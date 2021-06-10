@@ -19,15 +19,15 @@ MonoBehaviour:
     m_Value: 1
   colorMode:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   color:
     m_OverrideState: 1
-    m_Value: {r: 0.77410436, g: 0.8584906, b: 0, a: 1}
+    m_Value: {r: 0, g: 0.78131837, b: 0.85882354, a: 1}
     hdr: 1
     showAlpha: 0
     showEyeDropper: 1
   tint:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: {r: 0.67712265, g: 0.8207547, b: 0, a: 1}
     hdr: 1
     showAlpha: 0
@@ -51,7 +51,7 @@ MonoBehaviour:
     min: 0
   baseHeight:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 6.2
   maximumHeight:
     m_OverrideState: 0
     m_Value: 50
@@ -63,14 +63,14 @@ MonoBehaviour:
     showEyeDropper: 1
   meanFreePath:
     m_OverrideState: 1
-    m_Value: 200
+    m_Value: 152.38
     min: 1
   enableVolumetricFog:
     m_OverrideState: 1
     m_Value: 1
   anisotropy:
     m_OverrideState: 1
-    m_Value: 0.448
+    m_Value: 0.4
     min: -1
     max: 1
   globalLightProbeDimmer:
@@ -296,7 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59b6606ef2548734bb6d11b9d160bc7e, type: 3}
   m_Name: HDRISky
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   rotation:
     m_OverrideState: 0
@@ -401,7 +401,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   skyType:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 3
   skyAmbientMode:
     m_OverrideState: 0
     m_Value: 0
@@ -420,7 +420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a81bcacc415a1f743bfdf703afc52027, type: 3}
   m_Name: GradientSky
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   m_AdvancedMode: 0
   rotation:
     m_OverrideState: 0
@@ -459,19 +459,19 @@ MonoBehaviour:
     m_Value: 0
   top:
     m_OverrideState: 1
-    m_Value: {r: 0.34659946, g: 1, b: 0, a: 1}
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
     hdr: 1
     showAlpha: 0
     showEyeDropper: 1
   middle:
     m_OverrideState: 1
-    m_Value: {r: 0.07587219, g: 0.5188679, b: 0.19614114, a: 1}
+    m_Value: {r: 0.0065414715, g: 0.018250715, b: 0.066037714, a: 1}
     hdr: 1
     showAlpha: 0
     showEyeDropper: 1
   bottom:
     m_OverrideState: 1
-    m_Value: {r: 0.120772526, g: 0.4339623, b: 0.33361322, a: 1}
+    m_Value: {r: 0.07662871, g: 0.10913199, b: 0.13207549, a: 1}
     hdr: 1
     showAlpha: 0
     showEyeDropper: 1

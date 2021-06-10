@@ -143,7 +143,7 @@ Material:
     - _AlphaDstBlend: 0
     - _AlphaSrcBlend: 1
     - _Anisotropy: 0
-    - _ArmGlow: 0
+    - _ArmGlow: 0.24114996
     - _BlendMode: 0
     - _CoatMask: 0
     - _CullMode: 2
@@ -214,7 +214,7 @@ Material:
     - _RenderQueueType: 1
     - _RequireSplitLighting: 0
     - _SSRefractionProjectionModel: 0
-    - _Smoothness: 0.584
+    - _Smoothness: 0
     - _SmoothnessRemapMax: 1
     - _SmoothnessRemapMin: 0
     - _SpecularAAScreenSpaceVariance: 0.1

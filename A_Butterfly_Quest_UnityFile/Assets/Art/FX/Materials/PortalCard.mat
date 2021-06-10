@@ -255,11 +255,11 @@ Material:
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
-    - _EndColor: {r: 2.1490197, g: 2.9960785, b: 0.8156863, a: 0.5254902}
+    - _EndColor: {r: 0, g: 0.13716576, b: 0.4056604, a: 0.5254902}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
-    - _StartColor: {r: 0, g: 1, b: 0.062591314, a: 0}
+    - _StartColor: {r: 0, g: 0.06491189, b: 0.103773594, a: 0}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}

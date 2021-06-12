@@ -101,7 +101,6 @@ public class Shoot : MonoBehaviour
         bool hitSomething = false;
         ButterflyBehaviourV2 currButterlfy;
         currButterlfy = ButterflyInventory.Instance.GetFirstButterfly(ButterflyType);
-        ButterflyInventory.Instance.ShootedButterfly(currButterlfy);
 
         //Si touche un mesh alors prend les coordonees en direction
         if (Physics.Raycast(Camera.main.transform.position + Camera.main.transform.forward * 5f, Camera.main.transform.forward, out ShootInfo, Range, IgnoreMask))
@@ -109,6 +108,8 @@ public class Shoot : MonoBehaviour
             Debug.DrawRay(Camera.main.transform.position + Camera.main.transform.forward * 5f, Camera.main.transform.forward * Range, Color.red, 5f);
             HitPos = ShootInfo.point;
             Debug.DrawRay(HitPos, Vector3.up * 5f, Color.red, 5f);
+
+            ButterflyInventory.Instance.ShootedButterfly(currButterlfy, HitPos);
 
             if (ShootInfo.transform.gameObject.GetComponent<HealthSystem>())
             {
@@ -150,12 +151,12 @@ public class Shoot : MonoBehaviour
             Debug.DrawRay(Camera.main.transform.position + Camera.main.transform.forward * 5f, Camera.main.transform.forward * Range, Color.blue, 5f);
             HitPos = shootRay.GetPoint(Range);
             Debug.DrawRay(HitPos, Vector3.up * 5f, Color.blue, 5f);
+            ButterflyInventory.Instance.ShootedButterfly(currButterlfy, HitPos);
             ButterflyInventory.Instance.AddToReloadList(currButterlfy);
         }
 
-
         //VFX
-        
+
         VFXManager.m_instance.SpawnShootVFX(HitPos,hitSomething);
 
         SimpleCameraShakeInCinemachine.m_instance.StartShake();
@@ -168,7 +169,6 @@ public class Shoot : MonoBehaviour
         {
             if (Input.GetAxisRaw("Fire1") == 1 && canShoot)
             {
-
                 ShootButterfly(ButterflyTypeSelection.Instance.SelectionTypeValue);
                 AudioManager.instance.m_audioSource2.clip = AudioManager.instance.shootsSounds[ButterflyTypeSelection.Instance.SelectionTypeValue];
                 AudioManager.instance.m_audioSource2.Play();

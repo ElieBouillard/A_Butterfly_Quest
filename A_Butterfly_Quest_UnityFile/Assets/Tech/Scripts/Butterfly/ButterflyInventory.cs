@@ -61,6 +61,14 @@ public class ButterflyInventory : MonoBehaviour
         }
     }
 
+    public void ShootedButterfly(ButterflyBehaviourV2 currButterfly, Vector3 HitImpact)
+    {
+        ButterflyInInventory[(int)currButterfly.m_ButterflyType].Remove(currButterfly);
+        currButterfly.gameObject.SetActive(false);
+        currButterfly.gameObject.transform.position = HitImpact;
+        currButterfly.gameObject.SetActive(true);
+    }
+
     public void ShootedButterfly(ButterflyBehaviourV2 currButterfly)
     {
         ButterflyInInventory[(int)currButterfly.m_ButterflyType].Remove(currButterfly);

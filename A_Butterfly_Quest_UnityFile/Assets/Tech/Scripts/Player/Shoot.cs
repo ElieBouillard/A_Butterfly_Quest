@@ -103,9 +103,9 @@ public class Shoot : MonoBehaviour
         currButterlfy = ButterflyInventory.Instance.GetFirstButterfly(ButterflyType);
 
         //Si touche un mesh alors prend les coordonees en direction
-        if (Physics.Raycast(Camera.main.transform.position + Camera.main.transform.forward * 5f, Camera.main.transform.forward, out ShootInfo, Range, IgnoreMask))
+        if (Physics.Raycast(Camera.main.transform.position + Camera.main.transform.forward * 3f, Camera.main.transform.forward, out ShootInfo, Range, IgnoreMask))
         {
-            Debug.DrawRay(Camera.main.transform.position + Camera.main.transform.forward * 5f, Camera.main.transform.forward * Range, Color.red, 5f);
+            Debug.DrawRay(Camera.main.transform.position + Camera.main.transform.forward * 3f, Camera.main.transform.forward * Range, Color.red, 5f);
             HitPos = ShootInfo.point;
             Debug.DrawRay(HitPos, Vector3.up * 5f, Color.red, 5f);
 
@@ -147,8 +147,8 @@ public class Shoot : MonoBehaviour
         }
         else
         {
-            Ray shootRay = new Ray(Camera.main.transform.position + Camera.main.transform.forward * 5f, Camera.main.transform.forward * Range);
-            Debug.DrawRay(Camera.main.transform.position + Camera.main.transform.forward * 5f, Camera.main.transform.forward * Range, Color.blue, 5f);
+            Ray shootRay = new Ray(Camera.main.transform.position + Camera.main.transform.forward * 3f, Camera.main.transform.forward * Range);
+            Debug.DrawRay(Camera.main.transform.position + Camera.main.transform.forward * 3f, Camera.main.transform.forward * Range, Color.blue, 5f);
             HitPos = shootRay.GetPoint(Range);
             Debug.DrawRay(HitPos, Vector3.up * 5f, Color.blue, 5f);
             ButterflyInventory.Instance.ShootedButterfly(currButterlfy, HitPos);

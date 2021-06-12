@@ -42,8 +42,8 @@ public class Character3D : MonoBehaviour
     public float maxSpeed = 20;
     public float ClampVelocityY;
     private float currentSpeed = 0;
-    [HideInInspector]
     public bool FreezeInput = false;
+    public bool ForceFreeze = false;
     private float freezeClock;
     [HideInInspector]
     public bool forceNoJump;
@@ -115,7 +115,7 @@ public class Character3D : MonoBehaviour
         grounded = IsGrounded();
 
         //Inputs
-        if (FreezeInput == false)
+        if (FreezeInput == false && ForceFreeze == false)
         {
             horizontalInput = Input.GetAxis("Horizontal");
             verticalInput = Input.GetAxis("Vertical");         

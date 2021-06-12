@@ -18,14 +18,19 @@ public class CameraCinematique : MonoBehaviour
     public Animator animator;
     bool isAnimationFinished = false;
     public GameObject target;
+
+    private bool canUnfreeze;
     private void Awake()
     {
         instance = this;
         target.SetActive(true);
-        Character3D.m_instance.FreezePosPlayer(10);
+
     }
     private void Start()
     {
+        Character3D.m_instance.ForceFreeze = true;
+        canUnfreeze = true;
+
         if (m_AtelierType == AtelierType.Tempête)
         {
             animator.SetTrigger("Tempete");
@@ -45,6 +50,12 @@ public class CameraCinematique : MonoBehaviour
         {
             isAnimationFinished = true;
             target.SetActive(false);
+            if (canUnfreeze)
+            {
+                Character3D.m_instance.ForceFreeze = false;
+                canUnfreeze = false;
+            }
+
         }
     }  
 }

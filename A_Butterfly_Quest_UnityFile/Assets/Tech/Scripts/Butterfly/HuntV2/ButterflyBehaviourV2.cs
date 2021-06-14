@@ -37,7 +37,7 @@ public class ButterflyBehaviourV2 : MonoBehaviour
     public void SetButterFlyToLauncherPos()
     {
         randomMove = false;
-        m_Speed = 4f;
+        m_Speed = 5f;
         m_TargetPos = butterflyLauncher.transform.position;
         gameObject.transform.forward = player.transform.GetChild(0).transform.forward;
     }

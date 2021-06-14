@@ -79,7 +79,7 @@ public class PresurePlate : MonoBehaviour
         {
             Activated = true;
             targetPos = startPos + new Vector3(0, -range, 0);
-            clock = Character3D.m_instance.clocksCanDash[1];
+            clock = Character3D.m_instance.clockCanDash;
             canFalse = true;
         }
 

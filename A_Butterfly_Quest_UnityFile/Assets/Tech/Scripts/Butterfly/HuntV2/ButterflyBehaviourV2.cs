@@ -17,6 +17,9 @@ public class ButterflyBehaviourV2 : MonoBehaviour
     private GameObject PlayerCluster;
     private bool randomMove;
 
+    private float recoveryClock;
+    private bool inRecovery;
+
     private void Start()
     {
         player = Character3D.m_instance.gameObject;
@@ -51,6 +54,16 @@ public class ButterflyBehaviourV2 : MonoBehaviour
         return (int)m_ButterflyType;
     }
 
+    public void SetToRecovery()
+    {
+        recoveryClock = 1f;
+        inRecovery = true;
+    }
+    public void GoToCluster()
+    {
+
+    }
+
     float clockChangeTargetPos;
     private void Update()
     {
@@ -66,7 +79,7 @@ public class ButterflyBehaviourV2 : MonoBehaviour
                 m_TargetPos = new Vector3(transform.parent.position.x + Random.Range(-MovementRange, MovementRange), transform.parent.position.y + Random.Range(-MovementRange, MovementRange), transform.parent.position.z + Random.Range(-MovementRange, MovementRange));
                 if (transform.parent.GetComponent<ButterflyClusterV2>().isFollowingPlayer)
                 {
-                    clockChangeTargetPos = Random.Range(0.2f, 0.4f);
+                    clockChangeTargetPos = Random.Range(0.1f, 0.3f);
                 }
                 else
                 {
@@ -76,5 +89,24 @@ public class ButterflyBehaviourV2 : MonoBehaviour
             }
         }
         transform.position = Vector3.MoveTowards(transform.position, m_TargetPos, m_Speed / 100);
+
+        if (inRecovery)
+        {
+            if(recoveryClock > 0)
+            {
+                recoveryClock -= Time.deltaTime;
+            }
+            else
+            {
+                m_Speed = 20f;
+                m_TargetPos = PlayerCluster.transform.position;
+                if((PlayerCluster.transform.position - transform.position).magnitude < 2f)
+                {
+                    ButterflyInventory.Instance.ButterflyInInventory[(int)this.m_ButterflyType].Add(this);
+                    randomMove = true;
+                    inRecovery = false;
+                }                
+            }
+        }
     }
 }

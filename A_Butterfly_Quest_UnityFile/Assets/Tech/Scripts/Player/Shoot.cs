@@ -89,11 +89,11 @@ public class Shoot : MonoBehaviour
             AimAssitReceptacle();
         }
 
-        //Reload
-        if (Input.GetButtonDown("Reload"))
-        {
-            ButterflyInventory.Instance.StartReload();
-        }
+        ////Reload
+        //if (Input.GetButtonDown("Reload"))
+        //{
+        //    ButterflyInventory.Instance.StartReload();
+        //}
     }
 
     private void ShootButterfly(int ButterflyType)
@@ -135,12 +135,12 @@ public class Shoot : MonoBehaviour
                 }
                 else
                 {
-                    ButterflyInventory.Instance.AddToReloadList(currButterlfy);
+                    ButterflyInventory.Instance.SetButterflyToRecovery(currButterlfy);
                 }
             }
             else
             {
-                ButterflyInventory.Instance.AddToReloadList(currButterlfy);
+                ButterflyInventory.Instance.SetButterflyToRecovery(currButterlfy);
             }
 
             hitSomething = (ShootInfo.transform.gameObject.GetComponent<RonceBehaviour>() || ShootInfo.transform.gameObject.GetComponent<HealthSystem>());
@@ -152,7 +152,7 @@ public class Shoot : MonoBehaviour
             HitPos = shootRay.GetPoint(Range);
             Debug.DrawRay(HitPos, Vector3.up * 5f, Color.blue, 5f);
             ButterflyInventory.Instance.ShootedButterfly(currButterlfy, HitPos);
-            ButterflyInventory.Instance.AddToReloadList(currButterlfy);
+            ButterflyInventory.Instance.SetButterflyToRecovery(currButterlfy);
         }
 
         //VFX

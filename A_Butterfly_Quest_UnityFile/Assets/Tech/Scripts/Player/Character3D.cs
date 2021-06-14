@@ -310,7 +310,7 @@ public class Character3D : MonoBehaviour
         ButterflyBehaviourV2 currButterfly;
         currButterfly = ButterflyInventory.Instance.GetFirstButterfly(DashType);
         ButterflyInventory.Instance.ShootedButterfly(currButterfly);
-        ButterflyInventory.Instance.AddToReloadList(currButterfly);
+        ButterflyInventory.Instance.SetButterflyToRecovery(currButterfly);
         FreezePosPlayer(DashDuration, true, true);
         AnimationManager.m_instance.dashTrigger = true;
         AnimationManager.m_instance.canPlayStepSound = false;

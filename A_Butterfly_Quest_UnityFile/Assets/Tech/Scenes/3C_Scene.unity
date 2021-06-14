@@ -157,7 +157,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9289136}
   m_LocalRotation: {x: -0, y: 0.9750655, z: -0, w: -0.22191736}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 142.6, y: 26.3, z: 289.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7255424629777524410}
@@ -257,6 +257,7 @@ MonoBehaviour:
   maxSpeed: 5
   ClampVelocityY: 2
   FreezeInput: 0
+  ForceFreeze: 0
   forceNoJump: 0
   freezeDirection: 0
   DashSpeed: 15
@@ -397,10 +398,6 @@ MonoBehaviour:
   ButterflyInInventoryValue: 0
   ButterflyIllusionInInventoryValue: 0
   ButterflyTempeteInInventoryValue: 0
-  ButterflyInTravelValue: 0
-  ButterflyToReloadValue: 0
-  ButterflyInTravel: []
-  ButterflyToReload: []
 --- !u!114 &9289144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1340,8 +1337,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195822808}
-  m_LocalRotation: {x: 0.23946878, y: 0.7405191, z: -0.18421924, w: 0.60029113}
-  m_LocalPosition: {x: 581.8394, y: -84.709854, z: -79.2807}
+  m_LocalRotation: {x: 0.23946877, y: 0.74051917, z: -0.18421923, w: 0.6002911}
+  m_LocalPosition: {x: 266.59296, y: -14.515022, z: -94.965515}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1780449882}

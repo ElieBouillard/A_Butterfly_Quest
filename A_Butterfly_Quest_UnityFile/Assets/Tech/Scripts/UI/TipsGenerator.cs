@@ -40,9 +40,6 @@ public class TipsGenerator : MonoBehaviour
 
     private void Start()
     {
-        //TipsManager.instance.ShowTip(4, TipsManager.TipType.BottomTip);
-        //TipsManager.instance.ShowTip(4, TipsManager.TipType.BottomTip);
-        //isShowingTip = true;
         canClockHide = true;
         canPlaySFX = true;
     }
@@ -69,10 +66,12 @@ public class TipsGenerator : MonoBehaviour
 
     private void Update()
     {
+        
         if (clockHide > 0)
         {
             clockHide -= Time.deltaTime;
             canHide = true;
+            canClockHide = false;
         }
         else
         {
@@ -141,12 +140,9 @@ public class TipsGenerator : MonoBehaviour
                 Hide();
                 dontShowTipAgain = true;
             }
-            //if (Input.GetAxis("Aim") > 0 && Input.GetAxisRaw("Fire1") == 1)
-            //{
-                
-            //}
+
         }
-        if (m_condition == endCondition.ScopeAndShoot && isShowingTip)
+        if (m_condition == endCondition.ScopeAndShootBrambles && isShowingTip)
         {
             
             if (Input.GetAxis("Aim") > 0 && Input.GetAxisRaw("Fire1") == 1)
@@ -155,18 +151,8 @@ public class TipsGenerator : MonoBehaviour
                 dontShowTipAgain = true;
             }
         }
-        if (m_condition == endCondition.BigJump && isShowingTip) 
-        {
-            if (Input.GetKeyDown(KeyCode.Joystick1Button0))
-            {
-                jump = true;
-            }
-            if (jump && Input.GetKeyDown(KeyCode.Joystick1Button2))
-            {
-                Hide();
-                dontShowTipAgain = true;
-            }
-        }
+        
+        
         if (m_condition == endCondition.Key && isShowingTip)
         {
             if (Input.GetAxisRaw("GiveKey") == 1)
@@ -177,6 +163,14 @@ public class TipsGenerator : MonoBehaviour
             
         }
 
+        if (m_condition == endCondition.BigJump && isShowingTip)
+        {
+            if (gameObjectNeeded.GetComponent<TriggerTips>().succes == true)
+            {
+                Hide();
+                dontShowTipAgain = true;
+            }
+        }
 
 
         if (m_condition == endCondition.EndKey && isShowingTip)
@@ -185,12 +179,14 @@ public class TipsGenerator : MonoBehaviour
             {
                 Hide();
             }
+
             if (KeyInventory.instance.GetKeyCount() < 3)
             {
-                if (gameObjectNeeded.GetComponent<TriggerTips>().succes == true)
+                if (canClockHide)
                 {
-                    Hide();
+                    clockHide = 5;
                 }
+
             }
 
         }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CameraCinematique : MonoBehaviour
 {
@@ -20,14 +21,20 @@ public class CameraCinematique : MonoBehaviour
     public GameObject target;
 
     private bool canUnfreeze;
+
+    public GameObject dollyTrack;
+    public GameObject player;
+
     private void Awake()
     {
         instance = this;
         target.SetActive(true);
-
     }
     private void Start()
     {
+        Shoot.Instance.forceNoAim = true;
+        dollyTrack.gameObject.GetComponent<CinemachineSmoothPath>().m_Waypoints[0].position = Camera.main.transform.position - dollyTrack.transform.position;
+
         Character3D.m_instance.ForceFreeze = true;
         canUnfreeze = true;
 
@@ -53,7 +60,9 @@ public class CameraCinematique : MonoBehaviour
             if (canUnfreeze)
             {
                 Character3D.m_instance.ForceFreeze = false;
+                Character3D.m_instance.FreezePosPlayer(2f, true, true);
                 canUnfreeze = false;
+                Shoot.Instance.forceNoAim = false;
             }
 
         }

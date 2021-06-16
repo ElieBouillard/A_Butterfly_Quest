@@ -39,6 +39,7 @@ public class Shoot : MonoBehaviour
     [HideInInspector]
     public RaycastHit AimAssitHit;
     public Transform AimTargetTransform;
+    public bool forceNoAim;
 
 
     private void Awake()
@@ -56,31 +57,40 @@ public class Shoot : MonoBehaviour
 
     private void Update()
     {
-        //Aim
-        if (Input.GetAxis("Aim") > 0)
+        if (forceNoAim == false)
         {
-            Aiming = true;
-            CamAnimator.SetBool("AimCamera", true);
 
-            AnimationManager.m_instance.playerFocused = true; //Anim
-            canResetFreeLookCam = true;
-            VFXManager.m_instance.StartAiming(); // VFX
-        }
-        //No Aim
-        else if (Input.GetAxis("Aim") <= 0)
-        {
-            isAimAssist = false;
-            if (canResetFreeLookCam)
+            //Aim
+            if (Input.GetAxis("Aim") > 0)
             {
-                ResetFreeLookCamPos();
-                canResetFreeLookCam = false;
+                Aiming = true;
+                CamAnimator.SetBool("AimCamera", true);
+
+                AnimationManager.m_instance.playerFocused = true; //Anim
+                canResetFreeLookCam = true;
+                VFXManager.m_instance.StartAiming(); // VFX
             }
-            ResetAimCamPos();
-            Aiming = false;
-            CamAnimator.SetBool("AimCamera", false);
-            AnimationManager.m_instance.playerFocused = false; //Anim
-            VFXManager.m_instance.StopAiming(); // VFX
+            //No Aim
+            else if (Input.GetAxis("Aim") <= 0)
+            {
+                isAimAssist = false;
+                if (canResetFreeLookCam)
+                {
+                    ResetFreeLookCamPos();
+                    canResetFreeLookCam = false;
+                }
+                ResetAimCamPos();
+                Aiming = false;
+                CamAnimator.SetBool("AimCamera", false);
+                AnimationManager.m_instance.playerFocused = false; //Anim
+                VFXManager.m_instance.StopAiming(); // VFX
+            }
         }
+        else
+        {
+            Aiming = false;
+        }
+        
 
         //Shoot Papillons normaux
         if (Aiming)

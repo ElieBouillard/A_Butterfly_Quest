@@ -1048,7 +1048,7 @@ PrefabInstance:
     - target: {fileID: 8831862233269092308, guid: 1c22218c22590f749a350e6912adb2d6,
         type: 3}
       propertyPath: ValueNeeded
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8831862233269092308, guid: 1c22218c22590f749a350e6912adb2d6,
         type: 3}
@@ -4544,7 +4544,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 157362232}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 285.62827, y: 14.260704, z: 403.113}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 641609027}
@@ -21902,7 +21902,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 641609026}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.000030517578, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1489368825}
@@ -22323,7 +22323,7 @@ PrefabInstance:
     - target: {fileID: 8971001318520441939, guid: 6a6304c9f93bb1146a3bdc042deffd84,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 363.98
+      value: 391.4
       objectReference: {fileID: 0}
     - target: {fileID: 8971001318520441939, guid: 6a6304c9f93bb1146a3bdc042deffd84,
         type: 3}
@@ -22333,7 +22333,7 @@ PrefabInstance:
     - target: {fileID: 8971001318520441939, guid: 6a6304c9f93bb1146a3bdc042deffd84,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 118.14
+      value: 134.8
       objectReference: {fileID: 0}
     - target: {fileID: 8971001318520441939, guid: 6a6304c9f93bb1146a3bdc042deffd84,
         type: 3}
@@ -32124,6 +32124,8 @@ MonoBehaviour:
   m_AtelierType: 3
   animator: {fileID: 870934964}
   target: {fileID: 1339859502}
+  dollyTrack: {fileID: 0}
+  player: {fileID: 0}
 --- !u!95 &870934964
 Animator:
   serializedVersion: 3
@@ -35270,7 +35272,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 938104405}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -165.05, y: 0.66, z: -149.34}
+  m_LocalPosition: {x: 115.88858, y: 13.6, z: 251.1813}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 641609027}
@@ -35295,21 +35297,21 @@ MonoBehaviour:
     width: 0.2
   m_Looped: 0
   m_Waypoints:
-  - position: {x: -18.55571, y: 13.871155, z: 8.635681}
-    roll: 0
-  - position: {x: -18.369034, y: 11.307817, z: -8.297379}
-    roll: 0
-  - position: {x: -3.3925476, y: 6.7453613, z: -18.729568}
-    roll: 0
-  - position: {x: 10.512619, y: 6.755913, z: -16.743073}
-    roll: 0
-  - position: {x: 27.35875, y: 5.6726856, z: -0.65275574}
-    roll: 0
-  - position: {x: 39.54985, y: 8.152746, z: 21.89383}
+  - position: {x: 20.24086, y: 1.7199612, z: 47.29828}
     roll: 0
   - position: {x: 39.525528, y: 5.56925, z: 40.282867}
     roll: 0
-  - position: {x: 20.24086, y: 1.7199612, z: 47.29828}
+  - position: {x: 39.54985, y: 8.152746, z: 21.89383}
+    roll: 0
+  - position: {x: 27.35875, y: 5.6726856, z: -0.65275574}
+    roll: 0
+  - position: {x: 10.512619, y: 6.755913, z: -16.743073}
+    roll: 0
+  - position: {x: -3.3925476, y: 6.7453613, z: -18.729568}
+    roll: 0
+  - position: {x: -18.369034, y: 11.307817, z: -8.297379}
+    roll: 0
+  - position: {x: -18.55571, y: 13.871155, z: 8.635681}
     roll: 0
 --- !u!1001 &944195600
 PrefabInstance:
@@ -38357,6 +38359,8 @@ MonoBehaviour:
   m_AtelierType: 0
   animator: {fileID: 989278549}
   target: {fileID: 0}
+  dollyTrack: {fileID: 0}
+  player: {fileID: 0}
 --- !u!154 &992289772
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -46677,6 +46681,8 @@ MonoBehaviour:
   m_AtelierType: 2
   animator: {fileID: 1198254521}
   target: {fileID: 1616769205}
+  dollyTrack: {fileID: 0}
+  player: {fileID: 0}
 --- !u!95 &1198254521
 Animator:
   serializedVersion: 3
@@ -55993,7 +55999,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1489368824}
   m_LocalRotation: {x: 0.11354334, y: 0.49648777, z: -0.065696955, w: 0.8580745}
-  m_LocalPosition: {x: -171.73857, y: 16.730001, z: -139.0213}
+  m_LocalPosition: {x: 109.2, y: 16.730001, z: 261.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 736451209}
@@ -56015,6 +56021,8 @@ MonoBehaviour:
   m_AtelierType: 1
   animator: {fileID: 1489368827}
   target: {fileID: 1616769205}
+  dollyTrack: {fileID: 938104405}
+  player: {fileID: 0}
 --- !u!95 &1489368827
 Animator:
   serializedVersion: 3
@@ -62018,7 +62026,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1616769205}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -166.62, y: 8.44, z: -146.99}
+  m_LocalPosition: {x: 114.31859, y: 8.44, z: 253.53131}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 641609027}

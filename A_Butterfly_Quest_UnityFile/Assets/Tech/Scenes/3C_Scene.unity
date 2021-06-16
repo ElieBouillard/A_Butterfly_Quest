@@ -265,7 +265,7 @@ MonoBehaviour:
   DashCouldown: 2.75
   DashIllusionCouldown: 4
   clockDash: 0
-  clocksCanDash: []
+  clockCanDash: 0
   dashDebug: 1
   IllusionMeshItem: {fileID: 1114170077}
   NetCollider: {fileID: 723322828}
@@ -292,7 +292,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &9289140
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -333,6 +333,7 @@ MonoBehaviour:
   canShoot: 1
   isAimAssist: 0
   AimTargetTransform: {fileID: 0}
+  forceNoAim: 0
 --- !u!114 &9289142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1337,7 +1338,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195822808}
-  m_LocalRotation: {x: 0.23946877, y: 0.74051917, z: -0.18421923, w: 0.6002911}
+  m_LocalRotation: {x: 0.23946878, y: 0.7405191, z: -0.18421924, w: 0.60029113}
   m_LocalPosition: {x: 266.59296, y: -14.515022, z: -94.965515}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

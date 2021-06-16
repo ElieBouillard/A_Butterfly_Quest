@@ -17,13 +17,16 @@ public class CameraCinematique : MonoBehaviour
     public AtelierType m_AtelierType;
 
     public Animator animator;
-    bool isAnimationFinished = false;
     public GameObject target;
-
-    private bool canUnfreeze;
-
     public GameObject dollyTrack;
-    public GameObject player;
+
+    public float blackScreenDuration = 1f;
+
+    bool isAnimationFinished = false;
+    private bool canUnfreeze;
+    private float blackScreenClock;
+    private GameObject blackScreenObj;
+    private bool blackScreenCheck;
 
     private void Awake()
     {
@@ -32,11 +35,14 @@ public class CameraCinematique : MonoBehaviour
     }
     private void Start()
     {
-        Shoot.Instance.forceNoAim = true;
-        dollyTrack.gameObject.GetComponent<CinemachineSmoothPath>().m_Waypoints[0].position = Camera.main.transform.position - dollyTrack.transform.position;
+        blackScreenObj = UIManager.instance.BlackScreenDeath.gameObject;
 
+        Shoot.Instance.forceNoAim = true;
         Character3D.m_instance.ForceFreeze = true;
         canUnfreeze = true;
+
+        dollyTrack.gameObject.GetComponent<CinemachineSmoothPath>().m_Waypoints[0].position = Camera.main.transform.position - dollyTrack.transform.position;
+
 
         if (m_AtelierType == AtelierType.Tempête)
         {
@@ -59,12 +65,28 @@ public class CameraCinematique : MonoBehaviour
             target.SetActive(false);
             if (canUnfreeze)
             {
-                Character3D.m_instance.ForceFreeze = false;
-                Character3D.m_instance.FreezePosPlayer(2f, true, true);
+                blackScreenObj.GetComponent<Animator>().speed = 3f;
+                blackScreenObj.GetComponent<Animator>().SetBool("Opace", true);
+                blackScreenCheck = true;
+                blackScreenClock = blackScreenDuration;
                 canUnfreeze = false;
-                Shoot.Instance.forceNoAim = false;
             }
-
         }
+
+        if (blackScreenCheck)
+        {
+            if (blackScreenClock > 0)
+            {
+                blackScreenClock -= Time.deltaTime;
+            }
+            else
+            {
+                blackScreenObj.GetComponent<Animator>().speed = 1f;
+                blackScreenObj.GetComponent<Animator>().SetBool("Opace", false);
+                Shoot.Instance.forceNoAim = false;
+                Character3D.m_instance.ForceFreeze = false;
+                blackScreenCheck = false;
+            }
+        }        
     }  
 }

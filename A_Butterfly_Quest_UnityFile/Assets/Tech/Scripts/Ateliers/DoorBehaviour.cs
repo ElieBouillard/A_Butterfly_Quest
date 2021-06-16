@@ -150,7 +150,7 @@ public class DoorBehaviour : MonoBehaviour
     {
         if((player.transform.position - transform.position).magnitude < DetectionPlayerRange)
         {
-            if(Input.GetAxisRaw("GiveKey") == 1 || Input.GetKeyDown("t"))
+            if(Input.GetKeyDown(KeyCode.Joystick1Button3) || Input.GetKeyDown("t"))
             {
                 if (KeyInventory.instance.GetKeyCount() >= KeyNeeded)
                 {

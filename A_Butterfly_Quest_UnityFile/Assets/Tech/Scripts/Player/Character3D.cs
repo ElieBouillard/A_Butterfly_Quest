@@ -56,6 +56,7 @@ public class Character3D : MonoBehaviour
     public float DashDuration = 1f;
     public float DashCouldown = 2f;
     public float DashIllusionCouldown = 4f;
+    private float currDashCD;
     private float m_DashSpeed = 0f;
     [HideInInspector]
     public float clockDash = 0f;
@@ -323,10 +324,12 @@ public class Character3D : MonoBehaviour
         if (DashType != 1)
         {
             clockCanDash = DashCouldown;
+            currDashCD = DashCouldown;
         }
         else
         {
             clockCanDash = DashIllusionCouldown;
+            currDashCD = DashIllusionCouldown;
             dashIsIllusion = true;
             IllusionMeshItem.transform.position = transform.position + Vector3.up * 0.3f;
             IllusionMeshItem.transform.rotation = AnimationManager.m_instance.gameObject.transform.rotation;
@@ -375,7 +378,6 @@ public class Character3D : MonoBehaviour
         }
     }
 
-    bool checkDash;
     public void DashHudUpdate()
     {
         if(ButterflyInventory.Instance.ButterflyInInventory[m_butterflyTypeSelectionIndex].Count == 0 || CanDash == false)
@@ -389,15 +391,7 @@ public class Character3D : MonoBehaviour
 
         UIManager.instance.DashCd.color = UIManager.instance.DashColors[m_butterflyTypeSelectionIndex];
 
-        if(m_butterflyTypeSelectionIndex == 1)
-        {
-            UIManager.instance.DashCd.fillAmount = clockCanDash / DashIllusionCouldown;
-            checkDash = false;
-        }
-        else
-        {
-            UIManager.instance.DashCd.fillAmount = clockCanDash / DashCouldown;
-        }
+        UIManager.instance.DashCd.fillAmount = clockCanDash / currDashCD;
     }
 
     public bool GetCanDash()

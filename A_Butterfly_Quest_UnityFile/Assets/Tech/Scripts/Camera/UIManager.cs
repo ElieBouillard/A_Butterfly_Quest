@@ -44,6 +44,7 @@ public class UIManager : MonoBehaviour
 
     [Header("DeathHud")]
     public Image BlackScreenDeath;
+    public GameObject HitScreen;
 
     private void Awake()
     {
@@ -103,6 +104,7 @@ public class UIManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
         }
 
+        HitScreenUpdate();
     }
 
     public Vector2 GetFreeLookSensi()
@@ -117,14 +119,12 @@ public class UIManager : MonoBehaviour
     {
         Crosshair.SetActive(value);
     }
-
     public void StartPauseMenu()
     {
         PauseMenuHUD.SetActive(true);
         AnimationManager.m_instance.canPlayStepSound = false;
         freezePlayer = true;
     }
-
     public void Resume()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -132,6 +132,25 @@ public class UIManager : MonoBehaviour
         freezePlayer = false;
         Character3D.m_instance.FreezePosPlayer(0.3f, true, true);
         PauseMenuHUD.SetActive(false);
+    }
+
+    float hitScreenClock;
+    public void TrigerHitScreen()
+    {
+        hitScreenClock = 0.1f;
+    }
+
+    public void HitScreenUpdate()
+    {
+        if(hitScreenClock > 0)
+        {
+            hitScreenClock -= Time.deltaTime;
+            HitScreen.SetActive(true);
+        }
+        else
+        {
+            HitScreen.SetActive(false);
+        }
     }
 
 }

@@ -25,6 +25,9 @@ public class EnemyAiV3 : MonoBehaviour
     [Header("ChasingParametres")]
     public float ChasingSpeed;
 
+    [Header("AttackParametres")]
+    public Collider HitCollider;
+
     [Header("Debug")]
     public bool ShowDebugRay;
 
@@ -51,6 +54,9 @@ public class EnemyAiV3 : MonoBehaviour
         started = true;
         targetPosPatroling = null;
         initialPos = transform.position;
+
+        //Attack
+        HitCollider.enabled = false;
     }
 
     private void Update()
@@ -201,20 +207,32 @@ public class EnemyAiV3 : MonoBehaviour
     {
         if (!inAttack)
         {
+           
             m_Animator.SetTrigger("Attack");
             inAttack = true;
             AttackingClock = 2f;
+
         }
         else
         {
             if(AttackingClock > 0)
             {
                 AttackingClock -= Time.deltaTime;
+                gameObject.transform.LookAt(new Vector3(TargetObj.transform.position.x, transform.position.y, TargetObj.transform.position.z));
             }
             else
             {
                 inAttack = false;
             }
+        }
+
+        if (AttackingClock < 1.3f && AttackingClock > 0.7f)
+        {
+            HitCollider.enabled = true;
+        }
+        else
+        {
+            HitCollider.enabled = false;
         }
 
         //AnimSystem

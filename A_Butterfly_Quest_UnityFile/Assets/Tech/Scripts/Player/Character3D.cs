@@ -375,6 +375,7 @@ public class Character3D : MonoBehaviour
         }
     }
 
+    bool checkDash;
     public void DashHudUpdate()
     {
         if(ButterflyInventory.Instance.ButterflyInInventory[m_butterflyTypeSelectionIndex].Count == 0 || CanDash == false)
@@ -388,9 +389,10 @@ public class Character3D : MonoBehaviour
 
         UIManager.instance.DashCd.color = UIManager.instance.DashColors[m_butterflyTypeSelectionIndex];
 
-        if(clockCanDash > DashCouldown)
+        if(m_butterflyTypeSelectionIndex == 1)
         {
             UIManager.instance.DashCd.fillAmount = clockCanDash / DashIllusionCouldown;
+            checkDash = false;
         }
         else
         {

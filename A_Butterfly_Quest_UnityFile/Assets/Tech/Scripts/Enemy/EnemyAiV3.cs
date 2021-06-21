@@ -203,7 +203,7 @@ public class EnemyAiV3 : MonoBehaviour
         {
             m_Animator.SetTrigger("Attack");
             inAttack = true;
-            AttackingClock = 1f;
+            AttackingClock = 2f;
         }
         else
         {

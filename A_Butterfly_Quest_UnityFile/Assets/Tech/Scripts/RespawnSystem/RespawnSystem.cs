@@ -25,7 +25,8 @@ public class RespawnSystem : MonoBehaviour
     private int deathCount;
 
     private bool isDead;
-    private bool isAlive;
+    [HideInInspector]
+    public bool isAlive;
 
     private void Awake()
     {
@@ -57,6 +58,7 @@ public class RespawnSystem : MonoBehaviour
             AnimationManager.m_instance.isAlive = false;
             AudioManager.instance.Play("Death");
             isAlive = false;
+            Character3D.m_instance.ForceFreeze = true;
         }
     }
 
@@ -108,6 +110,7 @@ public class RespawnSystem : MonoBehaviour
         AnimationManager.m_instance.isAlive = true;
         AnimationManager.m_instance.canPlayStepSound = true;
         isAlive = true;
+        Character3D.m_instance.ForceFreeze = false;
     }
 
     public void AsignRespawnCoor(Vector3 m_coord)

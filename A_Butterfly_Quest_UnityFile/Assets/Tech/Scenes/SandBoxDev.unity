@@ -1180,25 +1180,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1056029080}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1084898033 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8826446479538386425, guid: 9b215aa75a3325748b51b644ff6c3129,
-    type: 3}
-  m_PrefabInstance: {fileID: 2016499040627244132}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1084898036
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1084898033}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.3620866, y: 0.25830504, z: 0.31185976}
-  m_Center: {x: -0.037137967, y: 0.023901861, z: -0.13549162}
 --- !u!1 &1096048239
 GameObject:
   m_ObjectHideFlags: 0
@@ -1233,6 +1214,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1098924665 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1749576381226069157, guid: 9b215aa75a3325748b51b644ff6c3129,
+    type: 3}
+  m_PrefabInstance: {fileID: 2016499040627244132}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1098924667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098924665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a37eb2ef391a8234b905ecefa26c6449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &1098924668
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098924665}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3, y: 0.3, z: 0.3}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1229208209
 GameObject:
   m_ObjectHideFlags: 0
@@ -2438,6 +2450,7 @@ GameObject:
   - component: {fileID: 1674603352588448671}
   - component: {fileID: 1674603352588448657}
   - component: {fileID: 2016499041885856733}
+  - component: {fileID: 1674603352588448660}
   m_Layer: 11
   m_Name: Monster
   m_TagString: Enemy
@@ -2463,7 +2476,21 @@ MonoBehaviour:
   AttackingRange: 2
   PatrolingSpeed: 2
   ChasingSpeed: 5.7
+  HitCollider: {fileID: 1098924668}
   ShowDebugRay: 0
+--- !u!65 &1674603352588448660
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674603352588448658}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3917656, y: 0.9291999, z: 0.86586636}
+  m_Center: {x: 0.0048274994, y: 0.47628945, z: -0.038104378}
 --- !u!195 &1674603352588448671
 NavMeshAgent:
   m_ObjectHideFlags: 0

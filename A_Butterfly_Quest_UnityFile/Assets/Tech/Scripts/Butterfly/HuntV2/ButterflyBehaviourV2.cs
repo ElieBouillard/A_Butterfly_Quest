@@ -69,10 +69,6 @@ public class ButterflyBehaviourV2 : MonoBehaviour
         recoveryClock = 1f;
         inRecovery = true;
     }
-    public void GoToCluster()
-    {
-
-    }
 
     float clockChangeTargetPos;
     private void Update()

@@ -192,7 +192,7 @@ Material:
     - _EnableFogOnTransparent: 0
     - _EnableGeometricSpecularAA: 0
     - _EnergyConservingSpecularColor: 1
-    - _Erosion: 0
+    - _Erosion: 1
     - _Flow: 0
     - _Glow: 1.94
     - _HeightAmplitude: 0.02

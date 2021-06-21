@@ -14,6 +14,8 @@ public class SuccessItem : MonoBehaviour
 
     private bool _allReadyGived;
     private bool canPlayMusic;
+
+    public GameObject keyCatchVFX;
     private void Start()
     {
         PlayerMask = LayerMask.GetMask("Player");
@@ -33,6 +35,11 @@ public class SuccessItem : MonoBehaviour
                 AudioManager.instance.Play("Key");
                 KeyInventory.instance.AddKeyToInvetory();
                 mode.SetActive(false);
+                if(keyCatchVFX != null)
+                {
+                    Instantiate(keyCatchVFX, transform.GetChild(0).GetChild(0).position, Quaternion.identity);  //SPAGHETTI
+                }
+                
                 _allReadyGived = true;
             }
         }

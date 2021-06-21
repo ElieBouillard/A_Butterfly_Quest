@@ -56,6 +56,7 @@ public class Character3D : MonoBehaviour
     public float DashDuration = 1f;
     public float DashCouldown = 2f;
     public float DashIllusionCouldown = 4f;
+    private float currDashCD;
     private float m_DashSpeed = 0f;
     [HideInInspector]
     public float clockDash = 0f;
@@ -70,6 +71,8 @@ public class Character3D : MonoBehaviour
 
     [Header("Hunt")]
     public GameObject NetCollider;
+    public GameObject NetVisualbox;
+    private Renderer CatchVisualisationRenderer;
 
     [Header("KnockBack")]
     public bool inKnockBack;
@@ -106,6 +109,11 @@ public class Character3D : MonoBehaviour
         _detectionDistanceGround = DetectionDistanceGround;
         IllusionMeshItem.SetActive(false);
         Physics.IgnoreCollision(GetComponent<Collider>(), IllusionMeshItem.GetComponent<Collider>(), true);
+
+        //NetVisualCollider
+        CatchVisualisationRenderer = NetVisualbox.GetComponent<Renderer>();
+        NetVisualbox.SetActive(false);
+
     }
     bool checkStepSound = false;
     void Update()
@@ -224,6 +232,7 @@ public class Character3D : MonoBehaviour
         KnockBackUpdate();
         StairMovementUpdate();
         HuntNetHitUpdate();
+        NetVisualBoxColliderUptade();
     }
 
     void FixedUpdate()
@@ -323,10 +332,12 @@ public class Character3D : MonoBehaviour
         if (DashType != 1)
         {
             clockCanDash = DashCouldown;
+            currDashCD = DashCouldown;
         }
         else
         {
             clockCanDash = DashIllusionCouldown;
+            currDashCD = DashIllusionCouldown;
             dashIsIllusion = true;
             IllusionMeshItem.transform.position = transform.position + Vector3.up * 0.3f;
             IllusionMeshItem.transform.rotation = AnimationManager.m_instance.gameObject.transform.rotation;
@@ -375,7 +386,6 @@ public class Character3D : MonoBehaviour
         }
     }
 
-    bool checkDash;
     public void DashHudUpdate()
     {
         if(ButterflyInventory.Instance.ButterflyInInventory[m_butterflyTypeSelectionIndex].Count == 0 || CanDash == false)
@@ -389,15 +399,7 @@ public class Character3D : MonoBehaviour
 
         UIManager.instance.DashCd.color = UIManager.instance.DashColors[m_butterflyTypeSelectionIndex];
 
-        if(m_butterflyTypeSelectionIndex == 1)
-        {
-            UIManager.instance.DashCd.fillAmount = clockCanDash / DashIllusionCouldown;
-            checkDash = false;
-        }
-        else
-        {
-            UIManager.instance.DashCd.fillAmount = clockCanDash / DashCouldown;
-        }
+        UIManager.instance.DashCd.fillAmount = clockCanDash / currDashCD;
     }
 
     public bool GetCanDash()
@@ -410,9 +412,42 @@ public class Character3D : MonoBehaviour
     private bool canClockAfterNetHit = false;
 
     private float clockNetHitCd;
+
+    private bool checkDrawHitbox;
     private void HuntNetHitUpdate()
     {
         //Chasse Coup de Filet
+        if (!Shoot.Instance.Aiming)
+        {
+            if (Input.GetAxis("Fire1") > 0.7f && checkDrawHitbox == false)
+            {
+                checkDrawHitbox = true;
+                ShowNetVisualBoxCollider(true);
+            }
+            else if (Input.GetAxisRaw("Fire1") == 0f && checkDrawHitbox == true)
+            {
+                checkDrawHitbox = false;
+                ShowNetVisualBoxCollider(false);
+
+                clockBeforeNetHit = 0.3f;
+                canClockAfterNetHit = true;
+                clockNetHitCd = 1f;
+
+                m_animManager.netTrigger = true;
+                VFXManager.m_instance.ShowNet(true);
+                AudioManager.instance.Play("Net");
+            }
+        }
+        else
+        {
+            if(checkDrawHitbox == true)
+            {
+                checkDrawHitbox = false;
+                ShowNetVisualBoxCollider(false);
+            }
+        }
+
+
         if (Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKeyDown("f") && !Shoot.Instance.Aiming && clockNetHitCd <= 0)
         {
             clockBeforeNetHit = 0.3f;
@@ -422,7 +457,6 @@ public class Character3D : MonoBehaviour
             m_animManager.netTrigger = true;
             VFXManager.m_instance.ShowNet(true);
             AudioManager.instance.Play("Net");
-
         }
 
         if (clockBeforeNetHit > 0)
@@ -457,6 +491,44 @@ public class Character3D : MonoBehaviour
         {
             clockNetHitCd -= Time.deltaTime;
         }
+    }
+
+    bool clockMeaning;
+    float clockShowVisualBox = 0f;
+    private void ShowNetVisualBoxCollider(bool value)
+    {
+        if (value)
+        {
+            clockMeaning = value;
+            clockShowVisualBox = 1f;
+        }
+        else
+        {
+            clockMeaning = value;
+            clockShowVisualBox = 0f;
+        }
+    }
+
+    private void NetVisualBoxColliderUptade()
+    {
+        if (clockMeaning)
+        {
+            if (clockShowVisualBox > 0)
+            {
+                clockShowVisualBox -= Time.deltaTime;
+                NetVisualbox.SetActive(true);
+            }
+
+        }
+        else
+        {
+            if (clockShowVisualBox < 1)
+            {
+                clockShowVisualBox += Time.deltaTime;
+                NetVisualbox.SetActive(false);
+            }
+        }
+        //CatchVisualisationRenderer.material.SetFloat("_erosion", clockShowVisualBox);
     }
 
     public void InitKnockBack()

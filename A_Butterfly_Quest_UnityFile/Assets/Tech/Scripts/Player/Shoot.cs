@@ -39,6 +39,7 @@ public class Shoot : MonoBehaviour
     [HideInInspector]
     public RaycastHit AimAssitHit;
     public Transform AimTargetTransform;
+    public bool forceNoAim;
 
 
     private void Awake()
@@ -56,31 +57,40 @@ public class Shoot : MonoBehaviour
 
     private void Update()
     {
-        //Aim
-        if (Input.GetAxis("Aim") > 0)
+        if (forceNoAim == false)
         {
-            Aiming = true;
-            CamAnimator.SetBool("AimCamera", true);
 
-            AnimationManager.m_instance.playerFocused = true; //Anim
-            canResetFreeLookCam = true;
-            VFXManager.m_instance.StartAiming(); // VFX
-        }
-        //No Aim
-        else if (Input.GetAxis("Aim") <= 0)
-        {
-            isAimAssist = false;
-            if (canResetFreeLookCam)
+            //Aim
+            if (Input.GetAxis("Aim") > 0)
             {
-                ResetFreeLookCamPos();
-                canResetFreeLookCam = false;
+                Aiming = true;
+                CamAnimator.SetBool("AimCamera", true);
+
+                AnimationManager.m_instance.playerFocused = true; //Anim
+                canResetFreeLookCam = true;
+                VFXManager.m_instance.StartAiming(); // VFX
             }
-            ResetAimCamPos();
-            Aiming = false;
-            CamAnimator.SetBool("AimCamera", false);
-            AnimationManager.m_instance.playerFocused = false; //Anim
-            VFXManager.m_instance.StopAiming(); // VFX
+            //No Aim
+            else if (Input.GetAxis("Aim") <= 0)
+            {
+                isAimAssist = false;
+                if (canResetFreeLookCam)
+                {
+                    ResetFreeLookCamPos();
+                    canResetFreeLookCam = false;
+                }
+                ResetAimCamPos();
+                Aiming = false;
+                CamAnimator.SetBool("AimCamera", false);
+                AnimationManager.m_instance.playerFocused = false; //Anim
+                VFXManager.m_instance.StopAiming(); // VFX
+            }
         }
+        else
+        {
+            Aiming = false;
+        }
+        
 
         //Shoot Papillons normaux
         if (Aiming)
@@ -89,11 +99,11 @@ public class Shoot : MonoBehaviour
             AimAssitReceptacle();
         }
 
-        //Reload
-        if (Input.GetButtonDown("Reload"))
-        {
-            ButterflyInventory.Instance.StartReload();
-        }
+        ////Reload
+        //if (Input.GetButtonDown("Reload"))
+        //{
+        //    ButterflyInventory.Instance.StartReload();
+        //}
     }
 
     private void ShootButterfly(int ButterflyType)
@@ -101,14 +111,15 @@ public class Shoot : MonoBehaviour
         bool hitSomething = false;
         ButterflyBehaviourV2 currButterlfy;
         currButterlfy = ButterflyInventory.Instance.GetFirstButterfly(ButterflyType);
-        ButterflyInventory.Instance.ShootedButterfly(currButterlfy);
 
         //Si touche un mesh alors prend les coordonees en direction
-        if (Physics.Raycast(Camera.main.transform.position + Camera.main.transform.forward * 5f, Camera.main.transform.forward, out ShootInfo, Range, IgnoreMask))
+        if (Physics.Raycast(Camera.main.transform.position + Camera.main.transform.forward * 3f, Camera.main.transform.forward, out ShootInfo, Range, IgnoreMask))
         {
-            Debug.DrawRay(Camera.main.transform.position + Camera.main.transform.forward * 5f, Camera.main.transform.forward * Range, Color.red, 5f);
+            Debug.DrawRay(Camera.main.transform.position + Camera.main.transform.forward * 3f, Camera.main.transform.forward * Range, Color.red, 5f);
             HitPos = ShootInfo.point;
             Debug.DrawRay(HitPos, Vector3.up * 5f, Color.red, 5f);
+
+            ButterflyInventory.Instance.ShootedButterfly(currButterlfy, HitPos);
 
             if (ShootInfo.transform.gameObject.GetComponent<HealthSystem>())
             {
@@ -134,28 +145,28 @@ public class Shoot : MonoBehaviour
                 }
                 else
                 {
-                    ButterflyInventory.Instance.AddToReloadList(currButterlfy);
+                    ButterflyInventory.Instance.SetButterflyToRecovery(currButterlfy);
                 }
             }
             else
             {
-                ButterflyInventory.Instance.AddToReloadList(currButterlfy);
+                ButterflyInventory.Instance.SetButterflyToRecovery(currButterlfy);
             }
 
             hitSomething = (ShootInfo.transform.gameObject.GetComponent<RonceBehaviour>() || ShootInfo.transform.gameObject.GetComponent<HealthSystem>());
         }
         else
         {
-            Ray shootRay = new Ray(Camera.main.transform.position + Camera.main.transform.forward * 5f, Camera.main.transform.forward * Range);
-            Debug.DrawRay(Camera.main.transform.position + Camera.main.transform.forward * 5f, Camera.main.transform.forward * Range, Color.blue, 5f);
+            Ray shootRay = new Ray(Camera.main.transform.position + Camera.main.transform.forward * 3f, Camera.main.transform.forward * Range);
+            Debug.DrawRay(Camera.main.transform.position + Camera.main.transform.forward * 3f, Camera.main.transform.forward * Range, Color.blue, 5f);
             HitPos = shootRay.GetPoint(Range);
             Debug.DrawRay(HitPos, Vector3.up * 5f, Color.blue, 5f);
-            ButterflyInventory.Instance.AddToReloadList(currButterlfy);
+            ButterflyInventory.Instance.ShootedButterfly(currButterlfy, HitPos);
+            ButterflyInventory.Instance.SetButterflyToRecovery(currButterlfy);
         }
 
-
         //VFX
-        
+
         VFXManager.m_instance.SpawnShootVFX(HitPos,hitSomething);
 
         SimpleCameraShakeInCinemachine.m_instance.StartShake();
@@ -168,7 +179,6 @@ public class Shoot : MonoBehaviour
         {
             if (Input.GetAxisRaw("Fire1") == 1 && canShoot)
             {
-
                 ShootButterfly(ButterflyTypeSelection.Instance.SelectionTypeValue);
                 AudioManager.instance.m_audioSource2.clip = AudioManager.instance.shootsSounds[ButterflyTypeSelection.Instance.SelectionTypeValue];
                 AudioManager.instance.m_audioSource2.Play();

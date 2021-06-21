@@ -7,12 +7,11 @@ public class MovingCube : MonoBehaviour
     public float mooveClock;
     private Vector3 rayPos;
 
-
     [Header("Parametres Raycast")]
     [Range(-1.5f, 1.5f)]
     public float OffsetY;
-    public enum Direction { Front, Left, Back, Right };
-    public Direction RayDir;
+    [Range(0f, 10f)]
+    public float RangeCantMove;
 
     public bool CollideWithPlayer;
     private Vector3 dir;
@@ -45,7 +44,7 @@ public class MovingCube : MonoBehaviour
 
         if (CollideWithPlayer)
         {            
-            bool raycast = Physics.Raycast(rayPos, dir, 2.99f);
+            bool raycast = Physics.Raycast(rayPos, dir, RangeCantMove);
             if (Character3D .m_instance.clockDash > 0 && canMoove && !raycast && dir == transform.forward && ButterflyTypeSelection.Instance.SelectionTypeValue == 2)
             {
                 target = new Vector3(transform.position.x, transform.position.y, transform.position.z) + dir * 3f;
@@ -77,21 +76,6 @@ public class MovingCube : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Vector3 rayPosTemp = new Vector3(transform.position.x, transform.position.y + OffsetY, transform.position.z);
-        if (RayDir == Direction.Front)
-        {
-            Gizmos.DrawRay(rayPosTemp, transform.forward * 4.49f);
-        }
-        else if (RayDir == Direction.Left)
-        {
-            Gizmos.DrawRay(rayPosTemp, -transform.right * 4.49f);
-        }
-        else if (RayDir == Direction.Back)
-        {
-            Gizmos.DrawRay(rayPosTemp, -transform.forward * 4.49f);
-        }
-        else if (RayDir == Direction.Right)
-        {
-            Gizmos.DrawRay(rayPosTemp, transform.right * 4.49f);
-        }
+        Gizmos.DrawRay(rayPosTemp, transform.forward * RangeCantMove);
     }
 }

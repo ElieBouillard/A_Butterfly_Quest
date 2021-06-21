@@ -42,8 +42,8 @@ public class Character3D : MonoBehaviour
     public float maxSpeed = 20;
     public float ClampVelocityY;
     private float currentSpeed = 0;
-    [HideInInspector]
     public bool FreezeInput = false;
+    public bool ForceFreeze = false;
     private float freezeClock;
     [HideInInspector]
     public bool forceNoJump;
@@ -60,9 +60,9 @@ public class Character3D : MonoBehaviour
     [HideInInspector]
     public float clockDash = 0f;
     [HideInInspector]
-    public float[] clocksCanDash;
-    private bool[] CanDash;
-    private float clockHud;
+    public float clockCanDash;
+    private bool CanDash;
+    private bool dashIsIllusion;
     public bool dashDebug;
     private int m_butterflyTypeSelectionIndex;
     public GameObject IllusionMeshItem;
@@ -103,8 +103,6 @@ public class Character3D : MonoBehaviour
     private void Start()
     {
         m_animManager = AnimationManager.m_instance;
-        clocksCanDash = new float[3];
-        CanDash = new bool[3];
         _detectionDistanceGround = DetectionDistanceGround;
         IllusionMeshItem.SetActive(false);
         Physics.IgnoreCollision(GetComponent<Collider>(), IllusionMeshItem.GetComponent<Collider>(), true);
@@ -115,7 +113,7 @@ public class Character3D : MonoBehaviour
         grounded = IsGrounded();
 
         //Inputs
-        if (FreezeInput == false)
+        if (FreezeInput == false && ForceFreeze == false)
         {
             horizontalInput = Input.GetAxis("Horizontal");
             verticalInput = Input.GetAxis("Vertical");         
@@ -310,7 +308,7 @@ public class Character3D : MonoBehaviour
         ButterflyBehaviourV2 currButterfly;
         currButterfly = ButterflyInventory.Instance.GetFirstButterfly(DashType);
         ButterflyInventory.Instance.ShootedButterfly(currButterfly);
-        ButterflyInventory.Instance.AddToReloadList(currButterfly);
+        ButterflyInventory.Instance.SetButterflyToRecovery(currButterfly);
         FreezePosPlayer(DashDuration, true, true);
         AnimationManager.m_instance.dashTrigger = true;
         AnimationManager.m_instance.canPlayStepSound = false;
@@ -321,14 +319,15 @@ public class Character3D : MonoBehaviour
         DashDir = PlayerMesh.transform.forward;
         clockDash = DashDuration;
         m_DashSpeed = DashSpeed;
-        CanDash[DashType] = false;
+        CanDash = false;
         if (DashType != 1)
         {
-            clocksCanDash[DashType] = DashCouldown;
+            clockCanDash = DashCouldown;
         }
         else
         {
-            clocksCanDash[DashType] = DashIllusionCouldown;
+            clockCanDash = DashIllusionCouldown;
+            dashIsIllusion = true;
             IllusionMeshItem.transform.position = transform.position + Vector3.up * 0.3f;
             IllusionMeshItem.transform.rotation = AnimationManager.m_instance.gameObject.transform.rotation;
             IllusionMeshItem.SetActive(true);
@@ -339,7 +338,7 @@ public class Character3D : MonoBehaviour
     {
         m_butterflyTypeSelectionIndex = ButterflyTypeSelection.Instance.SelectionTypeValue;
 
-        if ((Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKeyDown("left shift")) && CanDash[m_butterflyTypeSelectionIndex] && ButterflyInventory.Instance.ButterflyInInventory[m_butterflyTypeSelectionIndex].Count > 0)
+        if ((Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKeyDown("left shift")) && CanDash && ButterflyInventory.Instance.ButterflyInInventory[m_butterflyTypeSelectionIndex].Count > 0)
         {
             InitDash(m_butterflyTypeSelectionIndex);
         }
@@ -362,27 +361,23 @@ public class Character3D : MonoBehaviour
         }
 
         //DashCouldownDuration
-        for (int i = 0; i < clocksCanDash.Length; i++)
+        if (clockCanDash > 0)
         {
-            if(clocksCanDash[i] > 0)
+            clockCanDash -= Time.deltaTime;
+        }
+        else
+        {
+            CanDash = true;
+            if (dashIsIllusion)
             {
-                clocksCanDash[i] -= Time.deltaTime;
-            }
-            else
-            {
-                CanDash[i] = true;
-                if (i == 1)
-                {
-                    IllusionMeshItem.SetActive(false);
-                }
+                IllusionMeshItem.SetActive(false);
             }
         }
     }
 
     public void DashHudUpdate()
     {
-        clockHud = clocksCanDash[m_butterflyTypeSelectionIndex];
-        if(ButterflyInventory.Instance.ButterflyInInventory[m_butterflyTypeSelectionIndex].Count == 0 || CanDash[m_butterflyTypeSelectionIndex] == false)
+        if(ButterflyInventory.Instance.ButterflyInInventory[m_butterflyTypeSelectionIndex].Count == 0 || CanDash == false)
         {
             UIManager.instance.DashSprite.color = UIManager.instance.DashColors[3];
         }
@@ -393,20 +388,19 @@ public class Character3D : MonoBehaviour
 
         UIManager.instance.DashCd.color = UIManager.instance.DashColors[m_butterflyTypeSelectionIndex];
 
-        if(m_butterflyTypeSelectionIndex != 1)
+        if(clockCanDash > DashCouldown)
         {
-            UIManager.instance.DashCd.fillAmount =  clockHud / DashCouldown;
+            UIManager.instance.DashCd.fillAmount = clockCanDash / DashIllusionCouldown;
         }
         else
         {
-            UIManager.instance.DashCd.fillAmount =  clockHud / DashIllusionCouldown;
+            UIManager.instance.DashCd.fillAmount = clockCanDash / DashCouldown;
         }
-
     }
 
-    public bool GetCanDash(int value)
+    public bool GetCanDash()
     {
-        return CanDash[value];
+        return CanDash;
     }
 
     private float clockBeforeNetHit;

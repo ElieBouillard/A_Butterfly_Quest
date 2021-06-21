@@ -11,13 +11,7 @@ public class ButterflyInventory : MonoBehaviour
     public int ButterflyInInventoryValue;
     public int ButterflyIllusionInInventoryValue;
     public int ButterflyTempeteInInventoryValue;
-    public int ButterflyInTravelValue;
-    public int ButterflyToReloadValue;
-
     public List<List<ButterflyBehaviourV2>> ButterflyInInventory = new List<List<ButterflyBehaviourV2>>(3);
-
-    public List<ButterflyBehaviourV2> ButterflyInTravel = new List<ButterflyBehaviourV2>();
-    public List<ButterflyBehaviourV2> ButterflyToReload = new List<ButterflyBehaviourV2>();
 
     private float _clock;
     private bool _reloading = false;
@@ -61,15 +55,23 @@ public class ButterflyInventory : MonoBehaviour
         }
     }
 
+    public void ShootedButterfly(ButterflyBehaviourV2 currButterfly, Vector3 HitImpact)
+    {
+        ButterflyInInventory[(int)currButterfly.m_ButterflyType].Remove(currButterfly);
+        currButterfly.gameObject.SetActive(false);
+        currButterfly.gameObject.transform.position = HitImpact;
+    }
+
     public void ShootedButterfly(ButterflyBehaviourV2 currButterfly)
     {
         ButterflyInInventory[(int)currButterfly.m_ButterflyType].Remove(currButterfly);
         currButterfly.gameObject.SetActive(false);
     }
 
-    public void AddToReloadList(ButterflyBehaviourV2 currButterfly)
+    public void SetButterflyToRecovery(ButterflyBehaviourV2 currButterfly)
     {
-        ButterflyToReload.Add(currButterfly);
+        currButterfly.gameObject.SetActive(true);
+        currButterfly.SetToRecovery();
     }
 
     public bool ReceptacleGiveButterfly(int ButterflyType)
@@ -85,35 +87,6 @@ public class ButterflyInventory : MonoBehaviour
         }
     }
 
-    public void StartReload()
-    {
-        _reloading = true;
-        Debug.Log("Reloading...");
-        _clock = 1f;
-    }
-
-    public void Reload()
-    {
-        if (ButterflyToReload.Count > 0)
-        {
-            int reloadValue = ButterflyToReload.Count;
-            for (int i = 0; i < ButterflyToReload.Count; i++)
-            {
-                ButterflyInInventory[(int)ButterflyToReload[i].m_ButterflyType].Add(ButterflyToReload[i]);
-                ButterflyToReload[i].SetCatched();
-                ButterflyToReload[i].gameObject.SetActive(true);
-
-            }
-            ButterflyToReload.Clear();
-            Debug.Log("Reloading success with " + reloadValue + " butterfly !");
-        }
-        else
-        {
-            Debug.Log("No butterfly to reload !");
-        }
-        _reloading = false;
-    }
-
     public ButterflyBehaviourV2 GetFirstButterfly(int index)
     {
         return ButterflyInInventory[index][0];
@@ -127,9 +100,6 @@ public class ButterflyInventory : MonoBehaviour
         ButterflyInInventoryValue = ButterflyInInventory[0].Count;
         ButterflyIllusionInInventoryValue = ButterflyInInventory[1].Count;
         ButterflyTempeteInInventoryValue = ButterflyInInventory[2].Count;
-        ButterflyInTravelValue = ButterflyInTravel.Count;
-        ButterflyToReloadValue = ButterflyToReload.Count;
-
         
         //Deplacement Papillon Au Launcher
         if (Shoot.Instance.Aiming)
@@ -142,11 +112,9 @@ public class ButterflyInventory : MonoBehaviour
             }
             else
             {
-
                 SetButterflyToLauncherPos(ButterflyTypeSelection.Instance.SelectionTypeValue);
                 check = true;
             }
-
         }
         else
         {
@@ -154,17 +122,6 @@ public class ButterflyInventory : MonoBehaviour
             {
                 SetButterflyToPlayerCluster(ButterflyTypeSelection.Instance.SelectionTypeValue);
                 check = false;
-            }
-
-        }
-
-        //Clock reload
-        if (_reloading)
-        {
-            _clock -= Time.deltaTime;
-            if (_clock < 0)
-            {
-                Reload();
             }
         }
     }

@@ -47,6 +47,16 @@ public class ButterflyBehaviourV2 : MonoBehaviour
         randomMove = true;
         transform.SetParent(PlayerCluster.transform);
         gameObject.GetComponent<Collider>().enabled = false;
+
+        //addTrail
+        TrailRenderer m_trailRend;
+        if(transform.Find("FX").TryGetComponent<TrailRenderer>(out m_trailRend))
+        {
+            m_trailRend.enabled = true;
+            m_trailRend.startWidth = Random.Range(0.01f, 0.05f);
+            m_trailRend.time = Random.Range(0.1f, 1.5f);
+            transform.Find("FX").Find("Glow").gameObject.SetActive(false);
+        }
     }
 
     public int GetButterflyType()

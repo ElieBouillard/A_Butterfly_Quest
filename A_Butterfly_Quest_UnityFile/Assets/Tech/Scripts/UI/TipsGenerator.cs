@@ -155,7 +155,7 @@ public class TipsGenerator : MonoBehaviour
         
         if (m_condition == endCondition.Key && isShowingTip)
         {
-            if (Input.GetAxisRaw("GiveKey") == 1)
+            if (Input.GetKeyDown(KeyCode.Joystick1Button3))
             {
                 Hide();
                 dontShowTipAgain = true;

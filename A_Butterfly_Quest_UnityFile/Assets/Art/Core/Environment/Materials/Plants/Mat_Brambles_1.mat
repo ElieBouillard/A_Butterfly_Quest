@@ -9,15 +9,13 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Mat_Brambles_1
   m_Shader: {fileID: 4800000, guid: de7c45ac850ea734e8ea0bf65f5195f6, type: 3}
-  m_ShaderKeywords: _ALPHATEST_ON _BLENDMODE_ALPHA _ENABLE_FOG_ON_TRANSPARENT _NORMALMAP
-    _NORMALMAP_TANGENT_SPACE _SURFACE_TYPE_TRANSPARENT
+  m_ShaderKeywords: _NORMALMAP _NORMALMAP_TANGENT_SPACE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 2000
   stringTagMap:
     MotionVector: User
-    RenderType: Transparent
   disabledShaderPasses:
   - DistortionVectors
   - TransparentBackface
@@ -126,11 +124,11 @@ Material:
     - _AddPrecomputedVelocity: 0
     - _AlbedoAffectEmissive: 0
     - _AlphaCutoff: 0.5
-    - _AlphaCutoffEnable: 1
+    - _AlphaCutoffEnable: 0
     - _AlphaCutoffPostpass: 0.5
     - _AlphaCutoffPrepass: 0.5
     - _AlphaCutoffShadow: 0.5
-    - _AlphaDstBlend: 10
+    - _AlphaDstBlend: 0
     - _AlphaSrcBlend: 1
     - _Anisotropy: 0
     - _BlendMode: 0
@@ -138,6 +136,7 @@ Material:
     - _CullMode: 2
     - _CullModeForward: 2
     - _Cutoff: 0.5
+    - _Depth: 1
     - _DepthOffsetEnable: 0
     - _DetailAlbedoScale: 1
     - _DetailNormalScale: 1
@@ -163,8 +162,8 @@ Material:
     - _DistortionVectorScale: 2
     - _DoubleSidedEnable: 0
     - _DoubleSidedNormalMode: 1
-    - _DstBlend: 10
-    - _EmissiveAmount: 3000
+    - _DstBlend: 0
+    - _EmissiveAmount: 100
     - _EmissiveColorMode: 1
     - _EmissiveExposureWeight: 1
     - _EmissiveIntensity: 1
@@ -173,7 +172,7 @@ Material:
     - _EnableFogOnTransparent: 1
     - _EnableGeometricSpecularAA: 0
     - _EnergyConservingSpecularColor: 1
-    - _FresnelIntensity: 1
+    - _FresnelIntensity: 52.31
     - _FresnelPower: -2.49
     - _HeightAmplitude: 0.02
     - _HeightCenter: 0.5
@@ -200,7 +199,7 @@ Material:
     - _PPDPrimitiveWidth: 1
     - _ReceivesSSR: 1
     - _RefractionModel: 0
-    - _RenderQueueType: 5
+    - _RenderQueueType: 1
     - _RequireSplitLighting: 0
     - _SSRefractionProjectionModel: 0
     - _Smoothness: 1
@@ -222,7 +221,7 @@ Material:
     - _StencilWriteMaskMV: 40
     - _SubsurfaceMask: 1
     - _SupportDecals: 1
-    - _SurfaceType: 1
+    - _SurfaceType: 0
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
     - _Thickness: 1
@@ -239,13 +238,14 @@ Material:
     - _UVEmissive: 0
     - _UseEmissiveIntensity: 0
     - _UseShadowThreshold: 0
-    - _ZTestDepthEqualForOpaque: 4
-    - _ZTestGBuffer: 3
+    - _ZTestDepthEqualForOpaque: 3
+    - _ZTestGBuffer: 4
     - _ZTestModeDistortion: 4
     - _ZTestTransparent: 4
     - _ZWrite: 1
     - _depthfade: 0.25
     - _dispForce: 0.3
+    - _maxEmissive: 10000
     - _outlineforce: 165.12
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
@@ -256,7 +256,7 @@ Material:
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
-    - _FresnelColor: {r: 0.972549, g: 0, b: 0.37538135, a: 1}
+    - _FresnelColor: {r: 0.972549, g: 0, b: 0.3753813, a: 1}
     - _FresnelNoiseSpeed: {r: -0.1, g: -0.4, b: 0, a: 0}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
@@ -266,7 +266,7 @@ Material:
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
-    - _outlinefresnelColor: {r: 0.5849056, g: 0, b: 0.13612057, a: 1}
+    - _outlinefresnelColor: {r: 0.5849056, g: 0, b: 0.1361205, a: 1}
 --- !u!114 &1624820711846445718
 MonoBehaviour:
   m_ObjectHideFlags: 11

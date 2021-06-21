@@ -106,12 +106,12 @@ public class HealthSystem : MonoBehaviour
     {
         if(m_CharacterType == CharacterType.Player)
         {
-            if (canHit)
+            if (canHit && RespawnSystem.instance.isAlive)
             {
                 CurrHealth -= DamageValue;
-                clockCanHit = 1.5f;
-            }
-            
+                clockCanHit = 1.2f;
+                UIManager.instance.TrigerHitScreen();
+            }            
         }
         else
         {

@@ -112,13 +112,12 @@ public class AnimationManager : MonoBehaviour
         playerDirOffset = Vector3.Dot(offset, m_parentMesh.transform.right);
 
         //Check for freezes
-        if (!m_anim.GetCurrentAnimatorStateInfo(1).IsName("None") /* || other conditions for freeze*/)
+        if (!m_anim.GetCurrentAnimatorStateInfo(1).IsName("None") && !m_anim.GetCurrentAnimatorStateInfo(1).IsName("NetAttack")) /* || other conditions for freeze*/
         {
             if (!freezeRotations)
             {
                 freezeRotations = true;
-            }
-           
+            }           
         }
         else
         {

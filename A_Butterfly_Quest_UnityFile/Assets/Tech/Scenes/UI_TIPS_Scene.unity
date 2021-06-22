@@ -440,7 +440,7 @@ MonoBehaviour:
   - 'Press <sprite=8> to aim the Recepatacle and  <sprite=4>to Shoot Butterfly inside
     it '
   - Press <sprite=8> to Aim and  <sprite=4> with Storm Butterfly to Destroy the Brambles
-  - Hold <sprite=4> to show the Net Range and  Realse to catch Butterflies
+  - Walk Slowly and Hold <sprite=4> to show the Net Range then Release to catch Butterflies
   - Press <sprite=10> or <sprite=6>  to Equip a Butterfly
   - Press  <sprite=3> against the Rock with Storm Butterfly to move it
   - Press  <sprite=0> +  <sprite=3> to Jump Farther

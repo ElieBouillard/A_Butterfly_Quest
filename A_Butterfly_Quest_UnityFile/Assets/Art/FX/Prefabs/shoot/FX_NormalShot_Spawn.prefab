@@ -89,7 +89,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 7913
   m_UseColorTemperature: 1
-  m_BoundingSphereOverride: {x: 0, y: 1.794e-42, z: 0, w: -1}
+  m_BoundingSphereOverride: {x: 0, y: 3.4276e-41, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -20458,7 +20458,7 @@ ParticleSystem:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-      cycleCount: 2
+      cycleCount: 1
       repeatInterval: 0.1
       probability: 1
   SizeModule:
@@ -24200,8 +24200,8 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4a5187bde7002444cbfb0d4d6cbe5f28, type: 2}
-  - {fileID: 2100000, guid: 4a5187bde7002444cbfb0d4d6cbe5f28, type: 2}
+  - {fileID: 2100000, guid: 9cad76c2c012de042a214081fa20b144, type: 2}
+  - {fileID: 2100000, guid: 9cad76c2c012de042a214081fa20b144, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

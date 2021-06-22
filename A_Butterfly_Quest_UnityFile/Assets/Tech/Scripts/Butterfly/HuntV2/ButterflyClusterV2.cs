@@ -67,20 +67,20 @@ public class ButterflyClusterV2 : MonoBehaviour
             distToTargetPos = (targetPos - transform.position).magnitude;
             if (distToTargetPos < 0f)
             {
-                Speedydididi = 0.001f;
+                Speedydididi = 0.1f;
             }
             else if (distToTargetPos > 1.3f)
             {
-                Speedydididi = 0.07f;
+                Speedydididi = 6f;
             }
             else
             {
                 float distRatio = (distToTargetPos - 0f) / (1.3f - 0);
-                float diffSpeed = 0.07f - 0.001f;
-                Speedydididi = (distRatio * diffSpeed) + 0.001f;
+                float diffSpeed = 6f - 0.1f;
+                Speedydididi = (distRatio * diffSpeed) + 0.1f;
             }
 
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, Speedydididi);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, Speedydididi * Time.deltaTime);
 
             if (Shoot.Instance.Aiming)
             {

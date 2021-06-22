@@ -43,6 +43,16 @@ public class EnemyAiV3 : MonoBehaviour
 
     private float distanceToTarget;
 
+    private GameObject IllusionMeshPrefab;
+    private bool checkIllsionClone;
+
+    [Header("SFX")]
+    public string dammageSFX;
+    public string waitSFX;
+    public string attackSFX;
+
+
+
     private void Start()
     {
         //Links
@@ -57,6 +67,10 @@ public class EnemyAiV3 : MonoBehaviour
 
         //Attack
         HitCollider.enabled = false;
+
+        //IllusionClone
+        IllusionMeshPrefab = Character3D.m_instance.IllusionMeshItem;
+        Physics.IgnoreCollision(GetComponent<Collider>(), IllusionMeshPrefab.GetComponent<Collider>(), true);
     }
 
     private void Update()
@@ -64,6 +78,24 @@ public class EnemyAiV3 : MonoBehaviour
         StateMachineSystem();
         RangesSystem();
         //AnimatorSystem();
+
+        //IllusionClodeSystem
+        if (IllusionMeshPrefab.activeSelf)
+        {
+            if (!checkIllsionClone)
+            {
+                TargetObj = IllusionMeshPrefab;
+                checkIllsionClone = true;
+            }
+        }
+        else
+        {
+            if (checkIllsionClone)
+            {
+                TargetObj = Character3D.m_instance.gameObject;
+                checkIllsionClone = false;
+            }
+        }
     }
 
     #region System
@@ -211,7 +243,7 @@ public class EnemyAiV3 : MonoBehaviour
             m_Animator.SetTrigger("Attack");
             inAttack = true;
             AttackingClock = 2f;
-
+            PlaySound(attackSFX);
         }
         else
         {
@@ -260,5 +292,13 @@ public class EnemyAiV3 : MonoBehaviour
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, ChasingRange);
+    }
+
+    void PlaySound(string sfxName)
+    {
+        if (AudioManager.instance.sounds[0].source != null)
+        {
+            AudioManager.instance.Play(sfxName);
+        }
     }
 }

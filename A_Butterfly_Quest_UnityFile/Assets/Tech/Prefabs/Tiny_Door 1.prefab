@@ -100,10 +100,11 @@ MonoBehaviour:
   KeyNeeded: 0
   DetectionPlayerRange: 0
   ItemsWichUnlock: []
-  DoorSound: {fileID: 8300000, guid: fda970f8f2ad91848ac9630c60f60f74, type: 3}
+  DoorSound: {fileID: 8300000, guid: d7fd85b5cb2448b48bde9e3eee8a9c34, type: 3}
   isOpen: 0
   animator: {fileID: 0}
   bigDoor: 0
+  bigDoorSfx: 
 --- !u!82 &4966127462466077833
 AudioSource:
   m_ObjectHideFlags: 0

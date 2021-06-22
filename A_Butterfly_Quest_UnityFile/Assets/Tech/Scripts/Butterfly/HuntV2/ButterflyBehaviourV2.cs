@@ -16,9 +16,12 @@ public class ButterflyBehaviourV2 : MonoBehaviour
     private GameObject butterflyLauncher;
     private GameObject PlayerCluster;
     private bool randomMove;
+    private bool isFollowingPlayer;
 
     private float recoveryClock;
     private bool inRecovery;
+
+    private float minRange;
 
     private void Start()
     {
@@ -44,6 +47,7 @@ public class ButterflyBehaviourV2 : MonoBehaviour
 
     public void SetCatched()
     {
+        isFollowingPlayer = true;
         randomMove = true;
         transform.SetParent(PlayerCluster.transform);
         gameObject.GetComponent<Collider>().enabled = false;
@@ -73,6 +77,7 @@ public class ButterflyBehaviourV2 : MonoBehaviour
     }
 
     float clockChangeTargetPos;
+    bool randomRotate;
     private void Update()
     {
         if (randomMove)
@@ -84,10 +89,15 @@ public class ButterflyBehaviourV2 : MonoBehaviour
             else
             { 
                 m_Speed = Random.Range(2f, 3f);
+
                 m_TargetPos = new Vector3(transform.parent.position.x + Random.Range(-MovementRange, MovementRange), transform.parent.position.y + Random.Range(-MovementRange, MovementRange), transform.parent.position.z + Random.Range(-MovementRange, MovementRange));
                 if (transform.parent.GetComponent<ButterflyClusterV2>().isFollowingPlayer)
                 {
                     clockChangeTargetPos = Random.Range(0.1f, 0.3f);
+                    if (transform.parent.transform.gameObject.GetComponent<ButterflyClusterV2>().distToTargetPos < 0.1)
+                    {
+                        clockChangeTargetPos = Random.Range(1.5f, 2.2f);
+                    }
                 }
                 else
                 {
@@ -96,6 +106,30 @@ public class ButterflyBehaviourV2 : MonoBehaviour
                 transform.LookAt(m_TargetPos);
             }
         }
+
+        if (isFollowingPlayer)
+        {
+            MovementRange = 0.6f;            
+        }
+        else
+        {
+            if ((player.transform.position - transform.position).magnitude < 5f && player.gameObject.GetComponent<Rigidbody>().velocity.magnitude > 3.5f)
+            {
+                randomMove = false;
+                transform.position += transform.forward * 0.075f;
+                if (randomRotate)
+                {
+                    gameObject.transform.eulerAngles = new Vector3(0, Random.Range(-180, 180), 0);
+                    randomRotate = false;
+                }
+            }
+            else
+            {
+                randomMove = true;
+                randomRotate = true;
+            }
+        }       
+
         transform.position = Vector3.MoveTowards(transform.position, m_TargetPos, m_Speed / 100);
 
         if (inRecovery)

@@ -27,6 +27,9 @@ public class HealthSystem : MonoBehaviour
     private float clockCanHit;
     private float clockColorHit;
 
+    [Header("SFX")]
+    public string dammageSFX;
+
     private void Start()
     {
         m_repsawnSystem = gameObject.GetComponent<RespawnSystem>();
@@ -116,6 +119,7 @@ public class HealthSystem : MonoBehaviour
         else
         {
             CurrHealth -= DamageValue;
+            PlaySound(dammageSFX);
             InitColorHit();
         }
 
@@ -147,5 +151,13 @@ public class HealthSystem : MonoBehaviour
     public void Respawn()
     {
         CurrHealth = InitialHealth;
+    }
+
+    void PlaySound(string sfxName)
+    {
+        if (AudioManager.instance.sounds[0].source != null)
+        {
+            AudioManager.instance.Play(sfxName);
+        }
     }
 }

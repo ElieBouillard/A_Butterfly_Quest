@@ -507,9 +507,11 @@ public class Character3D : MonoBehaviour
             NetVisualbox.SetActive(true);
             clockShowVisualBox = 1;
             canClock = true;
+            //NetVisualbox.GetComponent<Collider>().enabled = false;
         }
         else
         {
+            NetVisualbox.GetComponent<Collider>().enabled = false;
             NetVisualbox.SetActive(false);
             currErosionValue = 1f;
             canClock = false;
@@ -524,10 +526,12 @@ public class Character3D : MonoBehaviour
             {
                 clockShowVisualBox -= Time.deltaTime;
                 charged = false;
+                NetVisualbox.GetComponent<Collider>().enabled = false;
             }
             else
             {
                 charged = true;
+                NetVisualbox.GetComponent<Collider>().enabled = true;
             }
         }
 

@@ -48,6 +48,8 @@ public class ButterflyBehaviourV2 : MonoBehaviour
         transform.SetParent(PlayerCluster.transform);
         gameObject.GetComponent<Collider>().enabled = false;
 
+        gameObject.transform.GetChild(0).transform.gameObject.GetComponent<ParticleSystem>().Stop();
+
         //addTrail
         TrailRenderer m_trailRend;
         if(transform.Find("FX").TryGetComponent<TrailRenderer>(out m_trailRend))
@@ -113,6 +115,11 @@ public class ButterflyBehaviourV2 : MonoBehaviour
                     inRecovery = false;
                 }                
             }
+        }
+
+        if (!NetVisualCollider.m_instance.colliderOn || NetVisualCollider.m_instance.gameObject.activeSelf == false) 
+        {
+            gameObject.transform.GetChild(0).transform.gameObject.GetComponent<ParticleSystem>().Stop();
         }
     }
 }

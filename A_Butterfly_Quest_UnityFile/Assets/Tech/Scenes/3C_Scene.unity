@@ -157,7 +157,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9289136}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 179, y: -66.7, z: 295.8}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7255424629777524410}
@@ -1262,6 +1262,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.6012218, y: 6.8897786, z: 1.5451374}
   m_Center: {x: 0.02661717, y: 3.4317706, z: 0.7852107}
+--- !u!114 &1079219395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079219390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9db20086fc34d5a46ba02827c274c0d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1114170077 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2331409774595580149, guid: 94f122f9843a46e4d96d8561f4be9d95,
@@ -1359,8 +1371,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195822808}
-  m_LocalRotation: {x: 0.23946881, y: 0.7405191, z: -0.18421927, w: 0.60029113}
-  m_LocalPosition: {x: 595.9983, y: -85.71487, z: -83.82941}
+  m_LocalRotation: {x: 0.23946878, y: 0.7405191, z: -0.18421924, w: 0.60029113}
+  m_LocalPosition: {x: 581.8394, y: -84.709854, z: -79.2807}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1780449882}
@@ -2358,7 +2370,7 @@ PrefabInstance:
     - target: {fileID: 3340417402739704076, guid: 664e653c31a29c0408643f1de8d4a39a,
         type: 3}
       propertyPath: sounds.Array.data[8].name
-      value: PressurePlateOn
+      value: PressurePlateOff
       objectReference: {fileID: 0}
     - target: {fileID: 3340417402739704076, guid: 664e653c31a29c0408643f1de8d4a39a,
         type: 3}

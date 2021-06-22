@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mushroom_LightQuad_Red
+  m_Name: Mushroom_LightQuad_Blue
   m_Shader: {fileID: 4800000, guid: c66b2bbe51b959840ab81052dafd9a39, type: 3}
   m_ShaderKeywords: _BLENDMODE_ADD _DISABLE_SSR _DOUBLESIDED_ON _ENABLE_FOG_ON_TRANSPARENT
     _ISPANNING3_ON _ISPANNING4_ON _NORMALMAP_TANGENT_SPACE _SURFACE_TYPE_TRANSPARENT
@@ -193,7 +193,7 @@ Material:
     - _EnergyConservingSpecularColor: 1
     - _Erosion: 0
     - _Flow: 0
-    - _Glow: 0.2
+    - _Glow: 0.59
     - _HeightAmplitude: 0.02
     - _HeightCenter: 0.5
     - _HeightMapParametrization: 0
@@ -290,7 +290,7 @@ Material:
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _MainColor: {r: 0.23753315, g: 0.23753315, b: 0.23753315, a: 0.4117647}
     - _PannerSpeed2: {r: 1, g: 0, b: 0, a: 0}
-    - _SecondaryColor: {r: 1.2926484, g: 0.21656936, b: 0, a: 0.4627451}
+    - _SecondaryColor: {r: 0.29357016, g: 0, b: 1.2926483, a: 0.4627451}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}

@@ -41,7 +41,6 @@ public class Shoot : MonoBehaviour
     public Transform AimTargetTransform;
     public bool forceNoAim;
 
-
     private void Awake()
     {
         CameraAimingScpt = GetComponent<CameraAiming>();
@@ -113,9 +112,9 @@ public class Shoot : MonoBehaviour
         currButterlfy = ButterflyInventory.Instance.GetFirstButterfly(ButterflyType);
 
         //Si touche un mesh alors prend les coordonees en direction
-        if (Physics.Raycast(Camera.main.transform.position + Camera.main.transform.forward * 3f, Camera.main.transform.forward, out ShootInfo, Range, IgnoreMask))
+        if (Physics.Raycast(Camera.main.transform.position + Camera.main.transform.forward * 2f, Camera.main.transform.forward, out ShootInfo, Range, IgnoreMask))
         {
-            Debug.DrawRay(Camera.main.transform.position + Camera.main.transform.forward * 3f, Camera.main.transform.forward * Range, Color.red, 5f);
+            Debug.DrawRay(Camera.main.transform.position + Camera.main.transform.forward * 2f, Camera.main.transform.forward * Range, Color.red, 5f);
             HitPos = ShootInfo.point;
             Debug.DrawRay(HitPos, Vector3.up * 5f, Color.red, 5f);
 

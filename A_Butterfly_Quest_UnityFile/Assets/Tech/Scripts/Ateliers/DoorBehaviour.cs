@@ -41,8 +41,11 @@ public class DoorBehaviour : MonoBehaviour
 
     private GameObject player;
 
+    bool canAnim = true;
+    public string bigDoorSfx;
     private void Start()
     {
+        canAnim = true;
         Speed = OpenSpeed;
         closePos = transform.position;
         targetPos = closePos;
@@ -59,6 +62,7 @@ public class DoorBehaviour : MonoBehaviour
 
     private void Update()
     {
+
         if(lastIsOpenState != isOpen)
         {
             if(m_audioSource != null)
@@ -82,6 +86,21 @@ public class DoorBehaviour : MonoBehaviour
         if (isOpen)
         {
             OpenDoor();
+            //if (bigDoor)
+            //{
+            //    if (canAnim)
+            //    {
+            //        AudioManager.instance.Play(bigDoorSfx);
+
+            //        //if (m_audioSource != null)
+            //        //{
+            //        //    m_audioSource.Stop();
+            //        //}
+            //        Debug.Log("test");
+            //        canAnim = false;
+            //    }
+            //}
+            
         }
         else
         {
@@ -112,6 +131,12 @@ public class DoorBehaviour : MonoBehaviour
         if (bigDoor)
         {
             animator.SetBool("Open", true);
+            if (canAnim)
+            {
+                AudioManager.instance.Play(bigDoorSfx);
+                canAnim = false;
+            }
+
         }
     }
 

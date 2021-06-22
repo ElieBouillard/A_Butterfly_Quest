@@ -1309,6 +1309,11 @@ MonoBehaviour:
   Butterfly_Normal: {fileID: 7679354112586176870}
   Butterfly_Illusion: {fileID: 2450242965764679000}
   Butterfly_Tempete: {fileID: 3456659419061577232}
+  camAffilied: 0
+  cam: {fileID: 0}
+  haveConnectedReceptacle: 0
+  connectedReceptacle: {fileID: 0}
+  SFXName: Recepatcle
 --- !u!65 &8831862233269092307
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -1257,7 +1257,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1079219390}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2.6012218, y: 6.8897786, z: 1.5451374}
@@ -1274,6 +1274,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9db20086fc34d5a46ba02827c274c0d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ButterflyInCollider: []
+  ButterflyExitCollider: []
+  colliderOn: 0
 --- !u!1 &1114170077 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2331409774595580149, guid: 94f122f9843a46e4d96d8561f4be9d95,

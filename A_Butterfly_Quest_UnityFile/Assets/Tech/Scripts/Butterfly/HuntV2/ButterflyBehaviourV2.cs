@@ -30,6 +30,7 @@ public class ButterflyBehaviourV2 : MonoBehaviour
         PlayerCluster = GameObject.Find("PlayerCluster");
         butterflyLauncher = GameObject.Find("ButterflyLauncher");
         randomMove = true;
+        canScared = true;
     }
 
     public void SetButterFlyTypeAtSpawn(int currButterflyType)
@@ -78,6 +79,8 @@ public class ButterflyBehaviourV2 : MonoBehaviour
 
     float clockChangeTargetPos;
     bool randomRotate;
+    float clockScared;
+    bool canScared;
     private void Update()
     {
         if (randomMove)
@@ -96,7 +99,7 @@ public class ButterflyBehaviourV2 : MonoBehaviour
                     clockChangeTargetPos = Random.Range(0.1f, 0.3f);
                     if (transform.parent.transform.gameObject.GetComponent<ButterflyClusterV2>().distToTargetPos < 0.1)
                     {
-                        clockChangeTargetPos = Random.Range(1.5f, 2.2f);
+                        clockChangeTargetPos = Random.Range(1f, 1.7f);
                     }
                 }
                 else
@@ -113,7 +116,7 @@ public class ButterflyBehaviourV2 : MonoBehaviour
         }
         else
         {
-            if ((player.transform.position - transform.position).magnitude < 5f && player.gameObject.GetComponent<Rigidbody>().velocity.magnitude > 3.5f)
+            if ((player.transform.position - transform.position).magnitude < 5f && player.gameObject.GetComponent<Rigidbody>().velocity.magnitude > 3.5f && canScared)
             {
                 randomMove = false;
                 transform.position += transform.forward * 0.075f;
@@ -122,15 +125,35 @@ public class ButterflyBehaviourV2 : MonoBehaviour
                     gameObject.transform.eulerAngles = new Vector3(0, Random.Range(-180, 180), 0);
                     randomRotate = false;
                 }
+                clockScared = Random.Range(0.5f, 1f);
             }
-            else
-            {
-                randomMove = true;
-                randomRotate = true;
-            }
-        }       
+
+            //if ((player.transform.position - transform.position).magnitude < 5f && Character3D.m_instance.inHuntNetHit == true)
+            //{
+                //randomMove = false;
+                //m_TargetPos = transform.position + new Vector3(Random.Range(10f,15f), 0, Random.Range(10f, 15f));
+                ////transform.position += transform.forward * 0.075f;
+                //if (randomRotate)
+                //{
+                //    gameObject.transform.eulerAngles = new Vector3(0, Random.Range(-180, 180), 0);
+                //    randomRotate = false;
+                //}
+            //}
+        }
+        
+        if(clockScared > 0)
+        {
+            clockScared -= Time.deltaTime;
+        }
+        else
+        {
+            randomMove = true;
+            randomRotate = true;
+            canScared = true;
+        }
 
         transform.position = Vector3.MoveTowards(transform.position, m_TargetPos, m_Speed / 100);
+        
 
         if (inRecovery)
         {

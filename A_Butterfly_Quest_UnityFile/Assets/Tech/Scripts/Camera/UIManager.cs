@@ -46,6 +46,10 @@ public class UIManager : MonoBehaviour
     public Image BlackScreenDeath;
     public GameObject HitScreen;
 
+    [Header("WavesHud")]
+    public GameObject WaveText;
+    public GameObject WaveBackGround;
+
     private void Awake()
     {
         instance = this;

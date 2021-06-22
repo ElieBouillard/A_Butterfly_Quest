@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WavesManager : MonoBehaviour
 {
@@ -10,16 +11,15 @@ public class WavesManager : MonoBehaviour
     public Waves[] Waves;
     public GameObject[] Spawners;
 
-    [Header("Debug")]
-    public List<GameObject> CurrWaveEnemys;
-    public int waveIndex;
-    private float clockWave;
+    //Debug
+    private List<GameObject> CurrWaveEnemys;
+    private int waveIndex;
     private float clockSpawn;
-    public float clockBetweenWaves;
+    private float clockBetweenWaves;
+    private GameObject WaveText;
+    private GameObject WaveBackground;
 
-    public GameObject WinBlackScreen;
 
-    bool canWin = true;
     private void Awake()
     {
         instance = this;
@@ -29,91 +29,105 @@ public class WavesManager : MonoBehaviour
     {
         CurrWaveEnemys = new List<GameObject>();
         waveIndex = 0;
-        InitiateNextWave();
         clockBetweenWaves = TimeBetweenWaves;
-        canWin = true;
+        WaveText = UIManager.instance.WaveText;
+        WaveBackground = UIManager.instance.WaveBackGround;
+
+        canShowBackGround = true;
+        canHideBackGround = true;
+        canShowText = true;
+        canHideText = true;
     }
 
     private void Update()
     {
         WaveSystemUpdate();
-        WinGame();
     }
 
+    int spawnerRandomValue;
     private void InitiateNextWave()
     {
-        foreach (GameObject spawner in Spawners)
+        if(CurrWaveEnemys.Count > 0)
         {
-            Spawner currScpt = spawner.GetComponent<Spawner>();
-            for (int i = 0; i < Waves[waveIndex].StartSpawnCount; i++)
-            {
-                CurrWaveEnemys.Add(currScpt.InstantiateEnemy());
-            }
+            CurrWaveEnemys.Clear();
         }
-        clockWave = Waves[waveIndex].WaveTime;
-        clockSpawn = Waves[waveIndex].RateTimingSpawn;
+
+        for (int i = 0; i < Waves[waveIndex].EnemyCount; i++)
+        {
+            spawnerRandomValue = Random.Range(0, Spawners.Length);
+            Spawner currSpawnerScpt = Spawners[spawnerRandomValue].GetComponent<Spawner>();
+            CurrWaveEnemys.Add(currSpawnerScpt.InstantiateEnemy());
+        }
+        clockBetweenWaves = TimeBetweenWaves;
+        waveIndex++;
+        canInitiateWave = false;
     }
 
-    //private void InstantiateRateGroup()
-    //{
-    //    foreach (GameObject spawner in Spawners)
-    //    {
-    //        Spawner currScpt = spawner.GetComponent<Spawner>();
-    //        for (int i = 0; i < Waves[waveIndex].HowManyPerRate; i++)
-    //        {
-    //            CurrWaveEnemys.Add(currScpt.InstantiateEnemy());
-    //        }
-    //    }
-    //}
-
-    public void KillAllEnemys()
-    {
-        for (int i = 0; i < CurrWaveEnemys.Count; i++)
-        {
-            CurrWaveEnemys[i].gameObject.SetActive(false);
-        }
-    }
-
+    bool canInitiateWave;
+    bool canShowBackGround;
+    bool canShowText;
+    bool canHideBackGround;
+    bool canHideText;
     private void WaveSystemUpdate()
     {
-        //if(clockWave > 0)
-        //{
-        //    clockWave -= Time.deltaTime;
+        if (CheckIfAllEnemyDead())
+        {
+            if (canInitiateWave)
+            {
+                if(waveIndex >= Waves.Length)
+                {
+                    Win();
+                }
+                else
+                {
+                    InitiateNextWave();
+                }               
+            }
+            else
+            {
+                if(clockBetweenWaves > 0)
+                {
+                    if (canShowBackGround)
+                    {
+                        WaveBackground.GetComponent<Animator>().SetBool("On", true);
+                        canShowBackGround = false;
+                    }
+                    if(canShowText && clockBetweenWaves <= 3.5f)
+                    {
+                        WaveText.GetComponent<Text>().text = "Wave " + (waveIndex + 1).ToString();
+                        WaveText.GetComponent<Animator>().SetBool("On", true);
+                        canShowText = false;
+                    }
+                    if(canHideText && clockBetweenWaves <= 1.5f)
+                    {
+                        WaveText.GetComponent<Animator>().SetBool("On", false);
+                        canHideText = false;
+                    }
+                    if(canHideBackGround&& clockBetweenWaves <= 1f)
+                    {
+                        WaveBackground.GetComponent<Animator>().SetBool("On", false);
+                        canHideBackGround = false;
+                    }
+                    clockBetweenWaves -= Time.deltaTime;
+                }
+                else
+                {
+                    canInitiateWave = true;
 
-        //    if (clockSpawn > 0)
-        //    {
-        //        clockSpawn -= Time.deltaTime;
-        //    }
-        //    else
-        //    {
-        //        InstantiateRateGroup();
-        //        clockSpawn = Waves[waveIndex].RateTimingSpawn;
-        //    }
-        //}
-        //else
-        //{
-        //    if (CheckIfAllEnemyDead())
-        //    {
-        //        if(clockBetweenWaves > 0)
-        //        {
-        //            clockBetweenWaves -= Time.deltaTime;
-        //        }
-        //        else
-        //        {
-        //            CurrWaveEnemys.Clear();
-        //            waveIndex++;
-        //            InitiateNextWave();
-        //            clockBetweenWaves = TimeBetweenWaves;
-        //        }
-        //    }
-        //}
+                    canShowBackGround = true;
+                    canHideBackGround = true;
+                    canShowText = true;
+                    canHideText = true;
+                }
+            }
+        }
     }
 
     private bool CheckIfAllEnemyDead()
     {
         if(CurrWaveEnemys.Count == 0)
         {
-            return false;
+            return true;
         }
 
         foreach (GameObject enemy in CurrWaveEnemys)
@@ -126,15 +140,8 @@ public class WavesManager : MonoBehaviour
         return true;
     }
 
-    private void WinGame()
+    private void Win()
     {
-        if (CheckIfAllEnemyDead())
-        {
-            if (canWin)
-            {
-                WinBlackScreen.GetComponent<Animator>().SetBool("Opace", true);
-                canWin = false;
-            }
-        }
+        Debug.Log("C'est gagné");
     }
 }

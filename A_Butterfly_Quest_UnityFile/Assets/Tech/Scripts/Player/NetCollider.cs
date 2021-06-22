@@ -17,7 +17,6 @@ public class NetCollider : MonoBehaviour
             }
         }
     }
-
     public List<ButterflyBehaviourV2> GetButterflyAndClearList()
     {
         List<ButterflyBehaviourV2> ListToGive = new List<ButterflyBehaviourV2>();

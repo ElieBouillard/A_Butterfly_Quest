@@ -51,7 +51,7 @@ MonoBehaviour:
   Range: 0
   Respawn: 0
   RangeScareByPlayer: 0
-  PosBehindPlayer: 0.6
+  PosBehindPlayer: 0.8
   PosY: 1.1
   PosX: 0
   Speed: 0.04
@@ -61,3 +61,4 @@ MonoBehaviour:
     type: 3}
   ButterflyTempete: {fileID: 6457228339399310163, guid: 6c7c23ae9d0a04f4c9e81b89003eb2c7,
     type: 3}
+  distToTargetPos: 0

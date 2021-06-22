@@ -415,6 +415,7 @@ public class Character3D : MonoBehaviour
 
     private bool checkDrawHitbox;
     bool charged = false;
+    public bool inHuntNetHit;
     private void HuntNetHitUpdate()
     {
         //Chasse Coup de Filet
@@ -427,6 +428,7 @@ public class Character3D : MonoBehaviour
             }
             else if (Input.GetAxisRaw("Fire1") == 0f && checkDrawHitbox == true && charged)
             {
+                inHuntNetHit = true;
                 checkDrawHitbox = false;
                 charged = false;
 
@@ -465,12 +467,14 @@ public class Character3D : MonoBehaviour
 
         if (clockBeforeNetHit > 0)
         {
+            
             clockBeforeNetHit -= Time.deltaTime;
         }
         else
         {
             if (canClockAfterNetHit)
             {
+                inHuntNetHit = false;
                 clockAfterNetHit = 0.3f;
                 canClockAfterNetHit = false;
             }
@@ -507,7 +511,6 @@ public class Character3D : MonoBehaviour
             NetVisualbox.SetActive(true);
             clockShowVisualBox = 1;
             canClock = true;
-            //NetVisualbox.GetComponent<Collider>().enabled = false;
         }
         else
         {

@@ -13969,10 +13969,11 @@ MonoBehaviour:
   KeyNeeded: 1
   DetectionPlayerRange: 10
   ItemsWichUnlock: []
-  DoorSound: {fileID: 0}
+  DoorSound: {fileID: 8300000, guid: e1a6dcbdac61138438da73231f969337, type: 3}
   isOpen: 0
   animator: {fileID: 405181777}
   bigDoor: 1
+  bigDoorSfx: 
 --- !u!95 &405181777
 Animator:
   serializedVersion: 3
@@ -20057,6 +20058,7 @@ MonoBehaviour:
     type: 3}
   ButterflyTempete: {fileID: 6457228339399310163, guid: 6c7c23ae9d0a04f4c9e81b89003eb2c7,
     type: 3}
+  distToTargetPos: 0
 --- !u!1001 &580203964
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32993,6 +32995,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 371887899179162042, guid: be5beb03e79ba844d96ca1c07441e6d7,
         type: 3}
+      propertyPath: DoorSound
+      value: 
+      objectReference: {fileID: 8300000, guid: fda970f8f2ad91848ac9630c60f60f74, type: 3}
+    - target: {fileID: 371887899179162042, guid: be5beb03e79ba844d96ca1c07441e6d7,
+        type: 3}
       propertyPath: OpenSpeed
       value: 1
       objectReference: {fileID: 0}
@@ -41193,6 +41200,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 371887899179162042, guid: be5beb03e79ba844d96ca1c07441e6d7,
         type: 3}
+      propertyPath: DoorSound
+      value: 
+      objectReference: {fileID: 8300000, guid: fda970f8f2ad91848ac9630c60f60f74, type: 3}
+    - target: {fileID: 371887899179162042, guid: be5beb03e79ba844d96ca1c07441e6d7,
+        type: 3}
       propertyPath: OpenSpeed
       value: 1
       objectReference: {fileID: 0}
@@ -41200,6 +41212,11 @@ PrefabInstance:
         type: 3}
       propertyPath: CloseSpeed
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 371887899179162042, guid: be5beb03e79ba844d96ca1c07441e6d7,
+        type: 3}
+      propertyPath: bigDoorSfx
+      value: BigDoor
       objectReference: {fileID: 0}
     - target: {fileID: 371887899179162042, guid: be5beb03e79ba844d96ca1c07441e6d7,
         type: 3}
@@ -62897,6 +62914,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 371887899179162042, guid: be5beb03e79ba844d96ca1c07441e6d7,
         type: 3}
+      propertyPath: DoorSound
+      value: 
+      objectReference: {fileID: 8300000, guid: fda970f8f2ad91848ac9630c60f60f74, type: 3}
+    - target: {fileID: 371887899179162042, guid: be5beb03e79ba844d96ca1c07441e6d7,
+        type: 3}
       propertyPath: OpenSpeed
       value: 1
       objectReference: {fileID: 0}
@@ -64080,6 +64102,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1011565344}
     m_Modifications:
+    - target: {fileID: 371887899179162042, guid: be5beb03e79ba844d96ca1c07441e6d7,
+        type: 3}
+      propertyPath: DoorSound
+      value: 
+      objectReference: {fileID: 8300000, guid: fda970f8f2ad91848ac9630c60f60f74, type: 3}
     - target: {fileID: 371887899179162042, guid: be5beb03e79ba844d96ca1c07441e6d7,
         type: 3}
       propertyPath: OpenSpeed
@@ -66172,10 +66199,11 @@ MonoBehaviour:
   KeyNeeded: 3
   DetectionPlayerRange: 10
   ItemsWichUnlock: []
-  DoorSound: {fileID: 0}
+  DoorSound: {fileID: 8300000, guid: e1a6dcbdac61138438da73231f969337, type: 3}
   isOpen: 0
   animator: {fileID: 1736790146}
   bigDoor: 1
+  bigDoorSfx: 
 --- !u!95 &1736790146
 Animator:
   serializedVersion: 3
@@ -66523,7 +66551,7 @@ PrefabInstance:
     - target: {fileID: 371887899179162042, guid: be5beb03e79ba844d96ca1c07441e6d7,
         type: 3}
       propertyPath: CloseSpeed
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 371887899179162042, guid: be5beb03e79ba844d96ca1c07441e6d7,
         type: 3}
@@ -69918,6 +69946,7 @@ MonoBehaviour:
     type: 3}
   ButterflyTempete: {fileID: 6457228339399310163, guid: 6c7c23ae9d0a04f4c9e81b89003eb2c7,
     type: 3}
+  distToTargetPos: 0
 --- !u!4 &1841452109
 Transform:
   m_ObjectHideFlags: 0
@@ -73357,6 +73386,7 @@ MonoBehaviour:
     type: 3}
   ButterflyTempete: {fileID: 6457228339399310163, guid: 6c7c23ae9d0a04f4c9e81b89003eb2c7,
     type: 3}
+  distToTargetPos: 0
 --- !u!1001 &1949750393
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -79167,7 +79197,7 @@ PrefabInstance:
     - target: {fileID: 8204084372152870255, guid: 1c22218c22590f749a350e6912adb2d6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 89.218
+      value: 89.22278
       objectReference: {fileID: 0}
     - target: {fileID: 8204084372152870255, guid: 1c22218c22590f749a350e6912adb2d6,
         type: 3}
@@ -79177,32 +79207,32 @@ PrefabInstance:
     - target: {fileID: 8204084372152870255, guid: 1c22218c22590f749a350e6912adb2d6,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 354.777
+      value: 354.77676
       objectReference: {fileID: 0}
     - target: {fileID: 8204084372152870255, guid: 1c22218c22590f749a350e6912adb2d6,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.002611018
+      value: -0.04271156
       objectReference: {fileID: 0}
     - target: {fileID: 8204084372152870255, guid: 1c22218c22590f749a350e6912adb2d6,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.00261011
+      value: 0.042696662
       objectReference: {fileID: 0}
     - target: {fileID: 8204084372152870255, guid: 1c22218c22590f749a350e6912adb2d6,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.70697856
+      value: 0.7056929
       objectReference: {fileID: 0}
     - target: {fileID: 8204084372152870255, guid: 1c22218c22590f749a350e6912adb2d6,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.70722544
+      value: 0.70593923
       objectReference: {fileID: 0}
     - target: {fileID: 8204084372152870255, guid: 1c22218c22590f749a350e6912adb2d6,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -90.00001
+      value: -89.97201
       objectReference: {fileID: 0}
     - target: {fileID: 8204084372152870255, guid: 1c22218c22590f749a350e6912adb2d6,
         type: 3}
@@ -79212,7 +79242,7 @@ PrefabInstance:
     - target: {fileID: 8204084372152870255, guid: 1c22218c22590f749a350e6912adb2d6,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 179.57701
+      value: 186.92499
       objectReference: {fileID: 0}
     - target: {fileID: 8831862233269092308, guid: 1c22218c22590f749a350e6912adb2d6,
         type: 3}
@@ -98356,10 +98386,11 @@ MonoBehaviour:
   KeyNeeded: 1
   DetectionPlayerRange: 10
   ItemsWichUnlock: []
-  DoorSound: {fileID: 0}
+  DoorSound: {fileID: 8300000, guid: fda970f8f2ad91848ac9630c60f60f74, type: 3}
   isOpen: 0
   animator: {fileID: 5147441888867575696}
   bigDoor: 1
+  bigDoorSfx: BigDoor
 --- !u!33 &5461331751828673505
 MeshFilter:
   m_ObjectHideFlags: 0

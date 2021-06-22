@@ -16,6 +16,8 @@ public class ButterflyClusterV2 : MonoBehaviour
     [Range(0f,50f)]
     public float Range;
     public bool Respawn;
+    [Range(0f, 20f)]
+    public float RangeScareByPlayer;
 
     [Header("Debug / Player Cluster")]
     [Range(0, 10)]
@@ -36,15 +38,19 @@ public class ButterflyClusterV2 : MonoBehaviour
     public GameObject ButterflyTempete;
 
     private Vector3? targetPos;
+    private GameObject playerMesh;
     private GameObject player;
     private float distToPlayer;
 
+
+
     private void Start()
     {
-        player = Character3D.m_instance.gameObject.transform.GetChild(0).gameObject;
+        player = Character3D.m_instance.gameObject;
+        playerMesh = player.transform.GetChild(0).gameObject;
         if (isFollowingPlayer)
         {
-            transform.position = player.transform.position;
+            transform.position = playerMesh.transform.position;
         }
         SpawnButterflys();
 
@@ -57,7 +63,7 @@ public class ButterflyClusterV2 : MonoBehaviour
         if (isFollowingPlayer)
         {
             Vector3 targetPos;
-            targetPos = player.transform.position - player.transform.forward * PosBehindPlayer + Vector3.up * PosY + player.transform.right * PosX;
+            targetPos = playerMesh.transform.position - playerMesh.transform.forward * PosBehindPlayer + Vector3.up * PosY + playerMesh.transform.right * PosX;
             distToPlayer = (targetPos - transform.position).magnitude;
             if (distToPlayer < 0f)
             {
@@ -89,6 +95,16 @@ public class ButterflyClusterV2 : MonoBehaviour
         }
         else
         {
+            if((player.transform.position - transform.position).magnitude < RangeScareByPlayer && player.GetComponent<Rigidbody>().velocity.magnitude > 3.5f)
+            {
+                m_Speed = 10f;
+                clockMove = 0f;
+            }
+            else
+            {
+                m_Speed = Random.Range(1.5f, 3f);
+            }
+
             if (targetPos == null)
             {
                 if (clockMove > 0)
@@ -103,16 +119,15 @@ public class ButterflyClusterV2 : MonoBehaviour
                         targetPos = null;
                     }
                 }
-
             }
             else
             {
-                transform.position = Vector3.MoveTowards(transform.position, targetPos.Value, Random.Range(2f, 4f) / 100f);
+                transform.position = Vector3.MoveTowards(transform.position, targetPos.Value, m_Speed / 100f);
                 Vector3 myDistance = targetPos.Value - transform.position;
                 if (myDistance.magnitude < 0.2f)
                 {
                     targetPos = null;
-                    clockMove = Random.Range(0f, 2f);
+                    clockMove = Random.Range(0.5f, 1.5f);
                 }
             }
         }
@@ -167,5 +182,7 @@ public class ButterflyClusterV2 : MonoBehaviour
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(transform.parent.position, Range);
         }
+
+        Gizmos.DrawWireSphere(transform.position, RangeScareByPlayer);
     }
 }

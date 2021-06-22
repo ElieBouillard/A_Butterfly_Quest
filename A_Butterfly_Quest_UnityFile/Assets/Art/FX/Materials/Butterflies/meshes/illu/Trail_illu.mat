@@ -85,7 +85,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTexture:
-        m_Texture: {fileID: 2800000, guid: ab41f5e85e7759544b873c03813158c5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1c4a38c7f6e79c44db3ddfd22b82c237, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
@@ -93,7 +93,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTexture:
-        m_Texture: {fileID: 2800000, guid: 9a6174c6675a3fa4bbc29fa67a98e98c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0553036eb3b5d7344b60a0f76560cfa7, type: 3}
         m_Scale: {x: 5, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
@@ -194,7 +194,7 @@ Material:
     - _EnergyConservingSpecularColor: 1
     - _Erosion: 0
     - _Flow: 0.214
-    - _Glow: 5
+    - _Glow: 2.04
     - _HeightAmplitude: 0.02
     - _HeightCenter: 0.5
     - _HeightMapParametrization: 0
@@ -289,9 +289,9 @@ Material:
     - _FakeFogColor: {r: 1, g: 1, b: 1, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _MainColor: {r: 0.13253225, g: 0.12941176, b: 0.7647059, a: 1}
+    - _MainColor: {r: 0.12406549, g: 0.27893606, b: 0.6415094, a: 1}
     - _PannerSpeed2: {r: 1, g: 0, b: 0, a: 0}
-    - _SecondaryColor: {r: 16.945696, g: 0, b: 26.759974, a: 1}
+    - _SecondaryColor: {r: 10.021892, g: 2.7104678, b: 32.356216, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}

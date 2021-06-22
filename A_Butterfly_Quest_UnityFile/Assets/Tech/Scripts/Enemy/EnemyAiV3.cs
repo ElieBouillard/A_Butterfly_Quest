@@ -46,6 +46,12 @@ public class EnemyAiV3 : MonoBehaviour
     private GameObject IllusionMeshPrefab;
     private bool checkIllsionClone;
 
+    [Header("SFX")]
+    public string dammageSFX;
+    public string waitSFX;
+    public string attackSFX;
+
+
 
     private void Start()
     {
@@ -237,7 +243,7 @@ public class EnemyAiV3 : MonoBehaviour
             m_Animator.SetTrigger("Attack");
             inAttack = true;
             AttackingClock = 2f;
-
+            PlaySound(attackSFX);
         }
         else
         {
@@ -286,5 +292,13 @@ public class EnemyAiV3 : MonoBehaviour
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, ChasingRange);
+    }
+
+    void PlaySound(string sfxName)
+    {
+        if (AudioManager.instance.sounds[0].source != null)
+        {
+            AudioManager.instance.Play(sfxName);
+        }
     }
 }

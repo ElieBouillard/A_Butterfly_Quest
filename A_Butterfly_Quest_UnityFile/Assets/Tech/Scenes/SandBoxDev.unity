@@ -2543,6 +2543,11 @@ PrefabInstance:
       propertyPath: Speedydididi
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 590550599605393959, guid: 83c604700b7bb034cb2ba8b0e5b799a0,
+        type: 3}
+      propertyPath: PosBehindPlayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83c604700b7bb034cb2ba8b0e5b799a0, type: 3}
 --- !u!4 &2051022723693816104 stripped

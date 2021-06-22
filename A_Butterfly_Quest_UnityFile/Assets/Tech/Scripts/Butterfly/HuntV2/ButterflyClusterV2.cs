@@ -31,6 +31,7 @@ public class ButterflyClusterV2 : MonoBehaviour
 
     private float Speedydididi;
     
+    private bool canSetScared;
 
     [Header("Links")]
     public GameObject ButterflyNormal;
@@ -40,9 +41,8 @@ public class ButterflyClusterV2 : MonoBehaviour
     private Vector3? targetPos;
     private GameObject playerMesh;
     private GameObject player;
-    private float distToPlayer;
 
-
+    public float distToTargetPos;
 
     private void Start()
     {
@@ -64,20 +64,20 @@ public class ButterflyClusterV2 : MonoBehaviour
         {
             Vector3 targetPos;
             targetPos = playerMesh.transform.position - playerMesh.transform.forward * PosBehindPlayer + Vector3.up * PosY + playerMesh.transform.right * PosX;
-            distToPlayer = (targetPos - transform.position).magnitude;
-            if (distToPlayer < 0f)
+            distToTargetPos = (targetPos - transform.position).magnitude;
+            if (distToTargetPos < 0f)
             {
-                Speedydididi = 0.02f;
+                Speedydididi = 0.001f;
             }
-            else if (distToPlayer > 2.5f)
+            else if (distToTargetPos > 1.3f)
             {
-                Speedydididi = 0.1f;
+                Speedydididi = 0.07f;
             }
             else
             {
-                float distRatio = (distToPlayer - 0f) / (2.5f - 0);
-                float diffSpeed = 0.1f - 0.02f;
-                Speedydididi = (distRatio * diffSpeed) + 0.02f;
+                float distRatio = (distToTargetPos - 0f) / (1.3f - 0);
+                float diffSpeed = 0.07f - 0.001f;
+                Speedydididi = (distRatio * diffSpeed) + 0.001f;
             }
 
             transform.position = Vector3.MoveTowards(transform.position, targetPos, Speedydididi);
@@ -90,21 +90,10 @@ public class ButterflyClusterV2 : MonoBehaviour
             {
                 PosX = 0f;
             }
-            
-
         }
         else
         {
-            if((player.transform.position - transform.position).magnitude < RangeScareByPlayer && player.GetComponent<Rigidbody>().velocity.magnitude > 3.5f)
-            {
-                m_Speed = 10f;
-                clockMove = 0f;
-            }
-            else
-            {
-                m_Speed = Random.Range(1.5f, 3f);
-            }
-
+            m_Speed = Random.Range(1.5f, 3f);
             if (targetPos == null)
             {
                 if (clockMove > 0)

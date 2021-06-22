@@ -50,7 +50,8 @@ MonoBehaviour:
   m_Speed: 0
   Range: 0
   Respawn: 0
-  PosBehindPlayer: 0
+  RangeScareByPlayer: 0
+  PosBehindPlayer: 0.6
   PosY: 1.1
   PosX: 0
   Speed: 0.04

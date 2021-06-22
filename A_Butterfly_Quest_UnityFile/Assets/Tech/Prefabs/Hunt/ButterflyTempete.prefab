@@ -9586,6 +9586,7 @@ GameObject:
   - component: {fileID: 6457228339399310161}
   - component: {fileID: -1265643424331802217}
   - component: {fileID: 3493882365849244998}
+  - component: {fileID: 3363691081328555153}
   m_Layer: 0
   m_Name: ButterflyTempete
   m_TagString: Butterfly
@@ -9685,6 +9686,22 @@ MonoBehaviour:
   m_ButterflyType: 0
   m_TargetPos: {x: 0, y: 0, z: 0}
   MovementRange: 1
+--- !u!54 &3363691081328555153
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6457228339399310163}
+  serializedVersion: 2
+  m_Mass: 0.001
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7752699874157759287
 GameObject:
   m_ObjectHideFlags: 0

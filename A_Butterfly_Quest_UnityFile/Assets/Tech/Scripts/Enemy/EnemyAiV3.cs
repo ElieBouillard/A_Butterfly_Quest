@@ -43,6 +43,10 @@ public class EnemyAiV3 : MonoBehaviour
 
     private float distanceToTarget;
 
+    private GameObject IllusionMeshPrefab;
+    private bool checkIllsionClone;
+
+
     private void Start()
     {
         //Links
@@ -57,6 +61,10 @@ public class EnemyAiV3 : MonoBehaviour
 
         //Attack
         HitCollider.enabled = false;
+
+        //IllusionClone
+        IllusionMeshPrefab = Character3D.m_instance.IllusionMeshItem;
+        Physics.IgnoreCollision(GetComponent<Collider>(), IllusionMeshPrefab.GetComponent<Collider>(), true);
     }
 
     private void Update()
@@ -64,6 +72,24 @@ public class EnemyAiV3 : MonoBehaviour
         StateMachineSystem();
         RangesSystem();
         //AnimatorSystem();
+
+        //IllusionClodeSystem
+        if (IllusionMeshPrefab.activeSelf)
+        {
+            if (!checkIllsionClone)
+            {
+                TargetObj = IllusionMeshPrefab;
+                checkIllsionClone = true;
+            }
+        }
+        else
+        {
+            if (checkIllsionClone)
+            {
+                TargetObj = Character3D.m_instance.gameObject;
+                checkIllsionClone = false;
+            }
+        }
     }
 
     #region System

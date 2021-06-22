@@ -289,7 +289,7 @@ Material:
     - _FakeFogColor: {r: 1, g: 1, b: 1, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _MainColor: {r: 0.7987142, g: 0.8113208, b: 0.4094874, a: 1}
+    - _MainColor: {r: 0.34015664, g: 0.63813996, b: 0.7924528, a: 1}
     - _PannerSpeed2: {r: 0.2, g: 0, b: 0, a: 0}
     - _SecondaryColor: {r: 0, g: 1.3254902, b: 1.4980392, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}

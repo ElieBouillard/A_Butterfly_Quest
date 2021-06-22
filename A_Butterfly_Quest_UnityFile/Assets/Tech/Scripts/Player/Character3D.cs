@@ -414,7 +414,7 @@ public class Character3D : MonoBehaviour
     private float clockNetHitCd;
 
     private bool checkDrawHitbox;
-    bool charged;
+    bool charged = false;
     private void HuntNetHitUpdate()
     {
         //Chasse Coup de Filet
@@ -422,13 +422,13 @@ public class Character3D : MonoBehaviour
         {
             if (Input.GetAxis("Fire1") > 0.7f && checkDrawHitbox == false)
             {
-                checkDrawHitbox = true;
                 ShowNetVisualBoxCollider(true);
+                checkDrawHitbox = true;
             }
             else if (Input.GetAxisRaw("Fire1") == 0f && checkDrawHitbox == true && charged)
             {
                 checkDrawHitbox = false;
-                ShowNetVisualBoxCollider(false);
+                charged = false;
 
                 clockBeforeNetHit = 0.3f;
                 canClockAfterNetHit = true;
@@ -437,15 +437,18 @@ public class Character3D : MonoBehaviour
                 m_animManager.netTrigger = true;
                 VFXManager.m_instance.ShowNet(true);
                 AudioManager.instance.Play("Net");
+                ShowNetVisualBoxCollider(false);
             }
-        }
-        else
-        {
-            if(checkDrawHitbox == true)
+            else if(Input.GetAxisRaw("Fire1") == 0f && checkDrawHitbox == true && !charged)
             {
                 checkDrawHitbox = false;
                 ShowNetVisualBoxCollider(false);
             }
+        }
+        else
+        {
+            checkDrawHitbox = false;
+            ShowNetVisualBoxCollider(false);
         }
 
 
@@ -494,67 +497,43 @@ public class Character3D : MonoBehaviour
         }
     }
 
-    bool clockMeaning;
+    float currErosionValue;
     float clockShowVisualBox = 0f;
+    bool canClock;
     private void ShowNetVisualBoxCollider(bool value)
     {
         if (value)
         {
-            clockMeaning = value;
+            NetVisualbox.SetActive(true);
             clockShowVisualBox = 1;
+            canClock = true;
         }
         else
         {
-            clockMeaning = value;
-            clockShowVisualBox = 0f;
+            NetVisualbox.SetActive(false);
+            currErosionValue = 1f;
+            canClock = false;
         }
     }
 
-    float currErosionValue;
     private void NetVisualBoxColliderUptade()
     {
-        if (clockMeaning)
+        if (canClock)
         {
             if (clockShowVisualBox > 0)
             {
                 clockShowVisualBox -= Time.deltaTime;
-                NetVisualbox.SetActive(true);
-                if(Input.GetAxisRaw("Fire1") == 0)
-                {
-                    clockMeaning = false;
-                    charged = false;
-                    checkDrawHitbox = false;
-                }
+                charged = false;
             }
             else
             {
                 charged = true;
             }
         }
-        else if (charged == true)
-        {
-            if (clockShowVisualBox < 1f)
-            {
-                clockShowVisualBox += Time.deltaTime;                
-            }
-            else
-            {
-                NetVisualbox.SetActive(false);
-                charged = false;
-            }
-        }
-        else
-        {
-            clockShowVisualBox = 1f;
-            charged = false;    
-        }
 
         currErosionValue = clockShowVisualBox;
-        if(currErosionValue > 1)
-        {
-            currErosionValue = 1;
-        }
-        else if(currErosionValue < 0)
+
+        if(currErosionValue < 0)
         {
             currErosionValue = 0;
         }

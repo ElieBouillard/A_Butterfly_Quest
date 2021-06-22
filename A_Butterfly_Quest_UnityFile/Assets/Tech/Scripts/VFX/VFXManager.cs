@@ -13,6 +13,8 @@ public class VFXManager : MonoBehaviour
     public ParticleSystem idleAimEnergyVFX;
     public ParticleSystem AimVFX;
     public ParticleSystem ShootVFX;
+    public ParticleSystem ShootVFX_Illusion;
+    public ParticleSystem ShootVFX_Tempete;
     public GameObject ShootLine;
     public ParticleSystem ImpactVFX_missed;
     public ParticleSystem ImpactVFX_hit;
@@ -190,12 +192,22 @@ public class VFXManager : MonoBehaviour
         
     }
 
-    public void SpawnShootVFX(Vector3 endPos, bool hitSomething = false)
+    public void SpawnShootVFX(Vector3 endPos, bool hitSomething = false, int type = 0)
     {
         Vector3 startPos = shoot_startPoint.transform.position;
-        
-        
-        Instantiate(ShootVFX, shoot_startPoint.transform.position, Quaternion.identity); //shoot
+
+        switch (type)
+        {
+            case 0:
+                Instantiate(ShootVFX, shoot_startPoint.transform.position, Quaternion.identity); //shoot
+                break;
+            case 1:
+                Instantiate(ShootVFX_Illusion, shoot_startPoint.transform.position, Quaternion.identity); //shoot illu
+                break;
+            case 2:
+                Instantiate(ShootVFX_Tempete, shoot_startPoint.transform.position, Quaternion.identity); //shoot tempete
+                break;
+        }
 
         if (hitSomething)
         {

@@ -7,11 +7,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Glow_06
+  m_Name: Mushroom_LightQuad_Red
   m_Shader: {fileID: 4800000, guid: c66b2bbe51b959840ab81052dafd9a39, type: 3}
-  m_ShaderKeywords: _ACTIVATEEFFECT_ON _BLENDMODE_PRE_MULTIPLY _DISABLE_SSR _DOUBLESIDED_ON
-    _ENABLE_FOG_ON_TRANSPARENT _ISPANNING3_ON _ISPANNING4_ON _NORMALMAP_TANGENT_SPACE
-    _SURFACE_TYPE_TRANSPARENT
+  m_ShaderKeywords: _BLENDMODE_ADD _DISABLE_SSR _DOUBLESIDED_ON _ENABLE_FOG_ON_TRANSPARENT
+    _ISPANNING3_ON _ISPANNING4_ON _NORMALMAP_TANGENT_SPACE _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
@@ -53,7 +52,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DistortionTexture:
-        m_Texture: {fileID: 2800000, guid: c068f140c584612469e41c535e4aa1e7, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DistortionVectorMap:
@@ -93,8 +92,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTexture:
-        m_Texture: {fileID: 2800000, guid: 9a6174c6675a3fa4bbc29fa67a98e98c, type: 3}
-        m_Scale: {x: 0.2, y: 1}
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
         m_Texture: {fileID: 0}
@@ -136,7 +135,7 @@ Material:
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
-    - _ActivateEffect: 1
+    - _ActivateEffect: 0
     - _ActivateEffect2: 0
     - _ActivateEffect3: 0
     - _AddPrecomputedVelocity: 0
@@ -147,15 +146,15 @@ Material:
     - _AlphaCutoffPostpass: 0.5
     - _AlphaCutoffPrepass: 0.5
     - _AlphaCutoffShadow: 0.5
-    - _AlphaDstBlend: 10
+    - _AlphaDstBlend: 1
     - _AlphaSrcBlend: 1
     - _Anisotropy: 0
-    - _BlendMode: 4
+    - _BlendMode: 1
     - _CoatMask: 0
     - _CullMode: 0
     - _CullModeForward: 0
     - _Cutoff: 0.5
-    - _Depth: 0.05
+    - _Depth: 0.72
     - _DepthOffsetEnable: 0
     - _DetailAlbedoScale: 1
     - _DetailNormalScale: 1
@@ -181,8 +180,8 @@ Material:
     - _DistortionVectorScale: 2
     - _DoubleSidedEnable: 1
     - _DoubleSidedNormalMode: 1
-    - _DstBlend: 10
-    - _DstBlendMode: 10
+    - _DstBlend: 1
+    - _DstBlendMode: 1
     - _EmissiveColorMode: 1
     - _EmissiveExposureWeight: 1
     - _EmissiveGlow: 1
@@ -193,8 +192,8 @@ Material:
     - _EnableGeometricSpecularAA: 0
     - _EnergyConservingSpecularColor: 1
     - _Erosion: 0
-    - _Flow: 0.214
-    - _Glow: 10000
+    - _Flow: 0
+    - _Glow: 0.2
     - _HeightAmplitude: 0.02
     - _HeightCenter: 0.5
     - _HeightMapParametrization: 0
@@ -289,9 +288,9 @@ Material:
     - _FakeFogColor: {r: 1, g: 1, b: 1, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _MainColor: {r: 0.34015664, g: 0.63813996, b: 0.7924528, a: 1}
-    - _PannerSpeed2: {r: 0.2, g: 0, b: 0, a: 0}
-    - _SecondaryColor: {r: 0, g: 1.3254902, b: 1.4980392, a: 1}
+    - _MainColor: {r: 0.23753315, g: 0.23753315, b: 0.23753315, a: 0.4117647}
+    - _PannerSpeed2: {r: 1, g: 0, b: 0, a: 0}
+    - _SecondaryColor: {r: 1.2926484, g: 0.21656936, b: 0, a: 0.4627451}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
@@ -300,8 +299,8 @@ Material:
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
     - _UVMasking: {r: 1, g: 0, b: 0, a: 0}
     - _UVPanningSPEED: {r: 1, g: 0, b: 0, a: 0}
-    - _XYSpeedZWClampAlpha: {r: 1, g: 0, b: 0, a: 1}
---- !u!114 &9207081513502337269
+    - _XYSpeedZWClampAlpha: {r: 0, g: 0, b: 0, a: 1}
+--- !u!114 &7165991443863408856
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

@@ -100,8 +100,7 @@ MonoBehaviour:
   KeyNeeded: 0
   DetectionPlayerRange: 0
   ItemsWichUnlock: []
-  DoorOpeningSound: {fileID: 8300000, guid: d07c66fd2a8972047bd59ac1e15e30a8, type: 3}
-  DoorClosingSound: {fileID: 8300000, guid: 03a63b8f3338d33419895a78c4c7750a, type: 3}
+  DoorSound: {fileID: 8300000, guid: fda970f8f2ad91848ac9630c60f60f74, type: 3}
   isOpen: 0
   animator: {fileID: 0}
   bigDoor: 0

@@ -107,8 +107,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17020e58e2d2c8d4e82a9fbdb4304d74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnTopOfMovingCube: 0
   Activated: 0
   speed: 0.005
   range: 0.1
-  targetPos: {x: 0, y: 0, z: 0}
-  startPos: {x: 0, y: 0, z: 0}
+  sfxOn: PressurePlateOn
+  sfxOff: PressurePlateOff

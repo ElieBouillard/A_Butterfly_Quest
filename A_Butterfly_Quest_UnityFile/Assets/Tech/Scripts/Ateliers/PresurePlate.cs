@@ -23,6 +23,10 @@ public class PresurePlate : MonoBehaviour
         targetPos = startPos;
     }
 
+    public string sfxOn;
+    public string sfxOff;
+
+
 
     private void Update()
     {
@@ -58,12 +62,15 @@ public class PresurePlate : MonoBehaviour
         {
             Activated = false;
             targetPos = startPos;
+            PlaySound(sfxOff);
         }
 
         if (other.GetComponent<MovingCube>())
         {
             Activated = false;
             targetPos = startPos;
+            PlaySound(sfxOff);
+
         }
     }
 
@@ -73,6 +80,7 @@ public class PresurePlate : MonoBehaviour
         {
             Activated = true;
             targetPos = startPos + new Vector3(0, -range, 0);
+            PlaySound(sfxOn);
         }
 
         if(other.transform.name == "IllusionMeshPrefab")
@@ -81,12 +89,22 @@ public class PresurePlate : MonoBehaviour
             targetPos = startPos + new Vector3(0, -range, 0);
             clock = Character3D.m_instance.clockCanDash;
             canFalse = true;
+            PlaySound(sfxOn);
         }
 
         if (other.GetComponent<MovingCube>())
         {
             Activated = true;
             targetPos = startPos + new Vector3(0, -range, 0);
+            PlaySound(sfxOn);
+        }
+    }
+
+    void PlaySound(string sfxName)
+    {
+        if (AudioManager.instance.sounds[0].source != null)
+        {
+            AudioManager.instance.Play(sfxName);
         }
     }
 }

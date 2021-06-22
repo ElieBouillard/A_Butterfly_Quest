@@ -157,7 +157,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9289136}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.01, y: 1.39, z: -10.04}
+  m_LocalPosition: {x: 179, y: -66.7, z: 295.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7255424629777524410}
@@ -2325,6 +2325,56 @@ PrefabInstance:
       propertyPath: FreeLookCamera
       value: 
       objectReference: {fileID: 2043809381}
+    - target: {fileID: 3340417402739704076, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
+      propertyPath: sounds.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340417402739704076, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
+      propertyPath: sounds.Array.data[4].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8f74ab52714c33749b207c3bfdcb1a44, type: 3}
+    - target: {fileID: 3340417402739704076, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
+      propertyPath: sounds.Array.data[5].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: bc45fb73f1905264bac69c45f725886d, type: 3}
+    - target: {fileID: 3340417402739704076, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
+      propertyPath: sounds.Array.data[7].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: bdcf2bf675e3e0c4290c9c0156ec6ea3, type: 3}
+    - target: {fileID: 3340417402739704076, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
+      propertyPath: sounds.Array.data[7].name
+      value: PressurePlateOn
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340417402739704076, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
+      propertyPath: sounds.Array.data[8].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 55a598388bbee7f4195295b571abf8cf, type: 3}
+    - target: {fileID: 3340417402739704076, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
+      propertyPath: sounds.Array.data[8].name
+      value: PressurePlateOn
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340417402739704076, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
+      propertyPath: sounds.Array.data[2].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340417402739704076, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
+      propertyPath: sounds.Array.data[7].volume
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340417402739704076, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
+      propertyPath: sounds.Array.data[8].volume
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 3340417402739704077, guid: 664e653c31a29c0408643f1de8d4a39a,
         type: 3}
       propertyPath: m_freelook

@@ -32,4 +32,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Tech/Scenes/SandBoxDev.unity
     guid: 0dc5436b9ebfa084b9289567f86025ec
+  - enabled: 1
+    path: Assets/Tech/Scenes/Integration_02.unity
+    guid: eaaa2211fb80f534ab247c450ece798d
+  - enabled: 1
+    path: Assets/Tech/Scenes/VFX_Environment.unity
+    guid: fa5a30f94ed50234983e0b7c9b278b95
+  - enabled: 1
+    path: Assets/Tech/Scenes/CONSOLE.unity
+    guid: 0ce314658bd63c945b32ea7e9155f635
   m_configObjects: {}

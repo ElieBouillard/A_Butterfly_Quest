@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:A_Butterfly_Quest_UnityFile/Assets/Tech/Scenes/LD/NavMesh.asset.meta
 guid: dc07fa1b559f1254692acdf822470e1c
 NativeFormatImporter:
+=======
+guid: fcd8edc26bd7e564ab52662316bd09f8
+folderAsset: yes
+DefaultImporter:
+>>>>>>> ed5f38b431a6f85a27f627094eaaf980ef2d3689:A_Butterfly_Quest_UnityFile/Assets/Tech/Test/Portrait.meta
   externalObjects: {}
   mainObjectFileID: 0
   userData: 

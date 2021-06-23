@@ -22,7 +22,9 @@ public class Receptacle : MonoBehaviour
 
     [Header("Feedback")]
     public List<GameObject> Balls = new List<GameObject>();
-    public Material Material;
+    public Material activatedMaterial_Normal;
+    public Material activatedMaterial_Tempete;
+    public Material activatedMaterial_Illusion;
     List<GameObject> BallsToColor = new List<GameObject>();
     int index = 0;
     
@@ -127,8 +129,19 @@ public class Receptacle : MonoBehaviour
     }
 
     private void ColorBall()
-    {   
-        BallsToColor[index].GetComponent<MeshRenderer>().material = Material;
+    {
+        switch (m_ButterflyNeededType)
+        {
+            case ButterflyNeededType.Normal:
+                BallsToColor[index].GetComponent<MeshRenderer>().material = activatedMaterial_Normal;
+                break;
+            case ButterflyNeededType.Illusion:
+                BallsToColor[index].GetComponent<MeshRenderer>().material = activatedMaterial_Illusion;
+                break;
+            case ButterflyNeededType.Tempete:
+                BallsToColor[index].GetComponent<MeshRenderer>().material = activatedMaterial_Tempete;
+                break;
+        }
     }  
 
 

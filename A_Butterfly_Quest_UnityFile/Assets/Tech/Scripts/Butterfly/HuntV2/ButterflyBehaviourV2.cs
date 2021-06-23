@@ -53,6 +53,7 @@ public class ButterflyBehaviourV2 : MonoBehaviour
         transform.SetParent(PlayerCluster.transform);
         gameObject.GetComponent<Collider>().enabled = false;
 
+        gameObject.transform.GetChild(0).transform.gameObject.GetComponent<ParticleSystem>().Clear();
         gameObject.transform.GetChild(0).transform.gameObject.GetComponent<ParticleSystem>().Stop();
 
         //addTrail
@@ -176,6 +177,7 @@ public class ButterflyBehaviourV2 : MonoBehaviour
 
         if (!NetVisualCollider.m_instance.colliderOn || NetVisualCollider.m_instance.gameObject.activeSelf == false) 
         {
+            gameObject.transform.GetChild(0).transform.gameObject.GetComponent<ParticleSystem>().Clear();
             gameObject.transform.GetChild(0).transform.gameObject.GetComponent<ParticleSystem>().Stop();
         }
     }

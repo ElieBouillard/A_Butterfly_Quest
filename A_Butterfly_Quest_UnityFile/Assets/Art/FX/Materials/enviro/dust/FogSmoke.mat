@@ -22,8 +22,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: FogSmoke
   m_Shader: {fileID: 4800000, guid: cd496bf9d6070ce468329073678da678, type: 3}
-  m_ShaderKeywords: _BLENDMODE_ALPHA _DISABLE_SSR _ISPANNING3_ON _ISPANNING4_ON _NORMALMAP_TANGENT_SPACE
-    _SURFACE_TYPE_TRANSPARENT
+  m_ShaderKeywords: _BLENDMODE_ALPHA _DISABLE_SSR _ENABLE_FOG_ON_TRANSPARENT _ISPANNING3_ON
+    _ISPANNING4_ON _NORMALMAP_TANGENT_SPACE _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -177,7 +177,7 @@ Material:
     - _DisplacementLockObjectScale: 1
     - _DisplacementLockTilingScale: 1
     - _DisplacementMode: 0
-    - _DistanceToFade: 60
+    - _DistanceToFade: 50
     - _DistanceToFade1: 70
     - _DistortionBlendMode: 0
     - _DistortionBlurBlendMode: 0
@@ -203,7 +203,7 @@ Material:
     - _EmissiveIntensity: 1
     - _EmissiveIntensityUnit: 0
     - _EnableBlendModePreserveSpecularLighting: 1
-    - _EnableFogOnTransparent: 0
+    - _EnableFogOnTransparent: 1
     - _EnableGeometricSpecularAA: 0
     - _EnergyConservingSpecularColor: 1
     - _Erosion: 0
@@ -241,7 +241,7 @@ Material:
     - _PPDPrimitiveWidth: 1
     - _ReceivesSSR: 0
     - _RefractionModel: 0
-    - _RenderQueueType: 1
+    - _RenderQueueType: 5
     - _RequireSplitLighting: 0
     - _SSRefractionProjectionModel: 0
     - _Smoothness: 0.5
@@ -264,7 +264,7 @@ Material:
     - _StencilWriteMaskMV: 40
     - _SubsurfaceMask: 1
     - _SupportDecals: 1
-    - _SurfaceType: 0
+    - _SurfaceType: 1
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
     - _Thickness: 1

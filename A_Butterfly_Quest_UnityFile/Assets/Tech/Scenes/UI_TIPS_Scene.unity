@@ -439,12 +439,12 @@ MonoBehaviour:
   - Camera
   - 'Press <sprite=8> to aim the Recepatacle and  <sprite=4>to Shoot Butterfly inside
     it '
-  - Press <sprite=8> to Aim and  <sprite=4> with Storm Butterfly to Destroy the Brambles
+  - Press <sprite=8> to Aim and  <sprite=4> with <sprite=13> to Destroy the Brambles
   - Walk Slowly and Hold <sprite=4> to show the Net Range then Release to catch Butterflies
   - Press <sprite=10> or <sprite=6>  to Equip a Butterfly
-  - Press  <sprite=3> against the Rock with Storm Butterfly to move it
+  - Press  <sprite=3> against the Rock with <sprite=13> to move it
   - Press  <sprite=0> +  <sprite=3> to Jump Farther
-  - Press  <sprite=3> with Illusion Butterfly to create a clone
+  - Press  <sprite=3> with <sprite=14> to create a clone
   - Press  <sprite=2> to get the Butterflies back to you
   - Press  <sprite=2> to Use the Key and Open the Door
   - Collect 3 Keys and Press  <sprite=2> to Open the Door

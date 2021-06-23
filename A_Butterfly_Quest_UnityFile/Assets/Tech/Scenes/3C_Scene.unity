@@ -816,9 +816,7 @@ MonoBehaviour:
   m_AnimatedTarget: {fileID: 508540547}
   m_LayerIndex: 0
   m_ShowDebugText: 0
-  m_ChildCameras:
-  - {fileID: 1078631265}
-  - {fileID: 2043809381}
+  m_ChildCameras: []
   m_Instructions:
   - m_FullHash: 1839989770
     m_VirtualCamera: {fileID: 2043809381}
@@ -1379,7 +1377,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195822808}
-  m_LocalRotation: {x: 0.29893947, y: 0.7180967, z: -0.25815213, w: 0.5730008}
+  m_LocalRotation: {x: 0.2989394, y: 0.7180967, z: -0.25815213, w: 0.5730008}
   m_LocalPosition: {x: 3.1282315, y: 3.0270233, z: 1.218966}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2423,7 +2421,7 @@ PrefabInstance:
     - target: {fileID: 3340417402739704076, guid: 664e653c31a29c0408643f1de8d4a39a,
         type: 3}
       propertyPath: sounds.Array.size
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 3340417402739704076, guid: 664e653c31a29c0408643f1de8d4a39a,
         type: 3}
@@ -2507,6 +2505,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3340417402739704076, guid: 664e653c31a29c0408643f1de8d4a39a,
         type: 3}
+      propertyPath: sounds.Array.data[13].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: c2f6209bb1000d64b9db25836d6ea119, type: 3}
+    - target: {fileID: 3340417402739704076, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
+      propertyPath: sounds.Array.data[13].name
+      value: Recepatcle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340417402739704076, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
       propertyPath: sounds.Array.data[2].volume
       value: 0.9
       objectReference: {fileID: 0}
@@ -2538,6 +2546,11 @@ PrefabInstance:
     - target: {fileID: 3340417402739704076, guid: 664e653c31a29c0408643f1de8d4a39a,
         type: 3}
       propertyPath: sounds.Array.data[12].volume
+      value: 0.268
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340417402739704076, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
+      propertyPath: sounds.Array.data[13].volume
       value: 0.268
       objectReference: {fileID: 0}
     - target: {fileID: 3340417402739704077, guid: 664e653c31a29c0408643f1de8d4a39a,
@@ -2572,6 +2585,12 @@ PrefabInstance:
       objectReference: {fileID: 1141279500}
     - target: {fileID: 3340417402739704078, guid: 664e653c31a29c0408643f1de8d4a39a,
         type: 3}
+      propertyPath: ShootVFX_Tempete
+      value: 
+      objectReference: {fileID: 2629178166941542265, guid: 7717749c6c88ce54895dffeb349e8d06,
+        type: 3}
+    - target: {fileID: 3340417402739704078, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
       propertyPath: idleAimEnergyVFX
       value: 
       objectReference: {fileID: 1604021083}
@@ -2600,6 +2619,12 @@ PrefabInstance:
       propertyPath: NormalGlowColor.r
       value: 0.34015664
       objectReference: {fileID: 0}
+    - target: {fileID: 3340417402739704078, guid: 664e653c31a29c0408643f1de8d4a39a,
+        type: 3}
+      propertyPath: ShootVFX_Illusion
+      value: 
+      objectReference: {fileID: 2629178166941542265, guid: dab9af6be34275a429a3826c1bd7dfd3,
+        type: 3}
     - target: {fileID: 3340417402739704078, guid: 664e653c31a29c0408643f1de8d4a39a,
         type: 3}
       propertyPath: TempeteGlowColor.a

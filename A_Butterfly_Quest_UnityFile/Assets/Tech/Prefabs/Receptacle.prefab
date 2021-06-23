@@ -1305,10 +1305,20 @@ MonoBehaviour:
   - {fileID: 234092226}
   - {fileID: 1766240281}
   - {fileID: 32565433}
-  Material: {fileID: 2100000, guid: f3f6465e9af6c5d49a69696727bf54a9, type: 2}
+  activatedMaterial_Normal: {fileID: 2100000, guid: f3f6465e9af6c5d49a69696727bf54a9,
+    type: 2}
+  activatedMaterial_Tempete: {fileID: 2100000, guid: d31e0e73e8616d647a6e7e532ec828ae,
+    type: 2}
+  activatedMaterial_Illusion: {fileID: 2100000, guid: 15557f789d1dcf340b9e5da0b4c1c941,
+    type: 2}
   Butterfly_Normal: {fileID: 7679354112586176870}
   Butterfly_Illusion: {fileID: 2450242965764679000}
   Butterfly_Tempete: {fileID: 3456659419061577232}
+  camAffilied: 0
+  cam: {fileID: 0}
+  haveConnectedReceptacle: 0
+  connectedReceptacle: {fileID: 0}
+  SFXName: Recepatcle
 --- !u!65 &8831862233269092307
 BoxCollider:
   m_ObjectHideFlags: 0

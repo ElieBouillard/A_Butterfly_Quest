@@ -194,7 +194,7 @@ Material:
     - _EnergyConservingSpecularColor: 1
     - _Erosion: 0
     - _Flow: 0.214
-    - _Glow: 7
+    - _Glow: 20
     - _HeightAmplitude: 0.02
     - _HeightCenter: 0.5
     - _HeightMapParametrization: 0
@@ -291,7 +291,7 @@ Material:
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _MainColor: {r: 0, g: 0, b: 0, a: 0.9647059}
     - _PannerSpeed2: {r: 0.2, g: 0, b: 0, a: 0}
-    - _SecondaryColor: {r: 42.527176, g: 43.5091, b: 20.728394, a: 1}
+    - _SecondaryColor: {r: 46.33666, g: 47.128056, b: 27.343164, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}

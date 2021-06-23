@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ReceptacleActivated
+  m_Name: ReceptacleActivated_illusion
   m_Shader: {fileID: 4800000, guid: c66b2bbe51b959840ab81052dafd9a39, type: 3}
   m_ShaderKeywords: _ACTIVATEEFFECT_ON _BLENDMODE_ALPHA _DISABLE_SSR _ENABLE_FOG_ON_TRANSPARENT
     _ISPANNING3_ON _ISPANNING4_ON _ISPANNING_ON _NORMALMAP_TANGENT_SPACE _SURFACE_TYPE_TRANSPARENT
@@ -52,7 +52,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DistortionTexture:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: c068f140c584612469e41c535e4aa1e7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DistortionVectorMap:
@@ -92,8 +92,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTexture:
-        m_Texture: {fileID: 2800000, guid: 9a6174c6675a3fa4bbc29fa67a98e98c, type: 3}
-        m_Scale: {x: 1, y: 0.2}
+        m_Texture: {fileID: 2800000, guid: 5f13594b34348ff4f9d829b7326b4622, type: 3}
+        m_Scale: {x: 0.5, y: 0.3}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
         m_Texture: {fileID: 0}
@@ -192,7 +192,7 @@ Material:
     - _EnableGeometricSpecularAA: 0
     - _EnergyConservingSpecularColor: 1
     - _Erosion: 0
-    - _Flow: 0
+    - _Flow: 1
     - _Glow: 15
     - _HeightAmplitude: 0.02
     - _HeightCenter: 0.5
@@ -288,9 +288,9 @@ Material:
     - _FakeFogColor: {r: 1, g: 1, b: 1, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _MainColor: {r: 1.5327469, g: 4.801485, b: 0.747401, a: 1}
-    - _PannerSpeed2: {r: 0.1, g: -0.2, b: 0, a: 0}
-    - _SecondaryColor: {r: 0.047864318, g: 1, b: 0, a: 0}
+    - _MainColor: {r: 15.265473, g: 2.6620493, b: 16.94838, a: 1}
+    - _PannerSpeed2: {r: 0.1, g: 0.2, b: 0, a: 0}
+    - _SecondaryColor: {r: 0.6391325, g: 0, b: 1, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
@@ -299,7 +299,7 @@ Material:
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
     - _UVMasking: {r: 1, g: 0, b: 0, a: 0}
     - _UVPanningSPEED: {r: 0.2, g: 0, b: 0, a: 0}
-    - _XYSpeedZWClampAlpha: {r: 0, g: 0, b: 0, a: 1}
+    - _XYSpeedZWClampAlpha: {r: 0.5, g: 0.5, b: 0, a: 1}
 --- !u!114 &1763989247174208754
 MonoBehaviour:
   m_ObjectHideFlags: 11

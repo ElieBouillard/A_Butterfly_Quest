@@ -49,10 +49,14 @@ public class Receptacle : MonoBehaviour
     public bool haveConnectedReceptacle;
     public GameObject connectedReceptacle;
 
+    public string SFXName;
+    bool canPlaySound;
+
 
 
     private void Start()
     {
+        canPlaySound = true;
         m_collider = gameObject.GetComponent<Collider>();
         PlayerMask = LayerMask.GetMask("Player");
 
@@ -78,7 +82,14 @@ public class Receptacle : MonoBehaviour
         {
             m_collider.enabled = false;
             Completed = true;
-            camLaunch();          
+            camLaunch();
+            if (canPlaySound)
+            {
+                AudioManager.instance.Play(SFXName);
+                canPlaySound = false;
+
+            }
+
         }
     }
 

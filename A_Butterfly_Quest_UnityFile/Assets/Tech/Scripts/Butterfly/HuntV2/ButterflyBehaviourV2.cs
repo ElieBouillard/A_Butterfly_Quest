@@ -119,7 +119,7 @@ public class ButterflyBehaviourV2 : MonoBehaviour
             if ((player.transform.position - transform.position).magnitude < 5f && player.gameObject.GetComponent<Rigidbody>().velocity.magnitude > 3.5f && canScared)
             {
                 randomMove = false;
-                transform.position += transform.forward * 0.075f;
+                transform.position += transform.forward * 8f * Time.deltaTime;
                 if (randomRotate)
                 {
                     gameObject.transform.eulerAngles = new Vector3(0, Random.Range(-180, 180), 0);

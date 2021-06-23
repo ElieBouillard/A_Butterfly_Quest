@@ -95,6 +95,8 @@ public class RespawnSystem : MonoBehaviour
                 Respawn();
                 canRespawn = false;
                 BlackScreenDeath.gameObject.GetComponent<Animator>().SetBool("Opace", false);
+                StartWaveTrigger.m_instance.canStartWave = true;
+                WavesManager.instance.ClearEnemys();
             }
         }
     }

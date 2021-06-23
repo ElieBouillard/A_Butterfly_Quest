@@ -11,14 +11,18 @@ public class WavesManager : MonoBehaviour
     public Waves[] Waves;
     public GameObject[] Spawners;
 
+    public GameObject succesItem;
+
     //Debug
     private List<GameObject> CurrWaveEnemys;
     private int waveIndex;
     private float clockSpawn;
-    private float clockBetweenWaves;
+    [HideInInspector]
+    public float clockBetweenWaves;
     private GameObject WaveText;
     private GameObject WaveBackground;
 
+    private bool canWave;
 
     private void Awake()
     {
@@ -28,8 +32,6 @@ public class WavesManager : MonoBehaviour
     private void Start()
     {
         CurrWaveEnemys = new List<GameObject>();
-        waveIndex = 0;
-        clockBetweenWaves = TimeBetweenWaves;
         WaveText = UIManager.instance.WaveText;
         WaveBackground = UIManager.instance.WaveBackGround;
 
@@ -37,6 +39,7 @@ public class WavesManager : MonoBehaviour
         canHideBackGround = true;
         canShowText = true;
         canHideText = true;
+        succesItem.SetActive(false);
     }
 
     private void Update()
@@ -70,57 +73,85 @@ public class WavesManager : MonoBehaviour
     bool canHideText;
     private void WaveSystemUpdate()
     {
-        if (CheckIfAllEnemyDead())
+        if (canWave)
         {
-            if (canInitiateWave)
+            if (CheckIfAllEnemyDead())
             {
-                if(waveIndex >= Waves.Length)
+                if (waveIndex >= Waves.Length)
                 {
                     Win();
                 }
-                else
+                if (canInitiateWave)
                 {
                     InitiateNextWave();
-                }               
-            }
-            else
-            {
-                if(clockBetweenWaves > 0)
-                {
-                    if (canShowBackGround)
-                    {
-                        WaveBackground.GetComponent<Animator>().SetBool("On", true);
-                        canShowBackGround = false;
-                    }
-                    if(canShowText && clockBetweenWaves <= 3.5f)
-                    {
-                        WaveText.GetComponent<Text>().text = "Wave " + (waveIndex + 1).ToString();
-                        WaveText.GetComponent<Animator>().SetBool("On", true);
-                        canShowText = false;
-                    }
-                    if(canHideText && clockBetweenWaves <= 1.5f)
-                    {
-                        WaveText.GetComponent<Animator>().SetBool("On", false);
-                        canHideText = false;
-                    }
-                    if(canHideBackGround&& clockBetweenWaves <= 1f)
-                    {
-                        WaveBackground.GetComponent<Animator>().SetBool("On", false);
-                        canHideBackGround = false;
-                    }
-                    clockBetweenWaves -= Time.deltaTime;
                 }
                 else
                 {
-                    canInitiateWave = true;
+                    if (clockBetweenWaves > 0)
+                    {
+                        if (canShowBackGround)
+                        {
+                            WaveBackground.GetComponent<Animator>().SetBool("On", true);
+                            canShowBackGround = false;
+                        }
+                        if (canShowText && clockBetweenWaves <= 3.5f)
+                        {
+                            WaveText.GetComponent<Text>().text = "Wave " + (waveIndex + 1).ToString();
+                            WaveText.GetComponent<Animator>().SetBool("On", true);
+                            canShowText = false;
+                        }
+                        if (canHideText && clockBetweenWaves <= 1.5f)
+                        {
+                            WaveText.GetComponent<Animator>().SetBool("On", false);
+                            canHideText = false;
+                        }
+                        if (canHideBackGround && clockBetweenWaves <= 1f)
+                        {
+                            WaveBackground.GetComponent<Animator>().SetBool("On", false);
+                            canHideBackGround = false;
+                        }
+                        clockBetweenWaves -= Time.deltaTime;
+                    }
+                    else
+                    {
+                        canInitiateWave = true;
 
-                    canShowBackGround = true;
-                    canHideBackGround = true;
-                    canShowText = true;
-                    canHideText = true;
+                        canShowBackGround = true;
+                        canHideBackGround = true;
+                        canShowText = true;
+                        canHideText = true;
+                    }
                 }
             }
         }
+    }
+
+    public void StartWaveSystem()
+    {
+        clockBetweenWaves = TimeBetweenWaves;
+        waveIndex = 0;
+        if(CurrWaveEnemys.Count > 0)
+        {
+            foreach (GameObject enemy in CurrWaveEnemys)
+            {
+                Destroy(enemy);
+            }
+            CurrWaveEnemys.Clear();
+        }
+        canWave = true;
+    }
+
+    public void ClearEnemys()
+    {
+        if (CurrWaveEnemys.Count > 0)
+        {
+            foreach (GameObject enemy in CurrWaveEnemys)
+            {
+                Destroy(enemy);
+            }
+            CurrWaveEnemys.Clear();
+        }
+        canWave = false;
     }
 
     private bool CheckIfAllEnemyDead()
@@ -142,6 +173,10 @@ public class WavesManager : MonoBehaviour
 
     private void Win()
     {
-        Debug.Log("C'est gagné");
+        canShowBackGround = false;
+        canHideBackGround = false;
+        canShowText = false;
+        canHideText = false;
+        succesItem.SetActive(true);
     }
 }

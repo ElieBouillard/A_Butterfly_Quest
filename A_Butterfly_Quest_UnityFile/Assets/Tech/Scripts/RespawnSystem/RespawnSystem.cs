@@ -59,6 +59,7 @@ public class RespawnSystem : MonoBehaviour
             AudioManager.instance.Play("Death");
             isAlive = false;
             Character3D.m_instance.ForceFreeze = true;
+            WavesManager.instance.ClearEnemys();
         }
     }
 
@@ -95,6 +96,7 @@ public class RespawnSystem : MonoBehaviour
                 Respawn();
                 canRespawn = false;
                 BlackScreenDeath.gameObject.GetComponent<Animator>().SetBool("Opace", false);
+                StartWaveTrigger.m_instance.canStartWave = true;
             }
         }
     }

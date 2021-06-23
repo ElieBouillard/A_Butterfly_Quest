@@ -94,7 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_enemyState: 0
   PatrolingRange: 5.9
-  ChasingRange: 20
+  ChasingRange: 25
   AttackingRange: 2
   PatrolingSpeed: 2
   ChasingSpeed: 5.7

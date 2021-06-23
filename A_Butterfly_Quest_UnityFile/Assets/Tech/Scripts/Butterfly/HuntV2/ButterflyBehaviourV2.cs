@@ -121,6 +121,7 @@ public class ButterflyBehaviourV2 : MonoBehaviour
             {
                 randomMove = false;
                 transform.position += transform.forward * 8f * Time.deltaTime;
+                transform.position += transform.forward * 8f * Time.deltaTime;
                 if (randomRotate)
                 {
                     gameObject.transform.eulerAngles = new Vector3(0, Random.Range(-180, 180), 0);

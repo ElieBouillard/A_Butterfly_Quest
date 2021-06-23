@@ -14,7 +14,7 @@ public class EnemyAiV3 : MonoBehaviour
     [Header("Ranges")]
     [Range(0f, 20f)]
     public float PatrolingRange;
-    [Range(0f, 20f)]
+    [Range(0f, 40f)]
     public float ChasingRange;
     [Range(0f, 2f)]
     public float AttackingRange;

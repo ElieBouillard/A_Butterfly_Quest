@@ -41,6 +41,7 @@ public class NetVisualCollider : MonoBehaviour
     {
         if (other.tag == "Butterfly")
         {
+            other.transform.GetChild(0).transform.gameObject.GetComponent<ParticleSystem>().Clear();
             other.transform.GetChild(0).transform.gameObject.GetComponent<ParticleSystem>().Stop();
         }
     }

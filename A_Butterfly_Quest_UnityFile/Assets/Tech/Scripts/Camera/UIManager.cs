@@ -50,6 +50,9 @@ public class UIManager : MonoBehaviour
     public GameObject WaveText;
     public GameObject WaveBackGround;
 
+    [Header("EndGameHud")]
+    public GameObject EngGameScreen;
+
     private void Awake()
     {
         instance = this;

@@ -23,6 +23,12 @@ public class KeyInventory : MonoBehaviour
         UIManager.instance.KeyCountTxt.text = _numberOfKey.ToString();
     }
 
+    [ContextMenu("AddKeyToInvetory")]
+    public void AddKey()
+    {
+        _numberOfKey++;
+    }
+
     public void AddKeyToInvetory(int value = 1)
     {
         _numberOfKey += value;

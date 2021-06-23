@@ -178,5 +178,6 @@ public class WavesManager : MonoBehaviour
         canShowText = false;
         canHideText = false;
         succesItem.SetActive(true);
+        canInitiateWave = false;
     }
 }

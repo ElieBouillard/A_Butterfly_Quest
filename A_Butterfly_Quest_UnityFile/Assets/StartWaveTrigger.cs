@@ -6,7 +6,7 @@ public class StartWaveTrigger : MonoBehaviour
 {
     public static StartWaveTrigger m_instance;
 
-    public bool canStartWave;
+    public bool canStartWave = true;
 
     private void Awake()
     {

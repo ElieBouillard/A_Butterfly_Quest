@@ -1164,6 +1164,9 @@ MonoBehaviour:
   - VOLUMES
   - UI_TIPS_Scene
   - UI_HUD_Scene
+  - Integration_02
+  - VFX_Environment
+  - CONSOLE
   instantLoad: 0
 --- !u!114 &372682442
 MonoBehaviour:
@@ -2107,7 +2110,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c6d999af500ed314a9b2fdbf13729573, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 05b87bfe9f0cd644aaec2c6f39352885, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

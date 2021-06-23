@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:A_Butterfly_Quest_UnityFile/Assets/Tree_Textures.meta
+guid: b99e3c94c6f7fcf45b43b97ab195e79c
+=======
 guid: 0bd82c45c9fc25f4e95e6673d6ae4809
+>>>>>>> ed5f38b431a6f85a27f627094eaaf980ef2d3689:A_Butterfly_Quest_UnityFile/Assets/Art/FX/Materials/Receptacle.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
